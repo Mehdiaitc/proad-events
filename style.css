@@ -1,64 +1,58 @@
-:root {
-    --blue-electric: #0047FF;
-    --cream-white: #F5F5F0;
-    --dark-bg: #000000;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROAD Events | On The Production Road</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--dark-bg); color: var(--cream-white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+    <header class="site-header">
+        <div class="logo-text">PROAD <span class="thin">EVENTS</span></div>
+        <nav class="main-nav">
+            <a href="index.html" class="active">Accueil</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html" class="cta-nav">Prendre RDV</a>
+        </nav>
+    </header>
 
-/* Header */
-.site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 1000; backdrop-filter: blur(10px); }
-.logo-text { font-weight: 900; letter-spacing: 2px; }
-.main-nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 700; font-size: 0.8rem; }
+    <main>
+        <section class="hero-zoom">
+            <div class="sticky-wrapper">
+                <div class="word-container">
+                    <span class="letter">P</span>
+                    <span class="letter">R</span>
+                    <span class="letter target-o">O</span>
+                    <span class="letter">A</span>
+                    <span class="letter">D</span>
+                </div>
+                
+                <div class="adn-reveal-zone">
+                    <p>Faire appel à PROAD, c'est s'engager sur une ligne de conduite rigoureuse, une véritable <span class="highlight">ROAD</span> tracée pour sécuriser votre projet.</p>
+                    <p>Chaque virage est maîtrisé pour aboutir à une <span class="highlight">PRODUCTION</span> d'excellence, fusionnant l'énergie du terrain et la précision stratégique.</p>
+                    
+                    <div class="scroll-indicator">
+                        <span>MONTER À BORD</span>
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+                
+                <p class="hero-subtitle" id="main-slogan">ON THE PRODUCTION ROAD</p>
+            </div>
+        </section>
 
-/* Hero Zoom */
-.hero-zoom { height: 300vh; position: relative; }
-.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
-.word-container { display: flex; gap: 5px; }
-.letter { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
-.letter.filled { color: var(--blue-electric); -webkit-text-stroke: 0px; filter: drop-shadow(0 0 15px var(--blue-electric)); }
-.hero-subtitle { color: var(--blue-electric); letter-spacing: 5px; font-weight: 700; margin-top: 20px; text-transform: uppercase; }
-
-/* Section ADN */
-.adn-section { padding: 150px 15%; text-align: center; background: #050505; border-top: 1px solid #111; }
-.adn-text { font-size: clamp(1.2rem, 2.5vw, 1.8rem); line-height: 1.6; color: #aaa; font-weight: 300; }
-.adn-text p { margin-bottom: 30px; }
-
-.highlight-road, .highlight-prod { 
-    color: var(--cream-white); font-weight: 900; letter-spacing: 2px;
-    padding: 0 10px; border-bottom: 2px solid var(--blue-electric);
-    text-shadow: 0 0 10px rgba(0, 71, 255, 0.5);
-}
-
-/* VUE DE HAUT DU CAMION */
-.truck-top-view { padding: 100px 0; background: #000; display: flex; justify-content: center; }
-.truck-body { width: 320px; background: #111; border-radius: 10px; position: relative; }
-
-.truck-cabin { 
-    height: 250px; background: #0a0a0a; border: 2px solid #222;
-    border-radius: 20px 20px 5px 5px; position: relative;
-    display: flex; justify-content: center; align-items: center;
-}
-
-/* NÉON WHY PROAD */
-.why-title-neon {
-    font-size: 2.2rem; font-weight: 900; color: transparent;
-    -webkit-text-stroke: 1px var(--blue-electric);
-    text-shadow: 0 0 5px var(--blue-electric), 0 0 15px var(--blue-electric);
-    transform: rotate(-90deg); white-space: nowrap;
-    animation: flicker 2s infinite alternate;
-}
-
-@keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 5px var(--blue-electric), 0 0 15px var(--blue-electric); }
-    20%, 24%, 55% { text-shadow: none; }
-}
-
-.truck-trailer { min-height: 1800px; background: #151515; margin-top: 15px; border: 2px solid #222; }
-.trailer-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 48px, #222 50px); }
-.steps-container { padding: 100px 20px; display: flex; flex-direction: column; gap: 250px; }
-.step-card { text-align: center; opacity: 0; transform: translateY(50px); transition: 0.8s; }
-.step-card.visible { opacity: 1; transform: translateY(0); }
-.step-num { font-size: 5rem; font-weight: 900; color: var(--blue-electric); display: block; filter: drop-shadow(0 0 10px var(--blue-electric)); }
-.step-card h3 { font-size: 1.8rem; margin-top: 10px; letter-spacing: 2px; }
+        <section class="truck-scene">
+            <div class="truck-sticky">
+                <div class="truck-rear">
+                    <div class="door door-left"><span class="door-text">WHY</span></div>
+                    <div class="door door-right"><span class="door-text">PROAD?</span></div>
+                    
+                    <div class="truck-interior">
+                        <div class="balloons-container">
+                            <div class="balloon-item"><span class="balloon">P</span><div class="balloon-info"><h3>PLAN</h3><p>Conception & Audit</p></div></div>
+                            <div class="balloon-item"><span class="balloon">R</span><div class="balloon-info"><h3>RUN</h3><p>Logistique flux</p></div></div>
+                            <div class="balloon-item"><span class="balloon">O</span><div class="balloon-info"><h3>ORGANIZE</h3><p>Expertise Budget</p></div></div>
+                            <div class="balloon-item"><span class="balloon">A</span><div class="balloon-info"><h3>ACTIVATE</h3><p>Régie Terrain</p></div></div>
+                            <div class
