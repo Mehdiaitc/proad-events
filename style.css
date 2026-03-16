@@ -5,73 +5,63 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--dark-bg); color: var(--cream-white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+
+body { 
+    background-color: var(--dark-bg); 
+    color: var(--cream-white); 
+    font-family: 'Poppins', sans-serif; 
+    overflow-x: hidden;
+}
 
 /* Header */
-.site-header { 
-    position: fixed; top: 0; width: 100%; 
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 50px; z-index: 1000; 
-    backdrop-filter: blur(10px); 
-}
+.site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 1000; backdrop-filter: blur(10px); }
 .logo-text { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
 
-.main-nav { display: flex; gap: 25px; align-items: center; }
-.main-nav a { color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+.main-nav a { color: white; text-decoration: none; margin-left: 30px; font-weight: 700; font-size: 0.9rem; }
 .cta-nav { border: 1px solid var(--blue-electric); padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
 .cta-nav:hover { background: var(--blue-electric); }
 
-/* Hero Zoom */
+/* Hero Zoom & Sniper technique */
 .hero-zoom { height: 250vh; position: relative; }
 .sticky-wrapper { 
     position: sticky; top: 0; height: 100vh; 
-    display: flex; flex-direction: column; 
-    justify-content: center; align-items: center; 
+    display: flex; justify-content: center; align-items: center; 
     overflow: hidden; 
 }
 
+/* Le Sniper Point : On crée un point invisible au centre de l'écran */
+.sniper-point {
+    position: relative;
+    width: 1px; height: 1px;
+}
+
 .text-mask-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    display: flex; justify-content: center; align-items: center;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); /* Recentrage de base */
+    transition: transform 0.1s linear, opacity 0.2s;
+    /* LE SECRET : L'origine du zoom est forcée sur le centre de la lettre O */
+    transform-origin: 52% 50%; 
 }
 
 .masked-text { 
-    font-size: clamp(5rem, 18vw, 15rem); 
-    font-weight: 900; 
-    color: transparent; 
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-    position: relative;
-    /* LE SECRET : On décale l'origine du zoom pour viser le O */
-    transform-origin: 51% 50%; 
-    transition: transform 0.1s linear, opacity 0.2s;
+    font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; 
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15); position: relative;
     white-space: nowrap;
 }
 
 .masked-text::before {
-    content: attr(data-text);
-    position: absolute; inset: 0;
-    color: var(--blue-electric);
-    -webkit-text-stroke: 0px;
-    background: linear-gradient(90deg, var(--blue-electric), #00d4ff, var(--blue-electric));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    /* Remplissage de gauche à droite */
+    content: attr(data-text); position: absolute; inset: 0;
+    color: var(--blue-electric); -webkit-text-stroke: 0px;
+    background: linear-gradient(90deg, var(--blue-electric) 0%, #00d4ff 50%, var(--blue-electric) 100%);
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
     clip-path: inset(0 var(--fill-progress, 100%) 0 0);
-    filter: drop-shadow(0 0 20px var(--blue-electric));
+    filter: drop-shadow(0 0 15px var(--blue-electric));
 }
 
-.hero-subtitle { color: var(--blue-electric); letter-spacing: 5px; font-weight: 700; margin-top: 20px; transition: opacity 0.3s; }
-
-/* Experience Camion */
-.truck-experience { background: var(--dark-bg); padding: 100px 0; position: relative; }
-.truck-container { width: 100%; border-top: 2px solid #1a1a1a; background: #050505; padding: 100px 0; }
-.why-title { font-size: 8vw; font-weight: 900; text-align: center; color: rgba(255, 255, 255, 0.05); margin-bottom: 80px; }
-.truck-steps { display: flex; flex-direction: column; gap: 120px; padding: 0 10%; }
-.step-card { display: flex; align-items: flex-start; gap: 40px; opacity: 0; transform: translateY(30px); transition: 0.8s; }
-.step-card.visible { opacity: 1; transform: translateY(0); }
-.step-letter { font-size: 6rem; font-weight: 900; color: var(--blue-electric); line-height: 0.8; }
-.step-info h3 { font-size: 2.5rem; margin-bottom: 10px; }
-.step-info p { color: #888; line-height: 1.6; max-width: 500px; }
+.hero-content {
+    position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+    text-align: center;
+}
+.hero-subtitle { letter-spacing: 5px; color: var(--blue-electric); margin-top: 20px; font-weight: 700; text-transform: uppercase; }
