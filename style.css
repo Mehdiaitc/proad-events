@@ -1,0 +1,17 @@
+:root {
+    --blue-electric: #0047FF;
+    --cream-white: #F5F5F0;
+    --dark-bg: #000000;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--dark-bg); color: var(--cream-white); font-family: 'Poppins', sans-serif; }
+.site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 100; backdrop-filter: blur(10px); }
+.logo-text { font-weight: 900; letter-spacing: 2px; }
+.main-nav a { color: white; text-decoration: none; margin-left: 30px; font-weight: 700; font-size: 0.9rem; }
+.cta-nav { border: 1px solid var(--blue-electric); padding: 8px 20px; border-radius: 50px; }
+.scroll-container { height: 250vh; position: relative; }
+.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
+.masked-text { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
+.hero-subtitle { letter-spacing: 10px; color: var(--blue-electric); margin-top: 10px; }
+.about-intro { padding: 100px 10%; text-align: center; }
+.highlight { color: var(--blue-electric); }
