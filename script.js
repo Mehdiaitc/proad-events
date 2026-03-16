@@ -9,31 +9,31 @@ function init3D() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
-    // COURBE PLUS ÉLÉGANTE ET FINE
+    // Route beaucoup plus longue et sinueuse
     curve = new THREE.CatmullRomCurve3([
         new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(2, -2, -10),
-        new THREE.Vector3(-3, -5, -20),
-        new THREE.Vector3(4, -8, -30),
-        new THREE.Vector3(-1, -12, -40),
-        new THREE.Vector3(0, -20, -60),
+        new THREE.Vector3(2, -3, -15),
+        new THREE.Vector3(-4, -8, -35),
+        new THREE.Vector3(5, -15, -60),
+        new THREE.Vector3(-2, -25, -90),
+        new THREE.Vector3(0, -40, -120),
     ]);
 
-    // ÉPAISSEUR TRÈS FINE (0.02 au lieu de 0.1)
-    const geometry = new THREE.TubeGeometry(curve, 150, 0.02, 12, false);
+    // Tube ultra fin pour l'élégance
+    const geometry = new THREE.TubeGeometry(curve, 200, 0.015, 8, false);
     const material = new THREE.MeshPhongMaterial({
         color: 0x0047FF,
         emissive: 0x0047FF,
-        emissiveIntensity: 2,
+        emissiveIntensity: 2.5,
         transparent: true,
-        opacity: 0 // Caché au départ
+        opacity: 0
     });
 
     tubeMesh = new THREE.Mesh(geometry, material);
     scene.add(tubeMesh);
 
     const light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(0, 0, 5);
+    light.position.set(0, 0, 10);
     scene.add(light);
 }
 
@@ -41,38 +41,40 @@ function animate() {
     requestAnimationFrame(animate);
     const scrollPos = window.scrollY;
     const maskedText = document.querySelector('.masked-text');
+    const slogan = document.getElementById('main-slogan');
 
-    // 1. EFFET TUNNEL DU O
     if (maskedText) {
-        // Zoom plus rapide pour créer l'effet d'entrée
+        // 1. Illumination (0 à 300 de scroll)
+        let illumination = Math.min(scrollPos / 300, 1);
+        maskedText.style.setProperty('--illumination-opacity', illumination);
+
+        // 2. Zoom Tunnel (Commence après l'illumination)
         let scale = 1;
-        if (scrollPos > 100) {
-            scale = 1 + Math.pow((scrollPos - 100) / 250, 3);
+        if (scrollPos > 200) {
+            // Croissance exponentielle pour "entrer" dans le O
+            scale = 1 + Math.pow((scrollPos - 200) / 200, 3);
             maskedText.style.transform = `scale(${scale})`;
             
-            // Illumination progressive du texte
-            let illumination = Math.min(scrollPos / 400, 1);
-            maskedText.style.setProperty('--illumination-opacity', illumination);
+            // On cache le slogan pendant le zoom
+            if (slogan) slogan.style.opacity = 1 - (scrollPos - 200) / 200;
         }
 
-        // 2. APPARITION DE LA ROUTE (Seulement quand on entre dans le O)
-        if (scale > 8) {
-            tubeMesh.material.opacity = Math.min((scale - 8) / 5, 1);
+        // 3. Affichage de la route quand le O est géant
+        if (scale > 15) {
             container.style.opacity = 1;
-        } else {
-            tubeMesh.material.opacity = 0;
-            container.style.opacity = 0;
-        }
-
-        // 3. MOUVEMENT DE LA CAMÉRA DANS LA ROUTE
-        if (scale > 10) {
-            let progress = Math.min((scrollPos - 800) / 3000, 0.99);
+            tubeMesh.material.opacity = Math.min((scale - 15) / 10, 1);
+            
+            // On avance dans la route
+            let progress = Math.min((scrollPos - 1200) / 4000, 0.99);
             if (progress > 0) {
                 const pos = curve.getPoint(progress);
-                const lookAt = curve.getPoint(progress + 0.01);
+                const lookAt = curve.getPoint(progress + 0.005);
                 camera.position.set(pos.x, pos.y, pos.z);
                 camera.lookAt(lookAt);
             }
+        } else {
+            container.style.opacity = 0;
+            tubeMesh.material.opacity = 0;
         }
     }
     renderer.render(scene, camera);
