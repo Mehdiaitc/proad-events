@@ -9,67 +9,71 @@ body { background-color: var(--dark-bg); color: var(--cream-white); font-family:
 
 /* Header */
 .site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 1000; backdrop-filter: blur(10px); }
-.logo-text { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.logo-text { font-weight: 900; letter-spacing: 2px; }
 
-/* Hero Zoom */
-.hero-zoom-zone { height: 300vh; position: relative; }
+/* Hero Zoom & ADN */
+.hero-zoom { height: 350vh; position: relative; }
 .sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
 
-.word-wrapper { display: flex; gap: 5px; z-index: 10; transition: transform 0.1s linear; }
+.word-container { display: flex; gap: 5px; z-index: 10; transition: transform 0.1s linear; }
 .letter { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
 .letter.filled { color: var(--blue-electric); -webkit-text-stroke: 0px; filter: drop-shadow(0 0 15px var(--blue-electric)); }
 
-.adn-reveal-overlay { position: absolute; opacity: 0; text-align: center; width: 80%; max-width: 900px; transform: scale(0.8); transition: 0.5s; pointer-events: none; }
-.adn-reveal-overlay p { font-size: 1.4rem; line-height: 1.6; margin-bottom: 20px; color: #ccc; }
+.adn-reveal-zone { 
+    position: absolute; opacity: 0; filter: blur(20px); transform: scale(0.9); 
+    transition: all 0.5s ease; text-align: center; width: 85%; max-width: 900px;
+}
+.adn-reveal-zone p { font-size: clamp(1.2rem, 2vw, 1.8rem); line-height: 1.6; margin-bottom: 25px; }
 .highlight { color: var(--blue-electric); font-weight: 900; }
-.hero-subtitle { color: var(--blue-electric); letter-spacing: 5px; font-weight: 700; margin-top: 20px; }
 
-/* SECTION CAMION ARRIÈRE */
+/* Indicateur Monter à Bord */
+.scroll-indicator { margin-top: 40px; opacity: 0; transition: 0.8s ease; }
+.scroll-indicator span { font-size: 0.8rem; letter-spacing: 4px; color: var(--blue-electric); font-weight: 700; }
+.arrow { width: 1px; height: 50px; background: var(--blue-electric); margin: 15px auto; position: relative; animation: arrowSlide 2s infinite; }
+@keyframes arrowSlide { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* SCÈNE DU CAMION ARRIÈRE */
 .truck-scene { height: 600vh; background: #000; }
-.truck-sticky { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 1500px; }
+.truck-sticky { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 2000px; }
 
-.truck-rear-view {
-    width: 420px; height: 520px; background: #050505;
-    border: 10px solid #1a1a1a; position: relative;
-    box-shadow: 0 50px 100px rgba(0,0,0,1);
-    background-image: linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.02) 95%);
-    background-size: 40px 100%; /* Texture tôle ondulée */
+/* Roues Arrière */
+.truck-wheel { position: absolute; bottom: 15%; width: 70px; height: 140px; background: #080808; border-radius: 8px; border: 2px solid #111; z-index: 1; box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
+.wheel-left { left: calc(50% - 240px); }
+.wheel-right { right: calc(50% - 240px); }
+
+.truck-rear-body {
+    width: 380px; height: 480px; background: #050505;
+    border: 12px solid #151515; position: relative; z-index: 2;
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(255,255,255,0.01) 40px);
 }
 
-/* Roues */
-.truck-wheel { position: absolute; bottom: -20px; width: 60px; height: 120px; background: #080808; border-radius: 5px; border: 2px solid #111; z-index: -1; }
-.left-wheel { left: -40px; }
-.right-wheel { right: -40px; }
-
 /* Portes articulées */
-.door-system {
+.door {
     position: absolute; width: 50%; height: 100%; background: #0a0a0a;
-    border: 2px solid #1a1a1a; z-index: 20; display: flex; 
+    border: 1px solid #1a1a1a; z-index: 10; display: flex; 
     justify-content: center; align-items: center; transform-origin: left;
     transition: transform 0.1s linear;
 }
-.right-door { right: 0; transform-origin: right; border-left: 1px solid #000; }
-.door-content span { color: var(--blue-electric); font-weight: 900; font-size: 2.5rem; text-shadow: 0 0 20px var(--blue-electric); }
+.door-right { right: 0; transform-origin: right; border-left: 2px solid #000; }
 
-/* BALLONS LETTRES 3D HÉLIUM */
-.truck-cargo { position: absolute; inset: 0; background: #000; overflow: hidden; }
-.balloons-container { position: relative; width: 100%; height: 100%; }
+.door-text { color: var(--blue-electric); font-weight: 900; font-size: 1.8rem; text-shadow: 0 0 15px var(--blue-electric); }
+
+/* BALLONS LETTRES 3D */
+.truck-interior { position: absolute; inset: 0; background: #000; overflow: visible; }
+.balloons-flow { position: relative; width: 100%; height: 100%; }
 
 .balloon-letter {
-    position: absolute; bottom: -150px; left: 50%; transform: translateX(-50%);
-    font-size: 8rem; font-weight: 900; color: var(--blue-electric);
-    opacity: 0; text-align: center;
-    
-    /* EFFET BALLON HÉLIUM CHROME */
+    position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);
+    opacity: 0; font-size: 7rem; font-weight: 900;
+    /* EFFET BALLON HÉLIUM CHROME BLEU */
+    background: linear-gradient(135deg, var(--blue-electric), #8db0ff, var(--blue-electric));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
     filter: drop-shadow(0 10px 20px rgba(0,71,255,0.4));
-    background: linear-gradient(135deg, var(--blue-electric), #88abff, var(--blue-electric));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    /* Simulation de volume par couches */
-    text-shadow: 
-        2px 2px 0px rgba(255,255,255,0.2),
-        -2px -2px 5px rgba(0,0,0,0.5),
-        0px 0px 30px rgba(0,71,255,0.6);
+    display: flex; flex-direction: column; align-items: center;
 }
+
+.b-node { width: 15px; height: 10px; background: var(--blue-electric); clip-path: polygon(50% 100%, 0 0, 100% 0); margin-top: -10px; }
+
+.b-info { text-align: center; margin-top: 20px; width: 260px; pointer-events: none; }
+.b-info h3 { font-size: 1.4rem; color: #fff; letter-spacing: 2px; }
+.b-info p { font-size: 0.85rem; color: #666; }
