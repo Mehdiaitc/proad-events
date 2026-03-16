@@ -12,40 +12,68 @@ body { background-color: var(--dark-bg); color: var(--cream-white); font-family:
 .logo-text { font-weight: 900; letter-spacing: 2px; }
 
 /* Hero Zoom */
-.hero-zoom { height: 350vh; position: relative; }
+.hero-zoom { height: 300vh; position: relative; }
 .sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
 
 .word-container { display: flex; gap: 5px; z-index: 10; transition: transform 0.1s linear; }
 .letter { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
 .letter.filled { color: var(--blue-electric); -webkit-text-stroke: 0px; filter: drop-shadow(0 0 15px var(--blue-electric)); }
 
-/* ADN Cache au départ */
+/* ADN Overlay */
 .adn-reveal-zone { 
-    position: absolute; opacity: 0; filter: blur(30px); transform: scale(0.8); 
-    transition: opacity 0.4s, filter 0.4s, transform 0.4s; 
-    text-align: center; width: 80%; max-width: 900px;
+    position: absolute; opacity: 0; filter: blur(20px); transform: scale(0.9); 
+    transition: all 0.5s ease-out; text-align: center; width: 80%; max-width: 900px;
 }
-.adn-reveal-zone p { font-size: clamp(1.1rem, 2vw, 1.8rem); line-height: 1.6; font-weight: 300; color: #ccc; margin-bottom: 20px; }
+.adn-reveal-zone p { font-size: 1.4rem; line-height: 1.6; margin-bottom: 30px; color: #bbb; }
 .highlight { color: var(--blue-electric); font-weight: 900; }
 
-.scroll-indicator { margin-top: 40px; opacity: 0; transition: 0.5s; }
-.scroll-indicator span { font-size: 0.8rem; letter-spacing: 3px; color: var(--blue-electric); }
-.arrow { width: 2px; height: 50px; background: var(--blue-electric); margin: 10px auto; position: relative; animation: slide 2s infinite; }
-@keyframes slide { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.scroll-indicator { margin-top: 50px; opacity: 0; transition: 0.5s; }
+.arrow { width: 1px; height: 60px; background: var(--blue-electric); margin: 10px auto; animation: slide 2s infinite; }
+@keyframes slide { 0%, 100% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-/* Camion Arrière */
-.truck-scene { height: 500vh; background: #000; }
+/* SCÈNE DU CAMION ARRIÈRE */
+.truck-scene { height: 600vh; background: #000; }
 .truck-sticky { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 1500px; }
-.truck-rear { width: 350px; height: 450px; background: #050505; border: 8px solid #151515; position: relative; display: flex; box-shadow: 0 0 100px rgba(0,71,255,0.1); }
 
-.door { position: absolute; width: 50%; height: 100%; background: #0a0a0a; border: 1px solid #1a1a1a; z-index: 5; display: flex; justify-content: center; align-items: center; transition: transform 0.1s linear; transform-origin: left; }
-.door-right { right: 0; transform-origin: right; }
-.door-text { color: var(--blue-electric); font-weight: 900; font-size: 1.2rem; text-shadow: 0 0 10px var(--blue-electric); }
+.truck-rear {
+    width: 380px; height: 480px; background: #050505;
+    border: 10px solid #111; border-radius: 5px; position: relative;
+    display: flex; box-shadow: 0 0 100px rgba(0,71,255,0.1);
+}
 
+/* Portes articulées */
+.door {
+    position: absolute; width: 50%; height: 100%; background: #0a0a0a;
+    border: 2px solid #1a1a1a; z-index: 10; display: flex; 
+    justify-content: center; align-items: center; transform-origin: left;
+    transition: transform 0.1s linear;
+}
+.door-right { right: 0; transform-origin: right; border-left: 1px solid #000; }
+
+.door-text { 
+    color: var(--blue-electric); font-weight: 900; font-size: 1.4rem; 
+    text-shadow: 0 0 15px var(--blue-electric); letter-spacing: 2px;
+}
+
+/* Intérieur & Ballons */
 .truck-interior { position: absolute; inset: 0; background: #000; overflow: hidden; }
-.balloons-container { position: relative; width: 100%; height: 100%; }
-.balloon-item { position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); opacity: 0; display: flex; flex-direction: column; align-items: center; }
-.balloon { width: 70px; height: 70px; border: 2px solid var(--blue-electric); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: 900; color: var(--blue-electric); box-shadow: 0 0 20px var(--blue-electric); }
-.balloon-info { text-align: center; margin-top: 15px; width: 250px; }
-.balloon-info h3 { font-size: 1.3rem; color: #fff; }
-.balloon-info p { font-size: 0.9rem; color: #777; }
+.balloons-flow { position: relative; width: 100%; height: 100%; }
+
+.balloon-box {
+    position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; opacity: 0;
+}
+
+.helium-letter {
+    width: 80px; height: 80px; background: var(--blue-electric);
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 2.5rem; font-weight: 900; color: white;
+    /* Effet Ballon Hélium 3D */
+    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.3), 
+                inset 10px 10px 20px rgba(255,255,255,0.4),
+                0 0 30px var(--blue-electric);
+}
+
+.ball-desc { text-align: center; margin-top: 20px; width: 280px; }
+.ball-desc h3 { font-size: 1.5rem; letter-spacing: 2px; }
+.ball-desc p { color: #777; font-size: 0.9rem; }
