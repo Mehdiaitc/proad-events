@@ -9,71 +9,56 @@ body { background-color: var(--dark-bg); color: var(--cream-white); font-family:
 
 /* Header */
 .site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 1000; backdrop-filter: blur(10px); }
-.logo-text { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
-.main-nav a { color: white; text-decoration: none; margin-left: 30px; font-weight: 700; font-size: 0.9rem; }
-.cta-nav { border: 1px solid var(--blue-electric); padding: 8px 20px; border-radius: 50px; }
+.logo-text { font-weight: 900; letter-spacing: 2px; }
+.main-nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 700; font-size: 0.8rem; }
 
-/* Hero Zoom & Sniper technique */
-.hero-zoom { height: 250vh; position: relative; }
-.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-
-.sniper-point { position: relative; width: 1px; height: 1px; }
-
-.text-mask-container {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: 52% 50%; /* Vise le centre du O */
-    transition: transform 0.1s linear, opacity 0.2s;
-}
-
-.masked-text { 
-    font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; 
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15); position: relative; white-space: nowrap;
-}
-
-.masked-text::before {
-    content: attr(data-text); position: absolute; inset: 0;
-    color: var(--blue-electric); -webkit-text-stroke: 0px;
-    background: linear-gradient(90deg, var(--blue-electric), #00d4ff, var(--blue-electric));
-    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
-    clip-path: inset(0 var(--fill-progress, 100%) 0 0);
-    filter: drop-shadow(0 0 20px var(--blue-electric));
-}
-
-.hero-content { position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); }
-.hero-subtitle { letter-spacing: 5px; color: var(--blue-electric); font-weight: 700; text-transform: uppercase; }
+/* Hero Zoom */
+.hero-zoom { height: 300vh; position: relative; }
+.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
+.word-container { display: flex; gap: 5px; }
+.letter { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
+.letter.filled { color: var(--blue-electric); -webkit-text-stroke: 0px; filter: drop-shadow(0 0 15px var(--blue-electric)); }
+.hero-subtitle { color: var(--blue-electric); letter-spacing: 5px; font-weight: 700; margin-top: 20px; text-transform: uppercase; }
 
 /* Section ADN */
-.adn-section { padding: 100px 10%; background: #050505; text-align: center; border-top: 1px solid #1a1a1a; }
-.adn-grid { display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 40px; }
-.adn-box { max-width: 250px; }
-.adn-label { font-size: 2.5rem; font-weight: 900; color: var(--blue-electric); display: block; margin-bottom: 10px; }
-.adn-plus { font-size: 3rem; font-weight: 200; opacity: 0.5; }
-.adn-result h2 { font-size: 4rem; font-weight: 900; letter-spacing: 5px; color: var(--cream-white); }
+.adn-section { padding: 150px 15%; text-align: center; background: #050505; border-top: 1px solid #111; }
+.adn-text { font-size: clamp(1.2rem, 2.5vw, 1.8rem); line-height: 1.6; color: #aaa; font-weight: 300; }
+.adn-text p { margin-bottom: 30px; }
 
-/* Experience Camion */
-.truck-experience { background: #000; position: relative; overflow: hidden; }
-.truck-roof { height: 100px; background: linear-gradient(to bottom, #000, #111); border-bottom: 5px solid #000; }
-.truck-side { 
-    background: #0a0a0a; padding: 100px 0; position: relative;
-    border-left: 20px solid #111; /* Simule l'angle du camion */
-}
-.truck-texture { 
-    position: absolute; inset: 0; pointer-events: none;
-    background-image: linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.02) 95%);
-    background-size: 50px 100%; /* Simule les panneaux de carrosserie */
+.highlight-road, .highlight-prod { 
+    color: var(--cream-white); font-weight: 900; letter-spacing: 2px;
+    padding: 0 10px; border-bottom: 2px solid var(--blue-electric);
+    text-shadow: 0 0 10px rgba(0, 71, 255, 0.5);
 }
 
-.why-title { 
-    font-size: 12vw; font-weight: 900; text-align: center; 
-    color: #111; text-shadow: 1px 1px 0px rgba(255,255,255,0.05);
-    margin-bottom: 100px; letter-spacing: -5px;
-    text-transform: uppercase;
+/* VUE DE HAUT DU CAMION */
+.truck-top-view { padding: 100px 0; background: #000; display: flex; justify-content: center; }
+.truck-body { width: 320px; background: #111; border-radius: 10px; position: relative; }
+
+.truck-cabin { 
+    height: 250px; background: #0a0a0a; border: 2px solid #222;
+    border-radius: 20px 20px 5px 5px; position: relative;
+    display: flex; justify-content: center; align-items: center;
 }
 
-.truck-steps { display: flex; flex-direction: column; gap: 150px; padding: 0 15%; position: relative; z-index: 2; }
-.step-card { display: flex; align-items: center; gap: 50px; opacity: 0; transform: translateX(-50px); transition: 1s; }
-.step-card.visible { opacity: 1; transform: translateX(0); }
-.step-letter { font-size: 8rem; font-weight: 900; color: var(--blue-electric); text-shadow: 0 0 30px rgba(0,71,255,0.3); }
-.step-info h3 { font-size: 3rem; margin-bottom: 10px; color: var(--cream-white); }
-.step-info p { color: #888; font-size: 1.2rem; max-width: 500px; }
+/* NÉON WHY PROAD */
+.why-title-neon {
+    font-size: 2.2rem; font-weight: 900; color: transparent;
+    -webkit-text-stroke: 1px var(--blue-electric);
+    text-shadow: 0 0 5px var(--blue-electric), 0 0 15px var(--blue-electric);
+    transform: rotate(-90deg); white-space: nowrap;
+    animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 5px var(--blue-electric), 0 0 15px var(--blue-electric); }
+    20%, 24%, 55% { text-shadow: none; }
+}
+
+.truck-trailer { min-height: 1800px; background: #151515; margin-top: 15px; border: 2px solid #222; }
+.trailer-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 48px, #222 50px); }
+.steps-container { padding: 100px 20px; display: flex; flex-direction: column; gap: 250px; }
+.step-card { text-align: center; opacity: 0; transform: translateY(50px); transition: 0.8s; }
+.step-card.visible { opacity: 1; transform: translateY(0); }
+.step-num { font-size: 5rem; font-weight: 900; color: var(--blue-electric); display: block; filter: drop-shadow(0 0 10px var(--blue-electric)); }
+.step-card h3 { font-size: 1.8rem; margin-top: 10px; letter-spacing: 2px; }
