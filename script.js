@@ -1,7 +1,7 @@
 window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
     
-    // Zoom
+    // Éléments Zoom
     const wordContainer = document.querySelector('.word-container');
     const letters = document.querySelectorAll('.letter');
     const targetO = document.querySelector('.target-o');
@@ -9,12 +9,14 @@ window.addEventListener('scroll', () => {
     const indicator = document.querySelector('.scroll-indicator');
     const slogan = document.getElementById('main-slogan');
     
-    // Camion
-    const doorL = document.querySelector('.door-left');
-    const doorR = document.querySelector('.door-right');
+    // Éléments Camion
+    const tagWhy = document.getElementById('tag-why');
+    const tagProad = document.getElementById('tag-proad');
+    const doorL = document.getElementById('door-left');
+    const doorR = document.getElementById('door-right');
     const balloons = document.querySelectorAll('.balloon-letter');
 
-    // 1. ZOOM DANS LE O
+    // 1. ZOOM DANS LE O (0 à 2800px)
     letters.forEach((l, i) => {
         if (scrollPos > i * 110) l.classList.add('filled');
         else l.classList.remove('filled');
@@ -27,6 +29,7 @@ window.addEventListener('scroll', () => {
         const rect = targetO.getBoundingClientRect();
         const offsetX = (window.innerWidth / 2) - (rect.left + rect.width / 2);
         const offsetY = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+        
         wordContainer.style.transform = `translate(${offsetX * (scale/2.5)}px, ${offsetY * (scale/2.5)}px) scale(${scale})`;
         
         if (scale > 4) {
@@ -42,29 +45,36 @@ window.addEventListener('scroll', () => {
         if (slogan) slogan.style.opacity = 1 - (scrollPos - 400) / 300;
     }
 
-    // 2. CAMION ET ENVOL DES BALLONS
-    const truckStart = 2800;
+    // 2. TAGGING ET CAMION (À partir de 3000px)
+    const truckStart = 3000;
     if (scrollPos > truckStart) {
-        let truckProg = scrollPos - truckStart;
-        
-        // Portes fermées au début (pour lire WHY PROAD)
-        let angle = 0;
-        if (truckProg > 600) {
-            angle = Math.min((truckProg - 600) / 5, 115);
-        }
-        
-        if(doorL) doorL.style.transform = `rotateY(${-angle}deg)`;
-        if(doorR) doorR.style.transform = `rotateY(${angle}deg)`;
+        let tp = scrollPos - truckStart;
 
-        // Les ballons s'échappent
+        // A. Tagging progressif (0 à 1000px de scroll camion)
+        const pWhy = Math.min(tp / 500, 1);
+        tagWhy.style.clipPath = `inset(0 ${100 - pWhy * 100}% 0 0)`;
+
+        if (tp > 500) {
+            const pProad = Math.min((tp - 500) / 500, 1);
+            tagProad.style.clipPath = `inset(0 ${100 - pProad * 100}% 0 0)`;
+        }
+
+        // B. Ouverture des portes (1200px et +)
+        let angle = 0;
+        if (tp > 1200) {
+            angle = Math.min((tp - 1200) / 800, 115);
+        }
+        doorL.style.transform = `rotateY(${-angle}deg)`;
+        doorR.style.transform = `rotateY(${angle}deg)`;
+
+        // C. Envol des ballons (1500px et +)
         balloons.forEach((b, i) => {
-            let bStart = (truckProg - 600) - (i * 450);
+            let bStart = (tp - 1500) - (i * 400);
             if (bStart > 0) {
                 b.style.opacity = 1;
-                // Dispersion désordonnée (Physique de l'hélium compressé)
                 let xMove = Math.sin(i * 3 + bStart / 150) * 100;
                 let yMove = -Math.pow(bStart, 1.1);
-                b.style.transform = `translateX(calc(-50% + ${xMove}px)) translateY(${yMove}px) scale(${1 + bStart/1500})`;
+                b.style.transform = `translateX(calc(-50% + ${xMove}px)) translateY(${yMove}px) scale(${1.2 + bStart/2000})`;
             } else {
                 b.style.opacity = 0;
             }
