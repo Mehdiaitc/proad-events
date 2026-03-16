@@ -1,68 +1,51 @@
-window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    
-    const wordContainer = document.querySelector('.word-container');
-    const letters = document.querySelectorAll('.letter');
-    const targetO = document.querySelector('.target-o');
-    const adnZone = document.querySelector('.adn-reveal-zone');
-    const indicator = document.querySelector('.scroll-indicator');
-    const slogan = document.getElementById('main-slogan');
-    
-    const doorLeft = document.querySelector('.door-left');
-    const doorRight = document.querySelector('.door-right');
-    const balloons = document.querySelectorAll('.balloon-item');
+:root {
+    --blue-electric: #0047FF;
+    --cream-white: #F5F5F0;
+    --dark-bg: #000000;
+}
 
-    // 1. ZOOM & RÉVÉLATION PROGRESSIVE
-    letters.forEach((l, i) => {
-        if (scrollPos > i * 100) l.classList.add('filled');
-        else l.classList.remove('filled');
-    });
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--dark-bg); color: var(--cream-white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
 
-    if (scrollPos > 400) {
-        let zoomProg = (scrollPos - 400);
-        let scale = 1 + Math.pow(zoomProg / 220, 3.8); // Zoom légèrement plus rapide
-        
-        const rect = targetO.getBoundingClientRect();
-        const offsetX = (window.innerWidth / 2) - (rect.left + rect.width / 2);
-        const offsetY = (window.innerHeight / 2) - (rect.top + rect.height / 2);
-        
-        wordContainer.style.transform = `translate(${offsetX * (scale/2.5)}px, ${offsetY * (scale/2.5)}px) scale(${scale})`;
-        
-        // APPARITION ADN : Se déclenche quand le zoom est déjà bien lancé
-        if (scale > 4) {
-            let adnFade = Math.min((scale - 4) / 6, 1);
-            adnZone.style.opacity = adnFade;
-            adnZone.style.filter = `blur(${30 - (adnFade * 30)}px)`;
-            adnZone.style.transform = `scale(${0.8 + (adnFade * 0.2)})`;
-            wordContainer.style.opacity = 1 - (adnFade * 1.2);
-            
-            if(adnFade > 0.9) indicator.style.opacity = 1;
-        } else {
-            adnZone.style.opacity = 0;
-            wordContainer.style.opacity = 1;
-            indicator.style.opacity = 0;
-        }
+/* Header */
+.site-header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 30px 50px; z-index: 1000; backdrop-filter: blur(10px); }
+.logo-text { font-weight: 900; letter-spacing: 2px; }
 
-        if (slogan) slogan.style.opacity = 1 - (scrollPos - 400) / 300;
-    }
+/* Hero Zoom */
+.hero-zoom { height: 350vh; position: relative; }
+.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
 
-    // 2. OUVERTURE CAMION
-    const truckStart = 2200; // Un peu plus bas pour laisser le temps à l'ADN
-    if (scrollPos > truckStart) {
-        let truckProg = (scrollPos - truckStart);
-        let angle = Math.min(truckProg / 6, 120);
-        doorLeft.style.transform = `rotateY(${-angle}deg)`;
-        doorRight.style.transform = `rotateY(${angle}deg)`;
+.word-container { display: flex; gap: 5px; z-index: 10; transition: transform 0.1s linear; }
+.letter { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); }
+.letter.filled { color: var(--blue-electric); -webkit-text-stroke: 0px; filter: drop-shadow(0 0 15px var(--blue-electric)); }
 
-        balloons.forEach((b, i) => {
-            let bStart = truckProg - (i * 450) - 400;
-            if (bStart > 0) {
-                b.style.opacity = 1;
-                let y = -bStart * 1.4;
-                b.style.transform = `translateX(-50%) translateY(${y}px) scale(${1 + bStart/1200})`;
-            } else {
-                b.style.opacity = 0;
-            }
-        });
-    }
-});
+/* ADN Cache au départ */
+.adn-reveal-zone { 
+    position: absolute; opacity: 0; filter: blur(30px); transform: scale(0.8); 
+    transition: opacity 0.4s, filter 0.4s, transform 0.4s; 
+    text-align: center; width: 80%; max-width: 900px;
+}
+.adn-reveal-zone p { font-size: clamp(1.1rem, 2vw, 1.8rem); line-height: 1.6; font-weight: 300; color: #ccc; margin-bottom: 20px; }
+.highlight { color: var(--blue-electric); font-weight: 900; }
+
+.scroll-indicator { margin-top: 40px; opacity: 0; transition: 0.5s; }
+.scroll-indicator span { font-size: 0.8rem; letter-spacing: 3px; color: var(--blue-electric); }
+.arrow { width: 2px; height: 50px; background: var(--blue-electric); margin: 10px auto; position: relative; animation: slide 2s infinite; }
+@keyframes slide { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* Camion Arrière */
+.truck-scene { height: 500vh; background: #000; }
+.truck-sticky { position: sticky; top: 0; height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 1500px; }
+.truck-rear { width: 350px; height: 450px; background: #050505; border: 8px solid #151515; position: relative; display: flex; box-shadow: 0 0 100px rgba(0,71,255,0.1); }
+
+.door { position: absolute; width: 50%; height: 100%; background: #0a0a0a; border: 1px solid #1a1a1a; z-index: 5; display: flex; justify-content: center; align-items: center; transition: transform 0.1s linear; transform-origin: left; }
+.door-right { right: 0; transform-origin: right; }
+.door-text { color: var(--blue-electric); font-weight: 900; font-size: 1.2rem; text-shadow: 0 0 10px var(--blue-electric); }
+
+.truck-interior { position: absolute; inset: 0; background: #000; overflow: hidden; }
+.balloons-container { position: relative; width: 100%; height: 100%; }
+.balloon-item { position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); opacity: 0; display: flex; flex-direction: column; align-items: center; }
+.balloon { width: 70px; height: 70px; border: 2px solid var(--blue-electric); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: 900; color: var(--blue-electric); box-shadow: 0 0 20px var(--blue-electric); }
+.balloon-info { text-align: center; margin-top: 15px; width: 250px; }
+.balloon-info h3 { font-size: 1.3rem; color: #fff; }
+.balloon-info p { font-size: 0.9rem; color: #777; }
