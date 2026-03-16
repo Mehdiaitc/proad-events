@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | PROAD Events</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        .portfolio-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-hero::before {
+            content: 'PORTFOLIO';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(8rem, 20vw, 22rem);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .portfolio-hero-content { position: relative; z-index: 2; }
+        .portfolio-hero-tag { font-size: 0.75rem; letter-spacing: 4px; color: var(--blue-electric); margin-bottom: 20px; }
+        .portfolio-hero h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 30px; }
+        .portfolio-hero h1 em { font-style: normal; color: var(--blue-electric); }
+        .portfolio-hero-desc { font-size: clamp(1rem, 1.5vw, 1.2rem); color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.7; }
+
+        .portfolio-filters { display: flex; gap: 12px; padding: 40px 60px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .filter-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px 24px; font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: var(--blue-electric); border-color: var(--blue-electric); color: #fff; }
+
+        .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; padding: 3px; }
+        .project-card { position: relative; overflow: hidden; cursor: pointer; background: #0a0a0a; }
+        .project-card:nth-child(1) { grid-column: span 8; grid-row: span 2; }
+        .project-card:nth-child(2) { grid-column: span 4; }
+        .project-card:nth-child(3) { grid-column: span 4; }
+        .project-card:nth-child(4) { grid-column: span 4; }
+        .project-card:nth-child(5) { grid-column: span 4; }
+        .project-card:nth-child(6) { grid-column: span 4; }
+        .project-card:nth-child(7) { grid-column: span 8; }
+
+        .project-card-inner { width: 100%; padding-bottom: 65%; position: relative; }
+        .project-card:nth-child(1) .project-card-inner { padding-bottom: 55%; }
+        .project-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .project-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 5rem; font-weight: 900; color: rgba(0,71,255,0.08); -webkit-text-stroke: 1px rgba(0,71,255,0.15); background: linear-gradient(135deg, #070710 0%, #0a0a14 100%); }
+        .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s ease; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-card:hover .project-img { transform: scale(1.05); }
+        .project-tag { font-size: 0.7rem; letter-spacing: 3px; color: var(--blue-electric); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .project-title { font-size: clamp(1.1rem, 2vw, 1.6rem); font-weight: 900; line-height: 1.2; margin-bottom: 8px; }
+        .project-meta { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+        .project-arrow { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+        .project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
+        .project-badge { position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); border: 1px solid rgba(0,71,255,0.4); color: var(--blue-electric); font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; padding: 5px 12px; text-transform: uppercase; backdrop-filter: blur(10px); }
+
+        .project-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 40px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .project-modal.open { opacity: 1; pointer-events: all; }
+        .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); }
+        .modal-inner { position: relative; z-index: 2; background: #080808; border: 1px solid rgba(255,255,255,0.08); max-width: 900px; width: 100%; max-height: 85vh; overflow-y: auto; transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .project-modal.open .modal-inner { transform: translateY(0); }
+        .modal-img-placeholder { width: 100%; height: 400px; background: linear-gradient(135deg, #050510 0%, #0a0a1a 100%); display: flex; align-items: center; justify-content: center; font-size: 8rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(0,71,255,0.15); }
+        .modal-content { padding: 40px; }
+        .modal-tag { font-size: 0.7rem; letter-spacing: 3px; color: var(--blue-electric); font-weight: 700; margin-bottom: 12px; }
+        .modal-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        .modal-desc { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 30px; }
+        .modal-details { display: flex; gap: 40px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px; }
+        .modal-detail-item span:first-child { display: block; font-size: 0.7rem; letter-spacing: 2px; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+        .modal-detail-item span:last-child { font-size: 1rem; font-weight: 700; }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all 0.2s; }
+        .modal-close:hover { background: var(--blue-electric); border-color: var(--blue-electric); }
+
+        .portfolio-cta { padding: 120px 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+        .portfolio-cta h2 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 20px; }
+        .portfolio-cta p { color: rgba(255,255,255,0.5); font-size: 1.1rem; margin-bottom: 40px; }
+
+        @media (max-width: 768px) {
+            .portfolio-hero { padding: 120px 24px 60px; }
+            .portfolio-filters { padding: 30px 24px; }
+            .project-card:nth-child(n) { grid-column: span 12; grid-row: span 1; }
+            .portfolio-cta { padding: 80px 24px; }
+            .project-modal { padding: 10px; }
+            .modal-details { flex-wrap: wrap; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo-text">PROAD <span class="thin">EVENTS</span></div>
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="contact.html" class="cta-nav">Prendre RDV</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="portfolio-hero">
+            <div class="portfolio-hero-content">
+                <p class="portfolio-hero-tag">— NOS RÉALISATIONS</p>
+                <h1>Chaque projet,<br>une <em>nouvelle route.</em></h1>
+                <p class="portfolio-hero-desc">De la conception à l'exploitation finale, découvrez les événements que nous avons produits avec rigueur et passion.</p>
+            </div>
+        </div>
+
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">Tout voir</button>
+            <button class="filter-btn" data-filter="soiree">Soirées & Galas</button>
+            <button class="filter-btn" data-filter="conference">Conférences</button>
+            <button class="filter-btn" data-filter="lancement">Lancements</button>
+            <button class="filter-btn" data-filter="autre">Autres</button>
+        </div>
+
+        <div class="portfolio-grid" id="portfolio-grid">
+            <div class="project-card" data-category="soiree" data-title="Gala de l'Excellence" data-lieu="Paris" data-date="2024" data-desc="Organisation complète d'un gala de prestige réunissant 400 invités. Scénographie sur mesure, coordination de prestataires premium et régie terrain intégrale.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">G</div>
+                    <span class="project-badge">Soirée</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Soirée & Gala</div>
+                        <div class="project-title">Gala de l'Excellence</div>
+                        <div class="project-meta">Paris — 2024 — 400 invités</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="lancement" data-title="Lancement Produit XYZ" data-lieu="Lyon" data-date="2024" data-desc="Mise en scène du lancement d'un nouveau produit technologique devant 200 journalistes et partenaires. Coordination lumière, son et contenu digital.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">X</div>
+                    <span class="project-badge">Lancement</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Lancement Produit</div>
+                        <div class="project-title">Lancement Produit XYZ</div>
+                        <div class="project-meta">Lyon — 2024 — 200 personnes</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="conference" data-title="Summit Stratégique 2024" data-lieu="Bordeaux" data-date="2024" data-desc="Séminaire de direction sur 2 jours pour une ETI industrielle. Gestion logistique complète, animations team building et coordination intervenants.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">S</div>
+                    <span class="project-badge">Conférence</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Séminaire</div>
+                        <div class="project-title">Summit Stratégique 2024</div>
+                        <div class="project-meta">Bordeaux — 2024 — 2 jours</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="soiree" data-title="Soirée Anniversaire Corporate" data-lieu="Marseille" data-date="2023" data-desc="Célébration des 20 ans d'une entreprise régionale. Ambiance immersive, mapping vidéo et live performance sur mesure pour 300 collaborateurs.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">A</div>
+                    <span class="project-badge">Soirée</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Anniversaire Corporate</div>
+                        <div class="project-title">20 ans — Soirée Corporate</div>
+                        <div class="project-meta">Marseille — 2023 — 300 personnes</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="autre" data-title="Festival OPEN AIR" data-lieu="Toulouse" data-date="2023" data-desc="Production d'un festival musical open air d'une journée. Coordination technique scène, gestion des flux, sécurité et partenaires locaux.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">F</div>
+                    <span class="project-badge">Festival</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Festival</div>
+                        <div class="project-title">Festival OPEN AIR</div>
+                        <div class="project-meta">Toulouse — 2023 — 1500 visiteurs</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="lancement" data-title="Inauguration Showroom" data-lieu="Paris" data-date="2023" data-desc="Inauguration d'un showroom premium avec cocktail de lancement, accueil presse et mise en lumière de l'espace sur 3 soirées consécutives.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">I</div>
+                    <span class="project-badge">Inauguration</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Inauguration</div>
+                        <div class="project-title">Inauguration Showroom</div>
+                        <div class="project-meta">Paris — 2023 — 3 soirées</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="conference" data-title="Convention Nationale" data-lieu="Nantes" data-date="2023" data-desc="Convention nationale pour un réseau de franchisés : 600 personnes, 3 scènes simultanées, coordination de 40 intervenants et retransmission live.">
+                <div class="project-card-inner">
+                    <div class="project-placeholder">C</div>
+                    <span class="project-badge">Convention</span>
+                    <div class="project-overlay">
+                        <div class="project-tag">Convention</div>
+                        <div class="project-title">Convention Nationale</div>
+                        <div class="project-meta">Nantes — 2023 — 600 personnes</div>
+                    </div>
+                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-cta">
+            <h2>Votre projet,<br><span class="highlight">notre prochaine route.</span></h2>
+            <p>Chaque événement que vous imaginez mérite une production à la hauteur.</p>
+            <a href="contact.html" class="cta-btn-large">
+                <span>DÉMARRER UN PROJET</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </main>
+
+    <div class="project-modal" id="project-modal">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-inner">
+            <button class="modal-close" id="modal-close">✕</button>
+            <div class="modal-img-placeholder" id="modal-img-placeholder">P</div>
+            <div class="modal-content">
+                <p class="modal-tag" id="modal-tag"></p>
+                <h2 class="modal-title" id="modal-title"></h2>
+                <p class="modal-desc" id="modal-desc"></p>
+                <div class="modal-details">
+                    <div class="modal-detail-item"><span>LIEU</span><span id="modal-lieu"></span></div>
+                    <div class="modal-detail-item"><span>ANNÉE</span><span id="modal-date"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">PROAD <span>EVENTS</span></div>
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="footer-copy">© 2025 PROAD Events. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FILTRES
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.project-card').forEach(card => {
+                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // MODAL
+        const modal = document.getElementById('project-modal');
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('modal-title').textContent = card.dataset.title;
+                document.getElementById('modal-desc').textContent = card.dataset.desc;
+                document.getElementById('modal-lieu').textContent = card.dataset.lieu;
+                document.getElementById('modal-date').textContent = card.dataset.date;
+                document.getElementById('modal-tag').textContent = card.querySelector('.project-badge').textContent;
+                document.getElementById('modal-img-placeholder').textContent = card.querySelector('.project-placeholder').textContent;
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    </script>
+</body>
+</html>
