@@ -6,42 +6,6 @@
     <title>PROAD Events | Production Road</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <style>
-        .truck-scene { height: 900vh; background: #000; }
-        .truck-sticky { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; perspective: 1500px; overflow: hidden; }
-        .truck-wheels-base { display: flex; gap: 200px; position: absolute; bottom: 15%; width: 380px; justify-content: center; z-index: 1; }
-        .wheel-under { width: 70px; height: 130px; background: #0a0a0a; border-radius: 5px; border: 1px solid #151515; }
-        .truck-rear-frame { width: 380px; height: 480px; background: #050505; border: 12px solid #111; position: relative; z-index: 10; box-shadow: 0 0 100px rgba(0,71,255,0.1); overflow: hidden; }
-        .graffiti-tag { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; z-index: 5; pointer-events: none; }
-        .graffiti-line { font-family: 'Permanent Marker', cursive; font-size: 4.8rem; font-weight: 400; line-height: 1; letter-spacing: 2px; color: var(--blue-electric); text-shadow: 0 0 8px var(--blue-electric), 0 0 20px var(--blue-electric), 0 0 45px rgba(0,71,255,0.6), 2px 2px 0 rgba(0,0,200,0.4); clip-path: inset(0 100% 0 0); white-space: nowrap; }
-        .door { position: absolute; width: 50%; height: 100%; background: #060606; border: 1px solid #1a1a1a; z-index: 20; transform-origin: left; transition: transform 0.1s linear; overflow: hidden; }
-        .door::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%); }
-        .door::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(to right, transparent 0px, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 30px); }
-        .door-right { right: 0; transform-origin: right; border-left: 1px solid #000; }
-        .truck-interior { position: absolute; inset: 0; background: #000; overflow: visible; z-index: 3; }
-        .balloons-container { position: absolute; inset: 0; overflow: visible; }
-        .balloon-wrap { position: absolute; bottom: 10px; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transform: translateX(-50%); will-change: transform, opacity; }
-        .balloon-wrap.floating { pointer-events: all; animation: heliumDrift 4s ease-in-out infinite; }
-        @keyframes heliumDrift {
-            0%   { transform: translateX(-50%) rotate(-2deg) translateY(0); }
-            33%  { transform: translateX(calc(-50% + 10px)) rotate(1.5deg) translateY(-8px); }
-            66%  { transform: translateX(calc(-50% - 6px)) rotate(-1deg) translateY(-4px); }
-            100% { transform: translateX(-50%) rotate(-2deg) translateY(0); }
-        }
-        .balloon-svg-wrap { cursor: pointer; transition: filter 0.2s ease, transform 0.2s ease; display: block; }
-        .balloon-svg-wrap:hover { transform: scale(1.1) translateY(-6px); }
-        .balloon-string { display: block; margin-top: -1px; }
-        .balloon-popup { position: fixed; z-index: 99999; pointer-events: none; opacity: 0; transform: translateY(12px) scale(0.94); transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1); }
-        .balloon-popup.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-        .balloon-popup-inner { background: #060608; border: 1px solid rgba(0,71,255,0.4); padding: 28px 32px; min-width: 270px; box-shadow: 0 24px 70px rgba(0,0,0,0.95), 0 0 50px rgba(0,71,255,0.12); position: relative; }
-        .balloon-popup-inner::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 2px; background: var(--blue-electric); }
-        .popup-letter { font-size: 3rem; font-weight: 900; color: var(--blue-electric); line-height: 1; margin-bottom: 2px; }
-        .popup-word { font-size: 0.65rem; font-weight: 700; letter-spacing: 4px; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 14px; }
-        .popup-title { font-size: 1.15rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
-        .popup-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.75; }
-        .popup-close { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; background: transparent; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; transition: all 0.2s; }
-        .popup-close:hover { background: var(--blue-electric); color: #fff; border-color: var(--blue-electric); }
-    </style>
 </head>
 <body>
 
@@ -55,7 +19,6 @@
     </header>
 
     <main>
-
         <section class="hero-zoom">
             <div class="sticky-wrapper">
                 <div class="word-container">
@@ -83,15 +46,24 @@
                     <div class="wheel-under"></div>
                     <div class="wheel-under"></div>
                 </div>
-                <div class="truck-rear-frame" id="truck-frame">
+
+                <div class="truck-rear-frame">
                     <div class="graffiti-tag">
                         <span class="graffiti-line" id="tag-why">WHY</span>
                         <span class="graffiti-line" id="tag-proad">PROAD?</span>
                     </div>
+                    
                     <div class="door door-left" id="door-left"></div>
                     <div class="door door-right" id="door-right"></div>
+                    
                     <div class="truck-interior">
-                        <div class="balloons-container" id="balloons-container"></div>
+                        <div class="balloons-container" id="balloons-container">
+                            <div class="balloon-letter" id="b-p">P<div class="b-node"></div></div>
+                            <div class="balloon-letter" id="b-r">R<div class="b-node"></div></div>
+                            <div class="balloon-letter" id="b-o">O<div class="b-node"></div></div>
+                            <div class="balloon-letter" id="b-a">A<div class="b-node"></div></div>
+                            <div class="balloon-letter" id="b-d">D<div class="b-node"></div></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,473 +72,21 @@
         <section class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-icon">◈</div>
                     <span class="stat-label-main">Tous types d'événements</span>
                     <span class="stat-label-sub">Corporate interne & externe</span>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon">✦</div>
-                    <span class="stat-label-main">Agences & Annonceurs</span>
-                    <span class="stat-label-sub">Interlocuteur direct, sans intermédiaire</span>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">◉</div>
                     <span class="stat-label-main">Né à Singapour</span>
-                    <span class="stat-label-sub">Une expérience internationale dès le départ</span>
+                    <span class="stat-label-sub">Expertise internationale</span>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon">⬡</div>
                     <span class="stat-label-main">Rigueur & Créativité</span>
-                    <span class="stat-label-sub">La précision stratégique au service de l'impact</span>
+                    <span class="stat-label-sub">Impact stratégique</span>
                 </div>
             </div>
         </section>
-
-        <section class="services-section">
-            <div class="services-header">
-                <p class="section-tag">— CE QUE NOUS FAISONS</p>
-                <h2>Une expertise<br><span class="highlight">terrain & stratégique</span></h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#0047FF" stroke-width="1.5"/><path d="M12 20h16M20 12v16" stroke="#0047FF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-                    <h3>Soirées & Galas</h3>
-                    <p>Conception et production d'événements privés haut de gamme, de A à Z.</p>
-                    <a href="portfolio.html" class="service-link">Voir les projets →</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="2" stroke="#0047FF" stroke-width="1.5"/><path d="M4 14h32" stroke="#0047FF" stroke-width="1.5"/><path d="M14 22h12M14 27h8" stroke="#0047FF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-                    <h3>Conférences & Séminaires</h3>
-                    <p>Organisation complète d'événements professionnels et corporate.</p>
-                    <a href="portfolio.html" class="service-link">Voir les projets →</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg viewBox="0 0 40 40" fill="none"><path d="M20 6l2.4 7.4H30l-6.2 4.5 2.4 7.4L20 21l-6.2 4.3 2.4-7.4L10 13.4h7.6z" stroke="#0047FF" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-                    <h3>Lancements de Produits</h3>
-                    <p>Créez l'impact au bon moment avec une mise en scène maîtrisée.</p>
-                    <a href="portfolio.html" class="service-link">Voir les projets →</a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="6" stroke="#0047FF" stroke-width="1.5"/><path d="M8 34c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#0047FF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-                    <h3>Événements Sur Mesure</h3>
-                    <p>Chaque projet est unique. Nous construisons l'événement à votre image.</p>
-                    <a href="portfolio.html" class="service-link">Voir les projets →</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="cta-inner">
-                <div class="cta-noise"></div>
-                <p class="cta-tag">— VOTRE PROCHAIN ÉVÉNEMENT</p>
-                <h2>Prêt à monter<br>à <span class="highlight">bord</span> ?</h2>
-                <p class="cta-sub">Discutons de votre projet. Un premier échange, sans engagement.</p>
-                <a href="contact.html" class="cta-btn-large">
-                    <span>PRENDRE RENDEZ-VOUS</span>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-            </div>
-        </section>
-
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-logo">PROAD <span>EVENTS</span></div>
-            <div class="footer-links">
-                <a href="index.html">Accueil</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <p class="footer-copy">© 2025 PROAD Events. Tous droits réservés.</p>
-        </div>
-    </footer>
-
-    <div class="balloon-popup" id="balloon-popup">
-        <div class="balloon-popup-inner">
-            <button class="popup-close" id="popup-close">✕</button>
-            <div class="popup-letter" id="popup-letter"></div>
-            <div class="popup-word" id="popup-word"></div>
-            <div class="popup-title" id="popup-title"></div>
-            <p class="popup-desc" id="popup-desc"></p>
-        </div>
-    </div>
-
-    <script>
-    const BALLOON_DATA = [
-        { letter: 'P', word: 'PLAN',        title: 'Conception & Audit',    desc: 'Nous cadrons votre projet de A à Z : brief créatif, audit des contraintes, planning détaillé et sélection des prestataires. La route commence ici.' },
-        { letter: 'R', word: 'RUN',         title: 'Coordination & Flux',   desc: 'La machine se met en mouvement. Coordination des équipes, gestion des flux logistiques et suivi en temps réel pour que rien ne déraille.' },
-        { letter: 'O', word: 'ORCHESTRATE', title: 'Optimisation & Budget', desc: "Chaque euro, chaque ressource est orchestrée avec précision. Nous maximisons l'impact tout en maîtrisant les coûts et les délais." },
-        { letter: 'A', word: 'ACTIVATE',    title: 'Régie Terrain',         desc: 'Le jour J, notre régie terrain prend le contrôle. Direction technique, gestion des imprévus et coordination live pour une exécution parfaite.' },
-        { letter: 'D', word: 'DELIVER',     title: 'Exploitation Finale',   desc: "La livraison est notre signature. Débriefing complet, retours d'expérience et archivage pour que chaque projet serve de base solide au suivant." }
-    ];
-    const BX       = [14, 28, 50, 72, 86];
-    const BY_EXTRA = [20, -10, 40, 0, 30];
-
-    function mylarDefs(id) {
-        return `<defs>
-  <linearGradient id="cyl${id}" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%"   stop-color="#000820"/>
-    <stop offset="15%"  stop-color="#001060"/>
-    <stop offset="30%"  stop-color="#0028C0"/>
-    <stop offset="48%"  stop-color="#0047FF"/>
-    <stop offset="60%"  stop-color="#4080FF"/>
-    <stop offset="72%"  stop-color="#80AAFF"/>
-    <stop offset="82%"  stop-color="#4080FF"/>
-    <stop offset="92%"  stop-color="#0028C0"/>
-    <stop offset="100%" stop-color="#000820"/>
-  </linearGradient>
-  <linearGradient id="cylH${id}" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%"   stop-color="#000820"/>
-    <stop offset="15%"  stop-color="#001060"/>
-    <stop offset="30%"  stop-color="#0028C0"/>
-    <stop offset="48%"  stop-color="#0047FF"/>
-    <stop offset="60%"  stop-color="#4080FF"/>
-    <stop offset="72%"  stop-color="#80AAFF"/>
-    <stop offset="82%"  stop-color="#4080FF"/>
-    <stop offset="92%"  stop-color="#0028C0"/>
-    <stop offset="100%" stop-color="#000820"/>
-  </linearGradient>
-  <linearGradient id="spec${id}" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%"   stop-color="transparent"/>
-    <stop offset="55%"  stop-color="rgba(255,255,255,0.0)"/>
-    <stop offset="65%"  stop-color="rgba(255,255,255,0.7)"/>
-    <stop offset="72%"  stop-color="rgba(255,255,255,0.3)"/>
-    <stop offset="80%"  stop-color="transparent"/>
-  </linearGradient>
-  <linearGradient id="specH${id}" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%"   stop-color="transparent"/>
-    <stop offset="55%"  stop-color="rgba(255,255,255,0.0)"/>
-    <stop offset="65%"  stop-color="rgba(255,255,255,0.6)"/>
-    <stop offset="72%"  stop-color="rgba(255,255,255,0.25)"/>
-    <stop offset="80%"  stop-color="transparent"/>
-  </linearGradient>
-  <radialGradient id="joint${id}" cx="50%" cy="50%" r="50%">
-    <stop offset="0%"   stop-color="#80AAFF"/>
-    <stop offset="40%"  stop-color="#0047FF"/>
-    <stop offset="100%" stop-color="#000820"/>
-  </radialGradient>
-  <filter id="glow${id}" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur stdDeviation="3" result="blur"/>
-    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-</defs>`;
-    }
-
-    function TV(id, x, y, w, h, r) {
-        r = r || Math.min(w/2, 12);
-        return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" ry="${r}" fill="url(#cyl${id})"/>
-<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" ry="${r}" fill="url(#spec${id})"/>`;
-    }
-    function TH(id, x, y, w, h, r) {
-        r = r || Math.min(h/2, 12);
-        return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" ry="${r}" fill="url(#cylH${id})"/>
-<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" ry="${r}" fill="url(#specH${id})"/>`;
-    }
-    function JT(id, cx, cy, r) {
-        r = r || 11;
-        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#joint${id})"/>`;
-    }
-    function attach(cx, cy) {
-        return `<ellipse cx="${cx}" cy="${cy}" rx="5" ry="4" fill="none" stroke="#4080FF" stroke-width="2"/>`;
-    }
-    function knot(cx, cy) {
-        return `<ellipse cx="${cx}" cy="${cy}" rx="6" ry="8" fill="#000820"/>
-<ellipse cx="${cx}" cy="${cy-2}" rx="4" ry="5" fill="#001060"/>
-<ellipse cx="${cx}" cy="${cy-3}" rx="2.5" ry="3" fill="#0028C0"/>`;
-    }
-
-    function makeSvgP(id) {
-        return `<svg viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg" filter="url(#glow${id})">${mylarDefs(id)}
-  ${TV(id,10,10,24,120,12)}
-  ${TH(id,10,10,65,28,14)}
-  ${TV(id,58,10,24,68,12)}
-  ${TH(id,10,50,65,28,14)}
-  ${JT(id,22,24,13)}
-  ${JT(id,70,24,13)}
-  ${JT(id,70,64,13)}
-  ${JT(id,22,64,13)}
-  ${attach(22,10)}
-  ${attach(70,10)}
-  ${knot(22,137)}
-</svg>`;
-    }
-    function makeSvgR(id) {
-        return `<svg viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg" filter="url(#glow${id})">${mylarDefs(id)}
-  ${TV(id,10,10,24,120,12)}
-  ${TH(id,10,10,65,28,14)}
-  ${TV(id,58,10,24,68,12)}
-  ${TH(id,10,50,65,28,14)}
-  ${JT(id,22,24,13)}
-  ${JT(id,70,24,13)}
-  ${JT(id,70,64,13)}
-  ${JT(id,22,64,13)}
-  <rect x="30" y="62" width="24" height="66" rx="12" fill="url(#cyl${id})" transform="rotate(20 42 80)"/>
-  <rect x="30" y="62" width="24" height="66" rx="12" fill="url(#spec${id})" transform="rotate(20 42 80)"/>
-  ${attach(22,10)}
-  ${attach(70,10)}
-  ${knot(22,137)}
-</svg>`;
-    }
-    function makeSvgO(id) {
-        return `<svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" filter="url(#glow${id})">${mylarDefs(id)}
-  <defs>
-    <linearGradient id="ov${id}" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#000820"/>
-      <stop offset="20%"  stop-color="#001a80"/>
-      <stop offset="45%"  stop-color="#0047FF"/>
-      <stop offset="62%"  stop-color="#80AAFF"/>
-      <stop offset="78%"  stop-color="#0047FF"/>
-      <stop offset="100%" stop-color="#000820"/>
-    </linearGradient>
-    <linearGradient id="ovS${id}" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="55%"  stop-color="transparent"/>
-      <stop offset="63%"  stop-color="rgba(255,255,255,0.65)"/>
-      <stop offset="70%"  stop-color="rgba(255,255,255,0.2)"/>
-      <stop offset="78%"  stop-color="transparent"/>
-    </linearGradient>
-    <mask id="donut${id}">
-      <ellipse cx="50" cy="75" rx="40" ry="55" fill="white"/>
-      <ellipse cx="50" cy="75" rx="18" ry="32" fill="black"/>
-    </mask>
-  </defs>
-  <ellipse cx="50" cy="75" rx="40" ry="55" fill="url(#ov${id})" mask="url(#donut${id})"/>
-  <ellipse cx="50" cy="75" rx="40" ry="55" fill="url(#ovS${id})" mask="url(#donut${id})"/>
-  <ellipse cx="36" cy="36" rx="10" ry="6" fill="rgba(255,255,255,0.3)" transform="rotate(-30 36 36)"/>
-  ${attach(28,20)}
-  ${attach(72,20)}
-  ${knot(50,136)}
-</svg>`;
-    }
-    function makeSvgA(id) {
-        return `<svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" filter="url(#glow${id})">${mylarDefs(id)}
-  <rect x="6" y="14" width="24" height="116" rx="12" fill="url(#cyl${id})" transform="rotate(-16 18 72)"/>
-  <rect x="6" y="14" width="24" height="116" rx="12" fill="url(#spec${id})" transform="rotate(-16 18 72)"/>
-  <rect x="70" y="14" width="24" height="116" rx="12" fill="url(#cyl${id})" transform="rotate(16 82 72)"/>
-  <rect x="70" y="14" width="24" height="116" rx="12" fill="url(#spec${id})" transform="rotate(16 82 72)"/>
-  ${TH(id,20,72,60,22,11)}
-  ${JT(id,32,83,11)}
-  ${JT(id,68,83,11)}
-  ${attach(20,14)}
-  ${attach(80,14)}
-  ${knot(50,138)}
-</svg>`;
-    }
-    function makeSvgD(id) {
-        return `<svg viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg" filter="url(#glow${id})">${mylarDefs(id)}
-  ${TV(id,10,10,24,120,12)}
-  ${TH(id,10,10,50,26,13)}
-  ${TH(id,10,114,50,26,13)}
-  <defs>
-    <linearGradient id="arc${id}" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#001a80"/>
-      <stop offset="35%"  stop-color="#0047FF"/>
-      <stop offset="60%"  stop-color="#80AAFF"/>
-      <stop offset="80%"  stop-color="#0047FF"/>
-      <stop offset="100%" stop-color="#000820"/>
-    </linearGradient>
-  </defs>
-  <path d="M34 10 Q92 10 92 75 Q92 140 34 140" fill="none" stroke="url(#arc${id})" stroke-width="24" stroke-linecap="round"/>
-  <path d="M34 10 Q92 10 92 75 Q92 140 34 140" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 18" stroke-dashoffset="-6"/>
-  ${JT(id,22,23,13)}
-  ${JT(id,52,23,12)}
-  ${JT(id,22,127,13)}
-  ${JT(id,52,127,12)}
-  ${attach(22,10)}
-  ${attach(54,10)}
-  ${knot(22,137)}
-</svg>`;
-    }
-
-    const SVG_MAKERS = [makeSvgP, makeSvgR, makeSvgO, makeSvgA, makeSvgD];
-    const bContainer = document.getElementById('balloons-container');
-
-    BALLOON_DATA.forEach((d, i) => {
-        const stringH   = 45 + i * 5;
-        const curveSide = (i % 2 === 0 ? 8 : -8);
-        const wrap      = document.createElement('div');
-        wrap.className  = 'balloon-wrap';
-        wrap.style.left = BX[i] + '%';
-        wrap.dataset.index = i;
-        wrap.innerHTML = `
-            <div class="balloon-svg-wrap" data-index="${i}">
-                ${SVG_MAKERS[i]('b' + i)}
-            </div>
-            <svg class="balloon-string" width="18" height="${stringH}" viewBox="0 0 18 ${stringH}">
-                <path d="M9 0 Q${9+curveSide} ${stringH*0.4} ${9-curveSide*0.3} ${stringH*0.7} Q9 ${stringH*0.9} 9 ${stringH}"
-                      stroke="rgba(200,210,255,0.4)" stroke-width="1.2" fill="none"/>
-            </svg>`;
-        bContainer.appendChild(wrap);
-    });
-
-    const balloonWraps = document.querySelectorAll('.balloon-wrap');
-    const popup   = document.getElementById('balloon-popup');
-    const pClose  = document.getElementById('popup-close');
-    let activeIdx = null;
-
-    function openPopup(index, el) {
-        const d  = BALLOON_DATA[index];
-        document.getElementById('popup-letter').textContent = d.letter;
-        document.getElementById('popup-word').textContent   = d.word;
-        document.getElementById('popup-title').textContent  = d.title;
-        document.getElementById('popup-desc').textContent   = d.desc;
-        const r  = el.getBoundingClientRect();
-        const PW = 280;
-        let left = r.left + r.width/2 - PW/2;
-        let top  = r.top - 220;
-        left = Math.max(12, Math.min(left, window.innerWidth - PW - 12));
-        if (top < 70) top = r.bottom + 16;
-        popup.style.left  = left + 'px';
-        popup.style.top   = top  + 'px';
-        popup.style.width = PW   + 'px';
-        popup.classList.add('visible');
-        activeIdx = index;
-    }
-    function closePopup() { popup.classList.remove('visible'); activeIdx = null; }
-    pClose.addEventListener('click', closePopup);
-    document.addEventListener('click', e => {
-        if (!popup.contains(e.target) && !e.target.closest('.balloon-svg-wrap')) closePopup();
-    });
-    bContainer.addEventListener('click', e => {
-        const svgW = e.target.closest('.balloon-svg-wrap');
-        if (!svgW) return;
-        const idx  = parseInt(svgW.dataset.index);
-        const wrap = balloonWraps[idx];
-        if (!wrap.classList.contains('floating')) return;
-        if (activeIdx === idx) { closePopup(); return; }
-        openPopup(idx, svgW);
-    });
-
-    const tagWhy   = document.getElementById('tag-why');
-    const tagProad = document.getElementById('tag-proad');
-    const doorL    = document.getElementById('door-left');
-    const doorR    = document.getElementById('door-right');
-    const TRUCK_START = 2800;
-
-    window.addEventListener('scroll', () => {
-        const S = window.scrollY;
-
-        const wordContainer = document.querySelector('.word-container');
-        const letters       = document.querySelectorAll('.letter');
-        const targetO       = document.querySelector('.target-o');
-        const adn           = document.querySelector('.adn-reveal-zone');
-        const indicator     = document.querySelector('.scroll-indicator');
-        const slogan        = document.getElementById('main-slogan');
-
-        letters.forEach((l, i) => l.classList.toggle('filled', S > i * 110));
-
-        if (S > 400 && S < 2800) {
-            const zp    = S - 400;
-            const scale = 1 + Math.pow(zp / 250, 3.5);
-            const rect  = targetO.getBoundingClientRect();
-            const ox    = (window.innerWidth  / 2) - (rect.left + rect.width  / 2);
-            const oy    = (window.innerHeight / 2) - (rect.top  + rect.height / 2);
-            wordContainer.style.transform = `translate(${ox*(scale/2.5)}px,${oy*(scale/2.5)}px) scale(${scale})`;
-            if (scale > 4) {
-                const fade = Math.min((scale - 4) / 6, 1);
-                adn.style.opacity           = fade;
-                adn.style.filter            = `blur(${20 - fade*20}px)`;
-                wordContainer.style.opacity = Math.max(0, 1 - fade*1.5);
-                if (fade > 0.8) indicator.style.opacity = 1;
-            } else {
-                adn.style.opacity       = 0;
-                indicator.style.opacity = 0;
-            }
-            if (slogan) slogan.style.opacity = Math.max(0, 1 - (S - 400) / 300);
-        }
-
-        if (S <= TRUCK_START) {
-            tagWhy.style.clipPath   = 'inset(0 100% 0 0)';
-            tagProad.style.clipPath = 'inset(0 100% 0 0)';
-            doorL.style.transform   = 'rotateY(0deg)';
-            doorR.style.transform   = 'rotateY(0deg)';
-            balloonWraps.forEach(w => {
-                w.style.opacity   = '0';
-                w.style.transform = 'translateX(-50%) translateY(0) scale(1)';
-                w.classList.remove('floating');
-            });
-            closePopup();
-            return;
-        }
-
-        const tp = S - TRUCK_START;
-
-        if (tp <= 400) {
-            const p = Math.min(tp / 400, 1);
-            tagWhy.style.clipPath   = `inset(0 ${100 - Math.round(p*100)}% 0 0)`;
-            tagProad.style.clipPath = 'inset(0 100% 0 0)';
-            doorL.style.transform   = 'rotateY(0deg)';
-            doorR.style.transform   = 'rotateY(0deg)';
-            balloonWraps.forEach(w => { w.style.opacity = '0'; w.classList.remove('floating'); });
-            return;
-        }
-
-        tagWhy.style.clipPath = 'inset(0 0% 0 0)';
-
-        if (tp <= 900) {
-            const p = Math.min((tp - 400) / 500, 1);
-            tagProad.style.clipPath = `inset(0 ${100 - Math.round(p*100)}% 0 0)`;
-            doorL.style.transform   = 'rotateY(0deg)';
-            doorR.style.transform   = 'rotateY(0deg)';
-            balloonWraps.forEach(w => { w.style.opacity = '0'; w.classList.remove('floating'); });
-            return;
-        }
-
-        tagProad.style.clipPath = 'inset(0 0% 0 0)';
-
-        if (tp <= 1400) {
-            doorL.style.transform = 'rotateY(0deg)';
-            doorR.style.transform = 'rotateY(0deg)';
-            balloonWraps.forEach(w => { w.style.opacity = '0'; w.classList.remove('floating'); });
-            return;
-        }
-
-        const doorProg  = Math.min((tp - 1400) / 800, 1);
-        const doorAngle = doorProg * 118;
-        doorL.style.transform = `rotateY(${-doorAngle}deg)`;
-        doorR.style.transform = `rotateY(${doorAngle}deg)`;
-
-        if (tp < 2200) {
-            balloonWraps.forEach(w => { w.style.opacity = '0'; w.classList.remove('floating'); });
-            return;
-        }
-
-        balloonWraps.forEach((wrap, i) => {
-            const bStart = 2200 + i * 400;
-            const prog   = tp - bStart;
-            const RISE   = 350;
-            if (prog < 0) {
-                wrap.style.opacity   = '0';
-                wrap.style.transform = 'translateX(-50%) translateY(0) scale(1)';
-                wrap.classList.remove('floating');
-                return;
-            }
-            if (prog <= RISE) {
-                const t      = prog / RISE;
-                const ease   = 1 - Math.pow(1 - t, 2.5);
-                const maxY   = -(window.innerHeight * 0.65 + BY_EXTRA[i]);
-                const scale  = 1 + ease * 0.6;
-                const wobble = Math.sin(t * Math.PI * 3) * 18 * (1 - t);
-                wrap.style.opacity   = String(Math.min(t * 4, 1));
-                wrap.style.transform = `translateX(calc(-50% + ${wobble}px)) translateY(${maxY * ease}px) scale(${scale})`;
-                wrap.classList.remove('floating');
-            } else {
-                const maxY = -(window.innerHeight * 0.65 + BY_EXTRA[i]);
-                wrap.style.opacity   = '1';
-                wrap.style.transform = `translateX(-50%) translateY(${maxY}px) scale(1.6)`;
-                wrap.classList.add('floating');
-            }
-        });
-    });
-
-    const revealObs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card').forEach((c, i) => {
-        c.style.transitionDelay = `${i * 0.1}s`;
-        revealObs.observe(c);
-    });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
