@@ -1,43 +1,45 @@
 window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
+    const wordContainer = document.querySelector('.word-container');
+    const letters = document.querySelectorAll('.letter');
+    const targetO = document.querySelector('.target-o');
     const slogan = document.getElementById('main-slogan');
-    const textContainer = document.querySelector('.text-mask-container');
 
-    if (textContainer) {
-        const maskedText = textContainer.querySelector('.masked-text');
-
-        // 1. Remplissage liquide (de 0 à 500 de scroll)
-        let fillProgress = 100 - Math.min(scrollPos / 500, 1) * 100;
-        maskedText.style.setProperty('--fill-progress', `${fillProgress}%`);
-
-        // 2. Zoom Tunnel focalisé sur le O
-        if (scrollPos > 400) {
-            // Croissance fluide
-            let scale = 1 + Math.pow((scrollPos - 400) / 250, 3.5);
-            textContainer.style.transform = `translate(-50%, -50%) scale(${scale})`;
-            
-            // On cache le slogan
-            if (slogan) slogan.style.opacity = 1 - (scrollPos - 400) / 300;
-            
-            // Disparition douce du mot
-            if (scale > 12) {
-                textContainer.style.opacity = 1 - (scale - 12) / 10;
+    if (wordContainer && targetO) {
+        // 1. Remplissage liquide des lettres
+        letters.forEach((l, index) => {
+            if (scrollPos > (index * 120)) {
+                l.classList.add('filled');
             } else {
-                textContainer.style.opacity = 1;
+                l.classList.remove('filled');
             }
+        });
+
+        // 2. ZOOM CHIRURGICAL SUR LE O
+        if (scrollPos > 600) {
+            let scale = 1 + Math.pow((scrollPos - 600) / 250, 3.8);
+            
+            const rect = targetO.getBoundingClientRect();
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const offsetX = centerX - (rect.left + rect.width / 2);
+            const offsetY = centerY - (rect.top + rect.height / 2);
+
+            wordContainer.style.transform = `translate(${offsetX * (scale/2.5)}px, ${offsetY * (scale/2.5)}px) scale(${scale})`;
+            wordContainer.style.opacity = 1 - (scale - 15) / 10;
+            if(slogan) slogan.style.opacity = 1 - (scrollPos - 600) / 300;
         } else {
-            textContainer.style.transform = `translate(-50%, -50%) scale(1)`;
-            if (slogan) slogan.style.opacity = 1;
-            textContainer.style.opacity = 1;
+            wordContainer.style.transform = `scale(1)`;
+            wordContainer.style.opacity = 1;
+            if(slogan) slogan.style.opacity = 1;
         }
     }
 });
 
-// Apparition des étapes sur le camion
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, { threshold: 0.2 });
+}, { threshold: 0.4 });
 
 document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
