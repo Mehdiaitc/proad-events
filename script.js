@@ -1,81 +1,95 @@
-:root {
-    --blue-electric: #0047FF;
-    --cream-white: #F5F5F0;
-    --dark-bg: #000000;
+// VARIABLES GLOBALES POUR THREE.JS
+let scene, camera, renderer, tubeMesh, curve;
+const container = document.getElementById('route-3d-container');
+
+// 1. INITIALISATION DE LA SCÈNE 3D
+function init3D() {
+    scene = new THREE.Scene();
+
+    // Caméra perspective (comme l'œil humain)
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5; // Position initiale
+
+    // Renderer (le moteur de rendu)
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // alpha: true pour fond transparent
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    // Lumières (pour le relief)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    // 2. CRÉATION DE LA COURBE DE LA ROUTE (P-R-O-A-D)
+    // On définit des points dans l'espace (x, y, z)
+    curve = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(0, 5, 0),      // P - Point de départ
+        new THREE.Vector3(2, 3, -2),     // Virage 1
+        new THREE.Vector3(-1, 0, -5),    // R - Ligne droite
+        new THREE.Vector3(-3, -2, -3),   // Virage 2 (Complexité/Acheteur)
+        new THREE.Vector3(1, -4, -1),    // O - Organize (Tournant stratégique)
+        new THREE.Vector3(3, -6, 0),     // Virage 3
+        new THREE.Vector3(0, -8, 2),     // A - Activate (Terrain)
+        new THREE.Vector3(-2, -10, 0),   // D - Deliver
+    ]);
+
+    // 3. CRÉATION DU TUBE (LA ROUTE)
+    // Geometrie : un tube le long de la courbe
+    const geometry = new THREE.TubeGeometry(curve, 100, 0.1, 8, false);
+    
+    // Matériau : Néon Bleu Roi Électrique Lumineux
+    const material = new THREE.MeshPhongMaterial({
+        color: 0x0047FF, // Bleu Roi
+        emissive: 0x0047FF, // Il émet de la lumière
+        emissiveIntensity: 1.5,
+        shininess: 100,
+        wireframe: false // false pour un tube plein
+    });
+
+    tubeMesh = new THREE.Mesh(geometry, material);
+    scene.add(tubeMesh);
+
+    // Gérer le redimensionnement de la fenêtre
+    window.addEventListener('resize', onWindowResize, false);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body { 
-    background-color: var(--dark-bg); 
-    color: var(--cream-white); 
-    font-family: 'Poppins', sans-serif; 
-    overflow-x: hidden;
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-/* Header */
-.site-header { 
-    position: fixed; top: 0; width: 100%; 
-    display: flex; justify-content: space-between; 
-    padding: 30px 50px; z-index: 1000; 
-    backdrop-filter: blur(10px); 
-}
-.logo-text { font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
-.thin { font-weight: 200; opacity: 0.8; }
-.main-nav a { color: white; text-decoration: none; margin-left: 30px; font-weight: 700; font-size: 0.9rem; }
-.cta-nav { border: 1px solid var(--blue-electric); padding: 8px 20px; border-radius: 50px; }
+// 4. ANIMATION AU SCROLL
+function updateCameraOnScroll() {
+    const scrollPos = window.scrollY;
+    const totalHeight = document.body.scrollHeight - window.innerHeight;
+    
+    // Calcul de la progression du scroll (0 à 1)
+    let fraction = scrollPos / totalHeight;
+    fraction = Math.min(Math.max(fraction, 0), 0.99); // Évite de dépasser la courbe
 
-/* CONTENEUR ROUTE 3D FIXED */
-#route-3d-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
-    z-index: -1; /* Derrière le texte */
-}
+    // On récupère la position et la direction sur la courbe à cette fraction
+    if(curve) {
+        const pos = curve.getPoint(fraction);
+        const lookAt = curve.getPoint(fraction + 0.01); // Un peu plus loin pour regarder devant
 
-/* Hero Section (Reste la même pour l'instant) */
-.scroll-container { height: 250vh; position: relative; z-index: 10; }
-.sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.masked-text { font-size: clamp(5rem, 18vw, 15rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); position: relative; transition: transform 0.1s linear; }
-.masked-text::before { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; color: var(--cream-white); -webkit-text-stroke: 0px; opacity: var(--illumination-opacity, 0); filter: drop-shadow(0 0 15px var(--blue-electric)); transition: opacity 0.1s linear; }
-.hero-subtitle { letter-spacing: 5px; color: var(--blue-electric); margin-top: 20px; font-weight: 700; text-transform: uppercase; }
-
-/* Intro Section */
-.about-intro { 
-    padding: 150px 10%; 
-    text-align: center; 
-    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8), #000);
-    z-index: 10; position: relative;
-}
-.about-intro h2 { font-size: 3rem; margin-bottom: 20px; }
-.highlight { color: var(--blue-electric); }
-
-/* SECTIONS ÉTAPES (P-R-O-A-D) */
-.step-section {
-    height: 100vh; /* Une étape par écran */
-    display: flex;
-    align-items: center;
-    padding-left: 10%;
-    z-index: 10; position: relative;
-    /* Transparent pour voir la route derrière */
+        // On place la caméra l'égérement au-dessus de la route
+        camera.position.set(pos.x, pos.y + 0.3, pos.z);
+        camera.lookAt(lookAt);
+    }
 }
 
-.step-content {
-    max-width: 500px;
-    background: rgba(0,0,0,0.6); /* Fond semi-transparent pour lisibilité */
-    padding: 40px;
-    border-radius: 15px;
-    border-left: 3px solid var(--blue-electric);
+// 5. BOUCLE DE RENDU (Pour l'animation)
+function animate() {
+    requestAnimationFrame(animate);
+    updateCameraOnScroll(); // Met à jour la caméra à chaque frame
+    renderer.render(scene, camera);
 }
 
-.step-letter {
-    font-size: 5rem;
-    font-weight: 900;
-    color: var(--blue-electric);
-    line-height: 1;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.step-content h3 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-.step-content p { color: #ccc; font-size: 1.1rem; line-height: 1.6; }
+// LANCEMENT
+window.addEventListener('load', () => {
+    init3D();
+    animate();
+});
