@@ -222,7 +222,7 @@ function loop() {
   spy += (sty - spy) * .032;
 
   const p     = getCurtP();
-  const openP = Math.max(0, Math.min((p - .38) / .62, 1));
+  const openP = Math.max(0, Math.min((p - .25) / .75, 1)); /* ← ouverture plus rapide */
 
   /* Draw curtains */
   drawCurtain(cvL);
