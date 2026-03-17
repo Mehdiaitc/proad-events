@@ -63,9 +63,10 @@ function positionBadge() {
 window.addEventListener('load',   () => setTimeout(positionBadge, 150));
 window.addEventListener('resize', () => { positionBadge(); resizeCanvases(); });
 
-/* ── Smoke ── */
+/* ── Smoke — cap particles ── */
 function spawnSmoke(W, H, fillY) {
-  if (Math.random() > 0.4) return;
+  if (particles.length > 60) return; /* cap total */
+  if (Math.random() > 0.3) return;
   particles.push({
     x: (60 + Math.random() * 860) * (W / 978.71),
     y: (fillY / TOTAL_H) * H,
@@ -93,61 +94,59 @@ function drawSmoke(W, H) {
   }
 }
 
-/* ── Dust trail ── */
+/* ── Dust trail — cap particles + throttle spawn ── */
 const dustParticles = [];
-let mouseX = -999, mouseY = -999;
-let lastMouseX = -999, lastMouseY = -999;
+let mouseX=-999, mouseY=-999, lastMouseX=-999, lastMouseY=-999;
+let lastDustSpawn = 0;
 
 document.addEventListener('mousemove', e => {
   const sticky = $('curtain-sticky');
   if (!sticky) return;
   const r = sticky.getBoundingClientRect();
-  /* only active when stage is visible */
   if (e.clientY < r.top || e.clientY > r.bottom) return;
   mouseX = e.clientX - r.left;
   mouseY = e.clientY - r.top;
-  /* spawn particles along movement */
-  const dx = mouseX - lastMouseX, dy = mouseY - lastMouseY;
-  const dist = Math.sqrt(dx*dx+dy*dy);
-  if (dist > 4) {
-    const n = Math.min(Math.floor(dist/4), 8);
+  const now = performance.now();
+  if (now - lastDustSpawn < 16) return; /* throttle to ~60fps max */
+  lastDustSpawn = now;
+  const dx=mouseX-lastMouseX, dy=mouseY-lastMouseY;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  if (dist > 5 && dustParticles.length < 120) {
+    const n = Math.min(Math.floor(dist/6), 5);
     for (let i=0;i<n;i++) {
-      const t = i/n;
+      const t=i/n;
       dustParticles.push({
-        x: lastMouseX + dx*t + (Math.random()-.5)*6,
-        y: lastMouseY + dy*t + (Math.random()-.5)*6,
-        vx: (Math.random()-.5)*.8,
-        vy: -(Math.random()*.6+.1),
-        r: .8 + Math.random()*2.2,
-        life: 1,
-        decay: .018+Math.random()*.02,
-        hue: 210+Math.random()*40 /* blue-violet range */
+        x: lastMouseX+dx*t+(Math.random()-.5)*5,
+        y: lastMouseY+dy*t+(Math.random()-.5)*5,
+        vx:(Math.random()-.5)*.7,
+        vy:-(Math.random()*.5+.1),
+        r:.6+Math.random()*1.8,
+        life:1,
+        decay:.022+Math.random()*.018,
+        hue:210+Math.random()*40
       });
     }
-    lastMouseX = mouseX; lastMouseY = mouseY;
+    lastMouseX=mouseX; lastMouseY=mouseY;
   }
 });
 
 function drawDust() {
-  if (!cvDust) return;
-  const sticky = $('curtain-sticky');
-  if (!sticky) return;
-  const W = sticky.offsetWidth, H = sticky.offsetHeight;
-  cvDust.width = W; cvDust.height = H;
-  if (!dustCtx) dustCtx = cvDust.getContext('2d');
+  if (!cvDust || !dustCtx) return;
+  const W = cvDust.width, H = cvDust.height;
+  if (!W || !H) return;
   dustCtx.clearRect(0,0,W,H);
   for (let i=dustParticles.length-1;i>=0;i--) {
     const p=dustParticles[i];
     p.x+=p.vx; p.y+=p.vy;
-    p.vx*=.96; p.vy*=.96;
-    p.r+=.015; p.life-=p.decay;
+    p.vx*=.95; p.vy*=.95;
+    p.r+=.02; p.life-=p.decay;
     if(p.life<=0){dustParticles.splice(i,1);continue;}
-    const g=dustCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-    g.addColorStop(0,   `hsla(${p.hue},100%,75%,${p.life*.9})`);
-    g.addColorStop(0.4, `hsla(${p.hue},100%,65%,${p.life*.4})`);
+    const g=dustCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.5);
+    g.addColorStop(0,   `hsla(${p.hue},100%,75%,${p.life*.85})`);
+    g.addColorStop(0.5, `hsla(${p.hue},100%,65%,${p.life*.3})`);
     g.addColorStop(1,   `hsla(${p.hue},100%,55%,0)`);
     dustCtx.beginPath();
-    dustCtx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+    dustCtx.arc(p.x,p.y,p.r*2.5,0,Math.PI*2);
     dustCtx.fillStyle=g; dustCtx.fill();
   }
 }
@@ -160,8 +159,12 @@ function resizeCanvases() {
 }
 window.addEventListener('load', resizeCanvases);
 
-/* ── Curtain draw ── */
+/* ── Curtain draw — throttled to 30fps max ── */
+let lastCurtainDraw = 0;
 function drawCurtain(cv) {
+  const now = performance.now();
+  if (now - lastCurtainDraw < 33) return; /* ~30fps */
+  lastCurtainDraw = now;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.clearRect(0,0,W,H);
   const n=8, fw=W/n;
