@@ -94,39 +94,53 @@ function drawSmoke(W, H) {
   }
 }
 
-/* ── Dust trail — cap particles + throttle spawn ── */
+/* ── Dust trail ── */
 const dustParticles = [];
 let mouseX=-999, mouseY=-999, lastMouseX=-999, lastMouseY=-999;
 let lastDustSpawn = 0;
+let stageRect = null;
+
+/* Cache stage rect, update on resize */
+function updateStageRect() {
+  const s = $('curtain-sticky');
+  if (s) stageRect = s.getBoundingClientRect();
+}
+window.addEventListener('load', () => setTimeout(updateStageRect, 200));
+window.addEventListener('resize', updateStageRect);
+window.addEventListener('scroll', updateStageRect, { passive: true });
 
 document.addEventListener('mousemove', e => {
-  const sticky = $('curtain-sticky');
-  if (!sticky) return;
-  const r = sticky.getBoundingClientRect();
-  if (e.clientY < r.top || e.clientY > r.bottom) return;
-  mouseX = e.clientX - r.left;
-  mouseY = e.clientY - r.top;
+  if (!stageRect) return;
+  /* Only spawn when stage is on screen */
+  if (e.clientY < stageRect.top || e.clientY > stageRect.bottom) return;
+  if (e.clientX < stageRect.left || e.clientX > stageRect.right) return;
+
+  mouseX = e.clientX - stageRect.left;
+  mouseY = e.clientY - stageRect.top;
+
   const now = performance.now();
-  if (now - lastDustSpawn < 16) return; /* throttle to ~60fps max */
+  if (now - lastDustSpawn < 16) return;
   lastDustSpawn = now;
-  const dx=mouseX-lastMouseX, dy=mouseY-lastMouseY;
-  const dist=Math.sqrt(dx*dx+dy*dy);
-  if (dist > 5 && dustParticles.length < 120) {
-    const n = Math.min(Math.floor(dist/6), 5);
-    for (let i=0;i<n;i++) {
-      const t=i/n;
+
+  const dx = mouseX - lastMouseX, dy = mouseY - lastMouseY;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  if (dist > 3 && dustParticles.length < 150) {
+    const n = Math.min(Math.floor(dist / 5), 6);
+    for (let i = 0; i < n; i++) {
+      const t = i / n;
       dustParticles.push({
-        x: lastMouseX+dx*t+(Math.random()-.5)*5,
-        y: lastMouseY+dy*t+(Math.random()-.5)*5,
-        vx:(Math.random()-.5)*.7,
-        vy:-(Math.random()*.5+.1),
-        r:.6+Math.random()*1.8,
-        life:1,
-        decay:.022+Math.random()*.018,
-        hue:210+Math.random()*40
+        x: lastMouseX + dx*t + (Math.random()-.5)*5,
+        y: lastMouseY + dy*t + (Math.random()-.5)*5,
+        vx: (Math.random()-.5)*.8,
+        vy: -(Math.random()*.7 + .2),
+        r: .8 + Math.random()*2,
+        life: 1,
+        decay: .018 + Math.random()*.018,
+        hue: 210 + Math.random()*50
       });
     }
-    lastMouseX=mouseX; lastMouseY=mouseY;
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
   }
 });
 
