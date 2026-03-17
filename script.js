@@ -32,8 +32,9 @@ const bcard       = $('bcard');
 const TOTAL_H = 160.47;
 let waveT     = 0;
 let curtT     = 0;
-let snapDone  = false;
-let sweepDone = false;
+let snapDone   = false;
+let snapDone2  = false; /* bloque définitivement le hero zoom après le 1er snap */
+let sweepDone  = false;
 let spx=50, spy=42, stx=50, sty=42, sph=0;
 const particles = [];
 
@@ -207,6 +208,11 @@ function loop() {
   curtT  += 0.014;
 
   /* ── HERO: fill + zoom ── */
+  /* Une fois le snap effectué, on ne recalcule plus le hero */
+  if (snapDone2) {
+    logoWrap.style.transform = '';
+    logoWrap.style.opacity   = '1';
+  } else {
   const hp    = getHeroP();
   const fillP = Math.min(hp / 0.45, 1);
   const fillH = fillP * TOTAL_H;
@@ -249,22 +255,24 @@ function loop() {
     scrollCue.style.opacity  = '0';
     smokeCanvas.style.opacity= '0';
     if(fadeOut===0&&!snapDone){
-      snapDone=true;
-      setTimeout(()=>{
-        $('scene-adn').scrollIntoView({behavior:'instant'});
-        logoWrap.style.transform='';
-        logoWrap.style.opacity='1';
-        setTimeout(()=>{snapDone=false;},1000);
-      },80);
+        snapDone=true;
+        setTimeout(()=>{
+          $('scene-adn').scrollIntoView({behavior:'instant'});
+          logoWrap.style.transform='';
+          logoWrap.style.opacity='1';
+          snapDone2=true; /* bloque définitivement le zoom */
+          setTimeout(()=>{snapDone=false;},1000);
+        },80);
+      }
+    } else {
+      logoWrap.style.transform='';
+      logoWrap.style.opacity='1';
+      badge.style.opacity    = Math.max(0,1-fillP*2);
+      tagline.style.opacity  = Math.max(0,1-fillP*1.5);
+      tagline.style.transform= `translateY(${fillP*20}px)`;
+      scrollCue.style.opacity= Math.max(0,1-fillP*3);
     }
-  } else {
-    logoWrap.style.transform='';
-    logoWrap.style.opacity='1';
-    badge.style.opacity    = Math.max(0,1-fillP*2);
-    tagline.style.opacity  = Math.max(0,1-fillP*1.5);
-    tagline.style.transform= `translateY(${fillP*20}px)`;
-    scrollCue.style.opacity= Math.max(0,1-fillP*3);
-  }
+  } /* fin du bloc snapDone2 */
 
   /* ── CURTAIN ── */
   updateSpotTarget();
