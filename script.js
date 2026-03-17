@@ -21,7 +21,7 @@ const cvL         = $('canvas-l');
 const cvR         = $('canvas-r');
 const cvS         = $('spotlight-canvas');
 const cvDust      = $('dust-canvas');
-let dustCtx       = null;
+const dustCtx     = cvDust ? cvDust.getContext('2d') : null;
 const cLel        = $('curtain-l');
 const cRel        = $('curtain-r');
 const stageC      = $('stage-content');
@@ -134,20 +134,20 @@ function drawDust() {
   if (!cvDust || !dustCtx) return;
   const W = cvDust.width, H = cvDust.height;
   if (!W || !H) return;
-  dustCtx.clearRect(0,0,W,H);
-  for (let i=dustParticles.length-1;i>=0;i--) {
-    const p=dustParticles[i];
-    p.x+=p.vx; p.y+=p.vy;
-    p.vx*=.95; p.vy*=.95;
-    p.r+=.02; p.life-=p.decay;
-    if(p.life<=0){dustParticles.splice(i,1);continue;}
-    const g=dustCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.5);
-    g.addColorStop(0,   `hsla(${p.hue},100%,75%,${p.life*.85})`);
-    g.addColorStop(0.5, `hsla(${p.hue},100%,65%,${p.life*.3})`);
+  dustCtx.clearRect(0, 0, W, H);
+  for (let i = dustParticles.length-1; i >= 0; i--) {
+    const p = dustParticles[i];
+    p.x += p.vx; p.y += p.vy;
+    p.vx *= .95; p.vy *= .95;
+    p.r += .02; p.life -= p.decay;
+    if (p.life <= 0) { dustParticles.splice(i, 1); continue; }
+    const g = dustCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.5);
+    g.addColorStop(0,   `hsla(${p.hue},100%,75%,${(p.life*.85).toFixed(2)})`);
+    g.addColorStop(0.5, `hsla(${p.hue},100%,65%,${(p.life*.3).toFixed(2)})`);
     g.addColorStop(1,   `hsla(${p.hue},100%,55%,0)`);
     dustCtx.beginPath();
-    dustCtx.arc(p.x,p.y,p.r*2.5,0,Math.PI*2);
-    dustCtx.fillStyle=g; dustCtx.fill();
+    dustCtx.arc(p.x, p.y, p.r*2.5, 0, Math.PI*2);
+    dustCtx.fillStyle = g; dustCtx.fill();
   }
 }
 function resizeCanvases() {
@@ -159,13 +159,49 @@ function resizeCanvases() {
 }
 window.addEventListener('load', resizeCanvases);
 
-/* ── Curtain draw — throttled to 30fps max ── */
+/* ── Curtain draw — each canvas draws its own side ── */
 let lastCurtainDraw = 0;
-function drawCurtain(cv) {
+function drawCurtain(cv, side) {
   const now = performance.now();
-  if (now - lastCurtainDraw < 33) return; /* ~30fps */
-  lastCurtainDraw = now;
+  if (now - lastCurtainDraw < 33 && side === 'right') return;
+  if (side === 'right') lastCurtainDraw = now;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  if (!W || !H) return;
+  ctx.clearRect(0, 0, W, H);
+  const n = 8, fw = W / n;
+  for (let i = 0; i < n; i++) {
+    const ph = (i / n) * Math.PI * 2;
+    const w1 = Math.sin(curtT*.7+ph)*.14 + Math.cos(curtT*.38+ph*1.5)*.06;
+    const li = .42 + .58 * Math.abs(Math.sin(curtT*.5+ph));
+    const r = Math.round(li*18), g = Math.round(32+li*34), b = Math.round(185+li*70);
+    const gd = ctx.createLinearGradient(i*fw, 0, (i+1)*fw, 0);
+    gd.addColorStop(0,   `rgb(${r-16},${g-10},${b-48})`);
+    gd.addColorStop(.25, `rgb(${r+20},${g+20},${b+42})`);
+    gd.addColorStop(.55, `rgb(${r+6},${g+6},${b+14})`);
+    gd.addColorStop(1,   `rgb(${r-10},${g-6},${b-32})`);
+    ctx.beginPath(); ctx.moveTo(i*fw, 0);
+    for (let s = 0; s <= 60; s++) {
+      const y = (s/60)*H;
+      const wx = Math.sin(y*.014+curtT*.65+ph)*fw*(.12+w1*.38)
+               + Math.sin(y*.027+curtT*.37+ph*2)*fw*.045;
+      ctx.lineTo(i*fw + fw*.5 + wx, y);
+    }
+    for (let s = 60; s >= 0; s--) ctx.lineTo((i+1)*fw, (s/60)*H);
+    ctx.closePath(); ctx.fillStyle = gd; ctx.fill();
+    const sh = ctx.createLinearGradient(i*fw, 0, i*fw+fw*.55, 0);
+    sh.addColorStop(0,   'rgba(255,255,255,0)');
+    sh.addColorStop(.4,  `rgba(255,255,255,${.032+li*.05})`);
+    sh.addColorStop(1,   'rgba(255,255,255,0)');
+    ctx.fillStyle = sh; ctx.fillRect(i*fw, 0, fw, H);
+  }
+  ctx.beginPath(); ctx.moveTo(0, H);
+  for (let x = 0; x <= W; x += 3) {
+    const y = H - 13 - Math.sin(x*.033+curtT*1.1)*8 - Math.cos(x*.054+curtT*.74)*5;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(W, H); ctx.closePath();
+  ctx.fillStyle = 'rgba(0,0,16,.6)'; ctx.fill();
+}
   ctx.clearRect(0,0,W,H);
   const n=8, fw=W/n;
   for (let i=0;i<n;i++) {
