@@ -10,18 +10,16 @@
 </head>
 <body>
 
-<svg class="svg-filters" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="spray" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
-      <feComposite in="displaced" in2="SourceGraphic" operator="in"/>
-    </filter>
-  </defs>
-</svg>
-
+<!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo">PROAD</a>
+  <a href="index.html" class="nav-logo-wrap">
+    <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+      <path fill="#fff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+      <path fill="#fff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+      <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#fff" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+    </svg>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
@@ -30,21 +28,48 @@
   <a href="#contact" class="nav-cta">Prendre RDV</a>
 </nav>
 
-<!-- ═══ 1. HERO ═══ -->
+<!-- ═══ 1. HERO — vrai logo + fill + zoom O ═══ -->
 <section class="hero-zoom">
   <div class="sticky-wrapper">
-    <div class="word-container">
-      <span class="letter">P</span>
-      <span class="letter">R</span>
-      <span class="letter target-o">O</span>
-      <span class="letter">A</span>
-      <span class="letter">D</span>
+    <div id="logo-wrap">
+      <!-- Outline layer -->
+      <svg id="logo-outline" viewBox="0 0 978.71 160.47" xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="1.5" d="M52.91,112.69v47.26H.5V3.37l106.27-.02c33.25.38,62.13,11.54,64.63,48.71,2.24,33.35-12.28,58.27-47.57,60.63H52.91ZM52.91,76.82h51.56c3.29,0,9.95-3.54,11.93-6.3,3.56-4.97,5.15-20.98.83-25.24-1.04-1.03-5.79-3.19-7.06-3.19h-57.25v34.73Z"/>
+        <path fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="1.5" d="M187.92,3.37l105.7-.03c41.81.35,68.09,16.93,65.22,61.83-1.37,21.53-10,34.85-29.43,43.48-.54.24-1-.33-.78.89l34.74,50.4h-51.56l-33.61-47.26h-37.03l-.85.85v46.4h-52.41V3.37ZM240.33,76.82h51.56c4.77,0,11.77-4.6,13.67-9.11,2.07-4.92,3.02-19.87-1.79-23.26-.75-.53-5.53-2.36-6.18-2.36h-57.25v34.73Z"/>
+        <path id="o-outline-path" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="1.5" d="M467.51.69l8.4-.19c47.22,2.14,93.96,18.34,97.13,72.6,3.7,63.39-40.82,85.14-97.18,86.26-57.45,1.14-107.67-19.7-103.97-85.69C374.93,19.74,420.19,2.87,467.51.69ZM468.08,42.26c-26.58,1.29-45.68,12.37-43.77,41.71,1.91,29.31,28.9,35.89,53.85,34.42,25.49-1.5,43.81-12.87,42.47-40.73-1.41-29.31-27.38-36.62-52.55-35.4Z"/>
+        <path fill="none" stroke="#2b40fc" stroke-miterlimit="10" stroke-width="1.5" d="M567.89,159.95L641.66,3.93l53.01-.6,17.31,36.43c-16.44,6.68-33.1,12.92-49.5,19.71-7.84,3.24-21.71,7.85-28.33,12.11-8.31,5.35-6.52,15.94,2.99,18.3l65.78,11.12c6.76,2.21,8.26,8.96,3.78,14.33l-87.25,44.61h-51.56Z"/>
+        <path fill="none" stroke="#2b40fc" stroke-miterlimit="10" stroke-width="1.5" d="M733.66,84.79l-7.76-5.62c-21.17-6.48-45.07-3.76-67.14-6.35-2.1-.37-2.65-2.69-1.48-4.3l57.77-22.97,18.6,39.24Z"/>
+        <path fill="none" stroke="#2b40fc" stroke-miterlimit="10" stroke-width="1.5" d="M769.56,159.95h-39.88c4.38-9.67,7.67-19.79,9.98-30.17,1.15-5.15,2.82-12.23,3.12-17.38.2-3.43-.75-6.61-.28-9.96l27.06,57.51Z"/>
+        <path fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="1.5" d="M786.08,159.95V3.37l106.27-.03c55.34.19,88.11,25.1,85.74,82.9-2.03,49.49-26.82,71.89-75.49,73.73l-116.52-.02ZM838.49,118.38c31.53-2.06,86.08,11.5,87.18-36.13,1.16-50.17-52.73-34.83-85.22-37.35l-1.96.88v72.6Z"/>
+      </svg>
+      <!-- Fill layer -->
+      <div id="logo-fill-wrap">
+        <svg id="logo-fill" viewBox="0 0 978.71 160.47" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="fill-clip"><rect id="fill-rect" x="0" y="160.47" width="978.71" height="0"/></clipPath>
+            <filter id="gw"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="gb"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g clip-path="url(#fill-clip)">
+            <path fill="white" filter="url(#gw)" d="M52.91,112.69v47.26H.5V3.37l106.27-.02c33.25.38,62.13,11.54,64.63,48.71,2.24,33.35-12.28,58.27-47.57,60.63H52.91ZM52.91,76.82h51.56c3.29,0,9.95-3.54,11.93-6.3,3.56-4.97,5.15-20.98.83-25.24-1.04-1.03-5.79-3.19-7.06-3.19h-57.25v34.73Z"/>
+            <path fill="white" filter="url(#gw)" d="M187.92,3.37l105.7-.03c41.81.35,68.09,16.93,65.22,61.83-1.37,21.53-10,34.85-29.43,43.48-.54.24-1-.33-.78.89l34.74,50.4h-51.56l-33.61-47.26h-37.03l-.85.85v46.4h-52.41V3.37ZM240.33,76.82h51.56c4.77,0,11.77-4.6,13.67-9.11,2.07-4.92,3.02-19.87-1.79-23.26-.75-.53-5.53-2.36-6.18-2.36h-57.25v34.73Z"/>
+            <path fill="white" filter="url(#gw)" d="M467.51.69l8.4-.19c47.22,2.14,93.96,18.34,97.13,72.6,3.7,63.39-40.82,85.14-97.18,86.26-57.45,1.14-107.67-19.7-103.97-85.69C374.93,19.74,420.19,2.87,467.51.69ZM468.08,42.26c-26.58,1.29-45.68,12.37-43.77,41.71,1.91,29.31,28.9,35.89,53.85,34.42,25.49-1.5,43.81-12.87,42.47-40.73-1.41-29.31-27.38-36.62-52.55-35.4Z"/>
+            <path fill="#2b40fc" filter="url(#gb)" d="M567.89,159.95L641.66,3.93l53.01-.6,17.31,36.43c-16.44,6.68-33.1,12.92-49.5,19.71-7.84,3.24-21.71,7.85-28.33,12.11-8.31,5.35-6.52,15.94,2.99,18.3l65.78,11.12c6.76,2.21,8.26,8.96,3.78,14.33l-87.25,44.61h-51.56Z"/>
+            <path fill="#2b40fc" filter="url(#gb)" d="M733.66,84.79l-7.76-5.62c-21.17-6.48-45.07-3.76-67.14-6.35-2.1-.37-2.65-2.69-1.48-4.3l57.77-22.97,18.6,39.24Z"/>
+            <path fill="#2b40fc" filter="url(#gb)" d="M769.56,159.95h-39.88c4.38-9.67,7.67-19.79,9.98-30.17,1.15-5.15,2.82-12.23,3.12-17.38.2-3.43-.75-6.61-.28-9.96l27.06,57.51Z"/>
+            <path fill="white" filter="url(#gw)" d="M786.08,159.95V3.37l106.27-.03c55.34.19,88.11,25.1,85.74,82.9-2.03,49.49-26.82,71.89-75.49,73.73l-116.52-.02ZM838.49,118.38c31.53-2.06,86.08,11.5,87.18-36.13,1.16-50.17-52.73-34.83-85.22-37.35l-1.96.88v72.6Z"/>
+          </g>
+          <defs><clipPath id="wave-clip"><rect id="wave-rect" x="0" y="160.47" width="978.71" height="6"/></clipPath></defs>
+          <path id="wave-path" fill="rgba(255,255,255,.35)" clip-path="url(#wave-clip)" d=""/>
+        </svg>
+      </div>
+      <canvas id="smoke-canvas"></canvas>
+      <div id="events-badge">EVENTS</div>
     </div>
-    <div id="events-badge">EVENTS</div>
     <div id="tagline">ON THE PRODUCTION ROAD</div>
     <div id="scroll-cue">
       <span>Scroll</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     </div>
   </div>
 </section>
@@ -67,7 +92,7 @@
   </div>
 </section>
 
-<!-- ═══ 3. CURTAIN ═══ -->
+<!-- ═══ 3. CURTAIN SCENE ═══ -->
 <section id="scene-curtain">
   <div id="curtain-sticky">
     <div class="stage-bar"></div>
@@ -78,9 +103,19 @@
     </div>
     <div class="stage-floor"></div>
 
+    <!-- Stage content -->
     <div id="stage-content">
+
+      <!-- LED screen with real logo flickering -->
       <div id="led-screen">
-        <div id="screen-logo">PROAD</div>
+        <div id="screen-logo-wrap">
+          <svg id="screen-logo-svg" viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#2b40fc" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+            <path fill="#2b40fc" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+            <path fill="#2b40fc" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+            <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#2b40fc" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+          </svg>
+        </div>
         <div id="screen-tagline">PLAN · RUN · ORGANIZE · ACTIVATE · DELIVER</div>
         <div id="screen-universe">L'UNIVERS PROAD</div>
       </div>
@@ -111,7 +146,6 @@
             <line x1="38" y1="65" x2="108" y2="65" stroke="rgba(0,71,255,.2)" stroke-width="1.5"/>
             <line x1="38" y1="80" x2="116" y2="80" stroke="rgba(0,71,255,.2)" stroke-width="1.5"/>
             <line x1="38" y1="95" x2="96" y2="95" stroke="rgba(0,71,255,.2)" stroke-width="1.5"/>
-            <line x1="38" y1="110" x2="112" y2="110" stroke="rgba(0,71,255,.2)" stroke-width="1.5"/>
             <path d="M38 112 L50 124 L74 98" stroke="#0047FF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glp)"/>
           </svg>
         </div>
@@ -252,7 +286,6 @@
 
     <canvas id="spotlight-canvas"></canvas>
     <div id="why-text"><span class="why">WHY</span><span class="pq">PROAD ?</span></div>
-
     <div class="curtains-wrap">
       <div class="curtain" id="curtain-l">
         <div class="curtain-rod"></div>
@@ -320,6 +353,7 @@
   <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
 </footer>
 
+<!-- Balloon card -->
 <div id="bcard">
   <div class="bcard-inner">
     <button class="bc-close" onclick="closeCard()">✕</button>
