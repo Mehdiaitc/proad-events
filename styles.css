@@ -30,9 +30,44 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
 
 /* ── ADN ── */
 #scene-adn{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 40px;text-align:center;}
-.adn-inner{max-width:740px;margin:0 auto;}
-.adn-lead{font-family:'Inter';font-size:clamp(1.1rem,2.3vw,1.5rem);font-weight:300;line-height:1.9;color:rgba(255,255,255,.7);margin-bottom:28px;}
-.w-proad,.w-road,.w-prod{font-family:'Bebas Neue';font-size:1.15em;letter-spacing:.1em;color:var(--blue);-webkit-text-stroke:1px rgba(255,255,255,.7);text-shadow:0 0 22px rgba(43,64,252,.55);text-decoration:none;cursor:pointer;font-style:normal;}
+.adn-inner{max-width:820px;margin:0 auto;}
+.adn-lead{
+  font-family:'Inter';
+  font-size:clamp(.9rem,1.8vw,1.15rem);
+  font-weight:300;
+  line-height:2;
+  color:rgba(255,255,255,.65);
+  margin-bottom:24px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+/* Mots clés — bleu scintillant, pas de contour */
+.w-proad,.w-road,.w-prod{
+  font-family:'Bebas Neue';
+  font-size:1.1em;
+  letter-spacing:.12em;
+  color:#2b40fc;
+  -webkit-text-stroke:0px;
+  text-decoration:none;
+  cursor:pointer;
+  font-style:normal;
+  animation:wordShimmer 3s ease-in-out infinite;
+  display:inline-block;
+}
+.w-road{ animation-delay:.6s; }
+.w-prod{ animation-delay:1.2s; font-size:1em; }
+@keyframes wordShimmer{
+  0%,100%{
+    color:#2b40fc;
+    text-shadow:0 0 8px rgba(43,64,252,.6),0 0 20px rgba(43,64,252,.3);
+    filter:brightness(1);
+  }
+  50%{
+    color:#6680ff;
+    text-shadow:0 0 14px rgba(43,64,252,1),0 0 35px rgba(43,64,252,.6),0 0 60px rgba(43,64,252,.2);
+    filter:brightness(1.4);
+  }
+}
 .scroll-hint{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:52px;opacity:0;animation:fadeIn .8s 1s forwards;}
 .scroll-hint span{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3);}
 .hint-mouse{width:24px;height:40px;border:1.5px solid rgba(255,255,255,.2);border-radius:12px;position:relative;}
