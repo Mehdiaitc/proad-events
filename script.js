@@ -1,167 +1,210 @@
-// ─── NAV scroll ───
-const nav = document.getElementById('nav');
+/* ═══════════════════════════════════════
+   PROAD Events — script.js
+   ═══════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+
+const nav        = $('nav');
+const liqRect    = $('liq-rect');
+const badge      = $('events-badge');
+const pWrap      = $('proad-wrap');
+const pSvg       = $('proad-svg');
+const tagline    = $('tagline');
+const zoomOvl    = $('zoom-overlay');
+const sceneHero  = $('scene-hero');
+const sceneTruck = $('scene-truck');
+const doorL      = $('door-l');
+const doorR      = $('door-r');
+const bals       = document.querySelectorAll('.balloon-wrap');
+const bcard      = $('bcard');
+
+let oCenter      = null;
+let zoomDone     = false;
+let balRisen     = false;
+
+/* ─── NAV ─── */
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
+  nav.classList.toggle('scrolled', scrollY > 50);
 });
 
-// ─── LIQUID fill + O positioning ───
-const liquidRect = document.getElementById('liquid-rect');
-const svgEl      = document.getElementById('proad-svg');
-const badge      = document.getElementById('events-badge');
-const logoWrap   = document.getElementById('proad-logo');
-
-let oCenter = null;
-let filled  = false;
-
-function findOCenter() {
+/* ─── Find O centre in SVG ─── */
+function findO() {
   const ns = 'http://www.w3.org/2000/svg';
-  const tmpSvg = document.createElementNS(ns, 'svg');
-  tmpSvg.setAttribute('viewBox', '0 0 700 160');
-  tmpSvg.style.cssText = 'position:absolute;visibility:hidden;width:700px;height:160px;';
-  document.body.appendChild(tmpSvg);
+  const s  = document.createElementNS(ns, 'svg');
+  s.setAttribute('viewBox', '0 0 780 160');
+  s.style.cssText = 'position:absolute;visibility:hidden;width:780px;height:160px;left:-9999px;';
+  document.body.appendChild(s);
 
-  const txt = document.createElementNS(ns, 'text');
-  txt.setAttribute('x', '50%');
-  txt.setAttribute('y', '148');
-  txt.setAttribute('text-anchor', 'middle');
-  txt.setAttribute('font-family', "'Bebas Neue',sans-serif");
-  txt.setAttribute('font-size', '160');
-  txt.setAttribute('letter-spacing', '18');
-  txt.textContent = 'PROAD';
-  tmpSvg.appendChild(txt);
+  const t = document.createElementNS(ns, 'text');
+  t.setAttribute('x', '50%'); t.setAttribute('y', '148');
+  t.setAttribute('text-anchor', 'middle');
+  t.setAttribute('font-family', "'Bebas Neue',sans-serif");
+  t.setAttribute('font-size', '160'); t.setAttribute('letter-spacing', '14');
+  t.textContent = 'PROAD'; s.appendChild(t);
 
-  let fullBox, prBox;
-  try {
-    fullBox = txt.getBBox();
-    txt.textContent = 'PR';
-    prBox = txt.getBBox();
-  } catch(e) {
-    document.body.removeChild(tmpSvg);
-    return;
-  }
-  document.body.removeChild(tmpSvg);
+  let fb, pb;
+  try { fb = t.getBBox(); t.textContent = 'PR'; pb = t.getBBox(); }
+  catch(e) { document.body.removeChild(s); return; }
+  document.body.removeChild(s);
 
-  const letterW = fullBox.width / 5;
-  const oX_vb   = prBox.x + prBox.width + letterW * 0.5;
-  const oY_vb   = 148 - 160 * 0.55;
+  const lw = fb.width / 5;
+  const ox = pb.x + pb.width + lw * .5;
+  const oy = 148 - 160 * .52;
 
-  const rect    = svgEl.getBoundingClientRect();
-  const scaleX  = rect.width  / 700;
-  const scaleY  = rect.height / 160;
-  const wrapRect = logoWrap.getBoundingClientRect();
+  const sr = pSvg.getBoundingClientRect();
+  const wr = pWrap.getBoundingClientRect();
+  const sx = sr.width  / 780;
+  const sy = sr.height / 160;
 
-  const px = (oX_vb * scaleX) + (rect.left - wrapRect.left);
-  const py = (oY_vb * scaleY) + (rect.top  - wrapRect.top);
-  const r  = letterW * scaleX * 0.38;
+  oCenter = {
+    x: ox * sx + (sr.left - wr.left),
+    y: oy * sy + (sr.top  - wr.top),
+    r: lw * sx * .38
+  };
 
-  oCenter = { x: px, y: py, r };
-
-  // Position EVENTS inside O
-  badge.style.left = px + 'px';
-  badge.style.top  = py + 'px';
-
-  // O click zone
-  let zone = document.getElementById('o-zone');
-  if (!zone) {
-    zone = document.createElement('div');
-    zone.id = 'o-zone';
-    zone.title = "Découvrir l'ADN PROAD";
-    zone.addEventListener('click', triggerOZoom);
-    logoWrap.appendChild(zone);
-  }
-  zone.style.cssText = `
-    position: absolute;
-    left: ${px - r}px;
-    top:  ${py - r}px;
-    width:  ${r * 2}px;
-    height: ${r * 2}px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 20;
-  `;
+  badge.style.left = oCenter.x + 'px';
+  badge.style.top  = oCenter.y + 'px';
 }
 
-window.addEventListener('load',   () => setTimeout(findOCenter, 150));
-window.addEventListener('resize', findOCenter);
+window.addEventListener('load',   () => setTimeout(findO, 200));
+window.addEventListener('resize', findO);
 
-// ─── Scroll-driven liquid fill ───
-function onScroll() {
-  const heroH    = document.getElementById('hero').offsetHeight;
-  const scrollY  = window.scrollY;
-  const progress = Math.min(scrollY / (heroH * 0.4), 1);
+/* ─── HERO scroll ─── */
+window.addEventListener('scroll', heroScroll, { passive: true });
 
-  // Liquid fill left → right
-  liquidRect.setAttribute('width', progress * 700);
+function heroScroll() {
+  const heroH = sceneHero.offsetHeight;
 
-  // EVENTS badge fades out
-  badge.style.opacity = Math.max(0, 1 - scrollY / 100);
+  /* Liquid fill: completes at 35% of hero scroll */
+  const fillP = Math.min(scrollY / (heroH * .35), 1);
+  liqRect.setAttribute('width', fillP * 780);
 
-  // Tagline parallax
-  document.getElementById('tagline').style.transform =
-    `translateY(${scrollY * 0.08}px)`;
+  /* EVENTS badge fades out */
+  badge.style.opacity = Math.max(0, 1 - scrollY / 90);
 
-  // Once fully filled: hint the O is clickable
-  if (progress >= 1 && !filled) {
-    filled = true;
-    const zone = document.getElementById('o-zone');
-    if (zone) zone.style.boxShadow = '0 0 0 2px rgba(26,71,255,.35)';
+  /* Tagline subtle parallax */
+  tagline.style.transform = `translateY(${scrollY * .07}px)`;
+
+  /* Zoom into O at 80% of hero scroll space */
+  const zoomP = scrollY / (heroH * .8);
+  if (zoomP >= 1 && !zoomDone) {
+    zoomDone = true;
+    doZoom();
   }
+  if (zoomP < .85) zoomDone = false;
 }
-window.addEventListener('scroll', onScroll, { passive: true });
 
-// ─── Zoom into O ───
-function triggerOZoom() {
+/* ─── Zoom into O → snap to ADN ─── */
+function doZoom() {
   if (!oCenter) return;
 
-  const wrapRect  = logoWrap.getBoundingClientRect();
-  const screenX   = wrapRect.left + oCenter.x;
-  const screenY   = wrapRect.top  + oCenter.y;
+  const wr = pWrap.getBoundingClientRect();
+  const cx = wr.left + oCenter.x;
+  const cy = wr.top  + oCenter.y;
+  const px = (cx / window.innerWidth  * 100).toFixed(1) + '%';
+  const py = (cy / window.innerHeight * 100).toFixed(1) + '%';
 
-  const ripple = document.createElement('div');
-  ripple.style.cssText = `
-    position: fixed;
-    left: ${screenX}px;
-    top:  ${screenY}px;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: #080808;
-    transform: translate(-50%,-50%) scale(1);
-    z-index: 190;
-    pointer-events: none;
-    transition: transform .65s cubic-bezier(.4,0,.2,1), opacity .65s;
-  `;
-  document.body.appendChild(ripple);
+  /* Start closed */
+  zoomOvl.style.transition = 'none';
+  zoomOvl.style.clipPath   = `circle(0% at ${px} ${py})`;
+  zoomOvl.style.pointerEvents = 'all';
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      ripple.style.transform = 'translate(-50%,-50%) scale(800)';
-    });
-  });
+  /* Expand to full screen */
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    zoomOvl.style.transition = 'clip-path .85s cubic-bezier(.4,0,.2,1)';
+    zoomOvl.style.clipPath   = `circle(150% at ${px} ${py})`;
+  }));
 
+  /* Snap to ADN section, then collapse overlay */
   setTimeout(() => {
-    document.getElementById('o-overlay').classList.add('visible');
-    document.body.style.overflow = 'hidden';
-    ripple.remove();
-  }, 550);
+    $('scene-adn').scrollIntoView({ behavior: 'instant' });
+    zoomOvl.style.transition   = 'clip-path .5s ease';
+    zoomOvl.style.clipPath     = 'circle(0% at 50% 50%)';
+    zoomOvl.style.pointerEvents = 'none';
+  }, 880);
 }
 
-// ─── Close overlay ───
-function closeOverlay() {
-  document.getElementById('o-overlay').classList.remove('visible');
-  document.body.style.overflow = '';
-}
-document.getElementById('o-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeOverlay();
+/* ─── ROAD link → scroll to truck ─── */
+$('road-link').addEventListener('click', () => {
+  sceneTruck.scrollIntoView({ behavior: 'smooth' });
 });
 
-// ─── Reveal on scroll ───
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
+/* ─── TRUCK scroll ─── */
+window.addEventListener('scroll', truckScroll, { passive: true });
+
+function truckScroll() {
+  const r     = sceneTruck.getBoundingClientRect();
+  const total = sceneTruck.offsetHeight - window.innerHeight;
+  const p     = Math.max(0, Math.min(1, -r.top / total));
+
+  /* Phase 1 — WHY appears (0 → 0.18) */
+  revealHalf($('gw-l'), p, .02, .18);
+  revealHalf($('gw-r'), p, .02, .18);
+
+  /* Phase 2 — PROAD? appears (0.20 → 0.38) */
+  revealHalf($('gp-l'), p, .20, .38);
+  revealHalf($('gp-r'), p, .20, .38);
+
+  /* Phase 3 — doors open (0.38 → 0.64) */
+  const dp = Math.max(0, Math.min(1, (p - .38) / .26));
+  doorL.style.transform = `perspective(1000px) rotateY(-${dp * 80}deg)`;
+  doorR.style.transform = `perspective(1000px) rotateY(${dp * 80}deg)`;
+
+  /* Graffiti halves travel with doors */
+  const sh = dp * 220;
+  ['gw-l', 'gp-l'].forEach(id => $(id).style.transform = `translateX(-${sh}px)`);
+  ['gw-r', 'gp-r'].forEach(id => $(id).style.transform = `translateX(${sh}px)`);
+
+  /* Fade graffiti as doors fully open */
+  const go = Math.max(0, 1 - (dp - .4) / .35);
+  ['gw-l','gw-r','gp-l','gp-r'].forEach(id => {
+    const el = $(id);
+    if (parseFloat(el.style.opacity || 1) > 0) el.style.opacity = go;
   });
-}, { threshold: 0.15 });
-reveals.forEach(r => io.observe(r));
+
+  /* Phase 4 — balloons rise (dp > 0.78) */
+  if (dp > .78 && !balRisen) {
+    balRisen = true;
+    bals.forEach((b, i) => setTimeout(() => b.classList.add('risen'), i * 150));
+  }
+  if (dp < .55 && balRisen) {
+    balRisen = false;
+    bals.forEach(b => b.classList.remove('risen'));
+  }
+}
+
+/* Grow a graffiti half from 0 to full width */
+function revealHalf(el, p, s, e) {
+  const t = Math.max(0, Math.min(1, (p - s) / (e - s)));
+  if (!el._fw) {
+    el.style.opacity = '1';
+    el.style.width   = 'auto';
+    el._fw = el.scrollWidth;
+    el.style.width   = '0';
+  }
+  el.style.opacity = t > 0 ? '1' : '0';
+  el.style.width   = (t * el._fw) + 'px';
+}
+
+/* ─── Balloon card ─── */
+bals.forEach(b => b.addEventListener('click', () => {
+  $('bc-l').textContent = b.dataset.l;
+  $('bc-w').textContent = b.dataset.w;
+  $('bc-d').textContent = b.dataset.d;
+  bcard.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}));
+
+function closeCard() {
+  bcard.classList.remove('open');
+  document.body.style.overflow = '';
+}
+bcard.addEventListener('click', e => { if (e.target === bcard) closeCard(); });
+
+/* ─── Reveal on scroll ─── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
