@@ -28,35 +28,51 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
 
 /* ── ADN ── */
 #scene-adn{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 40px;text-align:center;}
-.adn-inner{max-width:780px;margin:0 auto;}
+.adn-inner{max-width:740px;margin:0 auto;}
 .adn-lead{
-  font-family:'Bebas Neue';
-  font-size:clamp(1.6rem,3.5vw,2.8rem);
-  letter-spacing:.06em;
-  line-height:1.4;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.55);
-  margin-bottom:20px;
+  font-family:'Inter';
+  font-size:clamp(1.1rem,2.3vw,1.5rem);
+  font-weight:300;
+  line-height:1.9;
+  color:rgba(255,255,255,.7);
+  margin-bottom:28px;
+  -webkit-text-stroke:0px;
 }
 .adn-sub{
-  font-family:'Inter';
   font-size:clamp(.9rem,1.6vw,1.1rem);
-  font-weight:300;
-  letter-spacing:.02em;
-  -webkit-text-stroke:0px;
-  color:rgba(255,255,255,.4);
+  color:rgba(255,255,255,.45);
   margin-bottom:0;
 }
-/* Mots clés en bleu roi, contour blanc */
-.w-proad,.w-prod{
+/* Mots clés — bleu roi + contour blanc */
+.w-proad{
   font-family:'Bebas Neue';
-  font-size:inherit;
+  font-size:1.15em;
+  letter-spacing:.1em;
+  color:var(--blue);
+  -webkit-text-stroke:1px rgba(255,255,255,.7);
+  text-shadow:0 0 22px rgba(0,71,255,.55);
+  text-decoration:none;
+  cursor:pointer;
+}
+.w-road{
+  font-family:'Bebas Neue';
+  font-size:1.15em;
+  letter-spacing:.1em;
+  color:var(--blue);
+  -webkit-text-stroke:1px rgba(255,255,255,.7);
+  text-shadow:0 0 22px rgba(0,71,255,.55);
+  cursor:pointer;
+  text-decoration:none;
+}
+.w-prod{
+  font-family:'Bebas Neue';
+  font-size:1.15em;
   letter-spacing:.08em;
   color:var(--blue);
-  -webkit-text-stroke:1px rgba(255,255,255,.6);
-  text-shadow:0 0 22px rgba(0,71,255,.55),0 0 50px rgba(0,71,255,.2);
+  -webkit-text-stroke:1px rgba(255,255,255,.7);
+  text-shadow:0 0 22px rgba(0,71,255,.55);
+  cursor:pointer;
   font-style:normal;
-  text-decoration:none;
 }
 .scroll-hint{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:52px;opacity:0;animation:fadeIn .8s 1s forwards;}
 .scroll-hint span{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3);}
@@ -110,17 +126,18 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
 @keyframes textSweep{0%{background-position:200% 0;}100%{background-position:-100% 0;}}
 #screen-universe.done{-webkit-text-fill-color:rgba(100,160,255,.85);text-shadow:0 0 14px rgba(0,100,255,.5);background:none;}
 
-/* Props — bien dispersés sur la scène */
-#prop-p{bottom:26%;left:4%;  transform-origin:bottom center;}
-#prop-r{bottom:32%;left:22%; transform-origin:bottom center;}
-#prop-o{bottom:24%;left:44%; transform-origin:bottom center;}
-#prop-a{bottom:30%;left:65%; transform-origin:bottom center;}
-#prop-d{bottom:25%;right:3%; transform-origin:bottom center;}
-#prop-p .obj-wrap{transform:perspective(350px) rotateX(16deg) rotateY(12deg) scale(.8);}
-#prop-r .obj-wrap{transform:perspective(350px) rotateX(10deg) rotateY(5deg)  scale(.92);}
-#prop-o .obj-wrap{transform:perspective(350px) rotateX(12deg) rotateY(-2deg) scale(.96);}
-#prop-a .obj-wrap{transform:perspective(350px) rotateX(10deg) rotateY(-8deg) scale(.86);}
-#prop-d .obj-wrap{transform:perspective(350px) rotateX(14deg) rotateY(-14deg) scale(.8);}
+/* Props — placement version stable */
+.prop{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer;opacity:0;transition:opacity .6s,filter .35s;transform-style:preserve-3d;}
+#prop-p{bottom:28%;left:5%;}
+#prop-r{bottom:26%;left:23%;}
+#prop-o{bottom:23%;left:45%;}
+#prop-a{bottom:27%;left:63%;}
+#prop-d{bottom:25%;right:3%;}
+#prop-p .obj-wrap{transform:perspective(350px) rotateX(15deg) rotateY(10deg) scale(.82);}
+#prop-r .obj-wrap{transform:perspective(350px) rotateX(12deg) rotateY(5deg)  scale(.9);}
+#prop-o .obj-wrap{transform:perspective(350px) rotateX(10deg) rotateY(-2deg) scale(.95);}
+#prop-a .obj-wrap{transform:perspective(350px) rotateX(13deg) rotateY(-7deg) scale(.88);}
+#prop-d .obj-wrap{transform:perspective(350px) rotateX(14deg) rotateY(-12deg) scale(.82);}
 .obj-wrap{transition:transform .4s;transform-origin:bottom center;}
 .obj-wrap svg{display:block;filter:drop-shadow(0 10px 20px rgba(0,0,60,.8));}
 .prop:hover .obj-wrap{transform:perspective(350px) rotateX(4deg) rotateY(0deg) scale(1.05) translateY(-10px)!important;}
