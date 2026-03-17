@@ -20,6 +20,8 @@ const sCurt       = $('scene-curtain');
 const cvL         = $('canvas-l');
 const cvR         = $('canvas-r');
 const cvS         = $('spotlight-canvas');
+const cvDust      = $('dust-canvas');
+let dustCtx       = null;
 const cLel        = $('curtain-l');
 const cRel        = $('curtain-r');
 const stageC      = $('stage-content');
@@ -91,7 +93,64 @@ function drawSmoke(W, H) {
   }
 }
 
-/* ── Canvas resize ── */
+/* ── Dust trail ── */
+const dustParticles = [];
+let mouseX = -999, mouseY = -999;
+let lastMouseX = -999, lastMouseY = -999;
+
+document.addEventListener('mousemove', e => {
+  const sticky = $('curtain-sticky');
+  if (!sticky) return;
+  const r = sticky.getBoundingClientRect();
+  /* only active when stage is visible */
+  if (e.clientY < r.top || e.clientY > r.bottom) return;
+  mouseX = e.clientX - r.left;
+  mouseY = e.clientY - r.top;
+  /* spawn particles along movement */
+  const dx = mouseX - lastMouseX, dy = mouseY - lastMouseY;
+  const dist = Math.sqrt(dx*dx+dy*dy);
+  if (dist > 4) {
+    const n = Math.min(Math.floor(dist/4), 8);
+    for (let i=0;i<n;i++) {
+      const t = i/n;
+      dustParticles.push({
+        x: lastMouseX + dx*t + (Math.random()-.5)*6,
+        y: lastMouseY + dy*t + (Math.random()-.5)*6,
+        vx: (Math.random()-.5)*.8,
+        vy: -(Math.random()*.6+.1),
+        r: .8 + Math.random()*2.2,
+        life: 1,
+        decay: .018+Math.random()*.02,
+        hue: 210+Math.random()*40 /* blue-violet range */
+      });
+    }
+    lastMouseX = mouseX; lastMouseY = mouseY;
+  }
+});
+
+function drawDust() {
+  if (!cvDust) return;
+  const sticky = $('curtain-sticky');
+  if (!sticky) return;
+  const W = sticky.offsetWidth, H = sticky.offsetHeight;
+  cvDust.width = W; cvDust.height = H;
+  if (!dustCtx) dustCtx = cvDust.getContext('2d');
+  dustCtx.clearRect(0,0,W,H);
+  for (let i=dustParticles.length-1;i>=0;i--) {
+    const p=dustParticles[i];
+    p.x+=p.vx; p.y+=p.vy;
+    p.vx*=.96; p.vy*=.96;
+    p.r+=.015; p.life-=p.decay;
+    if(p.life<=0){dustParticles.splice(i,1);continue;}
+    const g=dustCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+    g.addColorStop(0,   `hsla(${p.hue},100%,75%,${p.life*.9})`);
+    g.addColorStop(0.4, `hsla(${p.hue},100%,65%,${p.life*.4})`);
+    g.addColorStop(1,   `hsla(${p.hue},100%,55%,0)`);
+    dustCtx.beginPath();
+    dustCtx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+    dustCtx.fillStyle=g; dustCtx.fill();
+  }
+}
 function resizeCanvases() {
   const s = $('curtain-sticky');
   if (!s) return;
@@ -296,6 +355,7 @@ function loop() {
 
   const sOp = Math.max(0, 1 - openP * 2.5);
   if (cvS) drawSpot(sOp);
+  drawDust();
   whyT.style.left    = (spx/100)*window.innerWidth  + 'px';
   whyT.style.top     = (spy/100)*window.innerHeight + 'px';
   whyT.style.opacity = sOp;
