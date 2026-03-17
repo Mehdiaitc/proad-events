@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PROAD Events | Production Road</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROAD Events | Production Road</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -21,157 +21,154 @@
   <a href="#contact" class="nav-cta">Prendre RDV</a>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div id="events-badge">EVENTS</div>
-
-  <div id="proad-logo">
-    <svg id="proad-svg" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="liquid-clip">
-          <rect id="liquid-rect" x="0" y="0" width="0" height="160"/>
-        </clipPath>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <!-- Ghost letters -->
-      <text id="proad-text-bg" x="50%" y="148" text-anchor="middle"
-        font-family="'Bebas Neue',sans-serif" font-size="160" letter-spacing="18">PROAD</text>
-      <!-- Filled (clipped) letters -->
-      <text id="proad-text-fill" x="50%" y="148" text-anchor="middle"
-        font-family="'Bebas Neue',sans-serif" font-size="160" letter-spacing="18"
-        clip-path="url(#liquid-clip)" filter="url(#glow)">PROAD</text>
-    </svg>
-  </div>
-
-  <div id="tagline">ON THE PRODUCTION ROAD</div>
-
-  <div id="scroll-cue">
-    <span>Scroll</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+<!-- ═══ 1. HERO ═══ -->
+<section id="scene-hero">
+  <div id="hero-sticky">
+    <div id="proad-wrap">
+      <svg id="proad-svg" viewBox="0 0 780 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="liq-clip"><rect id="liq-rect" x="0" y="0" width="0" height="160"/></clipPath>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <text id="proad-bg" x="50%" y="148" text-anchor="middle"
+          font-family="'Bebas Neue',sans-serif" font-size="160" letter-spacing="14">PROAD</text>
+        <text id="proad-fill" x="50%" y="148" text-anchor="middle"
+          font-family="'Bebas Neue',sans-serif" font-size="160" letter-spacing="14"
+          clip-path="url(#liq-clip)" filter="url(#glow)">PROAD</text>
+      </svg>
+    </div>
+    <div id="events-badge">EVENTS</div>
+    <div id="tagline">ON THE PRODUCTION ROAD</div>
+    <div id="scroll-cue">
+      <span>Scroll</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
   </div>
 </section>
 
-<!-- O OVERLAY (ADN) -->
-<div id="o-overlay">
-  <div class="o-content">
-    <h2>L'ADN PROAD</h2>
-    <div class="o-grid">
-      <div class="o-item">
-        <h4>Production</h4>
-        <p>Une maîtrise complète de la chaîne de production événementielle, de la conception à l'exécution.</p>
-      </div>
-      <div class="o-item">
-        <h4>Road</h4>
-        <p>Une trajectoire tracée avec rigueur. Chaque virage anticipé, chaque risque maîtrisé.</p>
-      </div>
-      <div class="o-item">
-        <h4>Expertise internationale</h4>
-        <p>Né à Singapour, PROAD apporte une vision globale à chaque projet local ou international.</p>
-      </div>
-      <div class="o-item">
-        <h4>Interlocuteur direct</h4>
-        <p>Agences ou annonceurs : un seul point de contact, sans intermédiaire, pour plus d'agilité.</p>
-      </div>
-    </div>
-    <button class="o-close" onclick="closeOverlay()">✕ Fermer</button>
-  </div>
-</div>
+<!-- Zoom overlay -->
+<div id="zoom-overlay"></div>
 
-<!-- WHY PROAD -->
+<!-- ═══ 2. ADN PHRASE ═══ -->
+<section id="scene-adn">
+  <div class="adn-inner">
+    <p class="adn-lead">
+      Faire appel à <a href="index.html" class="w-proad">PROAD</a>, c'est s'engager sur une ligne de conduite rigoureuse,
+      une véritable <span class="w-road" id="road-link">ROAD</span> tracée pour sécuriser votre projet.
+    </p>
+    <p class="adn-lead">
+      Chaque virage est maîtrisé pour aboutir à une <strong class="w-prod">PRODUCTION</strong> d'excellence,
+      fusionnant l'énergie du terrain et la précision stratégique.
+    </p>
+    <div class="scroll-hint">
+      <span>Découvrez la route</span>
+      <div class="hint-mouse"><div class="hint-dot"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. TRUCK ═══ -->
+<section id="scene-truck">
+  <div id="truck-sticky">
+    <div id="truck">
+
+      <!-- Interior -->
+      <div id="truck-interior">
+        <div class="balloon-wrap" data-l="P" data-w="PLAN" data-d="Anticiper chaque virage avant de prendre la route. Chaque projet commence par une stratégie solide.">
+          <div class="balloon">P</div><div class="string"></div>
+        </div>
+        <div class="balloon-wrap" data-l="R" data-w="RUN" data-d="Mettre en mouvement avec énergie et précision. Exécuter sans hésitation quand le feu est vert.">
+          <div class="balloon">R</div><div class="string"></div>
+        </div>
+        <div class="balloon-wrap" data-l="O" data-w="ORGANIZE" data-d="Orchestrer chaque détail pour une production sans faille. Rien n'est laissé au hasard.">
+          <div class="balloon">O</div><div class="string"></div>
+        </div>
+        <div class="balloon-wrap" data-l="A" data-w="ACTIVATE" data-d="Activer l'impact au bon moment, pour la bonne audience. Le timing fait la différence.">
+          <div class="balloon">A</div><div class="string"></div>
+        </div>
+        <div class="balloon-wrap" data-l="D" data-w="DELIVER" data-d="Tenir la promesse. Toujours. Chaque projet livré est une nouvelle référence.">
+          <div class="balloon">D</div><div class="string"></div>
+        </div>
+      </div>
+
+      <!-- Truck body -->
+      <div class="t-body">
+        <div class="t-roof"></div>
+        <div class="t-seam"></div>
+        <div class="t-hinges-l"><div class="hinge"></div><div class="hinge"></div><div class="hinge"></div></div>
+        <div class="t-hinges-r"><div class="hinge"></div><div class="hinge"></div><div class="hinge"></div></div>
+        <div class="t-handle-l"></div>
+        <div class="t-handle-r"></div>
+        <div class="t-refl-l"></div>
+        <div class="t-refl-r"></div>
+        <!-- Door halves -->
+        <div class="door" id="door-l"><div class="door-face"></div></div>
+        <div class="door" id="door-r"><div class="door-face"></div></div>
+        <!-- Graffiti -->
+        <div class="graffiti" id="gw-l">WH</div>
+        <div class="graffiti" id="gw-r">Y</div>
+        <div class="graffiti" id="gp-l">PRO</div>
+        <div class="graffiti" id="gp-r">AD?</div>
+      </div>
+
+      <div class="t-under"></div>
+      <div class="t-chassis">
+        <div class="t-axle"><div class="wheel"></div><div class="wheel"></div></div>
+        <div class="t-plate">PROAD · EVENTS</div>
+        <div class="t-axle"><div class="wheel"></div><div class="wheel"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. WHY PROAD ═══ -->
 <section id="why">
   <p class="section-label reveal">Pourquoi PROAD</p>
   <h2 class="reveal">Ce qui nous<br>distingue.</h2>
   <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">◈</div>
-      <h3>Tous types d'événements</h3>
-      <p>Corporate, galas, sports, lifestyle — chaque format est maîtrisé avec la même exigence.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">✦</div>
-      <h3>Agences & Annonceurs</h3>
-      <p>Interlocuteur direct, sans intermédiaire. La réactivité et la transparence que vous méritez.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">◉</div>
-      <h3>Né à Singapour</h3>
-      <p>Une expérience internationale dès le départ. Un regard global sur chaque brief local.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">⬡</div>
-      <h3>Rigueur & Créativité</h3>
-      <p>La précision stratégique au service de l'impact. Jamais l'un sans l'autre.</p>
-    </div>
+    <div class="why-card reveal"><div class="why-icon">◈</div><h3>Tous types d'événements</h3><p>Corporate, galas, sports, lifestyle — chaque format maîtrisé avec la même exigence.</p></div>
+    <div class="why-card reveal"><div class="why-icon">✦</div><h3>Agences & Annonceurs</h3><p>Interlocuteur direct, sans intermédiaire. La réactivité que vous méritez.</p></div>
+    <div class="why-card reveal"><div class="why-icon">◉</div><h3>Né à Singapour</h3><p>Une expérience internationale dès le départ. Un regard global sur chaque brief.</p></div>
+    <div class="why-card reveal"><div class="why-icon">⬡</div><h3>Rigueur & Créativité</h3><p>La précision stratégique au service de l'impact. Jamais l'un sans l'autre.</p></div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ═══ 5. SERVICES ═══ -->
 <section id="services">
   <p class="section-label reveal">Ce que nous faisons</p>
   <h2 class="reveal">Une expertise<br>terrain & stratégique.</h2>
   <p class="sub reveal">De l'idée à l'instant. Du brief au souvenir.</p>
   <div class="services-grid">
-    <div class="svc reveal">
-      <div class="svc-num">01</div>
-      <h3>Soirées & Galas</h3>
-      <p>Conception et production d'événements privés haut de gamme, de A à Z.</p>
-      <a href="portfolio.html" class="svc-tag">Voir les projets →</a>
-    </div>
-    <div class="svc reveal">
-      <div class="svc-num">02</div>
-      <h3>Événements Corporate</h3>
-      <p>Séminaires, conventions, teambuildings. Des formats qui fédèrent et marquent les équipes.</p>
-      <a href="portfolio.html" class="svc-tag">Voir les projets →</a>
-    </div>
-    <div class="svc reveal">
-      <div class="svc-num">03</div>
-      <h3>Lancements de Produits</h3>
-      <p>Créez l'impact au bon moment avec une mise en scène maîtrisée.</p>
-      <a href="portfolio.html" class="svc-tag">Voir les projets →</a>
-    </div>
-    <div class="svc reveal">
-      <div class="svc-num">04</div>
-      <h3>Lifestyle & Sports</h3>
-      <p>Événements de marque à fort ancrage culturel. Expériences immersives pour une audience engagée.</p>
-      <a href="portfolio.html" class="svc-tag">Voir les projets →</a>
-    </div>
+    <div class="svc reveal"><div class="svc-num">01</div><h3>Soirées & Galas</h3><p>Production d'événements privés haut de gamme, de A à Z.</p><a href="portfolio.html" class="svc-tag">Voir les projets →</a></div>
+    <div class="svc reveal"><div class="svc-num">02</div><h3>Événements Corporate</h3><p>Séminaires, conventions, teambuildings. Des formats qui fédèrent.</p><a href="portfolio.html" class="svc-tag">Voir les projets →</a></div>
+    <div class="svc reveal"><div class="svc-num">03</div><h3>Lancements de Produits</h3><p>Créez l'impact au bon moment avec une mise en scène maîtrisée.</p><a href="portfolio.html" class="svc-tag">Voir les projets →</a></div>
+    <div class="svc reveal"><div class="svc-num">04</div><h3>Lifestyle & Sports</h3><p>Expériences immersives à fort ancrage culturel pour une audience engagée.</p><a href="portfolio.html" class="svc-tag">Voir les projets →</a></div>
   </div>
 </section>
 
-<!-- STATS -->
+<!-- ═══ 6. STATS ═══ -->
 <section id="stats">
-  <div class="stat reveal">
-    <div class="stat-num">120+</div>
-    <div class="stat-label">Événements produits</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">8</div>
-    <div class="stat-label">Pays d'intervention</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">95%</div>
-    <div class="stat-label">Clients fidélisés</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">10+</div>
-    <div class="stat-label">Années d'expérience</div>
-  </div>
+  <div class="stat reveal"><div class="stat-num">120+</div><div class="stat-label">Événements produits</div></div>
+  <div class="stat reveal"><div class="stat-num">8</div><div class="stat-label">Pays d'intervention</div></div>
+  <div class="stat reveal"><div class="stat-num">95%</div><div class="stat-label">Clients fidélisés</div></div>
+  <div class="stat reveal"><div class="stat-num">10+</div><div class="stat-label">Années d'expérience</div></div>
 </section>
 
-<!-- CTA -->
+<!-- ═══ 7. CTA ═══ -->
 <section id="cta">
   <p class="section-label reveal">Votre prochain événement</p>
   <h2 class="reveal">Prêt à monter<br>à bord ?</h2>
-  <p class="reveal">Discutons de votre projet. Un premier échange, sans engagement, pour voir si la route est la même.</p>
+  <p class="reveal">Un premier échange, sans engagement, pour voir si la route est la même.</p>
   <a href="#contact" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="f-logo">PROAD EVENTS</div>
   <ul class="f-links">
@@ -182,6 +179,16 @@
   </ul>
   <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
 </footer>
+
+<!-- Balloon card -->
+<div id="bcard">
+  <div class="bcard-inner">
+    <button class="bc-close" onclick="closeCard()">✕</button>
+    <div class="bc-letter" id="bc-l"></div>
+    <div class="bc-word"   id="bc-w"></div>
+    <div class="bc-def"    id="bc-d"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
