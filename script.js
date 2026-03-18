@@ -171,31 +171,31 @@ function drawSpot(op){
   const px = (spx/100)*W;
   const py = (spy/100)*H;
 
-  /* Halo principal large — lumière frontale */
+  /* Halo principal large — lumière froide pure, blanc/bleu uniquement */
   const r1 = Math.min(W,H) * .40;
   const g1 = ctx.createRadialGradient(px, py, 0, px, py, r1);
-  g1.addColorStop(0,   `rgba(255,255,255,${(.20*op).toFixed(2)})`);
-  g1.addColorStop(.12, `rgba(220,235,255,${(.15*op).toFixed(2)})`);
-  g1.addColorStop(.38, `rgba(100,155,255,${(.06*op).toFixed(2)})`);
-  g1.addColorStop(.72, `rgba(43,64,252,${(.022*op).toFixed(3)})`);
+  g1.addColorStop(0,   `rgba(230,240,255,${(.18*op).toFixed(2)})`);
+  g1.addColorStop(.15, `rgba(200,225,255,${(.12*op).toFixed(2)})`);
+  g1.addColorStop(.40, `rgba(100,155,255,${(.055*op).toFixed(3)})`);
+  g1.addColorStop(.75, `rgba(43,64,252,${(.018*op).toFixed(3)})`);
   g1.addColorStop(1,   'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r1, 0, Math.PI*2);
   ctx.fillStyle = g1; ctx.fill();
 
-  /* Point chaud central */
-  const r2 = Math.min(W,H) * .06;
+  /* Point chaud central — blanc froid */
+  const r2 = Math.min(W,H) * .055;
   const g2 = ctx.createRadialGradient(px, py, 0, px, py, r2);
-  g2.addColorStop(0,  `rgba(255,255,255,${(.80*op).toFixed(2)})`);
-  g2.addColorStop(.4, `rgba(230,240,255,${(.38*op).toFixed(2)})`);
+  g2.addColorStop(0,  `rgba(240,248,255,${(.82*op).toFixed(2)})`);
+  g2.addColorStop(.4, `rgba(210,232,255,${(.40*op).toFixed(2)})`);
   g2.addColorStop(1,  'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r2, 0, Math.PI*2);
   ctx.fillStyle = g2; ctx.fill();
 
-  /* Anneau de diffusion */
+  /* Anneau bleu de diffusion */
   const r3 = Math.min(W,H) * .20;
   const g3 = ctx.createRadialGradient(px, py, r3*.55, px, py, r3);
   g3.addColorStop(0,  'rgba(0,0,0,0)');
-  g3.addColorStop(.5, `rgba(43,64,252,${(.038*op).toFixed(3)})`);
+  g3.addColorStop(.5, `rgba(43,64,252,${(.032*op).toFixed(3)})`);
   g3.addColorStop(1,  'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r3, 0, Math.PI*2);
   ctx.fillStyle = g3; ctx.fill();
