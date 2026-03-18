@@ -31,12 +31,19 @@
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
-  opacity: .55;
-}
-.adn-road-bg svg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+  /* Photo route avec filtre bleu et transparence maximale */
+  background-image: url('road.jpg');
+  background-size: cover;
+  background-position: center center;
+
+  /* Filtre : assombrir + teinte bleue PROAD */
+  opacity: 0.13;
+  filter: grayscale(40%) sepia(60%) hue-rotate(180deg) saturate(180%) brightness(0.5);
+
+  /* Fondu sur les bords */
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 40%, transparent 100%);
 }
 #scene-adn {
   position: relative;
@@ -262,8 +269,8 @@
 
 <!-- ═══ 2. ADN PHRASE ═══ -->
 <section id="scene-adn">
-  <!-- Fond : route vue aérienne, sinueuse, sobre -->
-  <div class="adn-road-bg" aria-hidden="true">
+  <!-- Fond route photo réelle avec filtre bleu -->
+  <div class="adn-road-bg" aria-hidden="true"></div>
     <svg viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
         <!-- Fond végétation sombre -->
