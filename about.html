@@ -209,6 +209,7 @@
   animation: introShimmer 3s ease-in-out infinite;
   display: block;
   margin-bottom: 0;
+  line-height: 1.1;
 }
 @keyframes introShimmer {
   0%,100% { color: #2b40fc; text-shadow: 0 0 8px rgba(43,64,252,.5); filter: brightness(1); }
@@ -284,31 +285,54 @@
 }
 .cop-float-btn:hover .cop-float-tooltip { opacity: 1; }
 
-/* Road timeline */
+/* ── ROAD TIMELINE HORIZONTALE ── */
 .bio-road {
   position: relative;
-  padding: 40px 0 20px 0;
-  margin-top: 8px;
+  margin-top: 48px;
+  padding-bottom: 8px;
 }
+/* Ligne horizontale */
 .bio-road-line {
   position: absolute;
-  left: 32px;
-  top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, rgba(43,64,252,.4) 10%, rgba(43,64,252,.3) 85%, transparent);
+  top: 14px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right,
+    transparent,
+    rgba(43,64,252,.5) 5%,
+    rgba(43,64,252,.4) 95%,
+    transparent);
+}
+/* Wrapper flex pour les 4 étapes */
+
+.bio-road-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px 60px;
+}
+@media(max-width:900px){
+  .bio-road-section { padding: 0 24px 48px; }
+}
+.bio-road-items {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 .bio-road-item {
+  flex: 1;
   position: relative;
-  padding: 0 0 40px 72px;
+  padding: 36px 12px 0 12px;
   opacity: 0;
-  transform: translateX(-8px);
+  transform: translateY(10px);
   transition: opacity .6s, transform .6s;
 }
-.bio-road-item.visible { opacity: 1; transform: translateX(0); }
+.bio-road-item.visible { opacity: 1; transform: translateY(0); }
+/* Point sur la ligne horizontale */
 .bio-road-dot {
   position: absolute;
-  left: 24px;
-  top: 6px;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 18px; height: 18px;
   border-radius: 50%;
   border: 2px solid var(--blue);
@@ -319,56 +343,53 @@
 }
 .bio-road-item:hover .bio-road-dot {
   background: var(--blue);
-  box-shadow: 0 0 16px rgba(43,64,252,.8);
+  box-shadow: 0 0 18px rgba(43,64,252,.85);
 }
-/* Virage connector */
-.bio-road-item:not(:last-child) .bio-road-dot::after {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: 6px;
-  width: 1px;
-  height: 40px;
-  background: rgba(43,64,252,.3);
-}
+.bio-road-item:not(:last-child) .bio-road-dot::after { display: none; }
 .bio-road-year {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .72rem;
-  letter-spacing: .22em;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: .65rem;
+  letter-spacing: .2em;
   color: var(--blue);
   margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
-.bio-road-year::after {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 1px;
-  background: rgba(43,64,252,.4);
-}
+.bio-road-year::after { display: none; }
 .bio-road-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
-  letter-spacing: .06em;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(.8rem, 1.1vw, .95rem);
+  letter-spacing: .05em;
   color: rgba(255,255,255,.9);
   margin-bottom: 4px;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 .bio-road-desc {
-  font-size: .78rem;
+  font-size: .7rem;
   color: var(--gray);
-  line-height: 1.6;
+  line-height: 1.5;
 }
-/* Last stop = destination */
 .bio-road-item:last-child .bio-road-dot {
   background: var(--blue);
   box-shadow: 0 0 20px rgba(43,64,252,.7);
   width: 22px; height: 22px;
-  left: 22px;
+  top: 3px;
 }
 .bio-road-item:last-child .bio-road-title { color: var(--blue); }
+@media(max-width:900px){
+  
+.bio-road-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px 60px;
+}
+@media(max-width:900px){
+  .bio-road-section { padding: 0 24px 48px; }
+}
+.bio-road-items { flex-direction: column; }
+  .bio-road-line { top: 0; bottom: 0; left: 14px; right: auto; width: 2px; height: auto;
+    background: linear-gradient(to bottom, transparent, rgba(43,64,252,.5) 5%, rgba(43,64,252,.4) 95%, transparent); }
+  .bio-road-item { padding: 0 0 28px 44px; }
+  .bio-road-dot { top: 4px; left: 5px; transform: none; }
+}
 
 .bio-body {
   font-size: .88rem;
@@ -796,13 +817,14 @@
     </p>
     <p class="bio-body reveal">
       Retour en France. Je continue avec <strong>Chab Agency</strong> à Aix-en-Provence. Chef de Projet Senior. C'est là que tout prend forme. Et c'est de <strong>Marseille</strong>, ville que j'aime pour sa diversité et son potentiel événementiel, que je décide de tracer ma propre route avec <strong>PROAD</strong>.
-    </p>
+    </p></div>
+</section>
 
-    <div class="bio-divider reveal"></div>
-
-    <!-- ROAD TIMELINE -->
-    <div class="bio-road reveal">
-      <div class="bio-road-line"></div>
+<!-- ── ROUTE TIMELINE HORIZONTALE ── -->
+<div class="bio-road-section">
+  <div class="bio-road reveal">
+    <div class="bio-road-line"></div>
+    <div class="bio-road-items">
 
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
@@ -832,9 +854,10 @@
         <div class="bio-road-desc">Ma propre route. Marseille et toute la France.</div>
       </div>
 
-    </div>
+    </div><!-- /bio-road-items -->
   </div>
-</section>
+</div>
+
 
 <!-- VALUES -->
 <div class="values-strip">
