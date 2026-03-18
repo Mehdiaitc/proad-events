@@ -62,43 +62,59 @@
   box-shadow: 0 0 20px rgba(43,64,252,.3);
 }
 
-/* ── FRANCE MAP ── */
+/* ── FRANCE MAP + CTA FUSIONNÉS ── */
 #france-map {
   padding: 100px 48px;
-  text-align: center;
   border-top: 1px solid rgba(255,255,255,.06);
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.france-cta-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.france-cta-text .section-label {
+  margin-bottom: 14px;
 }
 #france-map h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.8rem, 5vw, 5rem);
   letter-spacing: .03em;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   line-height: 1;
+  text-align: left;
 }
 .map-sub {
   color: var(--gray);
-  font-size: .85rem;
-  letter-spacing: .08em;
-  margin-bottom: 56px;
-  text-transform: uppercase;
+  font-size: .88rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+  text-align: left;
+  max-width: 420px;
 }
 .france-map-wrap {
-  max-width: 560px;
-  margin: 0 auto;
+  max-width: 480px;
+  width: 100%;
   position: relative;
 }
 #france-svg { width: 100%; height: auto; }
 
 .france-shape {
-  fill: rgba(43,64,252,.08);
-  stroke: rgba(43,64,252,.35);
+  fill: rgba(43,64,252,.07);
+  stroke: rgba(43,64,252,.4);
   stroke-width: 1.5;
+  stroke-linejoin: round;
 }
 
 /* Routes */
 .route-line {
   fill: none;
-  stroke: rgba(43,64,252,.45);
+  stroke: rgba(43,64,252,.5);
   stroke-width: 1.5;
   stroke-dasharray: 5 4;
   stroke-dashoffset: 0;
@@ -134,18 +150,18 @@
   animation: mapPulse 2s ease-out infinite;
 }
 @keyframes mapPulse {
-  0% { r: 8; opacity: .6; }
-  100% { r: 22; opacity: 0; }
+  0% { r: 7; opacity: .6; }
+  100% { r: 20; opacity: 0; }
 }
 .marseille-label {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: .18em;
   fill: #fff;
 }
 .marseille-sub {
   font-family: 'Inter', sans-serif;
-  font-size: 8px;
+  font-size: 7px;
   letter-spacing: .1em;
   fill: rgba(255,255,255,.35);
   text-transform: uppercase;
@@ -153,21 +169,27 @@
 
 /* City dots */
 .route-dot {
-  fill: rgba(43,64,252,.7);
+  fill: rgba(43,64,252,.75);
   stroke: rgba(43,64,252,.4);
   stroke-width: 1;
-  transition: r .2s;
 }
 .route-city {
   font-family: 'Inter', sans-serif;
-  font-size: 8.5px;
-  fill: rgba(255,255,255,.5);
+  font-size: 8px;
+  fill: rgba(255,255,255,.55);
   letter-spacing: .05em;
 }
 
-@media(max-width:768px){
-  #france-map { padding: 80px 24px; }
-  .france-map-wrap { max-width: 340px; }
+@media(max-width:900px){
+  #france-map {
+    grid-template-columns: 1fr;
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .france-cta-text { align-items: center; }
+  #france-map h2 { text-align: center; }
+  .map-sub { text-align: center; margin: 0 auto; }
+  .france-map-wrap { max-width: 360px; margin: 0 auto; }
 }
 </style>
 </head>
@@ -657,70 +679,107 @@
   </div>
 </section>
 
-<!-- ═══ 7. CTA ═══ -->
-<section id="cta">
-  <p class="section-label reveal">Votre prochain événement</p>
-  <h2 class="reveal">Faisons un bout<br>de chemin !</h2>
-  <p class="reveal">Un premier échange, sans engagement, pour voir si la route est la même.</p>
-  <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
-</section>
-
-<!-- ═══ 8. CARTE FRANCE ═══ -->
+<!-- ═══ 7. CTA + CARTE FRANCE ═══ -->
 <section id="france-map">
-  <p class="section-label reveal">Opérations</p>
-  <h2 class="reveal">Alors on trace<br>notre road ?</h2>
-  <p class="map-sub reveal">Basé à Marseille. Opérationnel partout.</p>
+  <div class="france-cta-text">
+    <p class="section-label reveal">Votre prochain événement</p>
+    <h2 class="reveal">Alors on trace<br>notre road ?</h2>
+    <p class="map-sub reveal">Un premier échange, sans engagement, pour voir si la route est la même.<br>Basé à Marseille. Opérationnel partout.</p>
+    <a href="contact.html" class="btn-primary reveal" style="margin-top:32px;display:inline-block;">PRENDRE RENDEZ-VOUS</a>
+  </div>
+
   <div class="france-map-wrap reveal">
-    <svg id="france-svg" viewBox="0 0 600 620" xmlns="http://www.w3.org/2000/svg">
-      <!-- France silhouette simplified -->
-      <path class="france-shape" d="M185,45 L210,35 L245,40 L275,30 L310,38 L340,32 L370,45 L390,65 L405,90 L415,115 L425,140 L430,165 L435,190 L440,215 L435,240 L445,265 L450,290 L445,315 L435,338 L420,358 L400,375 L378,390 L355,405 L330,418 L305,430 L290,450 L275,468 L258,485 L240,498 L220,508 L200,515 L178,510 L158,498 L140,482 L125,462 L112,440 L102,415 L95,388 L92,360 L95,332 L100,305 L105,278 L108,252 L105,226 L100,200 L98,174 L100,148 L108,122 L120,98 L138,76 L158,58 Z"/>
-      <!-- Routes depuis Marseille -->
+    <svg id="france-svg" viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="map-glow">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- ═══ VRAIE SILHOUETTE FRANCE ═══ -->
+      <!-- Tracé fidèle de la France métropolitaine -->
+      <path class="france-shape" d="
+        M 248,18
+        L 262,20 L 278,16 L 295,18 L 312,22 L 326,18 L 338,22
+        L 348,30 L 358,38 L 365,48 L 370,58 L 372,70 L 370,82
+        L 375,90 L 382,96 L 390,98 L 398,102 L 402,110 L 400,120
+        L 406,128 L 412,134 L 418,140 L 420,150 L 416,160
+        L 420,168 L 424,178 L 422,188 L 416,196 L 418,206
+        L 416,216 L 410,224 L 408,234 L 412,244 L 414,254
+        L 410,264 L 404,272 L 396,278 L 390,286 L 384,294
+        L 378,300 L 370,306 L 362,310 L 352,314 L 344,318
+        L 336,326 L 328,334 L 320,340 L 312,348 L 306,356
+        L 298,362 L 290,368 L 282,372 L 272,374 L 262,374
+        L 252,372 L 242,368 L 232,362 L 222,356 L 214,348
+        L 206,340 L 198,332 L 192,322 L 188,312 L 182,302
+        L 176,292 L 170,282 L 162,274 L 154,268 L 146,262
+        L 138,254 L 132,244 L 128,234 L 126,222 L 124,210
+        L 122,198 L 118,186 L 114,176 L 108,166 L 104,156
+        L 100,146 L 98,136 L 96,124 L 94,112 L 96,100
+        L 100,90 L 106,80 L 112,72 L 118,62 L 126,54
+        L 136,46 L 148,38 L 162,30 L 178,24 L 196,20 L 214,17 L 232,16
+        Z
+      "/>
+
+      <!-- Bretagne (péninsule ouest) -->
+      <path class="france-shape" d="
+        M 96,124 L 88,118 L 78,112 L 68,108 L 58,106
+        L 48,108 L 40,114 L 34,122 L 32,132 L 36,140
+        L 44,146 L 54,148 L 64,144 L 74,138 L 82,132
+        L 90,128 L 96,124 Z
+      " opacity="0.7"/>
+
+      <!-- Routes depuis Marseille — coordonnées ajustées -->
       <g class="map-routes">
-        <!-- Point Marseille -->
-        <circle class="marseille-dot" cx="340" cy="420" r="8"/>
-        <circle class="marseille-pulse" cx="340" cy="420" r="8"/>
-        <text class="marseille-label" x="355" y="415">MARSEILLE</text>
-        <text class="marseille-sub" x="355" y="428">Point de départ</text>
-        <!-- Route vers Paris -->
-        <path class="route-line" d="M340,420 Q310,360 290,300 Q270,240 255,185"/>
-        <circle class="route-dot" cx="255" cy="185" r="4"/>
-        <text class="route-city" x="262" y="182">Paris</text>
-        <!-- Route vers Lyon -->
-        <path class="route-line" d="M340,420 Q330,390 318,365"/>
-        <circle class="route-dot" cx="318" cy="365" r="4"/>
-        <text class="route-city" x="325" y="362">Lyon</text>
-        <!-- Route vers Bordeaux -->
-        <path class="route-line" d="M340,420 Q290,415 245,405 Q210,395 185,385"/>
-        <circle class="route-dot" cx="185" cy="385" r="4"/>
-        <text class="route-city" x="148" y="382">Bordeaux</text>
-        <!-- Route vers Nice/Monaco -->
-        <path class="route-line" d="M340,420 Q360,418 378,412 Q395,406 408,396"/>
-        <circle class="route-dot" cx="408" cy="396" r="4"/>
-        <text class="route-city" x="412" y="393">Monaco</text>
-        <!-- Route vers Cannes -->
-        <path class="route-line" d="M340,420 Q358,430 375,435 Q392,438 405,432"/>
-        <circle class="route-dot" cx="405" cy="432" r="4"/>
-        <text class="route-city" x="410" y="430">Cannes</text>
-        <!-- Route vers Aix -->
-        <path class="route-line route-short" d="M340,420 Q322,420 310,418"/>
-        <circle class="route-dot" cx="310" cy="418" r="4"/>
-        <text class="route-city" x="274" y="415">Aix-en-Pce</text>
-        <!-- Route vers Montpellier -->
-        <path class="route-line" d="M340,420 Q320,435 295,445 Q270,452 255,448"/>
-        <circle class="route-dot" cx="255" cy="448" r="4"/>
-        <text class="route-city" x="215" y="445">Montpellier</text>
-        <!-- Route internationale (Singapour pointillé) -->
-        <path class="route-intl" d="M408,396 Q440,360 455,310 Q465,270 460,230"/>
-        <text class="route-intl-label" x="458" y="225">Intl.</text>
+        <!-- Marseille -->
+        <circle class="marseille-dot" cx="318" cy="348" r="7"/>
+        <circle class="marseille-pulse" cx="318" cy="348" r="7"/>
+        <text class="marseille-label" x="330" y="344">MARSEILLE</text>
+        <text class="marseille-sub" x="330" y="356">Point de départ</text>
+
+        <!-- Route Paris -->
+        <path class="route-line" d="M318,348 Q295,290 275,230 Q258,175 248,130"/>
+        <circle class="route-dot" cx="248" cy="130" r="4"/>
+        <text class="route-city" x="255" y="127">Paris</text>
+
+        <!-- Route Lyon -->
+        <path class="route-line" d="M318,348 Q308,318 298,290"/>
+        <circle class="route-dot" cx="298" cy="290" r="4"/>
+        <text class="route-city" x="305" y="287">Lyon</text>
+
+        <!-- Route Bordeaux -->
+        <path class="route-line" d="M318,348 Q270,335 228,318 Q200,308 178,302"/>
+        <circle class="route-dot" cx="178" cy="302" r="4"/>
+        <text class="route-city" x="140" y="300">Bordeaux</text>
+
+        <!-- Route Aix -->
+        <path class="route-line route-short" d="M318,348 Q302,346 290,344"/>
+        <circle class="route-dot" cx="290" cy="344" r="4"/>
+        <text class="route-city" x="250" y="342">Aix</text>
+
+        <!-- Route Cannes -->
+        <path class="route-line" d="M318,348 Q336,352 350,350 Q362,348 368,342"/>
+        <circle class="route-dot" cx="368" cy="342" r="4"/>
+        <text class="route-city" x="370" y="340">Cannes</text>
+
+        <!-- Route Monaco -->
+        <path class="route-line" d="M318,348 Q342,340 362,328 Q374,320 382,312"/>
+        <circle class="route-dot" cx="382" cy="312" r="4"/>
+        <text class="route-city" x="386" y="310">Monaco</text>
+
+        <!-- Route Montpellier -->
+        <path class="route-line" d="M318,348 Q298,356 276,360 Q260,362 248,360"/>
+        <circle class="route-dot" cx="248" cy="360" r="4"/>
+        <text class="route-city" x="208" y="358">Montpellier</text>
+
+        <!-- Route Intl. (hors France) -->
+        <path class="route-intl" d="M382,312 Q400,280 410,248 Q418,220 415,190"/>
+        <text class="route-intl-label" x="418" y="186">Intl.</text>
       </g>
     </svg>
   </div>
 </section>
-
-<!-- CTA AFTER MAP -->
-<div style="text-align:center;padding:0 48px 80px;">
-  <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
-</div>
 
 <footer>
   <div class="f-logo">PROAD EVENTS</div>
