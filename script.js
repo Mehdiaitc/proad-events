@@ -3,7 +3,6 @@
    ═══════════════════════════════════════ */
 const $ = id => document.getElementById(id);
 
-/* ── Refs ── */
 const nav         = $('nav');
 const heroSection = document.querySelector('.hero-zoom');
 const logoWrap    = $('logo-wrap');
@@ -33,7 +32,7 @@ const bcard       = $('bcard');
 
 const TOTAL_H = 160.47;
 let waveT = 0, curtT = 0;
-let spx=50, spy=42, stx=50, sty=42, sph=0;
+let spx=50, spy=50, stx=50, sty=50, sph=0;
 let sweepDone  = false;
 let zoomActive = false;
 let zoomComplete = false;
@@ -43,7 +42,7 @@ const dustParticles = [];
 /* ── NAV ── */
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), {passive:true});
 
-/* ── Badge EVENTS — wait for fonts then use getBBox ── */
+/* ── Badge EVENTS ── */
 function positionBadge() {
   try {
     const bb  = oPath.getBBox();
@@ -154,39 +153,52 @@ function drawCurtain(cv, isRight) {
   ctx.fillStyle='rgba(0,0,16,.6)'; ctx.fill();
 }
 
-/* ── Spotlight ── */
+/* ── Spotlight WHY PROAD — lumière de face ──
+   Mouvement horizontal doux, centré verticalement,
+   lumière qui s'élargit depuis le centre comme un projecteur frontal */
 function updateSpotTarget(){
-  sph+=.009;
-  stx=50+Math.sin(sph*.71)*30+Math.sin(sph*1.37)*13+Math.sin(sph*.23)*7;
-  sty=38+Math.cos(sph*.53)*20+Math.cos(sph*.97)*9+Math.sin(sph*.41)*5;
+  sph += .007;
+  stx = 50 + Math.sin(sph*.53)*28 + Math.sin(sph*1.17)*10 + Math.sin(sph*.29)*5;
+  sty = 50 + Math.cos(sph*.41)*8  + Math.sin(sph*.73)*4;
 }
+
 function drawSpot(op){
-  op=isNaN(op)?0:Math.max(0,Math.min(1,op));
-  const ctx=cvS.getContext('2d'), W=cvS.width, H=cvS.height;
+  op = isNaN(op) ? 0 : Math.max(0, Math.min(1, op));
+  const ctx = cvS.getContext('2d'), W = cvS.width, H = cvS.height;
   ctx.clearRect(0,0,W,H);
-  if(op<=0) return;
-  const px=(spx/100)*W, py=(spy/100)*H;
-  const r1=Math.min(W,H)*.24;
-  const g1=ctx.createRadialGradient(px,py,0,px,py,r1);
-  g1.addColorStop(0,  `rgba(220,232,255,${(.22*op).toFixed(2)})`);
-  g1.addColorStop(.35,`rgba(170,205,255,${(.12*op).toFixed(2)})`);
-  g1.addColorStop(.7, `rgba(80,140,255,${(.04*op).toFixed(2)})`);
-  g1.addColorStop(1,  'rgba(0,0,0,0)');
-  ctx.beginPath();ctx.arc(px,py,r1,0,Math.PI*2);ctx.fillStyle=g1;ctx.fill();
-  const r2=Math.min(W,H)*.065;
-  const g2=ctx.createRadialGradient(px,py,0,px,py,r2);
-  g2.addColorStop(0,  `rgba(255,255,255,${(.58*op).toFixed(2)})`);
-  g2.addColorStop(.5, `rgba(220,235,255,${(.26*op).toFixed(2)})`);
+  if(op <= 0) return;
+
+  const px = (spx/100)*W;
+  const py = (spy/100)*H;
+
+  /* Halo principal large — lumière frontale */
+  const r1 = Math.min(W,H) * .40;
+  const g1 = ctx.createRadialGradient(px, py, 0, px, py, r1);
+  g1.addColorStop(0,   `rgba(255,255,255,${(.20*op).toFixed(2)})`);
+  g1.addColorStop(.12, `rgba(220,235,255,${(.15*op).toFixed(2)})`);
+  g1.addColorStop(.38, `rgba(100,155,255,${(.06*op).toFixed(2)})`);
+  g1.addColorStop(.72, `rgba(43,64,252,${(.022*op).toFixed(3)})`);
+  g1.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.beginPath(); ctx.arc(px, py, r1, 0, Math.PI*2);
+  ctx.fillStyle = g1; ctx.fill();
+
+  /* Point chaud central */
+  const r2 = Math.min(W,H) * .06;
+  const g2 = ctx.createRadialGradient(px, py, 0, px, py, r2);
+  g2.addColorStop(0,  `rgba(255,255,255,${(.80*op).toFixed(2)})`);
+  g2.addColorStop(.4, `rgba(230,240,255,${(.38*op).toFixed(2)})`);
   g2.addColorStop(1,  'rgba(0,0,0,0)');
-  ctx.beginPath();ctx.arc(px,py,r2,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();
-  const cw=190*op;
-  const cg=ctx.createLinearGradient(px,28,px,py);
-  cg.addColorStop(0,  `rgba(200,220,255,${(.2*op).toFixed(2)})`);
-  cg.addColorStop(.6, `rgba(150,190,255,${(.07*op).toFixed(2)})`);
-  cg.addColorStop(1,  'rgba(0,0,0,0)');
-  ctx.beginPath();ctx.moveTo(px-5,28);ctx.lineTo(px-cw/2,py);
-  ctx.lineTo(px+cw/2,py);ctx.lineTo(px+5,28);ctx.closePath();
-  ctx.fillStyle=cg;ctx.fill();
+  ctx.beginPath(); ctx.arc(px, py, r2, 0, Math.PI*2);
+  ctx.fillStyle = g2; ctx.fill();
+
+  /* Anneau de diffusion */
+  const r3 = Math.min(W,H) * .20;
+  const g3 = ctx.createRadialGradient(px, py, r3*.55, px, py, r3);
+  g3.addColorStop(0,  'rgba(0,0,0,0)');
+  g3.addColorStop(.5, `rgba(43,64,252,${(.038*op).toFixed(3)})`);
+  g3.addColorStop(1,  'rgba(0,0,0,0)');
+  ctx.beginPath(); ctx.arc(px, py, r3, 0, Math.PI*2);
+  ctx.fillStyle = g3; ctx.fill();
 }
 
 /* ── Dust trail ── */
@@ -278,10 +290,6 @@ function triggerZoom(){
     setTimeout(()=>{
       zoomOverlay.style.pointerEvents='none';
       zoomComplete=true;
-
-      /* ── FIX SCROLL RETOUR ──
-         Si l'utilisateur remonte avant la zone de zoom, on réinitialise
-         pour que l'animation puisse se rejouer */
       const unwatch = ()=>{
         if(getHeroP() < 0.52){
           zoomComplete = false;
@@ -290,7 +298,6 @@ function triggerZoom(){
         }
       };
       window.addEventListener('scroll', unwatch, {passive:true});
-
     },650);
   },520);
 }
@@ -331,7 +338,6 @@ function loop(){
 
   outlineSvg.style.opacity=Math.max(0.12,1-fillP*.88);
 
-  /* Smoke on fill boundary */
   const LW=logoWrap.offsetWidth, LH=logoWrap.offsetHeight;
   if(fillH>3&&fillH<TOTAL_H-2){
     smokeCanvas.style.opacity='1';
@@ -339,7 +345,7 @@ function loop(){
   } else { smokeCanvas.style.opacity='0'; }
   drawSmoke(LW,LH);
 
-  /* ── HERO zoom into O ── */
+  /* ── HERO zoom ── */
   if(!zoomComplete){
     const zP=Math.max(0,Math.min((hp-.55)/.30,1));
     if(zP>0){
@@ -365,26 +371,28 @@ function loop(){
     }
   }
 
-  /* ── CURTAIN ── */
+  /* ── CURTAIN ──
+     Déclenchement à 10% du scroll (au lieu de 25%)
+     → les projecteurs et WHY PROAD restent visibles plus tôt */
   updateSpotTarget();
-  spx+=(stx-spx)*.032; spy+=(sty-spy)*.032;
+  spx+=(stx-spx)*.028; spy+=(sty-spy)*.028;
 
   const cp=getCurtP();
-  const openP=Math.max(0,Math.min((cp-.25)/.75,1));
+  const openP=Math.max(0,Math.min((cp-.10)/.75,1));
 
   if(cvL&&cvR){ drawCurtain(cvL,false); drawCurtain(cvR,true); }
   cLel.style.transform=`translateX(-${openP*108}%)`;
   cRel.style.transform=`translateX(${openP*108}%)`;
 
-  const sOp=Math.max(0,1-openP*2.5);
+  const sOp=Math.max(0,1-openP*2.85);
   if(cvS) drawSpot(sOp);
   whyT.style.left=(spx/100)*window.innerWidth+'px';
   whyT.style.top=(spy/100)*window.innerHeight+'px';
   whyT.style.opacity=sOp;
 
-  if(openP>.25){
+  if(openP>.20){
     stageC.classList.add('visible');
-    if(!sweepDone&&openP>.48){
+    if(!sweepDone&&openP>.42){
       sweepDone=true;
       scrUni.classList.add('sweep');
       setTimeout(()=>{scrUni.classList.remove('sweep');scrUni.classList.add('done');},1300);
@@ -396,13 +404,11 @@ function loop(){
   }
 
   props.forEach((pr,i)=>{
-    const pp=Math.max(0,Math.min((openP-.28-i*.06)/.28,1));
+    const pp=Math.max(0,Math.min((openP-.22-i*.06)/.28,1));
     pr.style.opacity=pp;
   });
 
-  /* ── DUST ── */
   drawDust();
-
   requestAnimationFrame(loop);
 }
 loop();
