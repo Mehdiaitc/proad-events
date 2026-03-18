@@ -116,24 +116,24 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
   height: auto;
   display: block;
   filter:
-    drop-shadow(0 0 12px rgba(255,255,255,.7))
-    drop-shadow(0 0 40px rgba(255,255,255,.3))
-    drop-shadow(0 0 80px rgba(43,64,252,.4));
+    drop-shadow(0 0 14px rgba(43,64,252,.9))
+    drop-shadow(0 0 40px rgba(43,64,252,.55))
+    drop-shadow(0 0 90px rgba(43,64,252,.3));
   animation: logoBreath 3.5s ease-in-out infinite;
 }
 @keyframes logoBreath {
   0%,100% {
     filter:
-      drop-shadow(0 0 10px rgba(255,255,255,.65))
-      drop-shadow(0 0 35px rgba(255,255,255,.25))
-      drop-shadow(0 0 70px rgba(43,64,252,.35));
-    opacity: .92;
+      drop-shadow(0 0 10px rgba(43,64,252,.8))
+      drop-shadow(0 0 32px rgba(43,64,252,.45))
+      drop-shadow(0 0 70px rgba(43,64,252,.25));
+    opacity: .88;
   }
   50% {
     filter:
-      drop-shadow(0 0 18px rgba(255,255,255,.95))
-      drop-shadow(0 0 55px rgba(255,255,255,.45))
-      drop-shadow(0 0 100px rgba(43,64,252,.6));
+      drop-shadow(0 0 20px rgba(43,64,252,1))
+      drop-shadow(0 0 55px rgba(43,64,252,.7))
+      drop-shadow(0 0 110px rgba(43,64,252,.45));
     opacity: 1;
   }
 }
