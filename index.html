@@ -262,179 +262,112 @@
 
 <!-- ═══ 2. ADN PHRASE ═══ -->
 <section id="scene-adn">
-  <!-- Fond : route + camion PROAD en silhouette très subtile -->
+  <!-- Fond : route vue aérienne, sinueuse, sobre -->
   <div class="adn-road-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
-        <radialGradient id="horizon-glow" cx="50%" cy="40%" r="28%">
-          <stop offset="0%" stop-color="rgba(43,64,252,.20)"/>
-          <stop offset="60%" stop-color="rgba(43,64,252,.05)"/>
-          <stop offset="100%" stop-color="rgba(43,64,252,0)"/>
+        <!-- Fond végétation sombre -->
+        <radialGradient id="veg-center" cx="50%" cy="50%" r="60%">
+          <stop offset="0%"   stop-color="rgba(8,14,10,.0)"/>
+          <stop offset="100%" stop-color="rgba(4,8,6,.0)"/>
         </radialGradient>
-        <linearGradient id="road-surface" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(14,16,26,.0)"/>
-          <stop offset="100%" stop-color="rgba(14,16,26,.92)"/>
-        </linearGradient>
-        <linearGradient id="fade-v" x1="0" y1="0" x2="0" y2="1">
+        <!-- Masque fondu bords -->
+        <radialGradient id="fade-radial" cx="50%" cy="50%" r="55%">
+          <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+          <stop offset="75%"  stop-color="white" stop-opacity="1"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="fade-top" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stop-color="white" stop-opacity="0"/>
-          <stop offset="18%"  stop-color="white" stop-opacity="1"/>
-          <stop offset="82%"  stop-color="white" stop-opacity="1"/>
+          <stop offset="15%"  stop-color="white" stop-opacity="1"/>
+          <stop offset="85%"  stop-color="white" stop-opacity="1"/>
           <stop offset="100%" stop-color="white" stop-opacity="0"/>
         </linearGradient>
-        <mask id="fade-mask"><rect width="1440" height="600" fill="url(#fade-v)"/></mask>
-
-        <!-- Lueur rouge feux arrière camion -->
-        <radialGradient id="tail-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="rgba(210,30,30,.9)"/>
-          <stop offset="100%" stop-color="rgba(210,30,30,0)"/>
-        </radialGradient>
+        <mask id="scene-fade">
+          <rect width="1440" height="600" fill="url(#fade-top)"/>
+        </mask>
+        <!-- Asphalte -->
+        <linearGradient id="road-col" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="rgba(28,30,38,1)"/>
+          <stop offset="50%"  stop-color="rgba(35,37,46,1)"/>
+          <stop offset="100%" stop-color="rgba(28,30,38,1)"/>
+        </linearGradient>
       </defs>
 
-      <g mask="url(#fade-mask)">
+      <g mask="url(#scene-fade)" opacity="0.72">
 
-        <!-- Lueur horizon -->
-        <ellipse cx="720" cy="242" rx="460" ry="105" fill="url(#horizon-glow)"/>
+        <!-- Route sinueuse vue du dessus — S-curve comme les images de référence -->
+        <!-- Largeur de route ~80px, tracée en courbe de Bézier -->
 
-        <!-- Asphalte — point de fuite exactement à x=720 (centre) -->
-        <polygon points="370,600 1070,600 820,242 620,242" fill="rgba(16,18,30,.82)"/>
+        <!-- Corps de la route (épaisseur ~80px autour du chemin central) -->
+        <!-- Chemin central : part du bas-gauche, monte, vire à droite, redescend à droite -->
+        <!-- On trace la route comme un ruban avec offset gauche et droit -->
 
-        <!-- Bordures route -->
-        <line x1="620" y1="242" x2="370" y2="600" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-        <line x1="820" y1="242" x2="1070" y2="600" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
+        <!-- Bande asphalte principale -->
+        <path d="
+          M 540,600
+          C 540,520 580,460 620,400
+          C 660,340 720,310 740,260
+          C 760,210 740,160 720,100
+          C 710,70  700,40  695,0
+          L 775,0
+          C 780,40  790,70  800,100
+          C 820,160 800,210 780,260
+          C 760,310 820,340 860,400
+          C 900,460 940,520 940,600
+          Z
+        " fill="url(#road-col)" opacity="0.9"/>
 
-        <!-- Ligne centrale pointillée — x=720 à chaque niveau (centre exact) -->
-        <g stroke="rgba(255,255,255,.28)" stroke-linecap="round">
-          <!-- Chaque segment: x fixe à 720, largeur croît avec la distance -->
-          <line x1="719" y1="246" x2="721" y2="258"  stroke-width="1.5"/>
-          <line x1="719" y1="267" x2="721" y2="283"  stroke-width="2"/>
-          <line x1="719" y1="295" x2="721" y2="316"  stroke-width="2.5"/>
-          <line x1="719" y1="330" x2="721" y2="358"  stroke-width="3"/>
-          <line x1="718" y1="375" x2="722" y2="410"  stroke-width="4"/>
-          <line x1="718" y1="430" x2="722" y2="474"  stroke-width="5"/>
-          <line x1="717" y1="498" x2="723" y2="554"  stroke-width="6.5"/>
-        </g>
+        <!-- Bordures blanches gauche de la route -->
+        <path d="
+          M 540,600
+          C 540,520 580,460 620,400
+          C 660,340 720,310 740,260
+          C 760,210 740,160 720,100
+          C 710,70  700,40  695,0
+        " fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
 
-        <!-- Ligne d'horizon subtile -->
-        <line x1="0" y1="242" x2="1440" y2="242" stroke="rgba(43,64,252,.10)" stroke-width="1"/>
+        <!-- Bordures blanches droite de la route -->
+        <path d="
+          M 940,600
+          C 940,520 900,460 860,400
+          C 820,340 760,310 780,260
+          C 800,210 820,160 800,100
+          C 790,70  780,40  775,0
+        " fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
 
-        <!-- ═══ CAMION RÉALISTE DE DOS — SILHOUETTE À L'HORIZON ═══
-             Petit, centré sur x=720, positionné juste au-dessus de l'horizon -->
-        <g transform="translate(642, 192)" opacity="0.62">
+        <!-- Ligne centrale pointillée -->
+        <path d="
+          M 740,600
+          C 740,520 760,460 740,400
+          C 720,340 740,310 760,260
+          C 780,210 770,160 760,100
+          C 754,70  748,40  745,0
+        " fill="none"
+          stroke="rgba(255,255,255,.30)"
+          stroke-width="2"
+          stroke-dasharray="18 14"/>
 
-          <!-- === REMORQUE === -->
-          <!-- Corps principal remorque -->
-          <rect x="8" y="2" width="148" height="62" rx="2" fill="rgba(20,22,36,.98)"/>
-          <!-- Contour subtil -->
-          <rect x="8" y="2" width="148" height="62" rx="2" fill="none" stroke="rgba(90,100,130,.35)" stroke-width=".8"/>
+        <!-- Lueur bleue subtile sur la route -->
+        <path d="
+          M 540,600
+          C 540,520 580,460 620,400
+          C 660,340 720,310 740,260
+          C 760,210 740,160 720,100
+          C 710,70  700,40  695,0
+          L 775,0
+          C 780,40  790,70  800,100
+          C 820,160 800,210 780,260
+          C 760,310 820,340 860,400
+          C 900,460 940,520 940,600
+          Z
+        " fill="rgba(43,64,252,.04)"/>
 
-          <!-- Toit remorque (légère perspective) -->
-          <polygon points="8,2 156,2 160,0 4,0" fill="rgba(30,34,52,.9)"/>
-
-          <!-- Bande déco bleue horizontale -->
-          <rect x="8" y="30" width="148" height="2" fill="rgba(43,64,252,.7)"/>
-          <rect x="8" y="42" width="148" height="1.5" fill="rgba(43,64,252,.4)"/>
-
-          <!-- Texte PROAD EVENTS sur la remorque -->
-          <text x="82" y="22" font-family="'Bebas Neue',sans-serif" font-size="9"
-                fill="rgba(43,64,252,.85)" text-anchor="middle" letter-spacing="2.5">PROAD EVENTS</text>
-
-          <!-- Panneau réfléchissant arrière (rouge/blanc alterné — norme EU) -->
-          <rect x="30" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-          <rect x="36" y="55" width="6" height="6" fill="rgba(240,240,200,.8)"/>
-          <rect x="42" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-          <rect x="48" y="55" width="6" height="6" fill="rgba(240,240,200,.8)"/>
-          <rect x="54" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-          <rect x="104" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-          <rect x="110" y="55" width="6" height="6" fill="rgba(240,240,200,.8)"/>
-          <rect x="116" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-          <rect x="122" y="55" width="6" height="6" fill="rgba(240,240,200,.8)"/>
-          <rect x="128" y="55" width="6" height="6" fill="rgba(220,30,30,.9)"/>
-
-          <!-- Feux arrière remorque (4 rectangles, coin haut/bas) -->
-          <rect x="8"   y="4"  width="14" height="9" rx="1" fill="rgba(190,25,25,.95)"/>
-          <rect x="9"   y="5"  width="12" height="7" rx="1" fill="rgba(255,70,70,.8)"/>
-          <rect x="8"   y="48" width="14" height="9" rx="1" fill="rgba(190,25,25,.95)"/>
-          <rect x="9"   y="49" width="12" height="7" rx="1" fill="rgba(255,70,70,.8)"/>
-
-          <rect x="142" y="4"  width="14" height="9" rx="1" fill="rgba(190,25,25,.95)"/>
-          <rect x="143" y="5"  width="12" height="7" rx="1" fill="rgba(255,70,70,.8)"/>
-          <rect x="142" y="48" width="14" height="9" rx="1" fill="rgba(190,25,25,.95)"/>
-          <rect x="143" y="49" width="12" height="7" rx="1" fill="rgba(255,70,70,.8)"/>
-
-          <!-- Feux de gabarit remorque (orange, rangée du haut) -->
-          <circle cx="30"  cy="3" r="2" fill="rgba(255,140,0,.85)"/>
-          <circle cx="60"  cy="3" r="2" fill="rgba(255,140,0,.85)"/>
-          <circle cx="82"  cy="3" r="2" fill="rgba(255,140,0,.85)"/>
-          <circle cx="104" cy="3" r="2" fill="rgba(255,140,0,.85)"/>
-          <circle cx="134" cy="3" r="2" fill="rgba(255,140,0,.85)"/>
-
-          <!-- Charnière + sellette -->
-          <rect x="64" y="64" width="36" height="7" rx="1" fill="rgba(35,38,55,.95)"/>
-          <rect x="74" y="71" width="16" height="5" rx="1" fill="rgba(50,54,72,.9)"/>
-
-          <!-- === TRACTEUR / CABINE === -->
-          <!-- Corps cabine -->
-          <rect x="18" y="76" width="128" height="46" rx="3" fill="rgba(22,25,40,.97)"/>
-          <rect x="18" y="76" width="128" height="46" rx="3" fill="none" stroke="rgba(80,90,120,.3)" stroke-width=".8"/>
-
-          <!-- Toit cabine arrondi -->
-          <rect x="22" y="72" width="120" height="8" rx="4" fill="rgba(28,32,50,.95)"/>
-
-          <!-- Vitre arrière (bande sombre avec reflet) -->
-          <rect x="38" y="80" width="88" height="28" rx="2" fill="rgba(6,8,18,.9)"/>
-          <rect x="40" y="82" width="84" height="24" rx="1" fill="rgba(10,14,28,.8)" stroke="rgba(43,64,252,.15)" stroke-width=".5"/>
-          <!-- Reflet sur vitre -->
-          <rect x="44" y="84" width="20" height="8" rx="1" fill="rgba(43,64,252,.08)" transform="skewX(-10)"/>
-
-          <!-- Feux arrière cabine -->
-          <rect x="18" y="80" width="16" height="10" rx="1" fill="rgba(185,22,22,.95)"/>
-          <rect x="19" y="81" width="14" height="8"  rx="1" fill="rgba(255,60,60,.75)"/>
-          <rect x="18" y="94" width="16" height="10" rx="1" fill="rgba(255,120,0,.8)"/>
-
-          <rect x="130" y="80" width="16" height="10" rx="1" fill="rgba(185,22,22,.95)"/>
-          <rect x="131" y="81" width="14" height="8"  rx="1" fill="rgba(255,60,60,.75)"/>
-          <rect x="130" y="94" width="16" height="10" rx="1" fill="rgba(255,120,0,.8)"/>
-
-          <!-- Pare-chocs arrière -->
-          <rect x="14" y="118" width="136" height="6" rx="2" fill="rgba(35,38,58,.9)" stroke="rgba(70,80,110,.3)" stroke-width=".8"/>
-          <!-- Plaque d'immatriculation -->
-          <rect x="58" y="120" width="48" height="10" rx="1" fill="rgba(240,240,200,.12)" stroke="rgba(200,200,160,.2)" stroke-width=".5"/>
-
-          <!-- Châssis -->
-          <rect x="10" y="122" width="144" height="5" rx="1" fill="rgba(28,32,48,.95)"/>
-
-          <!-- === ROUES === -->
-          <!-- Double roues arrière remorque (côté gauche) -->
-          <ellipse cx="34"  cy="134" rx="13" ry="13" fill="rgba(10,11,18,.97)" stroke="rgba(70,80,110,.45)" stroke-width="1.2"/>
-          <ellipse cx="34"  cy="134" rx="7"  ry="7"  fill="rgba(45,50,72,.9)"/>
-          <ellipse cx="34"  cy="134" rx="3"  ry="3"  fill="rgba(70,76,100,.8)"/>
-          <ellipse cx="48"  cy="134" rx="13" ry="13" fill="rgba(10,11,18,.97)" stroke="rgba(70,80,110,.45)" stroke-width="1.2"/>
-          <ellipse cx="48"  cy="134" rx="7"  ry="7"  fill="rgba(45,50,72,.9)"/>
-
-          <!-- Double roues arrière remorque (côté droit) -->
-          <ellipse cx="116" cy="134" rx="13" ry="13" fill="rgba(10,11,18,.97)" stroke="rgba(70,80,110,.45)" stroke-width="1.2"/>
-          <ellipse cx="116" cy="134" rx="7"  ry="7"  fill="rgba(45,50,72,.9)"/>
-          <ellipse cx="130" cy="134" rx="13" ry="13" fill="rgba(10,11,18,.97)" stroke="rgba(70,80,110,.45)" stroke-width="1.2"/>
-          <ellipse cx="130" cy="134" rx="7"  ry="7"  fill="rgba(45,50,72,.9)"/>
-
-          <!-- Roues cabine (plus grandes) -->
-          <ellipse cx="40"  cy="138" rx="15" ry="15" fill="rgba(8,9,16,.98)" stroke="rgba(70,80,110,.5)" stroke-width="1.5"/>
-          <ellipse cx="40"  cy="138" rx="8"  ry="8"  fill="rgba(42,46,68,.9)"/>
-          <ellipse cx="40"  cy="138" rx="3.5" ry="3.5" fill="rgba(65,72,98,.8)"/>
-
-          <ellipse cx="124" cy="138" rx="15" ry="15" fill="rgba(8,9,16,.98)" stroke="rgba(70,80,110,.5)" stroke-width="1.5"/>
-          <ellipse cx="124" cy="138" rx="8"  ry="8"  fill="rgba(42,46,68,.9)"/>
-          <ellipse cx="124" cy="138" rx="3.5" ry="3.5" fill="rgba(65,72,98,.8)"/>
-
-        </g>
-
-        <!-- Halos feux arrière sur l'asphalte -->
-        <ellipse cx="657" cy="356" rx="28" ry="10" fill="rgba(200,25,25,.14)"/>
-        <ellipse cx="783" cy="356" rx="28" ry="10" fill="rgba(200,25,25,.14)"/>
-
-        <!-- Trainée lumière rouge (perspective) -->
-        <polygon points="640,350 674,350 440,600 370,600" fill="rgba(180,20,20,.03)"/>
-        <polygon points="766,350 800,350 1070,600 1000,600" fill="rgba(180,20,20,.03)"/>
+        <!-- Marquages virage (flèches directionnelles) -->
+        <!-- Virage du haut -->
+        <path d="M 755,130 L 745,115 L 735,130" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Virage du milieu -->
+        <path d="M 775,275 L 765,260 L 755,275" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
       </g>
     </svg>
