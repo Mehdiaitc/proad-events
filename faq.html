@@ -1,1 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | PROAD Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
 
+/* ── FAQ PAGE ── */
+.faq-hero {
+  min-height: 48vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 120px 48px 56px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.faq-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 50% at 50% 0%, rgba(43,64,252,.13) 0%, transparent 70%);
+}
+.faq-hero::after {
+  content: 'FAQ';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(12rem, 30vw, 28rem);
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.02);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -40%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.faq-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.faq-hero p { color: var(--gray); font-size: .9rem; max-width: 480px; line-height: 1.7; }
+
+/* ── LAYOUT ── */
+.faq-layout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+}
+
+/* ── CATEGORY TABS ── */
+.faq-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.faq-tab {
+  background: none;
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.4);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .72rem;
+  letter-spacing: .2em;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.faq-tab:hover { border-color: rgba(43,64,252,.4); color: rgba(255,255,255,.75); }
+.faq-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* ── CATEGORY BLOCK ── */
+.faq-category { margin-bottom: 64px; }
+.faq-category.hidden { display: none; }
+.faq-cat-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.faq-cat-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,.06);
+}
+.faq-cat-sub {
+  font-size: .72rem;
+  color: var(--blue);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+/* ── ACCORDION ── */
+.faq-list { display: flex; flex-direction: column; }
+
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.faq-item:first-child { border-top: 1px solid rgba(255,255,255,.06); }
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  cursor: pointer;
+  transition: color .2s;
+  user-select: none;
+}
+.faq-q:hover { color: rgba(255,255,255,.95); }
+.faq-q-text {
+  font-size: .92rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.75);
+  line-height: 1.4;
+  transition: color .2s;
+}
+.faq-q:hover .faq-q-text { color: #fff; }
+.faq-item.open .faq-q-text { color: #fff; }
+
+.faq-icon {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all .3s;
+  font-size: .75rem;
+  color: rgba(255,255,255,.4);
+}
+.faq-item.open .faq-icon {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s cubic-bezier(.25,.46,.45,.94), padding .3s;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 20px; }
+
+.faq-a-inner {
+  font-size: .84rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.85;
+  padding-right: 48px;
+}
+.faq-a-inner strong { color: rgba(255,255,255,.8); font-weight: 500; }
+.faq-a-inner a { color: var(--blue); text-decoration: none; }
+.faq-a-inner a:hover { text-decoration: underline; }
+.faq-a-inner ul {
+  margin: 10px 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.faq-a-inner ul li::marker { color: var(--blue); }
+
+/* ── STILL HAVE Q ── */
+.faq-cta {
+  margin-top: 80px;
+  text-align: center;
+  padding: 64px 48px;
+  background: rgba(43,64,252,.04);
+  border: 1px solid rgba(43,64,252,.15);
+  position: relative;
+  overflow: hidden;
+}
+.faq-cta::before {
+  content: '?';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20rem;
+  color: rgba(43,64,252,.04);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  pointer-events: none;
+}
+.faq-cta h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: .04em;
+  margin-bottom: 12px;
+}
+.faq-cta p { color: var(--gray); font-size: .88rem; margin-bottom: 32px; line-height: 1.7; }
+.faq-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-outline {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.7);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transition: all .3s;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .faq-layout { padding: 48px 24px 80px; }
+  .faq-hero { padding: 100px 24px 48px; }
+  .faq-a-inner { padding-right: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+      <path fill="#fff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+      <path fill="#fff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+      <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#fff" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html" style="color:#fff">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Prendre RDV</a>
+</nav>
+
+<!-- HERO -->
+<section class="faq-hero">
+  <p class="section-label reveal">Questions fréquentes</p>
+  <h1 class="reveal">Tout ce que vous<br>voulez savoir.</h1>
+  <p class="reveal">Avant de prendre la route, autant s'assurer qu'on roule dans la même direction.</p>
+</section>
+
+<!-- FAQ LAYOUT -->
+<div class="faq-layout">
+
+  <!-- TABS -->
+  <div class="faq-tabs reveal">
+    <button class="faq-tab active" onclick="filterFaq('all')">Toutes</button>
+    <button class="faq-tab" onclick="filterFaq('general')">Général</button>
+    <button class="faq-tab" onclick="filterFaq('process')">Process</button>
+    <button class="faq-tab" onclick="filterFaq('budget')">Budget</button>
+    <button class="faq-tab" onclick="filterFaq('services')">Services</button>
+    <button class="faq-tab" onclick="filterFaq('pratique')">Pratique</button>
+  </div>
+
+  <!-- ── GÉNÉRAL ── -->
+  <div class="faq-category reveal" data-cat="general">
+    <div class="faq-cat-sub">Général</div>
+    <div class="faq-cat-title">PROAD, c'est quoi ?</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qu'est-ce que PROAD Events exactement ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>PROAD Events</strong> est une structure de production événementielle indépendante fondée par Mehdi, basée à Marseille. PROAD signifie <strong>Production Road</strong> — la conviction qu'un événement réussi, c'est une route bien tracée, sans improvisation.<br><br>
+          Nous intervenons sur tous les formats : soirées, galas, séminaires, lancements de produits, événements corporate, lifestyle et luxe. En France et à l'international.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qui travaille chez PROAD Events ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          PROAD, c'est avant tout <strong>Mehdi</strong>, directeur de production et interlocuteur unique. Il a forgé son expérience à Singapour (Chab Events) puis à Aix-en-Provence (Chab Agency), sur des projets pour Ubisoft, Cartier, Macallan, Bain & Company, Lacoste, Allianz...<br><br>
+          Selon les projets, Mehdi s'appuie sur un réseau de prestataires de confiance — techniciens, traiteurs, scénographes, logisticiens — sélectionnés pour leur excellence.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">PROAD travaille avec qui ? Agences ou clients directs ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Les deux ! PROAD travaille aussi bien avec des <strong>agences événementielles ou de communication</strong> qui cherchent un producteur terrain fiable, qu'avec des <strong>annonceurs et entreprises en direct</strong> qui veulent un interlocuteur sans couche intermédiaire.<br><br>
+          Dans les deux cas, Mehdi est votre contact direct du brief à la livraison.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Vous intervenez où géographiquement ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Basé à <strong>Marseille</strong>, PROAD opère sur l'ensemble du territoire français. Nous avons également une solide expérience internationale — Singapour, Thaïlande, Belgique, Espagne, Monaco — et nous pouvons accompagner des projets hors de France sur demande.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PROCESS ── -->
+  <div class="faq-category reveal" data-cat="process">
+    <div class="faq-cat-sub">Process</div>
+    <div class="faq-cat-title">Comment ça marche ?</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Comment se déroule la collaboration de A à Z ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          La route PROAD se déroule en 5 étapes :<br><br>
+          <ul>
+            <li><strong>Brief</strong> — Vous nous parlez de votre projet : ambitions, dates, jauge, budget.</li>
+            <li><strong>Conception</strong> — Mehdi propose une vision, un rétro-planning et une enveloppe budgétaire.</li>
+            <li><strong>Validation</strong> — On aligne les visions, on ajuste, on signe.</li>
+            <li><strong>Production</strong> — PROAD prend le volant. Coordination, prestataires, logistique, tout est géré.</li>
+            <li><strong>Livraison</strong> — Le jour J, Mehdi est sur le terrain. Vous profitez de votre événement.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Combien de temps en avance faut-il vous contacter ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Idéalement, <strong>3 à 6 mois</strong> pour un projet de taille normale. Pour des événements complexes ou de grande envergure (+300 personnes, lieu sur-mesure), comptez <strong>6 à 12 mois</strong>.<br><br>
+          Cela dit, PROAD est habitué aux délais courts. Si votre projet est urgent, contactez-nous — on évaluera ensemble ce qui est faisable sans compromis sur la qualité.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Qui est mon interlocuteur pendant tout le projet ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Mehdi, et personne d'autre.</strong> C'est le principe fondateur de PROAD : un seul interlocuteur, du brief au bilan. Pas de turn-over, pas de perte d'information, pas de "je transmets à mon collègue".<br><br>
+          Vous avez accès direct au producteur à toutes les étapes du projet.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── BUDGET ── -->
+  <div class="faq-category reveal" data-cat="budget">
+    <div class="faq-cat-sub">Budget</div>
+    <div class="faq-cat-title">Les questions d'argent.</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Y a-t-il un budget minimum pour travailler avec PROAD ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Il n'y a pas de seuil minimum imposé, mais PROAD opère sur des projets à partir de <strong>quelques milliers d'euros</strong>. L'important, c'est l'adéquation entre vos ambitions et votre enveloppe budgétaire.<br><br>
+          Lors du premier échange, Mehdi vous dira franchement si le projet est réalisable dans votre budget ou s'il faut recalibrer les attentes.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Comment est calculé votre honoraire ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Les honoraires PROAD sont calculés selon la <strong>complexité du projet</strong>, le nombre de jours de production, et le niveau de coordination nécessaire. Nous fonctionnons en honoraires fixes (définis en amont) ou en pourcentage du budget global selon les projets.<br><br>
+          Tout est transparent et discuté dès le devis. Aucune mauvaise surprise en cours de route.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Pouvez-vous travailler avec un budget serré ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Oui, à condition d'être honnête sur les contraintes dès le départ. PROAD est capable de <strong>prioriser, redimensionner et optimiser</strong> un projet pour qu'il reste percutant dans une enveloppe restreinte.<br><br>
+          Ce qu'on ne fait pas : promettre la lune avec un budget étoile. La transparence fait partie de notre ADN.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <div class="faq-category reveal" data-cat="services">
+    <div class="faq-cat-sub">Services</div>
+    <div class="faq-cat-title">Ce qu'on fait (et ce qu'on ne fait pas).</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Quels types d'événements produisez-vous ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          PROAD couvre tous les formats :
+          <ul>
+            <li>Soirées de gala et événements d'entreprise</li>
+            <li>Séminaires, conventions, teambuildings</li>
+            <li>Lancements de produits et activations de marque</li>
+            <li>Événements lifestyle, sport et culture</li>
+            <li>Expériences luxe et VIP</li>
+            <li>Événements travel retail</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Gérez-vous aussi la recherche de lieu ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Oui. La recherche et la négociation de lieux font partie intégrante de notre prestation. Que vous ayez un lieu en tête ou que vous partiez de zéro, PROAD peut vous proposer des options adaptées à votre format, votre jauge et votre ADN de marque.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Proposez-vous uniquement la coordination ou aussi la production technique ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Les deux. PROAD peut intervenir en <strong>direction de production complète</strong> (de la conception à la livraison, prestataires inclus) ou en <strong>coordination pure</strong> si vous avez déjà vos prestataires et cherchez un chef d'orchestre pour tenir la route le jour J.<br><br>
+          Nous adaptons notre périmètre d'intervention à vos besoins réels.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PRATIQUE ── -->
+  <div class="faq-category reveal" data-cat="pratique">
+    <div class="faq-cat-sub">Pratique</div>
+    <div class="faq-cat-title">Les détails qui comptent.</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Sous quel délai vous répondez après une prise de contact ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Sous 24 heures</strong>, du lundi au vendredi. Si Mehdi est sur un événement le jour de votre message, le Copilote PROAD peut prendre note de votre demande et vous confirmer un créneau d'appel.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Le premier rendez-vous est-il payant ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Non.</strong> Le premier échange — qu'il soit par téléphone, visio ou en présentiel — est gratuit et sans engagement. C'est simplement l'occasion de se jauger, d'aligner les visions et de voir si la route est la même.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Vous déplacez-vous pour des événements à Paris ou à l'étranger ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Absolument. Mehdi est basé à Marseille mais se déplace sur tout le territoire et à l'international. Les frais de déplacement sont intégrés au devis de manière transparente. Singapour, Thaïlande, Monaco, Paris, Ibiza — la route s'arrête rarement à la frontière.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Que se passe-t-il si quelque chose tourne mal le jour J ?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          C'est exactement pour ça qu'on prépare une route, pas une improvisation. PROAD travaille avec des plans B sur les points critiques : prestataires de secours identifiés, timeline tamponnée, solutions alternatives prêtes.<br><br>
+          Et si malgré tout quelque chose déraille, <strong>Mehdi est là, sur place, pour gérer</strong>. Vous ne gérez pas le problème — c'est son boulot.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="faq-cta reveal">
+    <h3>Votre question<br>n'est pas là ?</h3>
+    <p>Le Copilote PROAD ou Mehdi directement — dans tous les cas,<br>vous aurez une réponse sous 24h.</p>
+    <div class="faq-cta-btns">
+      <a href="contact.html" class="btn-primary">PRENDRE RENDEZ-VOUS</a>
+      <a href="about.html" class="btn-outline">PARLER AU COPILOTE</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-logo">PROAD EVENTS</div>
+  <ul class="f-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+}, {passive:true});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, {threshold: .1});
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  // Open clicked if was closed
+  if (!isOpen) item.classList.add('open');
+}
+
+function filterFaq(cat) {
+  document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.faq-category').forEach(c => {
+    if (cat === 'all' || c.dataset.cat === cat) {
+      c.classList.remove('hidden');
+    } else {
+      c.classList.add('hidden');
+    }
+  });
+}
+</script>
+</body>
+</html>
