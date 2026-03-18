@@ -98,7 +98,7 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
 .ring{width:9px;height:9px;border-radius:50%;border:2px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05);}
 #spotlight-canvas{position:absolute;inset:0;z-index:35;pointer-events:none;}
 
-/* WHY PROAD? — lumière de face */
+/* WHY PROAD — logo + tagline sur les rideaux */
 #why-text {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -106,32 +106,61 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
   pointer-events: none;
   z-index: 40;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
 }
-#why-text span {
+#why-logo {
+  width: clamp(120px, 18vw, 220px);
+  height: auto;
+  display: block;
+  filter:
+    drop-shadow(0 0 12px rgba(255,255,255,.7))
+    drop-shadow(0 0 40px rgba(255,255,255,.3))
+    drop-shadow(0 0 80px rgba(43,64,252,.4));
+  animation: logoBreath 3.5s ease-in-out infinite;
+}
+@keyframes logoBreath {
+  0%,100% {
+    filter:
+      drop-shadow(0 0 10px rgba(255,255,255,.65))
+      drop-shadow(0 0 35px rgba(255,255,255,.25))
+      drop-shadow(0 0 70px rgba(43,64,252,.35));
+    opacity: .92;
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 18px rgba(255,255,255,.95))
+      drop-shadow(0 0 55px rgba(255,255,255,.45))
+      drop-shadow(0 0 100px rgba(43,64,252,.6));
+    opacity: 1;
+  }
+}
+.why-tagline {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(.7rem, 1.2vw, .95rem);
+  font-weight: 300;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  text-shadow: 0 0 20px rgba(255,255,255,.3);
+}
+.why-cta {
   display: block;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.8rem, 8.5vw, 7.5rem);
-  letter-spacing: .22em;
-  line-height: 1;
-  /* Pas de text-shadow par défaut — géré individuellement */
-}
-#why-text .why {
-  color: #ffffff;
-  /* Halo blanc pur — pas de jaune, pas de chaud */
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  letter-spacing: .35em;
+  color: rgba(255,255,255,.9);
   text-shadow:
-    0 0 8px rgba(255,255,255,.95),
-    0 0 22px rgba(220,230,255,.7),
-    0 0 55px rgba(180,210,255,.35);
-  font-weight: 400;
+    0 0 10px rgba(255,255,255,.8),
+    0 0 30px rgba(43,64,252,.6);
+  animation: ctaPulse 2.5s ease-in-out infinite;
 }
-#why-text .pq {
-  color: rgba(180,210,255,.95);
-  text-shadow:
-    0 0 14px rgba(43,64,252,.9),
-    0 0 40px rgba(43,64,252,.55),
-    0 0 80px rgba(43,64,252,.25);
-  font-weight: 400;
-  letter-spacing: .20em;
+@keyframes ctaPulse {
+  0%,100% { opacity: .8; letter-spacing: .35em; }
+  50%      { opacity: 1;  letter-spacing: .38em; text-shadow: 0 0 16px rgba(255,255,255,.95), 0 0 45px rgba(43,64,252,.8); }
 }
 
 /* Stage content */
