@@ -1,288 +1,682 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | PROAD Events</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
-    <style>
-        .portfolio-hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 0 60px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .portfolio-hero::before {
-            content: 'PORTFOLIO';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: clamp(8rem, 20vw, 22rem);
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.04);
-            white-space: nowrap;
-            pointer-events: none;
-        }
-        .portfolio-hero-content { position: relative; z-index: 2; }
-        .portfolio-hero-tag { font-size: 0.75rem; letter-spacing: 4px; color: var(--blue-electric); margin-bottom: 20px; }
-        .portfolio-hero h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 30px; }
-        .portfolio-hero h1 em { font-style: normal; color: var(--blue-electric); }
-        .portfolio-hero-desc { font-size: clamp(1rem, 1.5vw, 1.2rem); color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.7; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | PROAD Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── PORTFOLIO PAGE ── */
+.portfolio-hero {
+  min-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 48px 64px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.portfolio-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(43,64,252,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.portfolio-hero::after {
+  content: 'PORTFOLIO';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(8rem, 20vw, 18rem);
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.025);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.portfolio-hero .section-label { margin-bottom: 20px; }
+.portfolio-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.portfolio-hero p {
+  color: var(--gray);
+  font-size: .9rem;
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+.chab-mention {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 6px 16px;
+}
+.chab-mention span { color: var(--blue); }
 
-        .portfolio-filters { display: flex; gap: 12px; padding: 40px 60px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .filter-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px 24px; font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
-        .filter-btn:hover, .filter-btn.active { background: var(--blue-electric); border-color: var(--blue-electric); color: #fff; }
+/* ── FILTERS ── */
+.portfolio-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 48px 48px 40px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+.filter-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.45);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .78rem;
+  letter-spacing: .22em;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all .25s;
+  text-transform: uppercase;
+}
+.filter-btn:hover { border-color: rgba(43,64,252,.5); color: rgba(255,255,255,.8); }
+.filter-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-        .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; padding: 3px; }
-        .project-card { position: relative; overflow: hidden; cursor: pointer; background: #0a0a0a; }
-        .project-card:nth-child(1) { grid-column: span 8; grid-row: span 2; }
-        .project-card:nth-child(2) { grid-column: span 4; }
-        .project-card:nth-child(3) { grid-column: span 4; }
-        .project-card:nth-child(4) { grid-column: span 4; }
-        .project-card:nth-child(5) { grid-column: span 4; }
-        .project-card:nth-child(6) { grid-column: span 4; }
-        .project-card:nth-child(7) { grid-column: span 8; }
+/* ── GRID ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  padding: 0 2px 2px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
 
-        .project-card-inner { width: 100%; padding-bottom: 65%; position: relative; }
-        .project-card:nth-child(1) .project-card-inner { padding-bottom: 55%; }
-        .project-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-        .project-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 5rem; font-weight: 900; color: rgba(0,71,255,0.08); -webkit-text-stroke: 1px rgba(0,71,255,0.15); background: linear-gradient(135deg, #070710 0%, #0a0a14 100%); }
-        .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s ease; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; }
-        .project-card:hover .project-overlay { opacity: 1; }
-        .project-card:hover .project-img { transform: scale(1.05); }
-        .project-tag { font-size: 0.7rem; letter-spacing: 3px; color: var(--blue-electric); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
-        .project-title { font-size: clamp(1.1rem, 2vw, 1.6rem); font-weight: 900; line-height: 1.2; margin-bottom: 8px; }
-        .project-meta { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
-        .project-arrow { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
-        .project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
-        .project-badge { position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); border: 1px solid rgba(0,71,255,0.4); color: var(--blue-electric); font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; padding: 5px 12px; text-transform: uppercase; backdrop-filter: blur(10px); }
+.pcard {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0a0a14;
+  transition: opacity .4s;
+}
+.pcard.hidden { display: none; }
 
-        .project-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 40px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-        .project-modal.open { opacity: 1; pointer-events: all; }
-        .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); }
-        .modal-inner { position: relative; z-index: 2; background: #080808; border: 1px solid rgba(255,255,255,0.08); max-width: 900px; width: 100%; max-height: 85vh; overflow-y: auto; transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
-        .project-modal.open .modal-inner { transform: translateY(0); }
-        .modal-img-placeholder { width: 100%; height: 400px; background: linear-gradient(135deg, #050510 0%, #0a0a1a 100%); display: flex; align-items: center; justify-content: center; font-size: 8rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(0,71,255,0.15); }
-        .modal-content { padding: 40px; }
-        .modal-tag { font-size: 0.7rem; letter-spacing: 3px; color: var(--blue-electric); font-weight: 700; margin-bottom: 12px; }
-        .modal-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
-        .modal-desc { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 30px; }
-        .modal-details { display: flex; gap: 40px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px; }
-        .modal-detail-item span:first-child { display: block; font-size: 0.7rem; letter-spacing: 2px; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
-        .modal-detail-item span:last-child { font-size: 1rem; font-weight: 700; }
-        .modal-close { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all 0.2s; }
-        .modal-close:hover { background: var(--blue-electric); border-color: var(--blue-electric); }
+/* Sizes */
+.pcard.sz-large  { grid-column: span 6; aspect-ratio: 16/9; }
+.pcard.sz-medium { grid-column: span 4; aspect-ratio: 4/3; }
+.pcard.sz-small  { grid-column: span 3; aspect-ratio: 1; }
+.pcard.sz-wide   { grid-column: span 8; aspect-ratio: 21/9; }
+.pcard.sz-tall   { grid-column: span 4; aspect-ratio: 3/4; }
 
-        .portfolio-cta { padding: 120px 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
-        .portfolio-cta h2 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 20px; }
-        .portfolio-cta p { color: rgba(255,255,255,0.5); font-size: 1.1rem; margin-bottom: 40px; }
+/* Placeholder visual */
+.pcard-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.pcard:hover .pcard-bg { transform: scale(1.05); }
 
-        @media (max-width: 768px) {
-            .portfolio-hero { padding: 120px 24px 60px; }
-            .portfolio-filters { padding: 30px 24px; }
-            .project-card:nth-child(n) { grid-column: span 12; grid-row: span 1; }
-            .portfolio-cta { padding: 80px 24px; }
-            .project-modal { padding: 10px; }
-            .modal-details { flex-wrap: wrap; gap: 20px; }
-        }
-    </style>
+/* Overlay */
+.pcard-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(3,3,14,.97) 0%, rgba(3,3,14,.5) 45%, transparent 80%);
+  transition: opacity .3s;
+}
+.pcard:hover .pcard-overlay { opacity: .85; }
+
+/* Info */
+.pcard-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 24px 22px;
+  transform: translateY(0);
+  transition: transform .35s cubic-bezier(.25,.46,.45,.94);
+}
+.pcard-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .28em;
+  color: var(--blue);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pcard-tag::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--blue);
+}
+.pcard-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  letter-spacing: .04em;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.pcard-meta {
+  font-size: .7rem;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .06em;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.pcard-meta span { display: flex; align-items: center; gap: 4px; }
+
+.pcard-desc {
+  font-size: .75rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.6;
+  margin-top: 10px;
+  max-width: 320px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s .05s, transform .3s .05s;
+}
+.pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
+
+/* Pax badge */
+.pcard-pax {
+  position: absolute;
+  top: 16px; right: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.7);
+  background: rgba(0,0,0,.6);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 4px 10px;
+  backdrop-filter: blur(4px);
+}
+.pcard-year {
+  position: absolute;
+  top: 16px; left: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .65rem;
+  letter-spacing: .2em;
+  color: var(--blue);
+}
+
+/* Placeholder BGs — unique per category */
+.bg-corporate  { background: linear-gradient(135deg, #060a1a 0%, #0d1530 40%, #070c1e 100%); }
+.bg-gala       { background: linear-gradient(135deg, #08060f 0%, #160e28 40%, #0a0614 100%); }
+.bg-lifestyle  { background: linear-gradient(135deg, #040d12 0%, #071a1e 40%, #040a0e 100%); }
+.bg-launch     { background: linear-gradient(135deg, #0a080f 0%, #180f20 40%, #0c0a14 100%); }
+.bg-luxury     { background: linear-gradient(135deg, #0f0a04 0%, #1e1408 40%, #120d04 100%); }
+.bg-experiential { background: linear-gradient(135deg, #040d0a 0%, #071a12 40%, #040e09 100%); }
+
+/* Geometric accent on each card */
+.pcard-accent {
+  position: absolute;
+  pointer-events: none;
+  opacity: .18;
+  transition: opacity .4s;
+}
+.pcard:hover .pcard-accent { opacity: .32; }
+
+/* ── STATS BAR ── */
+.portfolio-stats {
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 48px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(32px, 6vw, 80px);
+  flex-wrap: wrap;
+  margin: 48px 0 0;
+}
+.pstat { text-align: center; }
+.pstat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: .04em;
+}
+.pstat-label {
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+/* ── CTA ── */
+.portfolio-cta {
+  text-align: center;
+  padding: 100px 48px;
+}
+.portfolio-cta h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: .03em;
+  margin-bottom: 16px;
+}
+.portfolio-cta p {
+  color: var(--gray);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  font-size: .9rem;
+}
+
+@media (max-width: 1024px) {
+  .pcard.sz-large  { grid-column: span 12; }
+  .pcard.sz-wide   { grid-column: span 12; }
+  .pcard.sz-medium { grid-column: span 6; }
+  .pcard.sz-tall   { grid-column: span 6; }
+  .pcard.sz-small  { grid-column: span 6; }
+}
+@media (max-width: 640px) {
+  .pcard.sz-large, .pcard.sz-wide, .pcard.sz-medium,
+  .pcard.sz-tall, .pcard.sz-small { grid-column: span 12; aspect-ratio: 4/3; }
+  .portfolio-hero { padding: 0 24px 48px; }
+  .portfolio-filters { padding: 32px 24px; }
+  .portfolio-stats { padding: 48px 24px; }
+  .portfolio-cta { padding: 80px 24px; }
+}
+</style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo-text">PROAD <span class="thin">EVENTS</span></div>
-        <nav class="main-nav">
-            <a href="index.html">Accueil</a>
-            <a href="portfolio.html" class="active">Portfolio</a>
-            <a href="contact.html" class="cta-nav">Prendre RDV</a>
-        </nav>
-    </header>
 
-    <main>
-        <div class="portfolio-hero">
-            <div class="portfolio-hero-content">
-                <p class="portfolio-hero-tag">— NOS RÉALISATIONS</p>
-                <h1>Chaque projet,<br>une <em>nouvelle route.</em></h1>
-                <p class="portfolio-hero-desc">De la conception à l'exploitation finale, découvrez les événements que nous avons produits avec rigueur et passion.</p>
-            </div>
-        </div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+      <path fill="#fff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+      <path fill="#fff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+      <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#fff" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html" style="color:#fff">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Prendre RDV</a>
+</nav>
 
-        <div class="portfolio-filters">
-            <button class="filter-btn active" data-filter="all">Tout voir</button>
-            <button class="filter-btn" data-filter="soiree">Soirées & Galas</button>
-            <button class="filter-btn" data-filter="conference">Conférences</button>
-            <button class="filter-btn" data-filter="lancement">Lancements</button>
-            <button class="filter-btn" data-filter="autre">Autres</button>
-        </div>
+<!-- HERO -->
+<section class="portfolio-hero" style="padding-top:120px;">
+  <p class="section-label reveal">Nos réalisations</p>
+  <h1 class="reveal">La Route<br>en Images.</h1>
+  <p class="reveal">De Marseille à Singapour, chaque projet raconte une histoire. Voici quelques-unes des routes empruntées.</p>
+  <div class="chab-mention reveal">
+    Projets réalisés en tant que chef de projet senior chez
+    <span>Chab Events</span> (Singapour) &amp; <span>Chab Agency</span> (Aix-en-Provence, dès 2023)
+  </div>
+</section>
 
-        <div class="portfolio-grid" id="portfolio-grid">
-            <div class="project-card" data-category="soiree" data-title="Gala de l'Excellence" data-lieu="Paris" data-date="2024" data-desc="Organisation complète d'un gala de prestige réunissant 400 invités. Scénographie sur mesure, coordination de prestataires premium et régie terrain intégrale.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">G</div>
-                    <span class="project-badge">Soirée</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Soirée & Gala</div>
-                        <div class="project-title">Gala de l'Excellence</div>
-                        <div class="project-meta">Paris — 2024 — 400 invités</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
+<!-- FILTERS -->
+<div class="portfolio-filters">
+  <button class="filter-btn active" data-filter="all">Tous</button>
+  <button class="filter-btn" data-filter="corporate">Corporate</button>
+  <button class="filter-btn" data-filter="gala">Soirées & Galas</button>
+  <button class="filter-btn" data-filter="launch">Lancements</button>
+  <button class="filter-btn" data-filter="lifestyle">Lifestyle & Sports</button>
+  <button class="filter-btn" data-filter="luxury">Luxe & Expérientiel</button>
+</div>
 
-            <div class="project-card" data-category="lancement" data-title="Lancement Produit XYZ" data-lieu="Lyon" data-date="2024" data-desc="Mise en scène du lancement d'un nouveau produit technologique devant 200 journalistes et partenaires. Coordination lumière, son et contenu digital.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">X</div>
-                    <span class="project-badge">Lancement</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Lancement Produit</div>
-                        <div class="project-title">Lancement Produit XYZ</div>
-                        <div class="project-meta">Lyon — 2024 — 200 personnes</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
+<!-- GRID -->
+<div class="portfolio-grid" id="portfolio-grid">
 
-            <div class="project-card" data-category="conference" data-title="Summit Stratégique 2024" data-lieu="Bordeaux" data-date="2024" data-desc="Séminaire de direction sur 2 jours pour une ETI industrielle. Gestion logistique complète, animations team building et coordination intervenants.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">S</div>
-                    <span class="project-badge">Conférence</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Séminaire</div>
-                        <div class="project-title">Summit Stratégique 2024</div>
-                        <div class="project-meta">Bordeaux — 2024 — 2 jours</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="soiree" data-title="Soirée Anniversaire Corporate" data-lieu="Marseille" data-date="2023" data-desc="Célébration des 20 ans d'une entreprise régionale. Ambiance immersive, mapping vidéo et live performance sur mesure pour 300 collaborateurs.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">A</div>
-                    <span class="project-badge">Soirée</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Anniversaire Corporate</div>
-                        <div class="project-title">20 ans — Soirée Corporate</div>
-                        <div class="project-meta">Marseille — 2023 — 300 personnes</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="autre" data-title="Festival OPEN AIR" data-lieu="Toulouse" data-date="2023" data-desc="Production d'un festival musical open air d'une journée. Coordination technique scène, gestion des flux, sécurité et partenaires locaux.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">F</div>
-                    <span class="project-badge">Festival</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Festival</div>
-                        <div class="project-title">Festival OPEN AIR</div>
-                        <div class="project-meta">Toulouse — 2023 — 1500 visiteurs</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="lancement" data-title="Inauguration Showroom" data-lieu="Paris" data-date="2023" data-desc="Inauguration d'un showroom premium avec cocktail de lancement, accueil presse et mise en lumière de l'espace sur 3 soirées consécutives.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">I</div>
-                    <span class="project-badge">Inauguration</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Inauguration</div>
-                        <div class="project-title">Inauguration Showroom</div>
-                        <div class="project-meta">Paris — 2023 — 3 soirées</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="conference" data-title="Convention Nationale" data-lieu="Nantes" data-date="2023" data-desc="Convention nationale pour un réseau de franchisés : 600 personnes, 3 scènes simultanées, coordination de 40 intervenants et retransmission live.">
-                <div class="project-card-inner">
-                    <div class="project-placeholder">C</div>
-                    <span class="project-badge">Convention</span>
-                    <div class="project-overlay">
-                        <div class="project-tag">Convention</div>
-                        <div class="project-title">Convention Nationale</div>
-                        <div class="project-meta">Nantes — 2023 — 600 personnes</div>
-                    </div>
-                    <div class="project-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="portfolio-cta">
-            <h2>Votre projet,<br><span class="highlight">notre prochaine route.</span></h2>
-            <p>Chaque événement que vous imaginez mérite une production à la hauteur.</p>
-            <a href="contact.html" class="cta-btn-large">
-                <span>DÉMARRER UN PROJET</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-        </div>
-    </main>
-
-    <div class="project-modal" id="project-modal">
-        <div class="modal-backdrop" id="modal-backdrop"></div>
-        <div class="modal-inner">
-            <button class="modal-close" id="modal-close">✕</button>
-            <div class="modal-img-placeholder" id="modal-img-placeholder">P</div>
-            <div class="modal-content">
-                <p class="modal-tag" id="modal-tag"></p>
-                <h2 class="modal-title" id="modal-title"></h2>
-                <p class="modal-desc" id="modal-desc"></p>
-                <div class="modal-details">
-                    <div class="modal-detail-item"><span>LIEU</span><span id="modal-lieu"></span></div>
-                    <div class="modal-detail-item"><span>ANNÉE</span><span id="modal-date"></span></div>
-                </div>
-            </div>
-        </div>
+  <!-- Ubisoft Paris 2025 — LARGE -->
+  <div class="pcard sz-large" data-cat="gala">
+    <div class="pcard-bg bg-gala">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 800 450"><circle cx="650" cy="80" r="220" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="650" cy="80" r="160" fill="none" stroke="#2b40fc" stroke-width=".5"/><line x1="0" y1="450" x2="800" y2="200" stroke="#2b40fc" stroke-width=".5"/></svg>
     </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2025</div>
+    <div class="pcard-pax">1 700 PAX</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Soirée Annuelle</div>
+      <div class="pcard-title">Ubisoft Paris<br>Soirée de Fin d'Année</div>
+      <div class="pcard-meta">
+        <span>📍 Pavillon Baltard · Paris</span>
+      </div>
+      <div class="pcard-desc">Soirée annuelle de 1 700 collaborateurs au Pavillon Baltard. Scénographie immersive, production complète son & lumière.</div>
+    </div>
+  </div>
 
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-logo">PROAD <span>EVENTS</span></div>
-            <div class="footer-links">
-                <a href="index.html">Accueil</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <p class="footer-copy">© 2025 PROAD Events. Tous droits réservés.</p>
-        </div>
-    </footer>
+  <!-- Ubisoft Paris 2023 — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="gala">
+    <div class="pcard-bg bg-gala">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><rect x="300" y="-50" width="300" height="300" fill="none" stroke="#2b40fc" stroke-width="1" transform="rotate(25 450 100)"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2023</div>
+    <div class="pcard-pax">1 700 PAX</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Soirée Annuelle</div>
+      <div class="pcard-title">Ubisoft Paris<br>La Felicità</div>
+      <div class="pcard-meta"><span>📍 La Felicità · Paris</span></div>
+      <div class="pcard-desc">Même format, autre adresse iconique. 1 700 invités pour la plus grande soirée gaming de l'année.</div>
+    </div>
+  </div>
 
-    <script>
-        // FILTRES
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.dataset.filter;
-                document.querySelectorAll('.project-card').forEach(card => {
-                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
-                });
-            });
-        });
+  <!-- Ubisoft RIA Montpellier — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="corporate">
+    <div class="pcard-bg bg-corporate">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><polygon points="265,20 520,380 10,380" fill="none" stroke="#2b40fc" stroke-width="1"/><polygon points="265,80 460,360 70,360" fill="none" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2025</div>
+    <div class="pcard-pax">180 PAX</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Journée Corporate</div>
+      <div class="pcard-title">Ubisoft RIA<br>Montpellier</div>
+      <div class="pcard-meta"><span>📍 CGR + La Voile Bleue · Montpellier</span></div>
+      <div class="pcard-desc">Journée complète : projection privée au CGR puis soirée exclusive à La Voile Bleue. 180 participants.</div>
+    </div>
+  </div>
 
-        // MODAL
-        const modal = document.getElementById('project-modal');
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.getElementById('modal-title').textContent = card.dataset.title;
-                document.getElementById('modal-desc').textContent = card.dataset.desc;
-                document.getElementById('modal-lieu').textContent = card.dataset.lieu;
-                document.getElementById('modal-date').textContent = card.dataset.date;
-                document.getElementById('modal-tag').textContent = card.querySelector('.project-badge').textContent;
-                document.getElementById('modal-img-placeholder').textContent = card.querySelector('.project-placeholder').textContent;
-                modal.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
-        document.getElementById('modal-close').addEventListener('click', closeModal);
-        document.getElementById('modal-backdrop').addEventListener('click', closeModal);
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    </script>
+  <!-- RSM France — WIDE -->
+  <div class="pcard sz-wide" data-cat="corporate">
+    <div class="pcard-bg bg-corporate">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 1100 340"><line x1="0" y1="170" x2="1100" y2="170" stroke="#2b40fc" stroke-width=".5"/><circle cx="550" cy="170" r="120" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="550" cy="170" r="200" fill="none" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2025</div>
+    <div class="pcard-pax">100 PAX · 3 JOURS</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Séminaire</div>
+      <div class="pcard-title">RSM France — Séminaire National</div>
+      <div class="pcard-meta"><span>📍 Marseille</span></div>
+      <div class="pcard-desc">3 jours de séminaire pour 100 collaborateurs. Logistique complète, programme de team-building et soirées de clôture.</div>
+    </div>
+  </div>
+
+  <!-- Alan Séminaire Marseille — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="corporate">
+    <div class="pcard-bg bg-corporate">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><rect x="100" y="80" width="330" height="240" fill="none" stroke="#2b40fc" stroke-width="1" rx="4"/><rect x="140" y="120" width="250" height="160" fill="none" stroke="#2b40fc" stroke-width=".4" rx="2"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2024</div>
+    <div class="pcard-pax">120 PAX · 2 JOURS</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Séminaire</div>
+      <div class="pcard-title">Alan — Séminaire<br>Marseille</div>
+      <div class="pcard-meta"><span>📍 Marseille</span></div>
+      <div class="pcard-desc">Séminaire 2 jours pour la scale-up santé Alan. 120 participants, expérience méridionale.</div>
+    </div>
+  </div>
+
+  <!-- Alan Revenue Kick Off — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="corporate">
+    <div class="pcard-bg bg-lifestyle">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><path d="M0,200 Q132,100 265,200 T530,200" fill="none" stroke="#2b40fc" stroke-width="1"/><path d="M0,240 Q132,140 265,240 T530,240" fill="none" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2024</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Revenue Kick-Off</div>
+      <div class="pcard-title">Alan — Camping<br>de Luxe Belgique</div>
+      <div class="pcard-meta"><span>📍 Belgique</span></div>
+      <div class="pcard-desc">Revenue kick-off dans un cadre insolite : camping de luxe en Belgique. Une expérience hors des sentiers battus.</div>
+    </div>
+  </div>
+
+  <!-- Lacoste Cap d'Eden Roc — LARGE -->
+  <div class="pcard sz-large" data-cat="launch">
+    <div class="pcard-bg bg-launch">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 800 450"><path d="M400,0 L800,450 L0,450 Z" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="400" cy="300" r="180" fill="none" stroke="#2b40fc" stroke-width=".5"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">Avril 2024</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Lancement de Collection</div>
+      <div class="pcard-title">Lacoste — Cap d'Eden Roc</div>
+      <div class="pcard-meta"><span>📍 Cap d'Eden Roc · Antibes</span></div>
+      <div class="pcard-desc">Lancement de collection dans l'un des lieux les plus iconiques de la Côte d'Azur. Élégance et mise en scène soignée.</div>
+    </div>
+  </div>
+
+  <!-- Lacoste Tax Free Cannes 2023 — SMALL -->
+  <div class="pcard sz-small" data-cat="gala">
+    <div class="pcard-bg bg-gala">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 400 400"><circle cx="200" cy="200" r="150" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="200" cy="200" r="80" fill="none" stroke="#2b40fc" stroke-width=".5"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2023</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Travel Retail</div>
+      <div class="pcard-title">Lacoste Travel Retail<br>Canopy by Hilton</div>
+      <div class="pcard-meta"><span>📍 Cannes</span></div>
+      <div class="pcard-desc">Soirée travel retail au Tax Free de Cannes. Hôtel Canopy by Hilton.</div>
+    </div>
+  </div>
+
+  <!-- Lacoste Skyfall 2024 — SMALL -->
+  <div class="pcard sz-small" data-cat="gala">
+    <div class="pcard-bg bg-gala">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 400 400"><rect x="50" y="50" width="300" height="300" fill="none" stroke="#2b40fc" stroke-width="1" transform="rotate(15 200 200)"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2024</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Travel Retail</div>
+      <div class="pcard-title">Lacoste Travel Retail<br>Le Skyfall</div>
+      <div class="pcard-meta"><span>📍 Cannes</span></div>
+      <div class="pcard-desc">Édition 2024 dans un nouveau lieu, Le Skyfall. L'esprit travel retail, revisité.</div>
+    </div>
+  </div>
+
+  <!-- Damen 5OCEAN Monaco — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="luxury">
+    <div class="pcard-bg bg-luxury">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><path d="M0,350 Q130,200 265,280 T530,200" fill="none" stroke="#c8a96e" stroke-width="1"/><path d="M0,300 Q130,150 265,230 T530,150" fill="none" stroke="#c8a96e" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2024</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Luxury · Yachting</div>
+      <div class="pcard-title">Damen — Soirée<br>5OCEAN</div>
+      <div class="pcard-meta"><span>📍 Monaco Yacht Show</span></div>
+      <div class="pcard-desc">Soirée de lancement à bord du tout nouveau superyacht 5OCEAN pendant le Monaco Yacht Show. Une première mondiale.</div>
+    </div>
+  </div>
+
+  <!-- Edrington Tax Free 2025 — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="luxury">
+    <div class="pcard-bg bg-luxury">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><polygon points="265,20 500,390 30,390" fill="none" stroke="#c8a96e" stroke-width="1"/><line x1="265" y1="20" x2="265" y2="390" stroke="#c8a96e" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2025</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Expérientiel · Travel Retail</div>
+      <div class="pcard-title">Edrington — Relooking<br>A-Yacht · 3 Decks</div>
+      <div class="pcard-meta"><span>📍 Tax Free · Cannes</span></div>
+      <div class="pcard-desc">Transformation complète d'un a-yacht en expérience premium : Macallan, Highland Park & Brugal sur 3 decks distincts.</div>
+    </div>
+  </div>
+
+  <!-- Morrocanoil — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="launch">
+    <div class="pcard-bg bg-launch">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><rect x="80" y="60" width="370" height="280" fill="none" stroke="#2b40fc" stroke-width="1"/><line x1="80" y1="200" x2="450" y2="200" stroke="#2b40fc" stroke-width=".4"/><line x1="265" y1="60" x2="265" y2="340" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2025</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Stand Sur Mesure</div>
+      <div class="pcard-title">Morrocanoil<br>Tax Free · Cannes</div>
+      <div class="pcard-meta"><span>📍 Cannes</span></div>
+      <div class="pcard-desc">Conception et construction d'un stand entièrement sur mesure pour la marque Morrocanoil au Tax Free de Cannes.</div>
+    </div>
+  </div>
+
+  <!-- HR Path Ibiza — WIDE -->
+  <div class="pcard sz-wide" data-cat="corporate">
+    <div class="pcard-bg bg-lifestyle">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 1100 340"><circle cx="200" cy="170" r="130" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="900" cy="170" r="90" fill="none" stroke="#2b40fc" stroke-width=".5"/><line x1="330" y1="170" x2="810" y2="170" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2024</div>
+    <div class="pcard-pax">50 PAX</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Séminaire International</div>
+      <div class="pcard-title">HR Path — Séminaire Ibiza</div>
+      <div class="pcard-meta"><span>📍 Ibiza, Espagne</span></div>
+      <div class="pcard-desc">Séminaire exclusif pour 50 cadres dirigeants à Ibiza. Travail en journée, expériences mémorables en soirée.</div>
+    </div>
+  </div>
+
+  <!-- Bain Thailand — LARGE -->
+  <div class="pcard sz-large" data-cat="corporate">
+    <div class="pcard-bg bg-corporate">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 800 450"><circle cx="400" cy="225" r="200" fill="none" stroke="#2b40fc" stroke-width="1"/><path d="M200,225 Q400,25 600,225 T1000,225" fill="none" stroke="#2b40fc" stroke-width=".5"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2022</div>
+    <div class="pcard-pax">200 PAX</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Séminaire International</div>
+      <div class="pcard-title">Bain & Company<br>Thaïlande</div>
+      <div class="pcard-meta"><span>📍 Marriott Hotel · Thaïlande</span></div>
+      <div class="pcard-desc">Séminaire complet de 200 participants au Marriott. Organisation des soirées, réunions plénières et activités immersives.</div>
+    </div>
+  </div>
+
+  <!-- Macallan Chijmes — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="luxury">
+    <div class="pcard-bg bg-experiential">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><path d="M265,20 L480,380 L50,380 Z" fill="none" stroke="#c8a96e" stroke-width="1"/><path d="M265,80 L430,360 L100,360 Z" fill="none" stroke="#c8a96e" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2022</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Expérientiel · VIP</div>
+      <div class="pcard-title">The Reach — Macallan<br>Chijmes · Singapour</div>
+      <div class="pcard-meta"><span>📍 Chijmes · Singapour</span></div>
+      <div class="pcard-desc">Event expérientiel ultra-VIP dans l'église désacralisée Chijmes. Une expérience Macallan hors du commun.</div>
+    </div>
+  </div>
+
+  <!-- Ubisoft Singapore Summer Party — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="gala">
+    <div class="pcard-bg bg-gala">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><circle cx="265" cy="200" r="160" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="265" cy="200" r="90" fill="none" stroke="#2b40fc" stroke-width=".4"/><circle cx="265" cy="200" r="30" fill="none" stroke="#2b40fc" stroke-width=".4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2022</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Summer Party</div>
+      <div class="pcard-title">Ubisoft — Summer Party<br>Singapour</div>
+      <div class="pcard-meta"><span>📍 Singapour</span></div>
+      <div class="pcard-desc">Summer party pour les équipes Ubisoft Singapore. Production scénique et expérience tropicale.</div>
+    </div>
+  </div>
+
+  <!-- Cartier HJ Sentosa — MEDIUM -->
+  <div class="pcard sz-medium" data-cat="luxury">
+    <div class="pcard-bg bg-luxury">
+      <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><rect x="80" y="80" width="370" height="240" fill="none" stroke="#c8a96e" stroke-width="1" rx="8"/><rect x="130" y="130" width="270" height="140" fill="none" stroke="#c8a96e" stroke-width=".4" rx="4"/></svg>
+    </div>
+    <div class="pcard-overlay"></div>
+    <div class="pcard-year">2022</div>
+    <div class="pcard-info">
+      <div class="pcard-tag">Haute Joaillerie · Luxe</div>
+      <div class="pcard-title">Cartier HJ<br>Sentosa Island</div>
+      <div class="pcard-meta"><span>📍 Sentosa Island · Singapour</span></div>
+      <div class="pcard-desc">Participation à l'organisation du Haute Joaillerie Cartier sur Sentosa Island, en collaboration avec l'agence Mazarine.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- STATS -->
+<div class="portfolio-stats">
+  <div class="pstat reveal">
+    <div class="pstat-num">17+</div>
+    <div class="pstat-label">Projets réalisés</div>
+  </div>
+  <div class="pstat reveal">
+    <div class="pstat-num">8</div>
+    <div class="pstat-label">Pays & Destinations</div>
+  </div>
+  <div class="pstat reveal">
+    <div class="pstat-num">10K+</div>
+    <div class="pstat-label">Participants</div>
+  </div>
+  <div class="pstat reveal">
+    <div class="pstat-num">6</div>
+    <div class="pstat-label">Univers d'activité</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="portfolio-cta">
+  <p class="section-label reveal">Votre prochain projet</p>
+  <h2 class="reveal">Traçons ensemble<br>votre route.</h2>
+  <p class="reveal">Chaque événement est une nouvelle destination. Parlez-nous de votre projet.</p>
+  <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
+</div>
+
+<footer>
+  <div class="f-logo">PROAD EVENTS</div>
+  <ul class="f-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
+</footer>
+
+<script>
+/* NAV */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+}, {passive:true});
+
+/* FILTERS */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.pcard');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => {
+      if (f === 'all' || c.dataset.cat === f) {
+        c.classList.remove('hidden');
+      } else {
+        c.classList.add('hidden');
+      }
+    });
+  });
+});
+
+/* REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, {threshold: .1});
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+</script>
 </body>
 </html>
