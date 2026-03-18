@@ -565,26 +565,25 @@ function filterFaq(cat) {
 
 
 
-<!-- COPILOTE FLOTTANT -->
 <style>
-.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:60px;height:60px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(43,64,252,.55);animation:cfpPulse 2.5s infinite;transition:transform .2s;padding:8px;overflow:hidden;}
+.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:62px;height:62px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s;padding:10px;overflow:visible;box-shadow:0 0 0 0 rgba(43,64,252,.5);}
 .cop-float-btn:hover{transform:scale(1.08);}
-.cop-float-btn img{width:100%;height:100%;object-fit:contain;display:block;}
-@keyframes cfpPulse{0%,100%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 0 rgba(43,64,252,.3);}50%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 12px rgba(43,64,252,0);}}
-.cop-float-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 6px rgba(34,197,94,.7);}
-.cop-float-tip{position:absolute;right:70px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
+.cop-float-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(43,64,252,.25);animation:cfpRing 2s ease-out infinite;pointer-events:none;}
+.cop-float-btn::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(43,64,252,.12);animation:cfpRing 2s ease-out .4s infinite;pointer-events:none;}
+@keyframes cfpRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.6);opacity:0;}}
+.cop-float-btn svg{width:100%;height:100%;display:block;}
+.cop-float-badge{position:absolute;top:0px;right:0px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 8px rgba(34,197,94,.8);z-index:2;}
+.cop-float-tip{position:absolute;right:74px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
 .cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
 .cop-float-btn:hover .cop-float-tip{opacity:1;}
-.cop-float-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.cop-float-panel{position:fixed;bottom:106px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
 .cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
 .cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
-.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px;overflow:hidden;}
-.cfp-av img{width:100%;height:100%;object-fit:contain;}
+.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:6px;overflow:hidden;}
 .cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;}
 .cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
 .cfp-msg.vis{opacity:1;transform:translateY(0);}
 .cfp-mav{width:28px;height:28px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;padding:4px;overflow:hidden;}
-.cfp-mav img{width:100%;height:100%;object-fit:contain;}
 .cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
 .cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0;}
 .cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.58rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
@@ -599,29 +598,28 @@ function filterFaq(cat) {
 .cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
 .cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);}
 </style>
-
 <button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
-  <img src="A_1.png" alt="Copilote PROAD">
+  <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>
   <div class="cop-float-badge"></div>
   <div class="cop-float-tip">Je suis le Copilote de Mehdi, je vous ecoute</div>
 </button>
 
 <div class="cop-float-panel" id="cfp-panel">
   <div class="cfp-hdr">
-    <div class="cfp-av"><img src="A_1.png" alt="CP"></div>
+    <div class="cfp-av"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
     <div style="flex:1">
       <strong style="display:block;font-size:.82rem;font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;color:#fff">COPILOTE PROAD</strong>
       <span style="font-size:.65rem;color:rgba(255,255,255,.35);font-family:Inter,sans-serif">Mehdi est sur la route - Je vous ecoute</span>
     </div>
-    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px">X</button>
+    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px;line-height:1">&#x2715;</button>
   </div>
   <div class="cfp-msgs" id="cfp-msgs">
     <div class="cfp-msg" id="cfp-m1">
-      <div class="cfp-mav"><img src="A_1.png" alt="CP"></div>
+      <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
       <div class="cfp-bub"><p>Je suis le <strong>Copilote</strong> de Mehdi. Il est sur la route. Je vous ecoute.</p></div>
     </div>
     <div class="cfp-msg" id="cfp-m2">
-      <div class="cfp-mav"><img src="A_1.png" alt="CP"></div>
+      <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
       <div class="cfp-bub"><p>Un projet ? Un RDV ? Un brief ? Dites-moi tout.</p></div>
     </div>
   </div>
@@ -638,7 +636,6 @@ function filterFaq(cat) {
   </div>
   <div class="cfp-footer">Copilote IA - Reponse Mehdi sous 24h</div>
 </div>
-
 <script>
 (function() {
   var isOpen = false;
@@ -660,20 +657,19 @@ function filterFaq(cat) {
     }
   };
 
-  function makeAvatar() {
+  var LOGO = '<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
+
+  function makeAv(cls) {
     var av = document.createElement('div');
-    av.className = 'cfp-mav';
-    var img = document.createElement('img');
-    img.src = 'A_1.png';
-    img.alt = 'CP';
-    av.appendChild(img);
+    av.className = cls;
+    av.innerHTML = LOGO;
     return av;
   }
 
   function botMsg(html) {
     var d = document.createElement('div');
     d.className = 'cfp-msg';
-    d.appendChild(makeAvatar());
+    d.appendChild(makeAv('cfp-mav'));
     var bub = document.createElement('div');
     bub.className = 'cfp-bub';
     var p = document.createElement('p');
@@ -706,14 +702,14 @@ function filterFaq(cat) {
   function typing(cb) {
     var t = document.createElement('div');
     t.className = 'cfp-msg vis';
-    t.appendChild(makeAvatar());
+    t.appendChild(makeAv('cfp-mav'));
     var bub = document.createElement('div');
     bub.className = 'cfp-bub';
     var p = document.createElement('p');
     p.style.cssText = 'display:flex;gap:5px;align-items:center;margin:0';
     for (var i = 0; i < 3; i++) {
       var dot = document.createElement('span');
-      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s ' + (i * 0.2) + 's infinite';
+      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s ' + (i*0.2) + 's infinite';
       p.appendChild(dot);
     }
     bub.appendChild(p);
