@@ -24,6 +24,28 @@
   width: 92%;
 }
 
+/* ── ROAD BACKGROUND ADN ── */
+.adn-road-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  opacity: .55;
+}
+.adn-road-bg svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#scene-adn {
+  position: relative;
+}
+#scene-adn .adn-inner {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── STATS ICONS SVG ── */
 .stat-icon-svg {
   width: 52px; height: 52px;
@@ -218,6 +240,116 @@
 
 <!-- ═══ 2. ADN PHRASE ═══ -->
 <section id="scene-adn">
+  <!-- Fond : route + camion PROAD en silhouette très subtile -->
+  <div class="adn-road-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <!-- Dégradé de la route perspective -->
+        <linearGradient id="road-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(43,64,252,0)"/>
+          <stop offset="40%" stop-color="rgba(43,64,252,.04)"/>
+          <stop offset="100%" stop-color="rgba(43,64,252,.10)"/>
+        </linearGradient>
+        <!-- Point de fuite horizon -->
+        <radialGradient id="horizon-glow" cx="50%" cy="42%" r="35%">
+          <stop offset="0%" stop-color="rgba(43,64,252,.18)"/>
+          <stop offset="100%" stop-color="rgba(43,64,252,0)"/>
+        </radialGradient>
+        <!-- Masque pour fondu haut/bas -->
+        <linearGradient id="fade-mask" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="white" stop-opacity="0"/>
+          <stop offset="25%" stop-color="white" stop-opacity="1"/>
+          <stop offset="75%" stop-color="white" stop-opacity="1"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="road-mask">
+          <rect width="1440" height="600" fill="url(#fade-mask)"/>
+        </mask>
+      </defs>
+
+      <g mask="url(#road-mask)" opacity="1">
+        <!-- Lueur horizon -->
+        <ellipse cx="720" cy="252" rx="420" ry="120" fill="url(#horizon-glow)"/>
+
+        <!-- Asphalte -->
+        <polygon points="480,600 960,600 780,252 660,252" fill="url(#road-grad)"/>
+
+        <!-- Lignes blanches centrale pointillées (perspective) -->
+        <g opacity="0.18" stroke="rgba(255,255,255,.9)" stroke-linecap="round">
+          <!-- Ligne centrale — plusieurs segments en perspective -->
+          <line x1="720" y1="258" x2="720" y2="272" stroke-width="2"/>
+          <line x1="720" y1="280" x2="720.5" y2="300" stroke-width="2.2"/>
+          <line x1="721" y1="310" x2="722" y2="336" stroke-width="2.5"/>
+          <line x1="722" y1="348" x2="723" y2="380" stroke-width="3"/>
+          <line x1="723" y1="396" x2="724" y2="432" stroke-width="3.5"/>
+          <line x1="724" y1="452" x2="725" y2="494" stroke-width="4"/>
+          <line x1="725" y1="518" x2="726" y2="570" stroke-width="5"/>
+        </g>
+
+        <!-- Bandes latérales route -->
+        <g opacity="0.12" stroke="rgba(255,255,255,.8)" stroke-linecap="round">
+          <!-- Gauche -->
+          <line x1="660" y1="252" x2="480" y2="600" stroke-width="1.5"/>
+          <!-- Droite -->
+          <line x1="780" y1="252" x2="960" y2="600" stroke-width="1.5"/>
+        </g>
+
+        <!-- ═══ CAMION SILHOUETTE ═══ -->
+        <g opacity="0.055" transform="translate(516, 300)">
+          <!-- Remorque -->
+          <rect x="0" y="0" width="240" height="90" rx="4" fill="rgba(255,255,255,.9)"/>
+          <!-- Détails remorque -->
+          <rect x="4" y="4" width="232" height="82" rx="2" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+          <!-- Logo PROAD sur la remorque -->
+          <text x="120" y="52" font-family="'Bebas Neue', sans-serif" font-size="22" fill="rgba(43,64,252,.8)" text-anchor="middle" letter-spacing="4">PROAD EVENTS</text>
+          <!-- Ligne déco remorque -->
+          <rect x="0" y="28" width="240" height="2" fill="rgba(43,64,252,.5)"/>
+          <rect x="0" y="62" width="240" height="2" fill="rgba(43,64,252,.5)"/>
+
+          <!-- Cabine tracteur -->
+          <rect x="240" y="10" width="82" height="80" rx="6" fill="rgba(255,255,255,.85)"/>
+          <!-- Pare-brise -->
+          <rect x="252" y="16" width="56" height="32" rx="3" fill="rgba(43,64,252,.4)"/>
+          <!-- Phare -->
+          <rect x="316" y="60" width="8" height="6" rx="1" fill="rgba(255,220,100,.9)"/>
+          <!-- Calandre -->
+          <rect x="318" y="32" width="4" height="28" rx="2" fill="rgba(150,180,255,.5)"/>
+
+          <!-- Châssis -->
+          <rect x="0" y="90" width="322" height="12" rx="2" fill="rgba(200,200,220,.6)"/>
+
+          <!-- Roues remorque -->
+          <circle cx="60" cy="106" r="16" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="60" cy="106" r="8" fill="rgba(80,80,100,.8)"/>
+          <circle cx="110" cy="106" r="16" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="110" cy="106" r="8" fill="rgba(80,80,100,.8)"/>
+          <circle cx="185" cy="106" r="16" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="185" cy="106" r="8" fill="rgba(80,80,100,.8)"/>
+          <circle cx="225" cy="106" r="16" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="225" cy="106" r="8" fill="rgba(80,80,100,.8)"/>
+
+          <!-- Roues cabine -->
+          <circle cx="288" cy="106" r="18" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="288" cy="106" r="9" fill="rgba(80,80,100,.8)"/>
+          <circle cx="320" cy="106" r="18" fill="rgba(30,30,50,.9)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <circle cx="320" cy="106" r="9" fill="rgba(80,80,100,.8)"/>
+
+          <!-- Reflet phares au sol -->
+          <ellipse cx="330" cy="126" rx="30" ry="6" fill="rgba(255,220,100,.06)"/>
+        </g>
+
+        <!-- Reflets phares du camion sur la route -->
+        <g opacity="0.06">
+          <ellipse cx="870" cy="460" rx="80" ry="20" fill="rgba(255,220,100,1)"/>
+          <polygon points="846,420 894,420 940,600 800,600" fill="rgba(255,220,80,.4)"/>
+        </g>
+
+        <!-- Ligne d'horizon -->
+        <line x1="0" y1="252" x2="1440" y2="252" stroke="rgba(43,64,252,.12)" stroke-width="1"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="adn-inner">
     <p class="adn-lead">
       Faire appel à <a href="index.html" class="w-proad">PROAD</a>, c'est s'engager sur une ligne de conduite rigoureuse,
