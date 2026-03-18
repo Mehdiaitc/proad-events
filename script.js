@@ -49,7 +49,7 @@ function positionBadge() {
     const bb  = oPath.getBBox();
     const sr  = outlineSvg.getBoundingClientRect();
     const wr  = logoWrap.getBoundingClientRect();
-    if (!sr.width) return; /* SVG not rendered yet */
+    if (!sr.width) return;
     const sx = sr.width  / 978.71;
     const sy = sr.height / 160.47;
     const px = (bb.x + bb.width  / 2) * sx + (sr.left - wr.left);
@@ -59,10 +59,9 @@ function positionBadge() {
     logoWrap.style.setProperty('--o-cx', (px / wr.width  * 100).toFixed(2) + '%');
     logoWrap.style.setProperty('--o-cy', (py / wr.height * 100).toFixed(2) + '%');
   } catch(e) {
-    setTimeout(positionBadge, 200); /* retry if fonts not ready */
+    setTimeout(positionBadge, 200);
   }
 }
-/* Wait for fonts to load before measuring */
 if (document.fonts) {
   document.fonts.ready.then(() => setTimeout(positionBadge, 100));
 } else {
@@ -279,6 +278,19 @@ function triggerZoom(){
     setTimeout(()=>{
       zoomOverlay.style.pointerEvents='none';
       zoomComplete=true;
+
+      /* ── FIX SCROLL RETOUR ──
+         Si l'utilisateur remonte avant la zone de zoom, on réinitialise
+         pour que l'animation puisse se rejouer */
+      const unwatch = ()=>{
+        if(getHeroP() < 0.52){
+          zoomComplete = false;
+          zoomActive   = false;
+          window.removeEventListener('scroll', unwatch);
+        }
+      };
+      window.addEventListener('scroll', unwatch, {passive:true});
+
     },650);
   },520);
 }
