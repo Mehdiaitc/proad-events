@@ -705,6 +705,7 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 
 
 
+
 <!-- COPILOTE FLOTTANT -->
 <style>
 .cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:60px;height:60px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(43,64,252,.55);animation:cfpPulse 2.5s infinite;transition:transform .2s;padding:8px;overflow:hidden;}
@@ -712,22 +713,22 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 .cop-float-btn img{width:100%;height:100%;object-fit:contain;display:block;}
 @keyframes cfpPulse{0%,100%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 0 rgba(43,64,252,.3);}50%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 12px rgba(43,64,252,0);}}
 .cop-float-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 6px rgba(34,197,94,.7);}
-.cop-float-tip{position:absolute;right:70px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
+.cop-float-tip{position:absolute;right:70px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
 .cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
 .cop-float-btn:hover .cop-float-tip{opacity:1;}
 .cop-float-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
 .cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
 .cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
-.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:6px;overflow:hidden;}
+.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px;overflow:hidden;}
 .cfp-av img{width:100%;height:100%;object-fit:contain;}
-.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(43,64,252,.3) transparent;}
+.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;}
 .cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
 .cfp-msg.vis{opacity:1;transform:translateY(0);}
 .cfp-mav{width:28px;height:28px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;padding:4px;overflow:hidden;}
 .cfp-mav img{width:100%;height:100%;object-fit:contain;}
 .cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
 .cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0;}
-.cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.58rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;font-family:Inter,sans-serif;letter-spacing:.03em;}
+.cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.58rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
 .cfp-ubub{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px 2px 12px 12px;padding:10px 14px;max-width:85%;}
 .cfp-ubub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.7);margin:0;text-align:right;}
 .cfp-quick{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
@@ -736,169 +737,166 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 .cfp-inrow{border-top:1px solid rgba(255,255,255,.05);padding:10px 12px;display:flex;gap:8px;}
 .cfp-in{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-family:Inter,sans-serif;font-size:.78rem;padding:8px 12px;outline:none;border-radius:2px;}
 .cfp-in:focus{border-color:rgba(43,64,252,.5);}
-.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;transition:background .2s;}
-.cfp-sendbtn:hover{background:#4455ff;}
-.cfp-sendbtn svg{width:15px;height:15px;}
-.cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);letter-spacing:.06em;}
+.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
+.cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);}
 </style>
 
 <button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
   <img src="A_1.png" alt="Copilote PROAD">
   <div class="cop-float-badge"></div>
-  <div class="cop-float-tip">Je suis le Copilote de Mehdi, je vous &eacute;coute</div>
+  <div class="cop-float-tip">Je suis le Copilote de Mehdi, je vous ecoute</div>
 </button>
 
 <div class="cop-float-panel" id="cfp-panel">
   <div class="cfp-hdr">
-    <div class="cfp-av">
-      <img src="A_1.png" alt="CP">
-    </div>
+    <div class="cfp-av"><img src="A_1.png" alt="CP"></div>
     <div style="flex:1">
       <strong style="display:block;font-size:.82rem;font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;color:#fff">COPILOTE PROAD</strong>
-      <span style="font-size:.65rem;color:rgba(255,255,255,.35);font-family:Inter,sans-serif">Mehdi est sur la route &middot; Je vous &eacute;coute</span>
+      <span style="font-size:.65rem;color:rgba(255,255,255,.35);font-family:Inter,sans-serif">Mehdi est sur la route - Je vous ecoute</span>
     </div>
-    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px;line-height:1">&#x2715;</button>
+    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px">X</button>
   </div>
   <div class="cfp-msgs" id="cfp-msgs">
     <div class="cfp-msg" id="cfp-m1">
       <div class="cfp-mav"><img src="A_1.png" alt="CP"></div>
-      <div class="cfp-bub"><p>Je suis le <strong>Copilote</strong> de Mehdi. Il est sur la route. Je vous &eacute;coute.</p></div>
+      <div class="cfp-bub"><p>Je suis le <strong>Copilote</strong> de Mehdi. Il est sur la route. Je vous ecoute.</p></div>
     </div>
     <div class="cfp-msg" id="cfp-m2">
       <div class="cfp-mav"><img src="A_1.png" alt="CP"></div>
-      <div class="cfp-bub"><p>Un projet&nbsp;? Un RDV&nbsp;? Un brief&nbsp;? Dites-moi tout.</p></div>
+      <div class="cfp-bub"><p>Un projet ? Un RDV ? Un brief ? Dites-moi tout.</p></div>
     </div>
   </div>
   <div class="cfp-quick" id="cfp-quick">
     <button class="cfp-qbtn" onclick="cfpAct(1)">Prendre RDV</button>
-    <button class="cfp-qbtn" onclick="cfpAct(2)">D&eacute;poser un brief</button>
+    <button class="cfp-qbtn" onclick="cfpAct(2)">Deposer un brief</button>
     <button class="cfp-qbtn" onclick="cfpAct(3)">En savoir plus</button>
   </div>
   <div class="cfp-inrow">
     <input class="cfp-in" id="cfp-in" type="text" placeholder="Votre message..." autocomplete="off">
     <button class="cfp-sendbtn" onclick="cfpSend()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
-  <div class="cfp-footer">Copilote IA &middot; R&eacute;ponse Mehdi sous 24h</div>
+  <div class="cfp-footer">Copilote IA - Reponse Mehdi sous 24h</div>
 </div>
 
 <script>
 (function() {
   var isOpen = false;
   var didInit = false;
-  var panel = document.getElementById("cfp-panel");
-  var msgs  = document.getElementById("cfp-msgs");
-  var inp   = document.getElementById("cfp-in");
-  var quick = document.getElementById("cfp-quick");
+  var panel = document.getElementById('cfp-panel');
+  var msgs  = document.getElementById('cfp-msgs');
+  var inp   = document.getElementById('cfp-in');
+  var quick = document.getElementById('cfp-quick');
 
   window.cfpToggle = function() {
     isOpen = !isOpen;
-    panel.classList.toggle("open", isOpen);
+    if (panel) panel.classList.toggle('open', isOpen);
     if (isOpen && !didInit) {
       didInit = true;
-      var m1 = document.getElementById("cfp-m1");
-      var m2 = document.getElementById("cfp-m2");
-      if (m1) setTimeout(function() { m1.classList.add("vis"); }, 300);
-      if (m2) setTimeout(function() { m2.classList.add("vis"); }, 800);
+      var m1 = document.getElementById('cfp-m1');
+      var m2 = document.getElementById('cfp-m2');
+      if (m1) setTimeout(function() { m1.classList.add('vis'); }, 300);
+      if (m2) setTimeout(function() { m2.classList.add('vis'); }, 800);
     }
   };
 
-  function botMsg(html) {
-    var d = document.createElement("div");
-    d.className = "cfp-msg";
-    var av = document.createElement("div");
-    av.className = "cfp-mav";
-    var img = document.createElement("img");
-    img.src = "assets/A_1.png";
-    img.alt = "CP";
+  function makeAvatar() {
+    var av = document.createElement('div');
+    av.className = 'cfp-mav';
+    var img = document.createElement('img');
+    img.src = 'A_1.png';
+    img.alt = 'CP';
     av.appendChild(img);
-    var bub = document.createElement("div");
-    bub.className = "cfp-bub";
-    var p = document.createElement("p");
+    return av;
+  }
+
+  function botMsg(html) {
+    var d = document.createElement('div');
+    d.className = 'cfp-msg';
+    d.appendChild(makeAvatar());
+    var bub = document.createElement('div');
+    bub.className = 'cfp-bub';
+    var p = document.createElement('p');
     p.innerHTML = html;
     bub.appendChild(p);
-    d.appendChild(av);
     d.appendChild(bub);
-    msgs.appendChild(d);
-    setTimeout(function() { d.classList.add("vis"); }, 30);
-    setTimeout(function() { msgs.scrollTop = msgs.scrollHeight; }, 100);
+    if (msgs) msgs.appendChild(d);
+    setTimeout(function() { d.classList.add('vis'); }, 30);
+    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
   }
 
   function userMsg(text) {
-    var d = document.createElement("div");
-    d.className = "cfp-msg vis";
-    d.style.flexDirection = "row-reverse";
-    var av = document.createElement("div");
-    av.className = "cfp-uav";
-    av.textContent = "vous";
-    var bub = document.createElement("div");
-    bub.className = "cfp-ubub";
-    var p = document.createElement("p");
+    var d = document.createElement('div');
+    d.className = 'cfp-msg vis';
+    d.style.flexDirection = 'row-reverse';
+    var av = document.createElement('div');
+    av.className = 'cfp-uav';
+    av.textContent = 'vous';
+    d.appendChild(av);
+    var bub = document.createElement('div');
+    bub.className = 'cfp-ubub';
+    var p = document.createElement('p');
     p.textContent = text;
     bub.appendChild(p);
-    d.appendChild(av);
     d.appendChild(bub);
-    msgs.appendChild(d);
-    setTimeout(function() { msgs.scrollTop = msgs.scrollHeight; }, 100);
+    if (msgs) msgs.appendChild(d);
+    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
   }
 
   function typing(cb) {
-    var t = document.createElement("div");
-    t.className = "cfp-msg vis";
-    var av = document.createElement("div");
-    av.className = "cfp-mav";
-    var img = document.createElement("img");
-    img.src = "assets/A_1.png";
-    img.alt = "CP";
-    av.appendChild(img);
-    var bub = document.createElement("div");
-    bub.className = "cfp-bub";
-    bub.innerHTML = "<p style='display:flex;gap:5px;align-items:center'><span style='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s infinite'></span><span style='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s .2s infinite'></span><span style='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s .4s infinite'></span></p>";
-    t.appendChild(av);
+    var t = document.createElement('div');
+    t.className = 'cfp-msg vis';
+    t.appendChild(makeAvatar());
+    var bub = document.createElement('div');
+    bub.className = 'cfp-bub';
+    var p = document.createElement('p');
+    p.style.cssText = 'display:flex;gap:5px;align-items:center;margin:0';
+    for (var i = 0; i < 3; i++) {
+      var dot = document.createElement('span');
+      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s ' + (i * 0.2) + 's infinite';
+      p.appendChild(dot);
+    }
+    bub.appendChild(p);
     t.appendChild(bub);
-    msgs.appendChild(t);
+    if (msgs) msgs.appendChild(t);
     setTimeout(function() { t.remove(); cb(); }, 950);
   }
 
   window.cfpAct = function(n) {
-    var labels = ["Je voudrais prendre rendez-vous", "Je souhaite deposer un brief", "En savoir plus sur PROAD"];
+    var labels = ['Je voudrais prendre rendez-vous', 'Je souhaite deposer un brief', 'En savoir plus sur PROAD'];
     userMsg(labels[n - 1]);
-    quick.style.display = "none";
+    if (quick) quick.style.display = 'none';
     typing(function() {
-      if (n === 1) {
-        botMsg("Parfait. Direction la <a href='contact.html' style='color:#2b40fc'>page Contact</a> pour reserver un creneau dans l'agenda de Mehdi.");
-      } else if (n === 2) {
-        botMsg("Quel type d'evenement, combien de personnes, pour quand ? Je transmets a Mehdi.");
-      } else {
-        botMsg("PROAD c'est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.");
-      }
+      if (n === 1) botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');
+      else if (n === 2) botMsg('Quel type d evenement, combien de personnes, pour quand ? Je transmets a Mehdi.');
+      else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');
     });
   };
 
   window.cfpSend = function() {
-    var text = inp ? inp.value.trim() : "";
+    var text = inp ? inp.value.trim() : '';
     if (!text) return;
-    inp.value = "";
+    inp.value = '';
     userMsg(text);
-    quick.style.display = "none";
+    if (quick) quick.style.display = 'none';
     var tl = text.toLowerCase();
     typing(function() {
-      if (tl.indexOf("rdv") > -1 || tl.indexOf("rendez") > -1) {
-        botMsg("Direction la <a href='contact.html' style='color:#2b40fc'>page Contact</a> pour un RDV. Mehdi repond sous 24h.");
-      } else if (tl.indexOf("brief") > -1 || tl.indexOf("projet") > -1) {
-        botMsg("Dites-m'en plus. Type, date, jauge ? Je note pour Mehdi.");
-      } else if (tl.indexOf("budget") > -1 || tl.indexOf("prix") > -1) {
-        botMsg("Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.");
+      if (tl.indexOf('rdv') > -1 || tl.indexOf('rendez') > -1) {
+        botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour un RDV. Mehdi repond sous 24h.');
+      } else if (tl.indexOf('brief') > -1 || tl.indexOf('projet') > -1) {
+        botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');
+      } else if (tl.indexOf('budget') > -1 || tl.indexOf('prix') > -1) {
+        botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');
       } else {
-        botMsg("Note ! Mehdi reprend le volant sous 24h. <a href='contact.html' style='color:#2b40fc'>Page Contact</a>");
+        botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');
       }
     });
   };
 
   if (inp) {
-    inp.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") { window.cfpSend(); }
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') window.cfpSend();
     });
   }
 })();
