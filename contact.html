@@ -725,10 +725,18 @@ const io = new IntersectionObserver(entries => {
 }, {threshold: .1});
 document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 
-function updateBudget(v
+function updateBudget(v) {
+  const val = parseInt(v);
+  const display = val >= 200000 ? '200 000 €+' : val.toLocaleString('fr-FR') + ' €';
+  document.getElementById('budget-display').textContent = display;
+}
 
-
-
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').classList.add('visible');
+  window.scrollTo({top: document.getElementById('form-success').offsetTop - 120, behavior: 'smooth'});
+}
 </script>
 
 <style>
