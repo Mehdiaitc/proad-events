@@ -171,31 +171,31 @@ function drawSpot(op){
   const px = (spx/100)*W;
   const py = (spy/100)*H;
 
-  /* Grand halo frontal — illumine logo + texte */
+  /* Grand halo frontal bleu — illumine logo + texte */
   const r1 = Math.min(W,H) * .52;
   const g1 = ctx.createRadialGradient(px, py, 0, px, py, r1);
-  g1.addColorStop(0,   `rgba(240,248,255,${(.22*op).toFixed(2)})`);
-  g1.addColorStop(.18, `rgba(210,230,255,${(.14*op).toFixed(2)})`);
-  g1.addColorStop(.45, `rgba(100,150,255,${(.05*op).toFixed(3)})`);
-  g1.addColorStop(.80, `rgba(43,64,252,${(.015*op).toFixed(3)})`);
+  g1.addColorStop(0,   `rgba(43,64,252,${(.28*op).toFixed(2)})`);
+  g1.addColorStop(.18, `rgba(43,64,252,${(.18*op).toFixed(2)})`);
+  g1.addColorStop(.45, `rgba(43,64,252,${(.07*op).toFixed(3)})`);
+  g1.addColorStop(.80, `rgba(43,64,252,${(.02*op).toFixed(3)})`);
   g1.addColorStop(1,   'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r1, 0, Math.PI*2);
   ctx.fillStyle = g1; ctx.fill();
 
-  /* Point chaud central — blanc froid pur */
+  /* Point chaud central — bleu électrique vif */
   const r2 = Math.min(W,H) * .07;
   const g2 = ctx.createRadialGradient(px, py, 0, px, py, r2);
-  g2.addColorStop(0,  `rgba(245,250,255,${(.75*op).toFixed(2)})`);
-  g2.addColorStop(.5, `rgba(215,235,255,${(.35*op).toFixed(2)})`);
+  g2.addColorStop(0,  `rgba(120,150,255,${(.85*op).toFixed(2)})`);
+  g2.addColorStop(.4, `rgba(43,64,252,${(.5*op).toFixed(2)})`);
   g2.addColorStop(1,  'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r2, 0, Math.PI*2);
   ctx.fillStyle = g2; ctx.fill();
 
-  /* Anneau diffusion bleu */
+  /* Anneau diffusion bleu large */
   const r3 = Math.min(W,H) * .26;
   const g3 = ctx.createRadialGradient(px, py, r3*.5, px, py, r3);
   g3.addColorStop(0,  'rgba(0,0,0,0)');
-  g3.addColorStop(.5, `rgba(43,64,252,${(.03*op).toFixed(3)})`);
+  g3.addColorStop(.5, `rgba(43,64,252,${(.055*op).toFixed(3)})`);
   g3.addColorStop(1,  'rgba(0,0,0,0)');
   ctx.beginPath(); ctx.arc(px, py, r3, 0, Math.PI*2);
   ctx.fillStyle = g3; ctx.fill();
