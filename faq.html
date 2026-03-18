@@ -559,5 +559,71 @@ function filterFaq(cat) {
   });
 }
 </script>
+
+<!-- COPILOTE FLOTTANT -->
+<style>
+.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(43,64,252,.55);animation:copPulse 2.5s infinite;transition:transform .2s;}
+.cop-float-btn:hover{transform:scale(1.08);}
+.cop-float-btn svg{width:24px;height:24px;}
+@keyframes copPulse{0%,100%{box-shadow:0 4px 20px rgba(43,64,252,.55),0 0 0 0 rgba(43,64,252,.35);}50%{box-shadow:0 4px 20px rgba(43,64,252,.55),0 0 0 10px rgba(43,64,252,0);}}
+.cop-float-badge{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #060608;}
+.cop-float-panel{position:fixed;bottom:96px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.cfp-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1a2aff,#0018cc);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:.8rem;color:#fff;flex-shrink:0;box-shadow:0 0 12px rgba(43,64,252,.5);}
+.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;scrollbar-width:thin;}
+.cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
+.cfp-msg.vis{opacity:1;transform:translateY(0);}
+.cfp-mav{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1a2aff,#0018cc);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:.6rem;color:#fff;flex-shrink:0;margin-top:2px;}
+.cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
+.cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);}
+.cfp-quick{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
+.cfp-qbtn{background:none;border:1px solid rgba(43,64,252,.25);color:rgba(255,255,255,.5);font-family:"Inter",sans-serif;font-size:.7rem;padding:6px 12px;cursor:pointer;border-radius:2px;transition:all .2s;}
+.cfp-qbtn:hover{border-color:#2b40fc;color:rgba(255,255,255,.85);}
+.cfp-inrow{border-top:1px solid rgba(255,255,255,.05);padding:10px 12px;display:flex;gap:8px;}
+.cfp-in{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-family:"Inter",sans-serif;font-size:.78rem;padding:8px 12px;outline:none;border-radius:2px;}
+.cfp-in:focus{border-color:rgba(43,64,252,.45);}
+.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
+.cfp-sendbtn svg{width:14px;height:14px;}
+</style>
+<button class="cop-float-btn" onclick="cfpToggle()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <div class="cop-float-badge"></div>
+</button>
+<div class="cop-float-panel" id="cfp-panel">
+  <div class="cfp-hdr">
+    <div class="cfp-av">CP</div>
+    <div style="flex:1"><strong style="display:block;font-size:.82rem;color:rgba(255,255,255,.9)">COPILOTE PROAD</strong><span style="font-size:.65rem;color:rgba(255,255,255,.35)">Mehdi est sur la route · Je prends le relais</span></div>
+    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem;padding:4px 8px">✕</button>
+  </div>
+  <div class="cfp-msgs" id="cfp-msgs">
+    <div class="cfp-msg" id="cfp-m1"><div class="cfp-mav">CP</div><div class="cfp-bub"><p>Mehdi est sur la route &#x1F6E3;&#xFE0F; Je suis son <strong>Copilote</strong> — un projet, un RDV, un brief ? Je transmets tout sous 24h.</p></div></div>
+  </div>
+  <div class="cfp-quick" id="cfp-quick">
+    <button class="cfp-qbtn" onclick="cfpAct('rdv')">&#x1F4C5; Prendre RDV</button>
+    <button class="cfp-qbtn" onclick="cfpAct('brief')">&#x1F4CB; Déposer un brief</button>
+    <button class="cfp-qbtn" onclick="cfpAct('info')">&#x1F4AC; En savoir plus</button>
+  </div>
+  <div class="cfp-inrow">
+    <input class="cfp-in" id="cfp-in" type="text" placeholder="Votre message..." autocomplete="off">
+    <button class="cfp-sendbtn" onclick="cfpSend()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+  <div style="padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04)">Copilote IA · Réponse Mehdi sous 24h</div>
+</div>
+<script>
+(function(){
+var open=false,init=false;
+var msgs=document.getElementById('cfp-msgs');
+var inp=document.getElementById('cfp-in');
+window.cfpToggle=function(){open=!open;document.getElementById('cfp-panel').classList.toggle('open',open);if(open&&!init){init=true;var m=document.getElementById('cfp-m1');if(m)setTimeout(function(){m.classList.add('vis');},300);}};
+function addBot(h){var d=document.createElement('div');d.className='cfp-msg';d.innerHTML='<div class="cfp-mav">CP</div><div class="cfp-bub"><p>'+h+'</p></div>';msgs.appendChild(d);setTimeout(function(){d.classList.add('vis');},30);setTimeout(function(){msgs.scrollTop=msgs.scrollHeight;},100);}
+function addUser(t){var d=document.createElement('div');d.style.cssText='display:flex;flex-direction:row-reverse;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);';d.innerHTML='<div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:rgba(255,255,255,.5);flex-shrink:0;margin-top:2px;">&#x2736;</div><div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px 2px 12px 12px;padding:10px 14px;max-width:85%;"><p style="font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);text-align:right;">'+t+'</p></div>';msgs.appendChild(d);setTimeout(function(){d.style.opacity='1';d.style.transform='translateY(0)';},30);setTimeout(function(){msgs.scrollTop=msgs.scrollHeight;},100);}
+function typing(cb){var t=document.createElement('div');t.className='cfp-msg vis';t.innerHTML='<div class="cfp-mav">CP</div><div class="cfp-bub"><p style="display:flex;gap:4px;align-items:center;padding:2px 0;"><span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:copPulse .8s infinite;"></span><span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:copPulse .8s .2s infinite;"></span><span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:copPulse .8s .4s infinite;"></span></p></div>';msgs.appendChild(t);setTimeout(function(){t.remove();cb();},900);}
+window.cfpAct=function(type){var tx={rdv:'Je voudrais prendre rendez-vous',brief:'Je souhaite déposer un brief',info:'En savoir plus sur PROAD'};addUser(tx[type]);document.getElementById('cfp-quick').style.display='none';typing(function(){if(type==='rdv')addBot('Parfait ! Direction la <a href="contact.html" style="color:#2b40fc">page Contact</a> — Mehdi vous confirme un créneau sous 24h.');else if(type==='brief')addBot('Super. Quel type d'événement, combien de personnes, pour quand ? Je transmets à Mehdi.');else addBot('<strong>PROAD</strong> c'est Production Road — des événements tracés comme des routes. Zéro improvisation, 100% livraison.');});};
+window.cfpSend=function(){var t=inp.value.trim();if(!t)return;inp.value='';addUser(t);document.getElementById('cfp-quick').style.display='none';var tl=t.toLowerCase();typing(function(){if(tl.includes('rdv')||tl.includes('rendez'))addBot('Direction la <a href="contact.html" style="color:#2b40fc">page Contact</a> pour un RDV — Mehdi répond sous 24h !');else if(tl.includes('brief')||tl.includes('projet'))addBot('Dites-m'en plus : type, date, jauge ? Je transmets à Mehdi.');else if(tl.includes('budget')||tl.includes('prix'))addBot('Pas de minimum imposé. Parlez-nous de vos ambitions, on trace la route ensemble.');else addBot('Noté ! Mehdi reprend le volant sous 24h. <a href="contact.html" style="color:#2b40fc">Page Contact</a>');});};
+if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfpSend();});
+})();
+</script>
+
 </body>
 </html>
