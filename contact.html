@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & RDV | PROAD Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
 
+/* ── CONTACT PAGE ── */
+.contact-hero {
+  min-height: 48vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 120px 48px 56px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.contact-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 50% at 50% 0%, rgba(43,64,252,.14) 0%, transparent 70%);
+}
+.contact-hero::after {
+  content: 'CONTACT';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(8rem, 22vw, 20rem);
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.022);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -38%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.contact-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.contact-hero p { color: var(--gray); font-size: .9rem; max-width: 480px; line-height: 1.7; }
+
+/* ── LAYOUT ── */
+.contact-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── FORM SIDE ── */
+.contact-form-col {}
+.contact-form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  letter-spacing: .03em;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.contact-form-sub {
+  color: var(--gray);
+  font-size: .82rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Form */
+.proad-form { display: flex; flex-direction: column; gap: 20px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .25em;
+  color: rgba(255,255,255,.4);
+}
+.form-input, .form-select, .form-textarea {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+  font-family: 'Inter', sans-serif;
+  font-size: .82rem;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color .2s, background .2s;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 2px;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,.2); }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(43,64,252,.5);
+  background: rgba(43,64,252,.04);
+}
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+.form-select option { background: #0d0d1a; color: #fff; }
+.form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+/* Budget slider */
+.budget-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--blue);
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+.form-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,.1);
+  outline: none;
+  cursor: pointer;
+}
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 10px rgba(43,64,252,.6);
+  cursor: pointer;
+}
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: .6rem;
+  color: rgba(255,255,255,.25);
+  letter-spacing: .1em;
+  margin-top: 6px;
+}
+
+/* Checkboxes */
+.form-checks { display: flex; flex-wrap: wrap; gap: 10px; }
+.form-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.form-check-item input[type="checkbox"] { display: none; }
+.check-box {
+  width: 18px; height: 18px;
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.form-check-item input:checked + .check-box {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.form-check-item input:checked + .check-box::after {
+  content: '✓';
+  font-size: .6rem;
+  color: #fff;
+}
+.check-label { font-size: .75rem; color: rgba(255,255,255,.5); }
+.form-check-item:hover .check-label { color: rgba(255,255,255,.8); }
+
+/* Submit */
+.form-submit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.btn-submit {
+  background: var(--blue);
+  border: none;
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .82rem;
+  letter-spacing: .2em;
+  padding: 16px 40px;
+  cursor: pointer;
+  transition: all .3s;
+  box-shadow: 0 0 24px rgba(43,64,252,.25);
+}
+.btn-submit:hover { background: #4455ff; box-shadow: 0 0 40px rgba(43,64,252,.5); transform: translateY(-2px); }
+.form-note { font-size: .65rem; color: rgba(255,255,255,.25); line-height: 1.5; }
+
+/* Success state */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 32px;
+  border: 1px solid rgba(43,64,252,.2);
+  background: rgba(43,64,252,.04);
+}
+.form-success.visible { display: block; }
+.success-icon {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.form-success h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: .06em;
+  margin-bottom: 12px;
+}
+.form-success p { color: var(--gray); font-size: .85rem; line-height: 1.7; }
+
+/* ── INFO SIDE ── */
+.contact-info-col { position: sticky; top: 100px; }
+
+.contact-card {
+  background: #07070f;
+  border: 1px solid rgba(43,64,252,.15);
+  padding: 32px;
+  margin-bottom: 16px;
+}
+.contact-card-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .28em;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.contact-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: .05em;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.contact-card p { font-size: .8rem; color: var(--gray); line-height: 1.7; }
+
+/* Response time */
+.response-time {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.rt-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34,197,94,.5);
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+.rt-text { font-size: .72rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+.rt-text strong { color: rgba(255,255,255,.75); display: block; }
+
+/* Social / contact links */
+.contact-links { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,.06);
+  text-decoration: none;
+  color: rgba(255,255,255,.6);
+  font-size: .78rem;
+  transition: all .25s;
+}
+.contact-link:hover { border-color: rgba(43,64,252,.35); color: #fff; background: rgba(43,64,252,.05); }
+.contact-link-icon { font-size: 1rem; width: 20px; text-align: center; }
+.contact-link-label { flex: 1; }
+.contact-link-arrow { font-size: .65rem; color: var(--blue); opacity: 0; transition: opacity .2s; }
+.contact-link:hover .contact-link-arrow { opacity: 1; }
+
+/* ── PROCESS BAR ── */
+.contact-process {
+  background: rgba(255,255,255,.018);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 64px 48px;
+}
+.contact-process-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.contact-process h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: .04em;
+  margin-bottom: 48px;
+  text-align: center;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  position: relative;
+}
+.process-step {
+  padding: 28px 24px;
+  background: rgba(255,255,255,.02);
+  position: relative;
+  text-align: center;
+  transition: background .3s;
+}
+.process-step:hover { background: rgba(43,64,252,.06); }
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: rgba(43,64,252,.2);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .9rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 8px;
+}
+.step-desc { font-size: .72rem; color: var(--gray); line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 48px; padding: 48px 24px 80px; }
+  .contact-info-col { position: static; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-hero { padding: 100px 24px 48px; }
+  .contact-process { padding: 48px 24px; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .process-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+      <path fill="#fff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+      <path fill="#fff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+      <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#fff" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta" style="background:var(--blue);color:#fff;">Prendre RDV</a>
+</nav>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <p class="section-label reveal">Prendre rendez-vous</p>
+  <h1 class="reveal">Tracez votre<br>Route.</h1>
+  <p class="reveal">Un premier échange, sans engagement. Dites-nous où vous voulez aller — on s'occupe du reste.</p>
+</section>
+
+<!-- PROCESS -->
+<div class="contact-process">
+  <div class="contact-process-inner">
+    <h3 class="reveal">Comment ça se passe ?</h3>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Brief</div>
+        <div class="step-desc">Vous remplissez le formulaire. Type d'événement, dates, ambitions.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Réponse 24h</div>
+        <div class="step-desc">Mehdi revient vers vous sous 24h pour valider le créneau et les grandes lignes.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">1er échange</div>
+        <div class="step-desc">Un call ou un rendez-vous pour aligner les visions et poser les bases du projet.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">On part !</div>
+        <div class="step-desc">La route est tracée. PROAD prend le volant. Vous embarquez.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="contact-layout">
+
+  <!-- FORM -->
+  <div class="contact-form-col">
+    <h2 class="contact-form-title reveal">Votre brief,<br>notre point de départ.</h2>
+    <p class="contact-form-sub reveal">Remplissez ce formulaire et Mehdi vous recontacte sous 24h. Pas de template, pas de devis automatique — une vraie conversation.</p>
+
+    <form class="proad-form reveal" id="contact-form" onsubmit="submitForm(event)">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Prénom *</label>
+          <input class="form-input" type="text" placeholder="Votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nom *</label>
+          <input class="form-input" type="text" placeholder="Votre nom" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input class="form-input" type="email" placeholder="votre@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input class="form-input" type="tel" placeholder="+33 6 00 00 00 00">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Société / Agence</label>
+        <input class="form-input" type="text" placeholder="Nom de votre structure">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Type d'événement *</label>
+        <select class="form-select" required>
+          <option value="" disabled selected>Sélectionnez un format</option>
+          <option>Soirée & Gala</option>
+          <option>Séminaire d'entreprise</option>
+          <option>Lancement de produit</option>
+          <option>Événement lifestyle / sport</option>
+          <option>Événement de luxe / expérientiel</option>
+          <option>Convention / conférence</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date souhaitée</label>
+          <input class="form-input" type="date">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nombre de participants</label>
+          <select class="form-select">
+            <option value="" disabled selected>Jauge estimée</option>
+            <option>Moins de 50</option>
+            <option>50 – 150</option>
+            <option>150 – 300</option>
+            <option>300 – 500</option>
+            <option>500 – 1 000</option>
+            <option>+ de 1 000</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Budget estimé</label>
+        <div class="budget-display" id="budget-display">20 000 €</div>
+        <input class="form-range" type="range" min="5000" max="200000" step="5000" value="20000"
+               oninput="updateBudget(this.value)">
+        <div class="range-labels"><span>5K€</span><span>50K€</span><span>100K€</span><span>200K€+</span></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Besoins identifiés</label>
+        <div class="form-checks">
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Scénographie</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Son & Lumière</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Traiteur</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Animation</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Lieu</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Logistique</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Coordination J</span></label>
+          <label class="form-check-item"><input type="checkbox"><div class="check-box"></div><span class="check-label">Production complète</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Votre message</label>
+        <textarea class="form-textarea" placeholder="Décrivez votre projet, vos ambitions, vos contraintes… Plus vous êtes précis, plus on avance vite."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-submit">ENVOYER LE BRIEF →</button>
+        <p class="form-note">Réponse garantie sous 24h.<br>Aucun engagement de votre part.</p>
+      </div>
+    </form>
+
+    <!-- Success -->
+    <div class="form-success" id="form-success">
+      <div class="success-icon">✦</div>
+      <h3>Brief reçu.<br>La route est lancée.</h3>
+      <p>Merci pour votre message. Mehdi vous recontacte sous 24h pour un premier échange.<br><br>En attendant, n'hésitez pas à explorer le <a href="portfolio.html" style="color:var(--blue)">portfolio</a>.</p>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="contact-info-col">
+
+    <div class="contact-card reveal">
+      <div class="contact-card-label">Disponibilité</div>
+      <h3>Mehdi est<br>sur la route.</h3>
+      <p>Chef de projet senior, Mehdi prend en charge personnellement chaque dossier. Pas d'assistants, pas d'intermédiaires — vous parlez directement au producteur.</p>
+      <div class="response-time">
+        <div class="rt-dot"></div>
+        <div class="rt-text">
+          <strong>Réponse sous 24h</strong>
+          Du lundi au vendredi, 9h–18h
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card reveal">
+      <div class="contact-card-label">Nous trouver</div>
+      <h3>Marseille &<br>toute la France.</h3>
+      <p>Basé à Marseille, PROAD opère sur l'ensemble du territoire français et à l'international.</p>
+      <div class="contact-links">
+        <a href="mailto:contact@proad-events.fr" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <span class="contact-link-label">contact@proad-events.fr</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="tel:+33600000000" class="contact-link">
+          <span class="contact-link-icon">☎</span>
+          <span class="contact-link-label">+33 6 00 00 00 00</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">in</span>
+          <span class="contact-link-label">LinkedIn PROAD Events</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">◉</span>
+          <span class="contact-link-label">Instagram @proad.events</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-card reveal">
+      <div class="contact-card-label">Le Copilote</div>
+      <h3>Une question<br>rapide ?</h3>
+      <p>Le Copilote PROAD est disponible sur la page À propos pour répondre à vos questions, prendre un brief ou planifier un rendez-vous.</p>
+      <a href="about.html#copilote" class="btn-primary" style="display:inline-block;margin-top:20px;font-size:.72rem;padding:12px 28px;">PARLER AU COPILOTE →</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">PROAD EVENTS</div>
+  <ul class="f-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+}, {passive:true});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, {threshold: .1});
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+function updateBudget(v) {
+  const val = parseInt(v);
+  const display = val >= 200000 ? '200 000 €+' : val.toLocaleString('fr-FR') + ' €';
+  document.getElementById('budget-display').textContent = display;
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').classList.add('visible');
+  window.scrollTo({top: document.getElementById('form-success').offsetTop - 120, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
