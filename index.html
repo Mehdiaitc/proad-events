@@ -7,6 +7,147 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* ── FIX BCARD description single line ── */
+.bc-def {
+  color: var(--gray);
+  font-size: .95rem;
+  line-height: 1.65;
+  max-width: 340px;
+  margin: 0 auto;
+  text-align: center;
+  white-space: normal;
+  word-break: normal;
+}
+.bcard-inner {
+  max-width: 480px;
+  width: 92%;
+}
+</style>
+/* ── STATS ICONS SVG ── */
+.stat-icon-svg {
+  width: 52px; height: 52px;
+  border: 1px solid rgba(43,64,252,.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--blue);
+  background: rgba(43,64,252,.06);
+  transition: background .3s, box-shadow .3s;
+}
+.stat:hover .stat-icon-svg {
+  background: rgba(43,64,252,.14);
+  box-shadow: 0 0 20px rgba(43,64,252,.3);
+}
+
+/* ── FRANCE MAP ── */
+#france-map {
+  padding: 100px 48px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+#france-map h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: .03em;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.map-sub {
+  color: var(--gray);
+  font-size: .85rem;
+  letter-spacing: .08em;
+  margin-bottom: 56px;
+  text-transform: uppercase;
+}
+.france-map-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+}
+#france-svg { width: 100%; height: auto; }
+
+.france-shape {
+  fill: rgba(43,64,252,.08);
+  stroke: rgba(43,64,252,.35);
+  stroke-width: 1.5;
+}
+
+/* Routes */
+.route-line {
+  fill: none;
+  stroke: rgba(43,64,252,.45);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  stroke-dashoffset: 0;
+  animation: dashMove 3s linear infinite;
+}
+.route-short { stroke: rgba(43,64,252,.3); }
+@keyframes dashMove { to { stroke-dashoffset: -18; } }
+
+.route-intl {
+  fill: none;
+  stroke: rgba(43,64,252,.2);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+  animation: dashMove 5s linear infinite;
+}
+.route-intl-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: .12em;
+  fill: rgba(43,64,252,.5);
+}
+
+/* Marseille dot with pulse */
+.marseille-dot {
+  fill: var(--blue);
+  filter: drop-shadow(0 0 6px rgba(43,64,252,.9));
+}
+.marseille-pulse {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.5;
+  opacity: .6;
+  animation: mapPulse 2s ease-out infinite;
+}
+@keyframes mapPulse {
+  0% { r: 8; opacity: .6; }
+  100% { r: 22; opacity: 0; }
+}
+.marseille-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  fill: #fff;
+}
+.marseille-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  letter-spacing: .1em;
+  fill: rgba(255,255,255,.35);
+  text-transform: uppercase;
+}
+
+/* City dots */
+.route-dot {
+  fill: rgba(43,64,252,.7);
+  stroke: rgba(43,64,252,.4);
+  stroke-width: 1;
+  transition: r .2s;
+}
+.route-city {
+  font-family: 'Inter', sans-serif;
+  font-size: 8.5px;
+  fill: rgba(255,255,255,.5);
+  letter-spacing: .05em;
+}
+
+@media(max-width:768px){
+  #france-map { padding: 80px 24px; }
+  .france-map-wrap { max-width: 340px; }
+}
+</style>
 </head>
 <body>
 
@@ -249,7 +390,7 @@
       </div>
 
       <!-- D -->
-      <div class="prop" id="prop-d" data-l="D" data-w="DELIVER" data-d="Le feu vert final. La soirée est officiellement lancée.">
+      <div class="prop" id="prop-d" data-l="D" data-w="DELIVER" data-d="Le feu vert final. L'événement est officiellement lancé.">
         <div class="prop-spotlight"></div>
         <div class="obj-wrap">
           <svg width="120" height="115" viewBox="0 0 165 162" xmlns="http://www.w3.org/2000/svg">
@@ -330,10 +471,34 @@
 
 <!-- ═══ 6. STATS ═══ -->
 <section id="stats">
-  <div class="stat reveal"><div class="stat-icon">🎯</div><div class="stat-title">Chaque projet<br>est unique</div><div class="stat-desc">Aucun copier-coller. Chaque événement est conçu sur mesure, du brief à la dernière seconde.</div></div>
-  <div class="stat reveal"><div class="stat-icon">🤝</div><div class="stat-title">Un seul<br>interlocuteur</div><div class="stat-desc">Vous parlez directement au producteur. Pas d'intermédiaire, pas de perte d'information.</div></div>
-  <div class="stat reveal"><div class="stat-icon">🌏</div><div class="stat-title">Vision<br>internationale</div><div class="stat-desc">De Marseille à Singapour, une expérience forgée sur plusieurs marchés au service de votre projet.</div></div>
-  <div class="stat reveal"><div class="stat-icon">🛣️</div><div class="stat-title">La route<br>est tracée</div><div class="stat-desc">Chaque virage est anticipé. Vous embarquez avec la certitude d'arriver à destination.</div></div>
+  <div class="stat reveal">
+    <div class="stat-icon-svg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="stat-title">Chaque projet<br>est unique</div>
+    <div class="stat-desc">Aucun copier-coller. Chaque événement est conçu sur mesure, du brief à la dernière seconde.</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-icon-svg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <div class="stat-title">Un seul<br>interlocuteur</div>
+    <div class="stat-desc">Vous parlez directement au producteur. Pas d'intermédiaire, pas de perte d'information.</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-icon-svg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </div>
+    <div class="stat-title">Expérience<br>multi-marchés</div>
+    <div class="stat-desc">Une expérience forgée sur plusieurs marchés et secteurs — corporate, luxe, lifestyle, tech, retail. Chaque format maîtrisé.</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-icon-svg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l9-13 9 13"/><path d="M3 17h18"/></svg>
+    </div>
+    <div class="stat-title">La route<br>est tracée</div>
+    <div class="stat-desc">Chaque virage est anticipé. Vous embarquez avec la certitude d'arriver à destination.</div>
+  </div>
 </section>
 
 <!-- ═══ 7. CTA ═══ -->
@@ -343,6 +508,63 @@
   <p class="reveal">Un premier échange, sans engagement, pour voir si la route est la même.</p>
   <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
 </section>
+
+<!-- ═══ 8. CARTE FRANCE ═══ -->
+<section id="france-map">
+  <p class="section-label reveal">Opérations</p>
+  <h2 class="reveal">Alors on trace<br>notre road ?</h2>
+  <p class="map-sub reveal">Basé à Marseille. Opérationnel partout.</p>
+  <div class="france-map-wrap reveal">
+    <svg id="france-svg" viewBox="0 0 600 620" xmlns="http://www.w3.org/2000/svg">
+      <!-- France silhouette simplified -->
+      <path class="france-shape" d="M185,45 L210,35 L245,40 L275,30 L310,38 L340,32 L370,45 L390,65 L405,90 L415,115 L425,140 L430,165 L435,190 L440,215 L435,240 L445,265 L450,290 L445,315 L435,338 L420,358 L400,375 L378,390 L355,405 L330,418 L305,430 L290,450 L275,468 L258,485 L240,498 L220,508 L200,515 L178,510 L158,498 L140,482 L125,462 L112,440 L102,415 L95,388 L92,360 L95,332 L100,305 L105,278 L108,252 L105,226 L100,200 L98,174 L100,148 L108,122 L120,98 L138,76 L158,58 Z"/>
+      <!-- Routes depuis Marseille -->
+      <g class="map-routes">
+        <!-- Point Marseille -->
+        <circle class="marseille-dot" cx="340" cy="420" r="8"/>
+        <circle class="marseille-pulse" cx="340" cy="420" r="8"/>
+        <text class="marseille-label" x="355" y="415">MARSEILLE</text>
+        <text class="marseille-sub" x="355" y="428">Point de départ</text>
+        <!-- Route vers Paris -->
+        <path class="route-line" d="M340,420 Q310,360 290,300 Q270,240 255,185"/>
+        <circle class="route-dot" cx="255" cy="185" r="4"/>
+        <text class="route-city" x="262" y="182">Paris</text>
+        <!-- Route vers Lyon -->
+        <path class="route-line" d="M340,420 Q330,390 318,365"/>
+        <circle class="route-dot" cx="318" cy="365" r="4"/>
+        <text class="route-city" x="325" y="362">Lyon</text>
+        <!-- Route vers Bordeaux -->
+        <path class="route-line" d="M340,420 Q290,415 245,405 Q210,395 185,385"/>
+        <circle class="route-dot" cx="185" cy="385" r="4"/>
+        <text class="route-city" x="148" y="382">Bordeaux</text>
+        <!-- Route vers Nice/Monaco -->
+        <path class="route-line" d="M340,420 Q360,418 378,412 Q395,406 408,396"/>
+        <circle class="route-dot" cx="408" cy="396" r="4"/>
+        <text class="route-city" x="412" y="393">Monaco</text>
+        <!-- Route vers Cannes -->
+        <path class="route-line" d="M340,420 Q358,430 375,435 Q392,438 405,432"/>
+        <circle class="route-dot" cx="405" cy="432" r="4"/>
+        <text class="route-city" x="410" y="430">Cannes</text>
+        <!-- Route vers Aix -->
+        <path class="route-line route-short" d="M340,420 Q322,420 310,418"/>
+        <circle class="route-dot" cx="310" cy="418" r="4"/>
+        <text class="route-city" x="274" y="415">Aix-en-Pce</text>
+        <!-- Route vers Montpellier -->
+        <path class="route-line" d="M340,420 Q320,435 295,445 Q270,452 255,448"/>
+        <circle class="route-dot" cx="255" cy="448" r="4"/>
+        <text class="route-city" x="215" y="445">Montpellier</text>
+        <!-- Route internationale (Singapour pointillé) -->
+        <path class="route-intl" d="M408,396 Q440,360 455,310 Q465,270 460,230"/>
+        <text class="route-intl-label" x="458" y="225">Intl.</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- CTA AFTER MAP -->
+<div style="text-align:center;padding:0 48px 80px;">
+  <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
+</div>
 
 <footer>
   <div class="f-logo">PROAD EVENTS</div>
@@ -367,5 +589,201 @@
 </div>
 
 <script src="script.js"></script>
+<!-- COPILOTE FLOTTANT -->
+<style>
+.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:60px;height:60px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(43,64,252,.55);animation:cfpPulse 2.5s infinite;transition:transform .2s;padding:6px;}
+.cop-float-btn:hover{transform:scale(1.08);}
+.cop-float-btn svg{width:38px;height:auto;}
+@keyframes cfpPulse{0%,100%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 0 rgba(43,64,252,.3);}50%{box-shadow:0 4px 24px rgba(43,64,252,.55),0 0 0 12px rgba(43,64,252,0);}}
+.cop-float-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 6px rgba(34,197,94,.7);}
+.cop-float-tip{position:absolute;right:70px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
+.cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
+.cop-float-btn:hover .cop-float-tip{opacity:1;}
+.cop-float-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:"Bebas Neue",sans-serif;font-size:.9rem;color:#fff;letter-spacing:.05em;}
+.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;}
+.cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
+.cfp-msg.vis{opacity:1;transform:translateY(0);}
+.cfp-mav{width:28px;height:28px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:"Bebas Neue",sans-serif;font-size:.65rem;color:#fff;letter-spacing:.04em;}
+.cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
+.cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0;}
+.cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
+.cfp-ubub{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px 2px 12px 12px;padding:10px 14px;max-width:85%;}
+.cfp-ubub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.7);margin:0;text-align:right;}
+.cfp-quick{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
+.cfp-qbtn{background:none;border:1px solid rgba(43,64,252,.25);color:rgba(255,255,255,.55);font-family:Inter,sans-serif;font-size:.7rem;padding:6px 12px;cursor:pointer;border-radius:2px;transition:all .2s;}
+.cfp-qbtn:hover{border-color:#2b40fc;color:rgba(255,255,255,.9);background:rgba(43,64,252,.08);}
+.cfp-inrow{border-top:1px solid rgba(255,255,255,.05);padding:10px 12px;display:flex;gap:8px;}
+.cfp-in{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-family:Inter,sans-serif;font-size:.78rem;padding:8px 12px;outline:none;border-radius:2px;}
+.cfp-in:focus{border-color:rgba(43,64,252,.5);}
+.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;transition:background .2s;}
+.cfp-sendbtn:hover{background:#4455ff;}
+.cfp-sendbtn svg{width:15px;height:15px;}
+.cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);letter-spacing:.06em;}
+</style>
+
+<button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
+  <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+    <path fill="#7090ff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+    <path fill="#7090ff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+  </svg>
+  <div class="cop-float-badge"></div>
+  <div class="cop-float-tip">Je suis le Copilote de Mehdi, je vous &eacute;coute</div>
+</button>
+
+<div class="cop-float-panel" id="cfp-panel">
+  <div class="cfp-hdr">
+    <div class="cfp-av">CP</div>
+    <div style="flex:1">
+      <strong style="display:block;font-size:.82rem;font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;color:#fff">COPILOTE PROAD</strong>
+      <span style="font-size:.65rem;color:rgba(255,255,255,.35);font-family:Inter,sans-serif">Mehdi est sur la route &middot; Je vous &eacute;coute</span>
+    </div>
+    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px;line-height:1">&#x2715;</button>
+  </div>
+  <div class="cfp-msgs" id="cfp-msgs">
+    <div class="cfp-msg" id="cfp-m1">
+      <div class="cfp-mav">CP</div>
+      <div class="cfp-bub"><p>Je suis le <strong>Copilote</strong> de Mehdi. Il est sur la route. Je vous &eacute;coute.</p></div>
+    </div>
+    <div class="cfp-msg" id="cfp-m2">
+      <div class="cfp-mav">CP</div>
+      <div class="cfp-bub"><p>Un projet&nbsp;? Un RDV&nbsp;? Un brief&nbsp;? Dites-moi tout.</p></div>
+    </div>
+  </div>
+  <div class="cfp-quick" id="cfp-quick">
+    <button class="cfp-qbtn" onclick="cfpAct(1)">Prendre RDV</button>
+    <button class="cfp-qbtn" onclick="cfpAct(2)">D&eacute;poser un brief</button>
+    <button class="cfp-qbtn" onclick="cfpAct(3)">En savoir plus</button>
+  </div>
+  <div class="cfp-inrow">
+    <input class="cfp-in" id="cfp-in" type="text" placeholder="Votre message..." autocomplete="off">
+    <button class="cfp-sendbtn" onclick="cfpSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+  <div class="cfp-footer">Copilote IA &middot; R&eacute;ponse Mehdi sous 24h</div>
+</div>
+
+<script>
+(function() {
+  var isOpen = false;
+  var didInit = false;
+  var panel = document.getElementById("cfp-panel");
+  var msgs  = document.getElementById("cfp-msgs");
+  var inp   = document.getElementById("cfp-in");
+  var quick = document.getElementById("cfp-quick");
+
+  window.cfpToggle = function() {
+    isOpen = !isOpen;
+    panel.classList.toggle("open", isOpen);
+    if (isOpen && !didInit) {
+      didInit = true;
+      var m1 = document.getElementById("cfp-m1");
+      var m2 = document.getElementById("cfp-m2");
+      if (m1) setTimeout(function() { m1.classList.add("vis"); }, 300);
+      if (m2) setTimeout(function() { m2.classList.add("vis"); }, 800);
+    }
+  };
+
+  function botMsg(html) {
+    var d = document.createElement("div");
+    d.className = "cfp-msg";
+    var av = document.createElement("div");
+    av.className = "cfp-mav";
+    av.textContent = "CP";
+    var bub = document.createElement("div");
+    bub.className = "cfp-bub";
+    var p = document.createElement("p");
+    p.innerHTML = html;
+    bub.appendChild(p);
+    d.appendChild(av);
+    d.appendChild(bub);
+    msgs.appendChild(d);
+    setTimeout(function() { d.classList.add("vis"); }, 30);
+    setTimeout(function() { msgs.scrollTop = msgs.scrollHeight; }, 100);
+  }
+
+  function userMsg(text) {
+    var d = document.createElement("div");
+    d.className = "cfp-msg vis";
+    d.style.flexDirection = "row-reverse";
+    var av = document.createElement("div");
+    av.className = "cfp-uav";
+    av.textContent = "vous";
+    var bub = document.createElement("div");
+    bub.className = "cfp-ubub";
+    var p = document.createElement("p");
+    p.textContent = text;
+    bub.appendChild(p);
+    d.appendChild(av);
+    d.appendChild(bub);
+    msgs.appendChild(d);
+    setTimeout(function() { msgs.scrollTop = msgs.scrollHeight; }, 100);
+  }
+
+  function typing(cb) {
+    var t = document.createElement("div");
+    t.className = "cfp-msg vis";
+    var av = document.createElement("div");
+    av.className = "cfp-mav";
+    av.textContent = "CP";
+    var bub = document.createElement("div");
+    bub.className = "cfp-bub";
+    bub.innerHTML = '<p style="display:flex;gap:5px;align-items:center">'
+      + '<span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s infinite"></span>'
+      + '<span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s .2s infinite"></span>'
+      + '<span style="width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpPulse .9s .4s infinite"></span>'
+      + '</p>';
+    t.appendChild(av);
+    t.appendChild(bub);
+    msgs.appendChild(t);
+    setTimeout(function() { t.remove(); cb(); }, 950);
+  }
+
+  window.cfpAct = function(n) {
+    var labels = ["Je voudrais prendre rendez-vous", "Je souhaite deposer un brief", "En savoir plus sur PROAD"];
+    userMsg(labels[n - 1]);
+    quick.style.display = "none";
+    typing(function() {
+      if (n === 1) {
+        botMsg('Parfait. Direction la <a href="contact.html" style="color:#2b40fc">page Contact</a> pour reserver un creneau dans l'agenda de Mehdi.');
+      } else if (n === 2) {
+        botMsg('Quel type d'evenement, combien de personnes, pour quand ? Je transmets a Mehdi.');
+      } else {
+        botMsg('PROAD c'est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');
+      }
+    });
+  };
+
+  window.cfpSend = function() {
+    var text = inp ? inp.value.trim() : "";
+    if (!text) return;
+    inp.value = "";
+    userMsg(text);
+    quick.style.display = "none";
+    var tl = text.toLowerCase();
+    typing(function() {
+      if (tl.indexOf("rdv") > -1 || tl.indexOf("rendez") > -1) {
+        botMsg('Direction la <a href="contact.html" style="color:#2b40fc">page Contact</a> pour un RDV. Mehdi repond sous 24h.');
+      } else if (tl.indexOf("brief") > -1 || tl.indexOf("projet") > -1) {
+        botMsg('Dites-m'en plus. Type, date, jauge ? Je note pour Mehdi.');
+      } else if (tl.indexOf("budget") > -1 || tl.indexOf("prix") > -1) {
+        botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');
+      } else {
+        botMsg('Note ! Mehdi reprend le volant sous 24h. <a href="contact.html" style="color:#2b40fc">Page Contact</a>');
+      }
+    });
+  };
+
+  if (inp) {
+    inp.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") { window.cfpSend(); }
+    });
+  }
+})();
+</script>
 </body>
 </html>
