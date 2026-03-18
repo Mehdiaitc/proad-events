@@ -327,16 +327,132 @@ a.cd-value:hover{color:var(--blue);}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ══════════════════════════════════
+   RESPONSIVE MOBILE — iPhone / Android
+   ══════════════════════════════════ */
 @media(max-width:768px){
-  #nav{padding:14px 20px;}.nav-links{display:none;}
-  #why,#services{padding-left:24px;padding-right:24px;}
-  #stats{gap:32px;padding:60px 24px;}
-  #about{padding:80px 24px;}
-  .about-inner{grid-template-columns:1fr;gap:48px;}
-  .about-visual{order:-1;}
-  .about-photo-frame{width:200px;}
-  #contact{padding:80px 24px;}
-  .contact-inner{grid-template-columns:1fr;gap:48px;}
-  .form-row{grid-template-columns:1fr;}
-  footer{flex-direction:column;text-align:center;padding:32px 24px;}
+
+  /* ── NAV ── */
+  #nav { padding: 12px 18px; }
+  .nav-logo-wrap img { width: 36px !important; }
+  /* Afficher les liens nav en petit */
+  .nav-links {
+    display: flex;
+    gap: 14px;
+  }
+  .nav-links a {
+    font-size: .62rem;
+    letter-spacing: .06em;
+  }
+  .nav-cta {
+    font-size: .6rem;
+    padding: 6px 12px;
+    letter-spacing: .1em;
+  }
+
+  /* ── HERO ── */
+  #logo-wrap { width: min(92vw, 420px); }
+
+  /* ── ADN ── */
+  #scene-adn { padding: 80px 20px; }
+  .adn-lead { font-size: clamp(.7rem, 3.2vw, .88rem); line-height: 1.9; }
+  .w-proad, .w-road { font-size: 1.3em; }
+  .w-prod { font-size: 1.2em; }
+
+  /* ── CURTAIN / SCÈNE ── */
+  #led-screen {
+    width: min(80vw, 320px);
+    height: min(28vh, 160px);
+  }
+  #screen-universe { font-size: clamp(.7rem, 3vw, 1rem); }
+
+  /* Props — empilés en 2 colonnes sur mobile */
+  #prop-p { bottom: 22%; left: 4%; }
+  #prop-r { bottom: 20%; left: 22%; }
+  #prop-o { bottom: 18%; left: 42%; }
+  #prop-a { bottom: 21%; left: 62%; }
+  #prop-d { bottom: 19%; left: 78%; }
+  .prop .obj-wrap svg { transform: scale(0.7); transform-origin: bottom center; }
+
+  /* ── WHY ── */
+  #why { padding: 60px 20px; }
+  #why h2 { font-size: clamp(2rem,8vw,3rem); margin-bottom: 32px; }
+  /* 2 cartes par ligne */
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .why-card { padding: 18px 14px; }
+  .why-card h3 { font-size: .82rem; }
+  .why-card p { font-size: .74rem; }
+  .why-icon { font-size: 1.2rem; margin-bottom: 8px; }
+
+  /* ── SERVICES ── */
+  #services { padding: 0 20px 60px; }
+  #services h2 { font-size: clamp(2rem,8vw,3rem); margin-bottom: 24px; }
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .svc { padding: 28px 18px; }
+  .svc h3 { font-size: .9rem; }
+  .svc p { font-size: .76rem; }
+
+  /* ── STATS — 2 par ligne ── */
+  #stats {
+    gap: 24px 32px;
+    padding: 50px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+  .stat { max-width: 150px; }
+  .stat-title { font-size: clamp(1rem,4vw,1.4rem); }
+  .stat-desc { font-size: .72rem; }
+
+  /* ── CTA / CARTE ── */
+  #france-map {
+    grid-template-columns: 1fr;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 40px;
+  }
+  .france-cta-text { align-items: center; }
+  #france-map h2 { font-size: clamp(2.2rem,8vw,3.5rem); text-align: center; }
+  .map-sub { text-align: center; font-size: .8rem; }
+  .france-map-wrap { max-width: 320px; margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  #about { padding: 60px 20px; }
+  .about-inner { grid-template-columns: 1fr; gap: 36px; }
+  .about-visual { order: -1; }
+  .about-photo-frame { width: min(220px, 60vw); }
+
+  /* ── CONTACT ── */
+  #contact { padding: 60px 20px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* ── FOOTER ── */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 20px;
+    gap: 12px;
+  }
+  .f-links { justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+  /* ── COPILOTE flottant ── */
+  .cop-float-btn { width: 52px; height: 52px; bottom: 20px; right: 16px; }
+  .cop-float-panel { right: 12px; bottom: 82px; width: calc(100vw - 24px); }
+}
+
+/* Extra small — iPhone SE, petits Android */
+@media(max-width:420px){
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: .58rem; }
+  .why-card h3 { font-size: .78rem; }
+  .svc h3 { font-size: .82rem; }
+  #stats { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
 }
