@@ -348,7 +348,7 @@
   <div class="about-inner">
     <div class="about-text">
       <p class="section-label reveal">À propos</p>
-      <h2 class="reveal">Mehdi Ait Chabane</h2>
+      <h2 class="reveal">Mehdi Aït-Chalal</h2>
       <p class="about-role reveal">Fondateur — PROAD Events</p>
       <p class="about-desc reveal">
         Forgé sur le terrain entre Marseille et Singapour, j'ai passé plus de 10 ans à produire des événements pour des marques internationales : Ubisoft, Roger Dubuis, Allianz, Bain & Company.
@@ -370,7 +370,7 @@
             <circle cx="40" cy="30" r="16" stroke="rgba(43,64,252,.4)" stroke-width="1.5" fill="none"/>
             <path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="rgba(43,64,252,.4)" stroke-width="1.5" fill="none"/>
           </svg>
-          <span class="photo-label">MEHDI AIT CHABANE</span>
+          <span class="photo-label">MEHDI AÏT-CHALAL</span>
         </div>
       </div>
       <div class="about-badge-wrap">
@@ -390,7 +390,7 @@
       <div class="contact-details reveal">
         <div class="contact-detail">
           <span class="cd-label">EMAIL</span>
-          <a href="mailto:contact@proadevents.com" class="cd-value">contact@proadevents.com</a>
+          <a href="mailto:events@proad-agency.com" class="cd-value">events@proad-agency.com</a>
         </div>
         <div class="contact-detail">
           <span class="cd-label">BASÉ À</span>
@@ -459,6 +459,41 @@
     <div class="bc-letter" id="bc-l"></div>
     <div class="bc-word"   id="bc-w"></div>
     <div class="bc-def"    id="bc-d"></div>
+  </div>
+</div>
+
+<!-- ═══ COPILOTE IA ═══ -->
+<div id="copilot" class="copilot hidden">
+  <button id="copilot-toggle" class="copilot-toggle" aria-label="Ouvrir le copilote">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span class="copilot-pulse"></span>
+  </button>
+  <div id="copilot-window" class="copilot-window">
+    <div class="copilot-header">
+      <div class="copilot-header-left">
+        <div class="copilot-avatar">P</div>
+        <div>
+          <div class="copilot-name">PROAD Copilote</div>
+          <div class="copilot-status">En ligne</div>
+        </div>
+      </div>
+      <button id="copilot-close" class="copilot-close" aria-label="Fermer">✕</button>
+    </div>
+    <div id="copilot-messages" class="copilot-messages"></div>
+    <div class="copilot-suggestions" id="copilot-suggestions">
+      <button class="copilot-chip" data-q="Quels types d'événements gérez-vous ?">Types d'événements</button>
+      <button class="copilot-chip" data-q="Comment se passe la prise en charge ?">Processus</button>
+      <button class="copilot-chip" data-q="Quelles sont vos références ?">Références</button>
+      <button class="copilot-chip" data-q="Je veux organiser un événement">Mon projet</button>
+    </div>
+    <form id="copilot-form" class="copilot-input-wrap">
+      <input type="text" id="copilot-input" placeholder="Posez votre question…" autocomplete="off">
+      <button type="submit" class="copilot-send" aria-label="Envoyer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
   </div>
 </div>
 

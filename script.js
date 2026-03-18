@@ -429,3 +429,129 @@ const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+
+/* ═══ COPILOTE IA ═══ */
+(function(){
+  const copilot    = $('copilot');
+  const toggle     = $('copilot-toggle');
+  const win        = $('copilot-window');
+  const closeBtn   = $('copilot-close');
+  const msgBox     = $('copilot-messages');
+  const form       = $('copilot-form');
+  const input      = $('copilot-input');
+  const suggestions= $('copilot-suggestions');
+  if(!copilot) return;
+
+  /* Show after 10s */
+  setTimeout(()=>{
+    copilot.classList.remove('hidden');
+  }, 10000);
+
+  let isOpen = false;
+
+  toggle.addEventListener('click', ()=>{
+    isOpen = true;
+    win.classList.add('open');
+    toggle.style.display='none';
+    if(!msgBox.children.length){
+      addBot("Bonjour ! Je suis le copilote PROAD. 👋\n\nJe peux vous renseigner sur nos services, notre approche ou vous aider à démarrer votre projet. Comment puis-je vous aider ?");
+    }
+    input.focus();
+  });
+
+  closeBtn.addEventListener('click', ()=>{
+    isOpen = false;
+    win.classList.remove('open');
+    toggle.style.display='flex';
+  });
+
+  /* Messages */
+  function addBot(text){
+    const el = document.createElement('div');
+    el.className = 'copilot-msg bot';
+    el.textContent = text;
+    msgBox.appendChild(el);
+    msgBox.scrollTop = msgBox.scrollHeight;
+  }
+  function addUser(text){
+    const el = document.createElement('div');
+    el.className = 'copilot-msg user';
+    el.textContent = text;
+    msgBox.appendChild(el);
+    msgBox.scrollTop = msgBox.scrollHeight;
+  }
+  function showTyping(){
+    const el = document.createElement('div');
+    el.className = 'copilot-msg typing';
+    el.id = 'typing-indicator';
+    el.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+    msgBox.appendChild(el);
+    msgBox.scrollTop = msgBox.scrollHeight;
+  }
+  function hideTyping(){
+    const t = $('typing-indicator');
+    if(t) t.remove();
+  }
+
+  /* Knowledge base */
+  const KB = [
+    { keys:['type','événement','event','format','genre','soirée','gala','corporate','sport','lifestyle','lancement'],
+      answer:"PROAD couvre tous les formats : soirées & galas, événements corporate (séminaires, conventions, teambuildings), lancements de produits, et événements lifestyle & sports. Chaque projet est traité sur-mesure, du brief au jour J." },
+    { keys:['processus','étape','comment','démarche','fonctionn','déroul','prise en charge','accompagn'],
+      answer:"Notre méthode suit la route PROAD :\n\n▸ P — PLAN : Brief & conception\n▸ R — RUN : Rétro-planning & coordination\n▸ O — ORGANIZE : Mise en place terrain\n▸ A — ACTIVATE : Décor, lumières, activation\n▸ D — DELIVER : Jour J, exécution parfaite\n\nUn seul interlocuteur du début à la fin." },
+    { keys:['référence','client','marque','portfolio','expérience','réalis'],
+      answer:"PROAD a produit des événements pour Ubisoft, Roger Dubuis, Allianz, Bain & Company, et bien d'autres marques internationales. Plus de 10 ans d'expérience entre Marseille et Singapour. Découvrez nos réalisations dans la section Portfolio." },
+    { keys:['prix','tarif','coût','budget','combien','devis'],
+      answer:"Chaque événement est unique, donc chaque budget l'est aussi. Le mieux est de nous décrire votre projet via le formulaire de contact — je vous recontacte sous 24h avec une première estimation. C'est sans engagement !" },
+    { keys:['lieu','ville','zone','où','localisation','marseille','singapour','international','france'],
+      answer:"PROAD est basé à Marseille et intervient partout en France et à l'international. Notre fondateur Mehdi Aït-Chalal a forgé son expertise entre Marseille et Singapour." },
+    { keys:['contact','joindre','appel','mail','email','rendez','rdv','téléphone'],
+      answer:"Vous pouvez nous contacter à events@proad-agency.com ou directement via le formulaire en bas de cette page. Décrivez votre projet et nous vous recontactons sous 24h — premier échange sans engagement !" },
+    { keys:['fondateur','mehdi','qui','équipe','créateur'],
+      answer:"PROAD a été fondé par Mehdi Aït-Chalal, producteur d'événements avec plus de 10 ans d'expérience internationale. Forgé entre Marseille et Singapour, il est votre interlocuteur unique, garantissant rigueur et créativité à chaque étape." },
+    { keys:['proad','signif','nom','pourquoi','acronyme'],
+      answer:"PROAD signifie Production Road — la route de la production événementielle. L'acronyme incarne notre méthode : Plan, Run, Organize, Activate, Deliver. Chaque virage est maîtrisé pour aboutir à une production d'excellence." },
+    { keys:['organiser','projet','prépare','veux','voudrais','besoin','aide','planifier'],
+      answer:"Super ! Pour lancer votre projet, le plus simple est de remplir le formulaire de contact en bas de page avec :\n\n▸ Date souhaitée\n▸ Lieu envisagé\n▸ Nombre d'invités\n▸ Ambiance / style\n\nJe vous recontacte sous 24h pour un premier échange sans engagement." },
+  ];
+
+  function findAnswer(q){
+    const ql = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    let best = null, bestScore = 0;
+    for(const entry of KB){
+      let score = 0;
+      for(const k of entry.keys){
+        const kn = k.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        if(ql.includes(kn)) score++;
+      }
+      if(score > bestScore){ bestScore = score; best = entry; }
+    }
+    if(best) return best.answer;
+    return "Merci pour votre question ! Pour une réponse personnalisée, je vous invite à remplir le formulaire de contact ci-dessous ou à nous écrire à events@proad-agency.com. Nous vous recontactons sous 24h !";
+  }
+
+  function handleQuestion(q){
+    addUser(q);
+    suggestions.style.display='none';
+    showTyping();
+    const delay = 600 + Math.random()*800;
+    setTimeout(()=>{
+      hideTyping();
+      addBot(findAnswer(q));
+    }, delay);
+  }
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const q = input.value.trim();
+    if(!q) return;
+    input.value='';
+    handleQuestion(q);
+  });
+
+  suggestions.addEventListener('click', e=>{
+    const chip = e.target.closest('.copilot-chip');
+    if(!chip) return;
+    handleQuestion(chip.dataset.q);
+  });
+})();
