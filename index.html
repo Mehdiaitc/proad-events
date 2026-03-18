@@ -21,11 +21,12 @@
     </svg>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html" style="color:#fff">Accueil</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="#about">À propos</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Prendre RDV</a>
+  <a href="contact.html" class="nav-cta">Prendre RDV</a>
 </nav>
 
 <!-- ═══ 1. HERO — vrai logo + fill + zoom O ═══ -->
@@ -340,105 +341,7 @@
   <p class="section-label reveal">Votre prochain événement</p>
   <h2 class="reveal">Faisons un bout<br>de chemin !</h2>
   <p class="reveal">Un premier échange, sans engagement, pour voir si la route est la même.</p>
-  <a href="#contact" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
-</section>
-
-<!-- ═══ 8. À PROPOS ═══ -->
-<section id="about">
-  <div class="about-inner">
-    <div class="about-text">
-      <p class="section-label reveal">À propos</p>
-      <h2 class="reveal">Mehdi Ait Chabane</h2>
-      <p class="about-role reveal">Fondateur — PROAD Events</p>
-      <p class="about-desc reveal">
-        Forgé sur le terrain entre Marseille et Singapour, j'ai passé plus de 10 ans à produire des événements pour des marques internationales : Ubisoft, Roger Dubuis, Allianz, Bain & Company.
-      </p>
-      <p class="about-desc reveal">
-        PROAD est né de cette conviction : chaque événement mérite un producteur qui maîtrise la route de A à Z. Un seul interlocuteur, une rigueur absolue, une créativité au service de l'impact.
-      </p>
-      <div class="about-values reveal">
-        <div class="about-value"><span class="av-icon">▸</span> Rigueur terrain</div>
-        <div class="about-value"><span class="av-icon">▸</span> Vision internationale</div>
-        <div class="about-value"><span class="av-icon">▸</span> Interlocuteur unique</div>
-        <div class="about-value"><span class="av-icon">▸</span> Excellence créative</div>
-      </div>
-    </div>
-    <div class="about-visual reveal">
-      <div class="about-photo-frame">
-        <div class="about-photo-placeholder">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="30" r="16" stroke="rgba(43,64,252,.4)" stroke-width="1.5" fill="none"/>
-            <path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="rgba(43,64,252,.4)" stroke-width="1.5" fill="none"/>
-          </svg>
-          <span class="photo-label">MEHDI AIT CHABANE</span>
-        </div>
-      </div>
-      <div class="about-badge-wrap">
-        <div class="about-badge">Marseille → Singapour → Marseille</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 9. CONTACT ═══ -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="contact-info">
-      <p class="section-label reveal">Contact</p>
-      <h2 class="reveal">Parlons de<br>votre projet.</h2>
-      <p class="contact-desc reveal">Un premier échange, sans engagement. Décrivez votre événement et je vous recontacte sous 24h.</p>
-      <div class="contact-details reveal">
-        <div class="contact-detail">
-          <span class="cd-label">EMAIL</span>
-          <a href="mailto:contact@proadevents.com" class="cd-value">contact@proadevents.com</a>
-        </div>
-        <div class="contact-detail">
-          <span class="cd-label">BASÉ À</span>
-          <span class="cd-value">Marseille, France</span>
-        </div>
-        <div class="contact-detail">
-          <span class="cd-label">INTERVENTION</span>
-          <span class="cd-value">France & International</span>
-        </div>
-      </div>
-    </div>
-    <form class="contact-form reveal" id="contact-form" onsubmit="return handleSubmit(event)">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="cf-name">Nom complet</label>
-          <input type="text" id="cf-name" name="name" required placeholder="Votre nom">
-        </div>
-        <div class="form-group">
-          <label for="cf-email">Email</label>
-          <input type="email" id="cf-email" name="email" required placeholder="votre@email.com">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="cf-company">Entreprise / Organisation</label>
-        <input type="text" id="cf-company" name="company" placeholder="Nom de votre structure">
-      </div>
-      <div class="form-group">
-        <label for="cf-type">Type d'événement</label>
-        <select id="cf-type" name="type">
-          <option value="" disabled selected>Sélectionnez un type</option>
-          <option value="soiree">Soirée & Gala</option>
-          <option value="corporate">Événement Corporate</option>
-          <option value="lancement">Lancement de Produit</option>
-          <option value="lifestyle">Lifestyle & Sports</option>
-          <option value="autre">Autre</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="cf-message">Décrivez votre projet</label>
-        <textarea id="cf-message" name="message" rows="5" required placeholder="Date souhaitée, lieu, nombre d'invités, ambiance envisagée…"></textarea>
-      </div>
-      <button type="submit" class="btn-primary form-submit">ENVOYER MA DEMANDE</button>
-      <div id="form-success" class="form-success" style="display:none;">
-        <span class="fs-icon">✓</span>
-        <span>Message envoyé ! Je vous recontacte très vite.</span>
-      </div>
-    </form>
-  </div>
+  <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
 </section>
 
 <footer>
@@ -446,8 +349,9 @@
   <ul class="f-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
 </footer>
