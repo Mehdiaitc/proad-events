@@ -1,1 +1,909 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos | PROAD Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
 
+/* ── ABOUT PAGE ── */
+.about-hero {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 120px 48px 64px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(43,64,252,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about-hero::after {
+  content: 'MEHDI';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(8rem, 22vw, 20rem);
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.022);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -38%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.about-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.about-hero p {
+  color: var(--gray);
+  font-size: .9rem;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* ── BIO SECTION ── */
+.bio-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 48px 100px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Photo side */
+.bio-photo-col { position: relative; }
+.bio-photo-frame {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #0a0a16;
+}
+.bio-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
+  transition: filter .4s;
+}
+.bio-photo-frame:hover img { filter: grayscale(0%) contrast(1.05); }
+
+/* Placeholder si pas de photo */
+.bio-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #0d0f1e 0%, #060810 60%, #0a0c1a 100%);
+  gap: 16px;
+}
+.bio-photo-placeholder svg { opacity: .25; }
+.bio-photo-placeholder span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .7rem;
+  letter-spacing: .3em;
+  color: rgba(255,255,255,.2);
+  text-transform: uppercase;
+}
+
+/* Blue accent border */
+.bio-photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(43,64,252,.25);
+  z-index: 2;
+  pointer-events: none;
+}
+/* Corner accent */
+.bio-photo-frame::after {
+  content: '';
+  position: absolute;
+  bottom: -12px; right: -12px;
+  width: 80px; height: 80px;
+  border-right: 2px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
+  z-index: 3;
+}
+
+.bio-name-tag {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bio-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: .08em;
+  color: #fff;
+}
+.bio-role {
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.bio-location {
+  font-size: .72rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.3);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Badges */
+.bio-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.bio-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .6rem;
+  letter-spacing: .18em;
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.4);
+}
+
+/* Text side */
+.bio-text-col { padding-top: 8px; }
+
+.bio-intro {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  letter-spacing: .03em;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.bio-intro em {
+  font-style: normal;
+  color: var(--blue);
+}
+
+.bio-body {
+  font-size: .88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255,255,255,.6);
+  margin-bottom: 24px;
+}
+.bio-body strong {
+  color: rgba(255,255,255,.88);
+  font-weight: 500;
+}
+
+.bio-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--blue);
+  margin: 32px 0;
+  box-shadow: 0 0 8px rgba(43,64,252,.6);
+}
+
+/* Timeline */
+.bio-timeline { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+.bio-tl-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  align-items: start;
+  position: relative;
+}
+.bio-tl-item::before {
+  content: '';
+  position: absolute;
+  left: 90px;
+  top: 10px;
+  bottom: -20px;
+  width: 1px;
+  background: rgba(255,255,255,.06);
+}
+.bio-tl-item:last-child::before { display: none; }
+.bio-tl-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .78rem;
+  letter-spacing: .18em;
+  color: var(--blue);
+  padding-top: 2px;
+  text-align: right;
+}
+.bio-tl-content h4 {
+  font-size: .85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 3px;
+}
+.bio-tl-content p {
+  font-size: .75rem;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* Values strip */
+.values-strip {
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 64px 48px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(32px, 6vw, 80px);
+  flex-wrap: wrap;
+  background: rgba(43,64,252,.025);
+}
+.value-item { text-align: center; max-width: 180px; }
+.value-icon {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 10px;
+  opacity: .7;
+}
+.value-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.8);
+  margin-bottom: 6px;
+}
+.value-desc {
+  font-size: .72rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════
+   COPILOTE — LE GRAND WIDGET
+   ═══════════════════════════════ */
+.copilote-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+.copilote-label {
+  font-size: .7rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.copilote-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  letter-spacing: .03em;
+  line-height: 1;
+  margin-bottom: 40px;
+}
+
+/* Chat UI */
+.copilote-widget {
+  background: #07070f;
+  border: 1px solid rgba(43,64,252,.2);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(43,64,252,.08), 0 40px 80px rgba(0,0,0,.5);
+}
+
+/* Header */
+.cop-header {
+  background: rgba(43,64,252,.07);
+  border-bottom: 1px solid rgba(43,64,252,.15);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cop-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a2aff, #0018cc);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .8rem;
+  color: #fff;
+  letter-spacing: .1em;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(43,64,252,.5);
+  position: relative;
+}
+.cop-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: 1px; right: 1px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 1.5px solid #07070f;
+}
+.cop-title { flex: 1; }
+.cop-title strong {
+  display: block;
+  font-size: .82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  letter-spacing: .04em;
+}
+.cop-title span {
+  font-size: .65rem;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .08em;
+}
+.cop-status {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .6rem;
+  letter-spacing: .2em;
+  color: #22c55e;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.2);
+  padding: 4px 10px;
+}
+
+/* Messages */
+.cop-messages {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 280px;
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(43,64,252,.3) transparent;
+}
+
+.cop-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s, transform .4s;
+}
+.cop-msg.visible { opacity: 1; transform: translateY(0); }
+
+.cop-msg-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a2aff, #0018cc);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .6rem;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 0 8px rgba(43,64,252,.4);
+}
+.cop-msg-bubble {
+  background: rgba(43,64,252,.1);
+  border: 1px solid rgba(43,64,252,.18);
+  border-radius: 2px 12px 12px 12px;
+  padding: 12px 16px;
+  max-width: 85%;
+}
+.cop-msg-bubble p {
+  font-size: .82rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.8);
+}
+.cop-msg-bubble strong { color: #fff; }
+.cop-msg-bubble em {
+  font-style: normal;
+  color: var(--blue);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .85rem;
+  letter-spacing: .06em;
+}
+
+/* User message */
+.cop-msg.user { flex-direction: row-reverse; }
+.cop-msg.user .cop-msg-bubble {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.08);
+  border-radius: 12px 2px 12px 12px;
+  text-align: right;
+}
+.cop-msg.user .cop-msg-bubble p { color: rgba(255,255,255,.6); }
+.cop-user-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem;
+  color: rgba(255,255,255,.5);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Quick actions */
+.cop-quick {
+  padding: 0 20px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cop-quick-btn {
+  background: none;
+  border: 1px solid rgba(43,64,252,.25);
+  color: rgba(255,255,255,.5);
+  font-family: 'Inter', sans-serif;
+  font-size: .72rem;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all .2s;
+  border-radius: 2px;
+}
+.cop-quick-btn:hover {
+  border-color: var(--blue);
+  color: rgba(255,255,255,.85);
+  background: rgba(43,64,252,.08);
+}
+
+/* Input */
+.cop-input-row {
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 14px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.cop-input {
+  flex: 1;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.8);
+  font-family: 'Inter', sans-serif;
+  font-size: .8rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .2s;
+  border-radius: 2px;
+}
+.cop-input::placeholder { color: rgba(255,255,255,.2); }
+.cop-input:focus { border-color: rgba(43,64,252,.45); }
+.cop-send {
+  background: var(--blue);
+  border: none;
+  color: #fff;
+  width: 38px; height: 38px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, box-shadow .2s;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+.cop-send:hover { background: #4455ff; box-shadow: 0 0 16px rgba(43,64,252,.5); }
+.cop-send svg { width: 16px; height: 16px; }
+
+/* Typing indicator */
+.cop-typing {
+  display: flex; gap: 4px; align-items: center;
+  padding: 8px 0 4px;
+}
+.cop-typing span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: .4;
+  animation: typingDot 1.2s infinite;
+}
+.cop-typing span:nth-child(2) { animation-delay: .2s; }
+.cop-typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes typingDot {
+  0%,60%,100% { opacity: .2; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* Disclaimer */
+.cop-disclaimer {
+  padding: 12px 20px;
+  font-size: .62rem;
+  color: rgba(255,255,255,.18);
+  letter-spacing: .06em;
+  border-top: 1px solid rgba(255,255,255,.04);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cop-disclaimer::before {
+  content: '⚡';
+  font-size: .7rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .bio-section {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 60px 24px 80px;
+  }
+  .bio-photo-frame { max-width: 280px; }
+  .about-hero { padding: 100px 24px 48px; }
+  .copilote-section { padding: 80px 24px; }
+  .values-strip { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+      <path fill="#fff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+      <path fill="#fff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+      <text x="0" y="413" font-family="'Bebas Neue',sans-serif" font-size="52" fill="#fff" textLength="463.28" lengthAdjust="spacing">PROAD EVENTS</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html" style="color:#fff">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Prendre RDV</a>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <p class="section-label reveal">À propos</p>
+  <h1 class="reveal">La Route<br>commence ici.</h1>
+  <p class="reveal">PROAD, c'est une vision, une méthode, et un homme derrière le volant.</p>
+</section>
+
+<!-- BIO -->
+<section class="bio-section">
+
+  <!-- Photo -->
+  <div class="bio-photo-col reveal">
+    <div class="bio-photo-frame">
+      <!-- Remplacer src par votre photo : assets/mehdi.jpg -->
+      <img src="assets/mehdi.jpg" alt="Mehdi — Fondateur PROAD Events"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="bio-photo-placeholder" style="display:none; position:absolute; inset:0;">
+        <svg width="60" height="60" viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#2b40fc" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+          <path fill="#2b40fc" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+          <path fill="#2b40fc" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+        </svg>
+        <span>Photo · Mehdi</span>
+      </div>
+    </div>
+    <div class="bio-name-tag">
+      <div class="bio-name">Mehdi</div>
+      <div class="bio-role">Fondateur &amp; Directeur de Production</div>
+      <div class="bio-location">
+        <svg width="10" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Marseille · France
+      </div>
+      <div class="bio-badges">
+        <div class="bio-badge">Production</div>
+        <div class="bio-badge">Direction de projet</div>
+        <div class="bio-badge">Singapour</div>
+        <div class="bio-badge">Luxe & Events</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text -->
+  <div class="bio-text-col">
+    <h2 class="bio-intro reveal">
+      Je produis des événements<br>
+      qui <em>marquent les esprits</em><br>
+      et tiennent leurs promesses.
+    </h2>
+
+    <p class="bio-body reveal">
+      J'ai fondé <strong>PROAD Events</strong> avec une conviction simple : un événement réussi, c'est une route bien tracée. Pas d'improvisation. Pas d'à-peu-près. Chaque virage est anticipé, chaque étape planifiée, jusqu'à ce que le rideau se lève.
+    </p>
+    <p class="bio-body reveal">
+      Marseillais de cœur, j'ai forgé mon expertise à <strong>Singapour</strong>, au sein de Chab Events, sur des projets internationaux exigeants — <strong>Ubisoft, Cartier, Bain & Company, Roger Dubuis, Macallan, Allianz</strong>. Des galas de 1 700 personnes aux expériences VIP dans des lieux désacralisés, j'ai appris à produire sans filet, avec précision.
+    </p>
+    <p class="bio-body reveal">
+      Depuis 2023, je déploie cette vision depuis <strong>Aix-en-Provence</strong> avec Chab Agency, pour des agences et des annonceurs qui cherchent un interlocuteur direct, sans intermédiaire, capable d'embarquer n'importe quel projet et de le livrer.
+    </p>
+
+    <div class="bio-divider reveal"></div>
+
+    <ul class="bio-timeline">
+      <li class="bio-tl-item reveal">
+        <div class="bio-tl-year">2025</div>
+        <div class="bio-tl-content">
+          <h4>Création de PROAD Events</h4>
+          <p>Lancement de la structure indépendante. Marseille & national.</p>
+        </div>
+      </li>
+      <li class="bio-tl-item reveal">
+        <div class="bio-tl-year">2023</div>
+        <div class="bio-tl-content">
+          <h4>Chab Agency — Chef de Projet Senior</h4>
+          <p>Retour en France. Aix-en-Provence. Projets corporate & lifestyle.</p>
+        </div>
+      </li>
+      <li class="bio-tl-item reveal">
+        <div class="bio-tl-year">2020–23</div>
+        <div class="bio-tl-content">
+          <h4>Chab Events — Singapour</h4>
+          <p>Production événementielle internationale. Clients : Ubisoft, Cartier, Macallan, Bain, Roger Dubuis…</p>
+        </div>
+      </li>
+      <li class="bio-tl-item reveal">
+        <div class="bio-tl-year">Avant</div>
+        <div class="bio-tl-content">
+          <h4>Marseille</h4>
+          <p>Premiers pas dans la production événementielle. L'énergie du Sud, la rigueur du terrain.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- VALUES -->
+<div class="values-strip">
+  <div class="value-item reveal">
+    <div class="value-icon">◈</div>
+    <div class="value-title">Rigueur</div>
+    <div class="value-desc">Chaque détail compte. Rien n'est laissé au hasard, de la logistique à la scénographie.</div>
+  </div>
+  <div class="value-item reveal">
+    <div class="value-icon">✦</div>
+    <div class="value-title">Réactivité</div>
+    <div class="value-desc">Un seul interlocuteur. Une réponse rapide. Pas de couche inutile entre vous et la décision.</div>
+  </div>
+  <div class="value-item reveal">
+    <div class="value-icon">◉</div>
+    <div class="value-title">Vision</div>
+    <div class="value-desc">Une lecture internationale des formats et tendances, au service de vos projets locaux.</div>
+  </div>
+  <div class="value-item reveal">
+    <div class="value-icon">⬡</div>
+    <div class="value-title">Impact</div>
+    <div class="value-desc">Un événement PROAD, ça se souvient. L'émotion et la précision ne sont pas incompatibles.</div>
+  </div>
+</div>
+
+<!-- ═══ COPILOTE ═══ -->
+<section class="copilote-section">
+  <p class="copilote-label reveal">Votre premier contact</p>
+  <h2 class="copilote-heading reveal">Rencontrez le Copilote —<br>il tient le volant pendant<br>que je suis sur la route.</h2>
+
+  <div class="copilote-widget reveal" id="copilote-widget">
+
+    <!-- Header -->
+    <div class="cop-header">
+      <div class="cop-avatar">CP</div>
+      <div class="cop-title">
+        <strong>COPILOTE PROAD</strong>
+        <span>Assistant de Mehdi · Production Road</span>
+      </div>
+      <div class="cop-status">EN LIGNE</div>
+    </div>
+
+    <!-- Messages -->
+    <div class="cop-messages" id="cop-messages">
+      <div class="cop-msg" id="msg-1">
+        <div class="cop-msg-avatar">CP</div>
+        <div class="cop-msg-bubble">
+          <p>Bienvenue sur <em>PROAD Events</em> 👋<br>Je suis le <strong>Copilote</strong> — Mehdi est actuellement sur la route, en pleine production.</p>
+        </div>
+      </div>
+      <div class="cop-msg" id="msg-2">
+        <div class="cop-msg-avatar">CP</div>
+        <div class="cop-msg-bubble">
+          <p>Mais pas d'inquiétude, je suis là pour prendre le relais. Vous pouvez me parler de votre projet, demander un <strong>rendez-vous</strong>, ou déposer un <strong>brief</strong> — Mehdi vous répondra dans les 24h.</p>
+        </div>
+      </div>
+      <div class="cop-msg" id="msg-3">
+        <div class="cop-msg-avatar">CP</div>
+        <div class="cop-msg-bubble">
+          <p>Qu'est-ce qui vous amène sur la route aujourd'hui ? 🛣️</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="cop-quick" id="cop-quick">
+      <button class="cop-quick-btn" onclick="quickAction('rdv')">📅 Prendre rendez-vous</button>
+      <button class="cop-quick-btn" onclick="quickAction('brief')">📋 Déposer un brief</button>
+      <button class="cop-quick-btn" onclick="quickAction('info')">💬 En savoir plus sur PROAD</button>
+      <button class="cop-quick-btn" onclick="quickAction('budget')">💰 Parler budget</button>
+    </div>
+
+    <!-- Input -->
+    <div class="cop-input-row">
+      <input class="cop-input" id="cop-input" type="text" placeholder="Écrivez votre message…" autocomplete="off">
+      <button class="cop-send" id="cop-send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+
+    <div class="cop-disclaimer">
+      Copilote IA · Les réponses sont transmises à Mehdi sous 24h
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">PROAD EVENTS</div>
+  <ul class="f-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
+</footer>
+
+<script>
+/* NAV */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+}, {passive:true});
+
+/* REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, {threshold: .1});
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+/* ── COPILOTE ── */
+const msgs = document.getElementById('cop-messages');
+const input = document.getElementById('cop-input');
+
+// Animate initial messages
+function showInitialMsgs() {
+  const initMsgs = ['msg-1','msg-2','msg-3'];
+  initMsgs.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('visible');
+    }, 400 + i * 600);
+  });
+}
+setTimeout(showInitialMsgs, 800);
+
+// Responses map
+const responses = {
+  rdv: [
+    "Super ! Pour prendre rendez-vous avec Mehdi, le plus simple est de passer par la page Contact 👉",
+    "Vous pouvez y indiquer votre disponibilité, le type d'événement et vos dates cibles. Mehdi vous confirme un créneau sous 24h.",
+    '<a href="contact.html" style="color:var(--blue);font-family:\'Bebas Neue\';letter-spacing:.1em;font-size:.85rem;">→ Aller à la page Contact</a>'
+  ],
+  brief: [
+    "Un brief, c'est le point de départ de toute bonne route. 📋",
+    "Dites-moi : <strong>quel type d'événement</strong>, pour <strong>combien de personnes</strong>, et <strong>à quelle date</strong> approximativement ? Je transmets ça directement à Mehdi.",
+  ],
+  info: [
+    "<em>PROAD</em> c'est Production Road — la conviction qu'un événement réussi se prépare comme un trajet : avec une route claire, des étapes maîtrisées, et zéro improvisation au dernier virage. 🛣️",
+    "Mehdi produit tous formats : galas, séminaires, lancements, soirées corporate, événements lifestyle & luxe. De 50 à 1 700 personnes, en France et à l'international.",
+  ],
+  budget: [
+    "Le budget, c'est la jauge d'essence — on ne part pas sans savoir jusqu'où on peut aller. ⛽",
+    "Pas de minimum imposé, mais Mehdi travaille sur des projets à partir de quelques milliers d'euros. L'essentiel c'est de cerner l'ambition du projet. Vous avez une fourchette en tête ?",
+  ]
+};
+
+function quickAction(type) {
+  const userTexts = {
+    rdv: 'Je voudrais prendre rendez-vous',
+    brief: 'Je souhaite déposer un brief',
+    info: 'J\'aimerais en savoir plus sur PROAD',
+    budget: 'J\'ai une question sur le budget'
+  };
+  addUserMessage(userTexts[type]);
+  document.getElementById('cop-quick').style.display = 'none';
+  showTyping(() => {
+    const resps = responses[type];
+    resps.forEach((r, i) => {
+      setTimeout(() => addBotMessage(r), i * 700);
+    });
+  });
+}
+
+function addUserMessage(text) {
+  const div = document.createElement('div');
+  div.className = 'cop-msg user';
+  div.innerHTML = `
+    <div class="cop-user-avatar">✦</div>
+    <div class="cop-msg-bubble"><p>${text}</p></div>
+  `;
+  msgs.appendChild(div);
+  setTimeout(() => div.classList.add('visible'), 30);
+  scrollToBottom();
+}
+
+function addBotMessage(html) {
+  const div = document.createElement('div');
+  div.className = 'cop-msg';
+  div.innerHTML = `
+    <div class="cop-msg-avatar">CP</div>
+    <div class="cop-msg-bubble"><p>${html}</p></div>
+  `;
+  msgs.appendChild(div);
+  setTimeout(() => div.classList.add('visible'), 30);
+  scrollToBottom();
+}
+
+function showTyping(callback) {
+  const typing = document.createElement('div');
+  typing.className = 'cop-msg visible';
+  typing.id = 'typing-indicator';
+  typing.innerHTML = `
+    <div class="cop-msg-avatar">CP</div>
+    <div class="cop-msg-bubble">
+      <div class="cop-typing"><span></span><span></span><span></span></div>
+    </div>
+  `;
+  msgs.appendChild(typing);
+  scrollToBottom();
+  setTimeout(() => {
+    typing.remove();
+    callback();
+  }, 1000);
+}
+
+function scrollToBottom() {
+  setTimeout(() => { msgs.scrollTop = msgs.scrollHeight; }, 100);
+}
+
+function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMessage(text);
+  document.getElementById('cop-quick').style.display = 'none';
+
+  // Smart responses
+  const t = text.toLowerCase();
+  let reply;
+  if (t.includes('rdv') || t.includes('rendez') || t.includes('réunion') || t.includes('call')) {
+    reply = responses.rdv;
+  } else if (t.includes('brief') || t.includes('projet') || t.includes('événement') || t.includes('event')) {
+    reply = responses.brief;
+  } else if (t.includes('budget') || t.includes('prix') || t.includes('coût') || t.includes('tarif')) {
+    reply = responses.budget;
+  } else if (t.includes('proad') || t.includes('qui') || t.includes('quoi') || t.includes('mehdi')) {
+    reply = responses.info;
+  } else {
+    reply = [
+      "Noté ! Je transmets ça à Mehdi dès qu'il reprend le volant. 🛣️",
+      "En attendant, si vous avez un projet précis en tête, n'hésitez pas à passer par la <a href='contact.html' style='color:var(--blue)'>page Contact</a> pour qu'on puisse structurer ça ensemble."
+    ];
+  }
+
+  showTyping(() => {
+    reply.forEach((r, i) => setTimeout(() => addBotMessage(r), i * 700));
+  });
+}
+
+// Enter key
+input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+</script>
+</body>
+</html>
