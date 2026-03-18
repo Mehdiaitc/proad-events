@@ -407,6 +407,23 @@ props.forEach(prop=>prop.addEventListener('click',e=>{
 function closeCard(){bcard.classList.remove('open');document.body.style.overflow='';}
 bcard.addEventListener('click',e=>{if(e.target===bcard)closeCard();});
 
+/* ── Contact form ── */
+function handleSubmit(e){
+  e.preventDefault();
+  const form=e.target;
+  const btn=form.querySelector('.form-submit');
+  btn.textContent='ENVOI EN COURS…';
+  btn.disabled=true;
+  setTimeout(()=>{
+    form.reset();
+    btn.textContent='ENVOYER MA DEMANDE';
+    btn.disabled=false;
+    const msg=$('form-success');
+    if(msg){msg.style.display='flex';setTimeout(()=>{msg.style.display='none';},5000);}
+  },1200);
+  return false;
+}
+
 /* ── Reveal ── */
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
