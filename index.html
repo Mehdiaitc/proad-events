@@ -291,7 +291,6 @@
       <!-- LED screen with real logo flickering -->
       <div id="led-screen">
         <div id="screen-logo-wrap"><img src="A_2.png" alt="PROAD Events" style="width:100%;height:auto;display:block;"></div>
-        <div id="screen-tagline">PLAN · RUN · ORGANIZE · ACTIVATE · DELIVER</div>
         <div id="screen-universe">L'UNIVERS PROAD</div>
       </div>
 
@@ -463,77 +462,89 @@
       <div class="prop" id="prop-d" data-l="D" data-w="DELIVER" data-d="Le feu vert final. L'&eacute;v&eacute;nement est officiellement lanc&eacute;.">
         <div class="prop-spotlight"></div>
         <div class="obj-wrap">
-          <svg width="130" height="130" viewBox="0 0 185 190" xmlns="http://www.w3.org/2000/svg">
+          <svg width="150" height="110" viewBox="0 0 200 148" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="flag-case-dark" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#0d0f1c"/>
-                <stop offset="100%" stop-color="#06070e"/>
+              <linearGradient id="fc-dark" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0a0c1e"/>
+                <stop offset="100%" stop-color="#06070f"/>
               </linearGradient>
-              <linearGradient id="flag-case-light" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#1a1e35"/>
-                <stop offset="100%" stop-color="#0f1128"/>
+              <linearGradient id="fc-blue" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1a2050"/>
+                <stop offset="100%" stop-color="#0f1438"/>
               </linearGradient>
-              <filter id="flag-glow">
+              <filter id="fd-glow">
                 <feGaussianBlur stdDeviation="3" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              <filter id="flag-shadow">
-                <feDropShadow dx="3" dy="7" stdDeviation="5" flood-color="#00001a" flood-opacity=".65"/>
+              <filter id="fd-shadow">
+                <feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#000020" flood-opacity=".7"/>
               </filter>
-              <clipPath id="flag-clip-d">
-                <path d="M22,12 Q100,6 168,18 Q166,44 164,70 Q100,64 22,70 Z"/>
+              <clipPath id="fc-clip">
+                <rect x="2" y="2" width="196" height="144" rx="4"/>
               </clipPath>
             </defs>
 
-            <!-- Mat -->
-            <rect x="16" y="10" width="6" height="176" rx="3" fill="#0d1020" stroke="#0047FF" stroke-width="1" filter="url(#flag-shadow)"/>
-            <!-- Base mat -->
-            <ellipse cx="19" cy="186" rx="12" ry="4.5" fill="rgba(0,71,255,.25)" filter="url(#flag-glow)"/>
-            <ellipse cx="19" cy="186" rx="7" ry="2.5" fill="rgba(0,71,255,.5)"/>
+            <!-- Corps drapeau — grand rectangle légèrement ondulé -->
+            <rect x="2" y="2" width="196" height="144" rx="4"
+                  fill="url(#fc-dark)" stroke="#0047FF" stroke-width="1.5"
+                  filter="url(#fd-shadow)"/>
 
-            <!-- Corps drapeau (large) -->
-            <path d="M22,12 Q100,6 168,18 Q166,44 164,70 Q100,64 22,70 Z"
-                  fill="#0a0c18" stroke="#0047FF" stroke-width="1.2" filter="url(#flag-shadow)"/>
-
-            <!-- Damier — cases alternees bleu fonce / bleu tres fonce -->
-            <g clip-path="url(#flag-clip-d)">
-              <!-- Fond base sombre -->
-              <rect x="22" y="10" width="146" height="62" fill="url(#flag-case-dark)"/>
-              <!-- Cases claires (bleu sombre) — rangee 1 -->
-              <rect x="22"  y="10" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="58"  y="10" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="94"  y="10" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="130" y="10" width="18" height="15" fill="url(#flag-case-light)"/>
-              <!-- Rangee 2 -->
-              <rect x="40"  y="25" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="76"  y="25" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="112" y="25" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="148" y="25" width="18" height="15" fill="url(#flag-case-light)"/>
-              <!-- Rangee 3 -->
-              <rect x="22"  y="40" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="58"  y="40" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="94"  y="40" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="130" y="40" width="18" height="15" fill="url(#flag-case-light)"/>
-              <!-- Rangee 4 -->
-              <rect x="40"  y="55" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="76"  y="55" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="112" y="55" width="18" height="15" fill="url(#flag-case-light)"/>
-              <rect x="148" y="55" width="18" height="15" fill="url(#flag-case-light)"/>
+            <!-- Damier — 10 colonnes x 7 rangées, cases 20x20 -->
+            <g clip-path="url(#fc-clip)">
+              <!-- Rangée 1 -->
+              <rect x="2"   y="2"  width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="42"  y="2"  width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="82"  y="2"  width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="122" y="2"  width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="162" y="2"  width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 2 -->
+              <rect x="22"  y="22" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="62"  y="22" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="102" y="22" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="142" y="22" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="182" y="22" width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 3 -->
+              <rect x="2"   y="42" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="42"  y="42" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="82"  y="42" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="122" y="42" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="162" y="42" width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 4 -->
+              <rect x="22"  y="62" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="62"  y="62" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="102" y="62" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="142" y="62" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="182" y="62" width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 5 -->
+              <rect x="2"   y="82" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="42"  y="82" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="82"  y="82" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="122" y="82" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="162" y="82" width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 6 -->
+              <rect x="22"  y="102" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="62"  y="102" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="102" y="102" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="142" y="102" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="182" y="102" width="20" height="20" fill="url(#fc-blue)"/>
+              <!-- Rangée 7 -->
+              <rect x="2"   y="122" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="42"  y="122" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="82"  y="122" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="122" y="122" width="20" height="20" fill="url(#fc-blue)"/>
+              <rect x="162" y="122" width="20" height="20" fill="url(#fc-blue)"/>
             </g>
 
-            <!-- Contour drapeau -->
-            <path d="M22,12 Q100,6 168,18 Q166,44 164,70 Q100,64 22,70 Z"
-                  fill="none" stroke="#0047FF" stroke-width="1.5"/>
+            <!-- Contour brillant -->
+            <rect x="2" y="2" width="196" height="144" rx="4"
+                  fill="none" stroke="#0047FF" stroke-width="1.8" filter="url(#fd-glow)"/>
 
-            <!-- Bord bleu lumineux bas du drapeau -->
-            <path d="M22,68 Q100,62 164,70"
-                  fill="none" stroke="#0047FF" stroke-width="2.5" filter="url(#flag-glow)"/>
-            <!-- Bord bleu haut -->
-            <path d="M22,14 Q100,8 166,20"
-                  fill="none" stroke="#0047FF" stroke-width="1" opacity=".5"/>
+            <!-- Bord gauche lumineux -->
+            <line x1="3" y1="2" x2="3" y2="146" stroke="#0047FF" stroke-width="3" opacity=".7" filter="url(#fd-glow)"/>
 
-            <!-- Lueur bleue sous drapeau -->
-            <ellipse cx="93" cy="75" rx="65" ry="8" fill="rgba(0,71,255,.12)" filter="url(#flag-glow)"/>
+            <!-- Lueur bleue sous le drapeau -->
+            <ellipse cx="100" cy="152" rx="80" ry="8"
+                     fill="rgba(0,71,255,.18)" filter="url(#fd-glow)"/>
           </svg>
         </div>
         <div class="prop-shadow"></div>
