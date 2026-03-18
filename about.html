@@ -201,18 +201,88 @@
   letter-spacing: .03em;
   line-height: 1.1;
   color: #fff;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .bio-intro em {
   font-style: normal;
   color: var(--blue);
   animation: introShimmer 3s ease-in-out infinite;
   display: block;
+  margin-bottom: 0;
 }
 @keyframes introShimmer {
   0%,100% { color: #2b40fc; text-shadow: 0 0 8px rgba(43,64,252,.5); filter: brightness(1); }
   50% { color: #6680ff; text-shadow: 0 0 18px rgba(43,64,252,.9), 0 0 40px rgba(43,64,252,.4); filter: brightness(1.3); }
 }
+
+/* Copilote float button — PROAD A logo */
+.cop-float-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: 1.5px solid rgba(43,64,252,.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 0 rgba(43,64,252,.3);
+  animation: copPulse 2.5s infinite;
+  transition: transform .2s, box-shadow .2s;
+  padding: 0;
+}
+.cop-float-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 32px rgba(43,64,252,.7);
+}
+.cop-float-btn svg { width: 32px; height: auto; }
+@keyframes copPulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 0 rgba(43,64,252,.3); }
+  50% { box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 10px rgba(43,64,252,0); }
+}
+.cop-float-badge {
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid var(--dark);
+  box-shadow: 0 0 6px rgba(34,197,94,.6);
+}
+
+/* Tooltip on hover */
+.cop-float-tooltip {
+  position: absolute;
+  right: 68px;
+  bottom: 50%;
+  transform: translateY(50%);
+  background: rgba(7,7,15,.98);
+  border: 1px solid rgba(43,64,252,.3);
+  padding: 8px 14px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: .72rem;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .04em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  border-radius: 2px;
+}
+.cop-float-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: rgba(43,64,252,.3);
+}
+.cop-float-btn:hover .cop-float-tooltip { opacity: 1; }
 
 /* Road timeline */
 .bio-road {
@@ -697,16 +767,7 @@
   <!-- Photo -->
   <div class="bio-photo-col reveal">
     <div class="bio-photo-frame">
-      <img src="assets/mehdi.jpg" alt="Mehdi — Fondateur PROAD Events"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="bio-photo-placeholder" style="display:none; position:absolute; inset:0;">
-        <svg width="60" height="60" viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#2b40fc" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
-          <path fill="#2b40fc" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
-          <path fill="#2b40fc" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
-        </svg>
-        <span>Photo · Mehdi</span>
-      </div>
+      <img src="Photo portrait.jpg" alt="Mehdi — Fondateur PROAD Events">
       <!-- Hover overlay -->
       <div class="bio-photo-overlay">
         <div class="bio-overlay-name">Mehdi</div>
@@ -715,14 +776,6 @@
           <svg width="9" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
           Marseille · France
         </div>
-      </div>
-    </div>
-    <div class="bio-name-tag">
-      <div class="bio-name">Mehdi</div>
-      <div class="bio-role">Fondateur &amp; Directeur de Production</div>
-      <div class="bio-location">
-        <svg width="10" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-        Marseille · France
       </div>
     </div>
   </div>
@@ -736,13 +789,13 @@
     </h2>
 
     <p class="bio-body reveal">
-      L'idée de <strong>PROAD</strong> m'est venue parce que je suis convaincu de ça : un événement réussi, ça ne s'improvise pas. C'est une route tracée avec méthode, chaque virage anticipé, chaque étape planifiée jusqu'à ce que le rideau se lève. Des agences, il n'en manque pas. Mais PROAD, c'est autre chose : un mélange de ma vision d'acheteur, de directeur de production, et de tout ce que j'ai appris et désappris au fil de mes expériences.
+      L'idée de <strong>PROAD</strong> part d'une conviction simple. Un événement réussi ne s'improvise pas. C'est une route tracée. Chaque virage anticipé, chaque étape planifiée. Des agences, il n'en manque pas. PROAD, c'est autre chose. Un mélange de vision d'acheteur, de direction de production et de tout ce que j'ai appris sur le terrain.
     </p>
     <p class="bio-body reveal">
-      Originaire du <strong>Sud-Ouest</strong>, c'est la passion de l'événement qui m'a mis sur la route. Direction <strong>Singapour</strong>, où j'ai rejoint <strong>Chab Events</strong> en tant qu'Event Executive puis Junior Event Manager. Des productions passionnantes pour des clients exigeants — <strong>Ubisoft, Cartier, Bain &amp; Company, Roger Dubuis, Macallan, Allianz</strong>. J'y ai appris à produire sans filet, à voir les erreurs à ne pas répéter, à forger une vraie vision du terrain.
+      Originaire du <strong>Sud-Ouest</strong>, c'est la passion de l'événement qui m'a mis en mouvement. Direction <strong>Singapour</strong>. J'intègre <strong>Chab Events</strong> comme Event Executive, puis Junior Event Manager. Des productions passionnantes. Des clients exigeants. <strong>Ubisoft, Cartier, Bain, Roger Dubuis, Macallan, Allianz.</strong> Je produis sans filet. J'apprends vite.
     </p>
     <p class="bio-body reveal">
-      En rentrant d'Asie, j'ai continué l'aventure avec eux depuis le <strong>Sud de la France</strong>, au sein de Chab Agency à Aix-en-Provence. Et c'est là, fort de tout ça, que j'ai décidé de tracer ma propre route avec <strong>PROAD</strong> — pour mettre cette vision au service de <strong>Marseille</strong>, ville dont je suis passionné pour sa diversité et son potentiel événementiel, et de toute la France.
+      Retour en France. Je continue avec <strong>Chab Agency</strong> à Aix-en-Provence. Chef de Projet Senior. C'est là que tout prend forme. Et c'est de <strong>Marseille</strong>, ville que j'aime pour sa diversité et son potentiel événementiel, que je décide de tracer ma propre route avec <strong>PROAD</strong>.
     </p>
 
     <div class="bio-divider reveal"></div>
@@ -754,29 +807,29 @@
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
         <div class="bio-road-year">Débuts</div>
-        <div class="bio-road-title">Sud-Ouest — Les premiers pas</div>
-        <div class="bio-road-desc">La passion de l'événement naît. Le goût du terrain, l'envie de faire vivre des moments.</div>
+        <div class="bio-road-title">Sud-Ouest</div>
+        <div class="bio-road-desc">La passion naît. Le goût du terrain, l'envie de faire vivre des moments.</div>
       </div>
 
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
-        <div class="bio-road-year">2021 — 2022</div>
+        <div class="bio-road-year">2021 · 2022</div>
         <div class="bio-road-title">Singapour · Chab Events</div>
-        <div class="bio-road-desc">Event Executive puis Junior Event Manager. Productions passionnantes pour Ubisoft, Cartier, Macallan, Bain, Roger Dubuis, Allianz. La production internationale sans filet.</div>
+        <div class="bio-road-desc">Event Executive. Junior Event Manager. Ubisoft, Cartier, Macallan, Bain, Roger Dubuis, Allianz.</div>
       </div>
 
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
-        <div class="bio-road-year">2023 — 2024</div>
+        <div class="bio-road-year">2023 · 2024</div>
         <div class="bio-road-title">Aix-en-Provence · Chab Agency</div>
-        <div class="bio-road-desc">Retour en France. Chef de Projet Senior. Projets corporate, lifestyle et luxe. La vision prend forme.</div>
+        <div class="bio-road-desc">Chef de Projet Senior. Corporate, lifestyle, luxe. La vision prend forme.</div>
       </div>
 
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
-        <div class="bio-road-year">2025 — Aujourd'hui</div>
+        <div class="bio-road-year">2025 · Aujourd'hui</div>
         <div class="bio-road-title">Marseille · PROAD Events</div>
-        <div class="bio-road-desc">Ma propre route. Une ville passionnante, un potentiel événementiel immense, et une vision claire de ce que la production peut être.</div>
+        <div class="bio-road-desc">Ma propre route. Marseille et toute la France.</div>
       </div>
 
     </div>
@@ -882,29 +935,30 @@
 
 <!-- ═══ COPILOTE FLOTTANT ═══ -->
 <style>
-.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(43,64,252,.55);animation:copPulse 2.5s infinite;transition:transform .2s,box-shadow .2s;}
-.cop-float-btn:hover{transform:scale(1.08);}
-.cop-float-btn svg{width:24px;height:24px;}
-@keyframes copPulse{0%,100%{box-shadow:0 4px 20px rgba(43,64,252,.55),0 0 0 0 rgba(43,64,252,.35);}50%{box-shadow:0 4px 20px rgba(43,64,252,.55),0 0 0 10px rgba(43,64,252,0);}}
-.cop-float-badge{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #060608;}
-.cop-float-panel{position:fixed;bottom:96px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.cop-float-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
 .cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
 </style>
 
 <button class="cop-float-btn" id="cop-float-btn" onclick="toggleCopFloat()">
-  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <!-- Logo PROAD — le A avec la route -->
+  <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/>
+    <path fill="#2b40fc" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/>
+    <path fill="#2b40fc" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/>
+  </svg>
   <div class="cop-float-badge"></div>
+  <div class="cop-float-tooltip">Je suis le Copilote de Mehdi, je vous écoute</div>
 </button>
 
 <div class="cop-float-panel" id="cop-float-panel">
   <div class="cop-header">
     <div class="cop-avatar">CP</div>
     <div class="cop-title"><strong>COPILOTE PROAD</strong><span>Mehdi est sur la route · Je prends le relais</span></div>
-    <button onclick="toggleCopFloat()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem;padding:4px 8px;">✕</button>
+    <button onclick="toggleCopFloat()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1rem;padding:4px 8px;flex-shrink:0;">✕</button>
   </div>
   <div class="cop-messages" id="cop-float-msgs" style="min-height:180px;max-height:260px;">
-    <div class="cop-msg" id="fmsg-1"><div class="cop-msg-avatar">CP</div><div class="cop-msg-bubble"><p>Mehdi est sur la route 🛣️ Je suis son <strong>Copilote</strong> — je prends le volant pour vous.</p></div></div>
-    <div class="cop-msg" id="fmsg-2"><div class="cop-msg-avatar">CP</div><div class="cop-msg-bubble"><p>Un projet ? Un RDV ? Un brief ? Dites-moi tout, je transmets à Mehdi sous 24h.</p></div></div>
+    <div class="cop-msg" id="fmsg-1"><div class="cop-msg-avatar">CP</div><div class="cop-msg-bubble"><p>Je suis le <strong>Copilote</strong> de Mehdi. Il est sur la route en ce moment. Je vous écoute. 🛣️</p></div></div>
+    <div class="cop-msg" id="fmsg-2"><div class="cop-msg-avatar">CP</div><div class="cop-msg-bubble"><p>Un projet en tête ? Un RDV à caler ? Un brief à déposer ? Dites-moi tout.</p></div></div>
   </div>
   <div class="cop-quick" id="cop-float-quick">
     <button class="cop-quick-btn" onclick="floatAction('rdv')">📅 Prendre RDV</button>
