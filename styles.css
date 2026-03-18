@@ -99,10 +99,40 @@ body{background:var(--dark);color:var(--light);font-family:'Inter',sans-serif;ov
 #spotlight-canvas{position:absolute;inset:0;z-index:35;pointer-events:none;}
 
 /* WHY PROAD? — lumière de face */
-#why-text{position:absolute;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:40;white-space:nowrap;}
-#why-text span{display:block;font-family:'Bebas Neue';font-size:clamp(3.2rem,7.5vw,6.5rem);letter-spacing:.18em;line-height:1.05;}
-#why-text .why{color:rgba(255,255,255,.97);text-shadow:0 0 12px rgba(240,245,255,.9),0 0 35px rgba(200,220,255,.5);}
-#why-text .pq{color:rgba(200,220,255,.95);text-shadow:0 0 18px rgba(43,64,252,.95),0 0 50px rgba(43,64,252,.6);}
+#why-text {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 40;
+  white-space: nowrap;
+}
+#why-text span {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.8rem, 8.5vw, 7.5rem);
+  letter-spacing: .22em;
+  line-height: 1;
+  /* Pas de text-shadow par défaut — géré individuellement */
+}
+#why-text .why {
+  color: #ffffff;
+  /* Halo blanc pur — pas de jaune, pas de chaud */
+  text-shadow:
+    0 0 8px rgba(255,255,255,.95),
+    0 0 22px rgba(220,230,255,.7),
+    0 0 55px rgba(180,210,255,.35);
+  font-weight: 400;
+}
+#why-text .pq {
+  color: rgba(180,210,255,.95);
+  text-shadow:
+    0 0 14px rgba(43,64,252,.9),
+    0 0 40px rgba(43,64,252,.55),
+    0 0 80px rgba(43,64,252,.25);
+  font-weight: 400;
+  letter-spacing: .20em;
+}
 
 /* Stage content */
 #stage-content{position:absolute;inset:0;z-index:20;opacity:0;transition:opacity .6s;pointer-events:none;}
