@@ -420,6 +420,26 @@
 }
 .pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
 
+/* ── BADGE AGENCE EN BAS DE CARTE ── */
+.pcard-agency {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 5px 14px;
+  background: rgba(3,4,10,.7);
+  border-top: 1px solid rgba(43,64,252,.12);
+  font-family: 'Inter', sans-serif;
+  font-size: .55rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.22);
+  z-index: 6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pcard-agency span { color: rgba(43,64,252,.55); }
+.pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
+
 /* Bordure hover dorée */
 .pcard { border: 1px solid transparent; transition: border-color .3s; }
 .pcard:hover { border-color: rgba(201,169,110,.3); }
@@ -471,7 +491,7 @@
       <div class="road-cards-inner">
 
         <div class="rcard" data-target="proj-ubisoft">
-          <div class="rcard-logo"><img src="logos/Ubisoft_logo.png" alt="Ubisoft" onerror="this.style.display='none';this.parentNode.innerHTML+='<span class=rcard-fallback>Ubisoft</span>'"></div>
+          <div class="rcard-logo"><img src="logos/UBISOFT.png" alt="Ubisoft" onerror="this.style.display='none';this.parentNode.innerHTML+='<span class=rcard-fallback>Ubisoft</span>'"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Ubisoft</div>
             <div class="rcard-type">Soirées & Réunions internes</div>
@@ -532,7 +552,7 @@
 
         <!-- Duplicates for infinite loop -->
         <div class="rcard" data-target="proj-ubisoft">
-          <div class="rcard-logo"><img src="logos/Ubisoft_logo.png" alt="Ubisoft" onerror="this.style.display='none';this.parentNode.innerHTML+='<span class=rcard-fallback>Ubisoft</span>'"></div>
+          <div class="rcard-logo"><img src="logos/UBISOFT.png" alt="Ubisoft" onerror="this.style.display='none';this.parentNode.innerHTML+='<span class=rcard-fallback>Ubisoft</span>'"></div>
           <div class="rcard-overlay"><div class="rcard-name">Ubisoft</div><div class="rcard-type">Soirées & Réunions</div><div class="rcard-stat">1 700 pax</div></div>
         </div>
         <div class="rcard" data-target="proj-lacoste">
@@ -695,7 +715,6 @@
 
   <!-- Ubisoft Paris 2025 — LARGE -->
   <div class="pcard sz-large" data-cat="gala" id="proj-ubisoft">
-    <div class="pcard-chab-badge">Projets réalisés chez <span>Chab Events</span> Singapour &amp; <span>Chab Agency</span> Aix-en-Provence</div>
     <div class="pcard-bg bg-gala">
       <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 800 450"><circle cx="650" cy="80" r="220" fill="none" stroke="#2b40fc" stroke-width="1"/><circle cx="650" cy="80" r="160" fill="none" stroke="#2b40fc" stroke-width=".5"/><line x1="0" y1="450" x2="800" y2="200" stroke="#2b40fc" stroke-width=".5"/></svg>
     </div>
@@ -708,6 +727,7 @@
       <div class="pcard-meta"><span>📍 Pavillon Baltard · Paris</span></div>
       <div class="pcard-desc">Soirée annuelle de 1 700 collaborateurs au Pavillon Baltard. Scénographie immersive, production complète son & lumière.</div>
     </div>
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
   </div>
 
   <!-- Ubisoft Paris 2023 — MEDIUM -->
@@ -723,6 +743,8 @@
       <div class="pcard-title">Ubisoft Paris<br>La Felicità</div>
       <div class="pcard-meta"><span>📍 La Felicità · Paris</span></div>
       <div class="pcard-desc">Même format, autre adresse iconique. 1 700 invités pour la plus grande soirée gaming de l'année.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -739,6 +761,8 @@
       <div class="pcard-title">Ubisoft RIA<br>Montpellier</div>
       <div class="pcard-meta"><span>📍 CGR + La Voile Bleue · Montpellier</span></div>
       <div class="pcard-desc">Journée complète : projection privée au CGR puis soirée exclusive à La Voile Bleue. 180 participants.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -755,6 +779,8 @@
       <div class="pcard-title">RSM France — Séminaire National</div>
       <div class="pcard-meta"><span>📍 Marseille</span></div>
       <div class="pcard-desc">3 jours de séminaire pour 100 collaborateurs. Logistique complète, programme de team-building et soirées de clôture.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -771,6 +797,8 @@
       <div class="pcard-title">Alan — Séminaire<br>Marseille</div>
       <div class="pcard-meta"><span>📍 Marseille</span></div>
       <div class="pcard-desc">Séminaire 2 jours pour la scale-up santé Alan. 120 participants, expérience méridionale.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -786,6 +814,8 @@
       <div class="pcard-title">Alan — Camping<br>de Luxe Belgique</div>
       <div class="pcard-meta"><span>📍 Belgique</span></div>
       <div class="pcard-desc">Revenue kick-off dans un cadre insolite : camping de luxe en Belgique. Une expérience hors des sentiers battus.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -801,6 +831,8 @@
       <div class="pcard-title">Lacoste — Cap d'Eden Roc</div>
       <div class="pcard-meta"><span>📍 Cap d'Eden Roc · Antibes</span></div>
       <div class="pcard-desc">Lancement de collection dans l'un des lieux les plus iconiques de la Côte d'Azur. Élégance et mise en scène soignée.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -816,6 +848,8 @@
       <div class="pcard-title">Lacoste Travel Retail<br>Canopy by Hilton</div>
       <div class="pcard-meta"><span>📍 Cannes</span></div>
       <div class="pcard-desc">Soirée travel retail au Tax Free de Cannes. Hôtel Canopy by Hilton.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -831,6 +865,8 @@
       <div class="pcard-title">Lacoste Travel Retail<br>Le Skyfall</div>
       <div class="pcard-meta"><span>📍 Cannes</span></div>
       <div class="pcard-desc">Édition 2024 dans un nouveau lieu, Le Skyfall. L'esprit travel retail, revisité.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -846,6 +882,8 @@
       <div class="pcard-title">Damen — Soirée<br>5OCEAN</div>
       <div class="pcard-meta"><span>📍 Monaco Yacht Show</span></div>
       <div class="pcard-desc">Soirée de lancement à bord du tout nouveau superyacht 5OCEAN pendant le Monaco Yacht Show. Une première mondiale.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -861,6 +899,8 @@
       <div class="pcard-title">Edrington — Relooking<br>A-Yacht · 3 Decks</div>
       <div class="pcard-meta"><span>📍 Tax Free · Cannes</span></div>
       <div class="pcard-desc">Transformation complète d'un a-yacht en expérience premium : Macallan, Highland Park & Brugal sur 3 decks distincts.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -876,6 +916,8 @@
       <div class="pcard-title">Morrocanoil<br>Tax Free · Cannes</div>
       <div class="pcard-meta"><span>📍 Cannes</span></div>
       <div class="pcard-desc">Conception et construction d'un stand entièrement sur mesure pour la marque Morrocanoil au Tax Free de Cannes.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -892,6 +934,8 @@
       <div class="pcard-title">HR Path — Séminaire Ibiza</div>
       <div class="pcard-meta"><span>📍 Ibiza, Espagne</span></div>
       <div class="pcard-desc">Séminaire exclusif pour 50 cadres dirigeants à Ibiza. Travail en journée, expériences mémorables en soirée.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
     </div>
   </div>
 
@@ -908,6 +952,8 @@
       <div class="pcard-title">Bain & Company<br>Thaïlande</div>
       <div class="pcard-meta"><span>📍 Marriott Hotel · Thaïlande</span></div>
       <div class="pcard-desc">Séminaire complet de 200 participants au Marriott. Organisation des soirées, réunions plénières et activités immersives.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Events</span> · Singapour</div>
     </div>
   </div>
 
@@ -923,6 +969,8 @@
       <div class="pcard-title">The Reach — Macallan<br>Chijmes · Singapour</div>
       <div class="pcard-meta"><span>📍 Chijmes · Singapour</span></div>
       <div class="pcard-desc">Event expérientiel ultra-VIP dans l'église désacralisée Chijmes. Une expérience Macallan hors du commun.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Events</span> · Singapour</div>
     </div>
   </div>
 
@@ -938,6 +986,8 @@
       <div class="pcard-title">Ubisoft — Summer Party<br>Singapour</div>
       <div class="pcard-meta"><span>📍 Singapour</span></div>
       <div class="pcard-desc">Summer party pour les équipes Ubisoft Singapore. Production scénique et expérience tropicale.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Events</span> · Singapour</div>
     </div>
   </div>
 
@@ -953,6 +1003,8 @@
       <div class="pcard-title">Cartier HJ<br>Sentosa Island</div>
       <div class="pcard-meta"><span>📍 Sentosa Island · Singapour</span></div>
       <div class="pcard-desc">Participation à l'organisation du Haute Joaillerie Cartier sur Sentosa Island, en collaboration avec l'agence Mazarine.</div>
+
+    <div class="pcard-agency">Réalisé via <span>Chab Events</span> · Singapour</div>
     </div>
   </div>
 
