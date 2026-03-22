@@ -49,8 +49,8 @@
   width: 100%;
   overflow: hidden;
   margin-bottom: 16px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
 }
 .road-strip {
   display: flex;
@@ -70,12 +70,14 @@
 }
 .road-cards-inner {
   display: flex;
-  gap: 16px;
-  padding: 8px;
+  gap: 18px;
+  padding: 10px;
 }
+
+/* ── CARTE 240×140 ── */
 .rcard {
-  width: 200px;
-  height: 120px;
+  width: 240px;
+  height: 140px;
   flex-shrink: 0;
   background: rgba(10,12,24,.8);
   border: 1px solid rgba(43,64,252,.18);
@@ -87,7 +89,7 @@
 }
 .rcard:hover {
   border-color: #C9A96E;
-  box-shadow: 0 0 24px rgba(201,169,110,.2);
+  box-shadow: 0 0 28px rgba(201,169,110,.22);
 }
 .rcard-logo {
   position: absolute;
@@ -95,22 +97,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 22px 28px;
 }
 .rcard-logo img {
-  max-width: 130px;
-  max-height: 60px;
+  max-width: 160px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: .55;
   transition: opacity .35s;
 }
-.rcard:hover .rcard-logo img { opacity: .12; }
+.rcard:hover .rcard-logo img { opacity: .1; }
 .rcard-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(6,6,14,.97) 0%, rgba(6,6,14,.85) 60%, transparent 100%);
-  padding: 12px 14px;
+  background: linear-gradient(to top, rgba(6,6,14,.97) 0%, rgba(6,6,14,.82) 55%, transparent 100%);
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -121,24 +125,24 @@
 .rcard:hover .rcard-overlay { opacity: 1; transform: translateY(0); }
 .rcard-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: .95rem;
+  font-size: 1rem;
   letter-spacing: .1em;
   color: #fff;
   line-height: 1;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 .rcard-type {
-  font-size: .6rem;
+  font-size: .62rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(43,64,252,.9);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 .rcard-detail {
-  font-size: .58rem;
+  font-size: .6rem;
   color: rgba(255,255,255,.45);
   line-height: 1.4;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -146,7 +150,7 @@
 }
 .rcard-stat {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: .78rem;
+  font-size: .82rem;
   letter-spacing: .08em;
   color: #C9A96E;
 }
@@ -464,7 +468,7 @@
   .pcard.sz-large, .pcard.sz-wide { grid-column: span 12; }
   .pcard.sz-medium, .pcard.sz-tall { grid-column: span 6; }
   .pcard.sz-small { grid-column: span 6; }
-  .rcard { width: 160px; height: 100px; }
+  .rcard { width: 180px; height: 110px; }
   .road-clients-header { padding: 0 20px; }
 }
 </style>
@@ -488,10 +492,8 @@
   <p class="section-label reveal">Nos réalisations</p>
   <h1 class="reveal">La Route<br>en Images.</h1>
   <p class="reveal">De Marseille à Singapour, chaque projet raconte une histoire. Voici quelques-unes des routes empruntées.</p>
-
 </section>
 
-<!-- FILTERS -->
 <!-- ═══ ROUTE DES CLIENTS — CARROUSEL ═══ -->
 <section class="road-clients">
 
@@ -500,7 +502,6 @@
     <h2>La route des clients</h2>
   </div>
 
-  <!-- Route decorative line -->
   <div class="road-divider">
     <div class="road-line-left"></div>
     <div class="road-center-mark"></div>
@@ -512,8 +513,8 @@
     <div class="road-strip road-strip--right" id="strip-1">
       <div class="road-cards-inner">
 
-        <div class="rcard" data-client="Ubisoft" data-type="Soirées & Galas" data-detail="3 projets · Paris & Montpellier · Jusqu'à 1 700 pax" data-year="2023–2025">
-          <div class="rcard-logo"><img src="logos/ubisoft.png" alt="Ubisoft"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Ubisoft_logo.png" alt="Ubisoft"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Ubisoft</div>
             <div class="rcard-type">Soirées & Réunions internes</div>
@@ -522,8 +523,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Lacoste" data-type="Luxe & Expérientiel" data-detail="3 projets · Cannes Tax Free · Cap Eden Roc" data-year="2023–2024">
-          <div class="rcard-logo"><img src="logos/lacoste.png" alt="Lacoste"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/lacoste-logo-png-transparent.png" alt="Lacoste"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Lacoste</div>
             <div class="rcard-type">Soirées VIP & Shootings</div>
@@ -532,8 +533,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Edrington" data-type="Luxe & Expérientiel" data-detail="Relooking du Yacht Lady Trudy · 3 ponts · Cannes" data-year="2025">
-          <div class="rcard-logo"><img src="logos/edrington.png" alt="Edrington"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Edrington logo.png" alt="Edrington"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Edrington</div>
             <div class="rcard-type">Yacht Experience</div>
@@ -542,8 +543,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Moroccanoil" data-type="Lancements" data-detail="Stand sur mesure · Tax Free Cannes · 2025" data-year="2025">
-          <div class="rcard-logo"><img src="logos/moroccanoil.png" alt="Moroccanoil"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Moroccanoil logo.png" alt="Moroccanoil"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Moroccanoil</div>
             <div class="rcard-type">Lancement Produit</div>
@@ -552,8 +553,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Damen Yachting" data-type="Luxe & Expérientiel" data-detail="Monaco Yacht Show 2024 · 5Ocean" data-year="2024">
-          <div class="rcard-logo"><img src="logos/damen.png" alt="Damen Yachting"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Damen logo.png" alt="Damen Yachting"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Damen Yachting</div>
             <div class="rcard-type">Soirée Yacht</div>
@@ -562,8 +563,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Bain & Company" data-type="Corporate" data-detail="Séminaire Thailand · 200 pax · Marriott" data-year="2022–2023">
-          <div class="rcard-logo"><img src="logos/bain.png" alt="Bain & Company"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Bain_&_Company_logo.svg.png" alt="Bain & Company"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Bain & Company</div>
             <div class="rcard-type">Séminaire International</div>
@@ -572,29 +573,29 @@
           </div>
         </div>
 
-        <!-- Duplicate for infinite loop -->
-        <div class="rcard" data-client="Ubisoft" data-type="Soirées & Galas">
-          <div class="rcard-logo"><img src="logos/ubisoft.png" alt="Ubisoft"></div>
+        <!-- Duplicates for infinite loop -->
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Ubisoft_logo.png" alt="Ubisoft"></div>
           <div class="rcard-overlay"><div class="rcard-name">Ubisoft</div><div class="rcard-type">Soirées & Réunions</div><div class="rcard-stat">1 700 pax</div></div>
         </div>
-        <div class="rcard" data-client="Lacoste">
-          <div class="rcard-logo"><img src="logos/lacoste.png" alt="Lacoste"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/lacoste-logo-png-transparent.png" alt="Lacoste"></div>
           <div class="rcard-overlay"><div class="rcard-name">Lacoste</div><div class="rcard-type">Soirées VIP & Shootings</div><div class="rcard-stat">3 projets</div></div>
         </div>
-        <div class="rcard" data-client="Edrington">
-          <div class="rcard-logo"><img src="logos/edrington.png" alt="Edrington"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Edrington logo.png" alt="Edrington"></div>
           <div class="rcard-overlay"><div class="rcard-name">Edrington</div><div class="rcard-type">Yacht Experience</div><div class="rcard-stat">Cannes 2025</div></div>
         </div>
-        <div class="rcard" data-client="Moroccanoil">
-          <div class="rcard-logo"><img src="logos/moroccanoil.png" alt="Moroccanoil"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Moroccanoil logo.png" alt="Moroccanoil"></div>
           <div class="rcard-overlay"><div class="rcard-name">Moroccanoil</div><div class="rcard-type">Lancement Produit</div><div class="rcard-stat">2025</div></div>
         </div>
-        <div class="rcard" data-client="Damen Yachting">
-          <div class="rcard-logo"><img src="logos/damen.png" alt="Damen Yachting"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Damen logo.png" alt="Damen Yachting"></div>
           <div class="rcard-overlay"><div class="rcard-name">Damen Yachting</div><div class="rcard-type">Soirée Yacht</div><div class="rcard-stat">Monaco 2024</div></div>
         </div>
-        <div class="rcard" data-client="Bain & Company">
-          <div class="rcard-logo"><img src="logos/bain.png" alt="Bain & Company"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Bain_&_Company_logo.svg.png" alt="Bain & Company"></div>
           <div class="rcard-overlay"><div class="rcard-name">Bain & Company</div><div class="rcard-type">Séminaire International</div><div class="rcard-stat">200 pax</div></div>
         </div>
 
@@ -607,8 +608,8 @@
     <div class="road-strip road-strip--left" id="strip-2">
       <div class="road-cards-inner">
 
-        <div class="rcard" data-client="Alan" data-type="Corporate" data-detail="2 projets · Belgique & Marseille" data-year="2024–2025">
-          <div class="rcard-logo"><img src="logos/alan.png" alt="Alan"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Alan Logo.png" alt="Alan"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Alan</div>
             <div class="rcard-type">Séminaires Corporate</div>
@@ -617,8 +618,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="RSM France" data-type="Corporate" data-detail="Séminaire 3j · Radisson Blu Marseille" data-year="2023">
-          <div class="rcard-logo"><img src="logos/rsm.png" alt="RSM France"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/RSM Logo.png" alt="RSM France"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">RSM France</div>
             <div class="rcard-type">Séminaire</div>
@@ -627,8 +628,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="HR Path" data-type="Corporate" data-detail="Séminaire Ibiza · 50 pax · 2024" data-year="2024">
-          <div class="rcard-logo"><img src="logos/hr-path.png" alt="HR Path"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Logo_HR_Path_1920px.png" alt="HR Path"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">HR Path</div>
             <div class="rcard-type">Séminaire International</div>
@@ -637,8 +638,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Nexans" data-type="Lancements" data-detail="Atomium Bruxelles · Lancement Benelux" data-year="2022–2023">
-          <div class="rcard-logo"><img src="logos/nexans.png" alt="Nexans"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/Nexans_logo.svg.png" alt="Nexans"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Nexans</div>
             <div class="rcard-type">Lancement Corporate</div>
@@ -647,8 +648,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="NOLT" data-type="Lifestyle & Sports" data-detail="Shooting catalogue 2026/2027 · Monaco & Menton" data-year="2025">
-          <div class="rcard-logo"><img src="logos/nolt.png" alt="NOLT"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/NOLT_FOND_NOIR.png" alt="NOLT"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">NOLT</div>
             <div class="rcard-type">Shooting Catalogue</div>
@@ -657,8 +658,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="JD Sports" data-type="Lifestyle & Sports" data-detail="Village des Nations · Sponsor titre CAN 2025" data-year="2026">
-          <div class="rcard-logo"><img src="logos/jd-sports.png" alt="JD Sports"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/JD Sports.png" alt="JD Sports"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">JD Sports</div>
             <div class="rcard-type">Fan Zone · Sponsor Titre</div>
@@ -667,8 +668,8 @@
           </div>
         </div>
 
-        <div class="rcard" data-client="Le Coq Sportif" data-type="Lifestyle & Sports" data-detail="Village des Nations · Sponsor premium" data-year="2026">
-          <div class="rcard-logo"><img src="logos/le-coq-sportif.png" alt="Le Coq Sportif"></div>
+        <div class="rcard">
+          <div class="rcard-logo"><img src="logos/le-coq-sportif-logo-png-seeklo..." alt="Le Coq Sportif"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Le Coq Sportif</div>
             <div class="rcard-type">Pop-up & Collection Exclusive</div>
@@ -678,13 +679,13 @@
         </div>
 
         <!-- Duplicates for loop -->
-        <div class="rcard"><div class="rcard-logo"><img src="logos/alan.png" alt="Alan"></div><div class="rcard-overlay"><div class="rcard-name">Alan</div><div class="rcard-type">Séminaires Corporate</div><div class="rcard-stat">400 pax</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/rsm.png" alt="RSM France"></div><div class="rcard-overlay"><div class="rcard-name">RSM France</div><div class="rcard-type">Séminaire</div><div class="rcard-stat">110 pax</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/hr-path.png" alt="HR Path"></div><div class="rcard-overlay"><div class="rcard-name">HR Path</div><div class="rcard-type">Séminaire International</div><div class="rcard-stat">50 pax</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/nexans.png" alt="Nexans"></div><div class="rcard-overlay"><div class="rcard-name">Nexans</div><div class="rcard-type">Lancement Corporate</div><div class="rcard-stat">Bruxelles</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/nolt.png" alt="NOLT"></div><div class="rcard-overlay"><div class="rcard-name">NOLT</div><div class="rcard-type">Shooting Catalogue</div><div class="rcard-stat">Monaco 2025</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/jd-sports.png" alt="JD Sports"></div><div class="rcard-overlay"><div class="rcard-name">JD Sports</div><div class="rcard-type">Fan Zone</div><div class="rcard-stat">6 000+ visiteurs</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/le-coq-sportif.png" alt="Le Coq Sportif"></div><div class="rcard-overlay"><div class="rcard-name">Le Coq Sportif</div><div class="rcard-type">Collection Exclusive</div><div class="rcard-stat">+40M impressions</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/Alan Logo.png" alt="Alan"></div><div class="rcard-overlay"><div class="rcard-name">Alan</div><div class="rcard-type">Séminaires Corporate</div><div class="rcard-stat">400 pax</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/RSM Logo.png" alt="RSM France"></div><div class="rcard-overlay"><div class="rcard-name">RSM France</div><div class="rcard-type">Séminaire</div><div class="rcard-stat">110 pax</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/Logo_HR_Path_1920px.png" alt="HR Path"></div><div class="rcard-overlay"><div class="rcard-name">HR Path</div><div class="rcard-type">Séminaire International</div><div class="rcard-stat">50 pax</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/Nexans_logo.svg.png" alt="Nexans"></div><div class="rcard-overlay"><div class="rcard-name">Nexans</div><div class="rcard-type">Lancement Corporate</div><div class="rcard-stat">Bruxelles</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/NOLT_FOND_NOIR.png" alt="NOLT"></div><div class="rcard-overlay"><div class="rcard-name">NOLT</div><div class="rcard-type">Shooting Catalogue</div><div class="rcard-stat">Monaco 2025</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/JD Sports.png" alt="JD Sports"></div><div class="rcard-overlay"><div class="rcard-name">JD Sports</div><div class="rcard-type">Fan Zone</div><div class="rcard-stat">6 000+ visiteurs</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/le-coq-sportif-logo-png-seeklo..." alt="Le Coq Sportif"></div><div class="rcard-overlay"><div class="rcard-name">Le Coq Sportif</div><div class="rcard-type">Collection Exclusive</div><div class="rcard-stat">+40M impressions</div></div></div>
 
       </div>
     </div>
@@ -707,16 +708,12 @@
   <!-- ═══ VILLAGE DES NATIONS — CARTE FEATURED PRESSE ═══ -->
   <div class="pcard sz-wide pcard-featured" data-cat="lifestyle">
     <div class="pcard-bg bg-vdn">
-      <!-- Fond graphique évoquant la fête, le stade, Marseille -->
       <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 1200 400">
-        <!-- Cercles concentriques style stade -->
         <ellipse cx="600" cy="200" rx="500" ry="180" fill="none" stroke="rgba(43,64,252,.25)" stroke-width="1.5"/>
         <ellipse cx="600" cy="200" rx="380" ry="130" fill="none" stroke="rgba(43,64,252,.18)" stroke-width="1"/>
         <ellipse cx="600" cy="200" rx="260" ry="85" fill="none" stroke="rgba(43,64,252,.12)" stroke-width=".8"/>
-        <!-- Lignes terrain -->
         <line x1="600" y1="20" x2="600" y2="380" stroke="rgba(43,64,252,.15)" stroke-width="1"/>
         <line x1="100" y1="200" x2="1100" y2="200" stroke="rgba(43,64,252,.1)" stroke-width=".8"/>
-        <!-- Drapeaux africains symboliques -->
         <rect x="80" y="60" width="18" height="12" fill="rgba(43,64,252,.4)" rx="1"/>
         <rect x="1100" y="60" width="18" height="12" fill="rgba(43,64,252,.4)" rx="1"/>
         <rect x="80" y="320" width="18" height="12" fill="rgba(43,64,252,.4)" rx="1"/>
@@ -724,16 +721,12 @@
       </svg>
     </div>
     <div class="pcard-overlay"></div>
-
-    <!-- Badge PRESSE -->
     <div class="pcard-press-badge">
       <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-2 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
       Presse · Maritima.fr
     </div>
-
     <div class="pcard-year">Jan. 2026</div>
     <div class="pcard-pax">10 000 PAX</div>
-
     <div class="pcard-info">
       <div class="pcard-tag pcard-tag-featured">Concept Original · Fan Zone · CAN 2025</div>
       <div class="pcard-title pcard-title-featured">Village des Nations<br><span>Marseille · Esplanade J4</span></div>
@@ -741,30 +734,13 @@
         <span>📍 Face au Mucem · Marseille</span>
         <span>🤝 JD Sports · Le Coq Sportif · Ville de Marseille</span>
       </div>
-
-      <!-- Stats clés -->
       <div class="pcard-stats-row">
-        <div class="pcard-stat">
-          <div class="pcard-stat-num">6 000+</div>
-          <div class="pcard-stat-label">Visiteurs</div>
-        </div>
-        <div class="pcard-stat">
-          <div class="pcard-stat-num">+40M</div>
-          <div class="pcard-stat-label">Impressions</div>
-        </div>
-        <div class="pcard-stat">
-          <div class="pcard-stat-num">4</div>
-          <div class="pcard-stat-label">Activations</div>
-        </div>
-        <div class="pcard-stat">
-          <div class="pcard-stat-num">3</div>
-          <div class="pcard-stat-label">Sponsors majeurs</div>
-        </div>
+        <div class="pcard-stat"><div class="pcard-stat-num">6 000+</div><div class="pcard-stat-label">Visiteurs</div></div>
+        <div class="pcard-stat"><div class="pcard-stat-num">+40M</div><div class="pcard-stat-label">Impressions</div></div>
+        <div class="pcard-stat"><div class="pcard-stat-num">4</div><div class="pcard-stat-label">Activations</div></div>
+        <div class="pcard-stat"><div class="pcard-stat-num">3</div><div class="pcard-stat-label">Sponsors majeurs</div></div>
       </div>
-
       <div class="pcard-desc">Concept créé de A à Z. Fan zone géante dédiée à la CAN 2025 — 10 000 m², écran LED 40m², village culinaire, pop-up store exclusif Le Coq Sportif x Village des Nations. Complet dès J-1. Un format conçu pour être dupliqué sur les grandes compétitions mondiales.</div>
-
-      <!-- Activations -->
       <div class="pcard-activations">
         <div class="pcard-act-label">Activations</div>
         <div class="pcard-act-list">
@@ -774,7 +750,6 @@
           <div class="pcard-act-item">🎤 Village des Nations · J4 · Écran géant · DJ set · Concerts live</div>
         </div>
       </div>
-
       <div class="pcard-media-coverage">
         <span class="pcard-media-label">Médias présents</span>
         <span class="pcard-media-list">La Provence · M6 · Hugo Décrypte · Influenceurs nationaux</span>
@@ -797,9 +772,7 @@
     <div class="pcard-info">
       <div class="pcard-tag">Soirée Annuelle</div>
       <div class="pcard-title">Ubisoft Paris<br>Soirée de Fin d'Année</div>
-      <div class="pcard-meta">
-        <span>📍 Pavillon Baltard · Paris</span>
-      </div>
+      <div class="pcard-meta"><span>📍 Pavillon Baltard · Paris</span></div>
       <div class="pcard-desc">Soirée annuelle de 1 700 collaborateurs au Pavillon Baltard. Scénographie immersive, production complète son & lumière.</div>
     </div>
   </div>
@@ -1007,7 +980,7 @@
 
   <!-- Macallan Chijmes — MEDIUM -->
   <div class="pcard sz-medium" data-cat="luxury">
-    <div class="pcard-bg bg-experiential">
+    <div class="pcard-bg bg-luxury">
       <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><path d="M265,20 L480,380 L50,380 Z" fill="none" stroke="#c8a96e" stroke-width="1"/><path d="M265,80 L430,360 L100,360 Z" fill="none" stroke="#c8a96e" stroke-width=".4"/></svg>
     </div>
     <div class="pcard-overlay"></div>
@@ -1054,22 +1027,10 @@
 
 <!-- STATS -->
 <div class="portfolio-stats">
-  <div class="pstat reveal">
-    <div class="pstat-num">17+</div>
-    <div class="pstat-label">Projets réalisés</div>
-  </div>
-  <div class="pstat reveal">
-    <div class="pstat-num">8</div>
-    <div class="pstat-label">Pays & Destinations</div>
-  </div>
-  <div class="pstat reveal">
-    <div class="pstat-num">10K+</div>
-    <div class="pstat-label">Participants</div>
-  </div>
-  <div class="pstat reveal">
-    <div class="pstat-num">6</div>
-    <div class="pstat-label">Univers d'activité</div>
-  </div>
+  <div class="pstat reveal"><div class="pstat-num">17+</div><div class="pstat-label">Projets réalisés</div></div>
+  <div class="pstat reveal"><div class="pstat-num">8</div><div class="pstat-label">Pays & Destinations</div></div>
+  <div class="pstat reveal"><div class="pstat-num">10K+</div><div class="pstat-label">Participants</div></div>
+  <div class="pstat reveal"><div class="pstat-num">6</div><div class="pstat-label">Univers d'activité</div></div>
 </div>
 
 <!-- CTA -->
@@ -1101,7 +1062,6 @@ window.addEventListener('scroll', () => {
 /* FILTERS */
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = document.querySelectorAll('.pcard');
-
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     filterBtns.forEach(b => b.classList.remove('active'));
@@ -1126,11 +1086,39 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 </script>
 
-
-
-
-
-
+<!-- COPILOTE PROAD -->
+<style>
+.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:62px;height:62px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s;padding:10px;overflow:visible;box-shadow:0 0 0 0 rgba(43,64,252,.5);}
+.cop-float-btn:hover{transform:scale(1.08);}
+.cop-float-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(43,64,252,.25);animation:cfpRing 2s ease-out infinite;pointer-events:none;}
+.cop-float-btn::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(43,64,252,.12);animation:cfpRing 2s ease-out .4s infinite;pointer-events:none;}
+@keyframes cfpRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.6);opacity:0;}}
+.cop-float-badge{position:absolute;top:0px;right:0px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 8px rgba(34,197,94,.8);z-index:2;}
+.cop-float-tip{position:absolute;right:74px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
+.cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
+.cop-float-btn:hover .cop-float-tip{opacity:1;}
+.cop-float-panel{position:fixed;bottom:106px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:6px;overflow:hidden;}
+.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;}
+.cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
+.cfp-msg.vis{opacity:1;transform:translateY(0);}
+.cfp-mav{width:28px;height:28px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;padding:4px;overflow:hidden;}
+.cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
+.cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0;}
+.cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.58rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
+.cfp-ubub{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px 2px 12px 12px;padding:10px 14px;max-width:85%;}
+.cfp-ubub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.7);margin:0;text-align:right;}
+.cfp-quick{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
+.cfp-qbtn{background:none;border:1px solid rgba(43,64,252,.25);color:rgba(255,255,255,.55);font-family:Inter,sans-serif;font-size:.7rem;padding:6px 12px;cursor:pointer;border-radius:2px;transition:all .2s;}
+.cfp-qbtn:hover{border-color:#2b40fc;color:rgba(255,255,255,.9);background:rgba(43,64,252,.08);}
+.cfp-inrow{border-top:1px solid rgba(255,255,255,.05);padding:10px 12px;display:flex;gap:8px;}
+.cfp-in{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-family:Inter,sans-serif;font-size:.78rem;padding:8px 12px;outline:none;border-radius:2px;}
+.cfp-in:focus{border-color:rgba(43,64,252,.5);}
+.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
+.cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);}
+</style>
 
 <button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
   <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>
@@ -1150,11 +1138,11 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
   <div class="cfp-msgs" id="cfp-msgs">
     <div class="cfp-msg" id="cfp-m1">
       <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>Bonjour ! Je suis le <strong>Copilote</strong> de Mehdi. Il prend personnellement en charge chaque projet.</p></div>
+      <div class="cfp-bub"><p>Bonjour ! Je suis le <strong>Copilote</strong> de Mehdi. Il prend personnellement en charge chaque projet.</p></div>
     </div>
     <div class="cfp-msg" id="cfp-m2">
       <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>En quoi puis-je vous aider ? Un RDV, un brief, une question — je suis là pour ça.</p></div>
+      <div class="cfp-bub"><p>En quoi puis-je vous aider ? Un RDV, un brief, une question — je suis là pour ça.</p></div>
     </div>
   </div>
   <div class="cfp-quick" id="cfp-quick">
@@ -1170,124 +1158,20 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
   </div>
   <div class="cfp-footer">Copilote IA - Reponse Mehdi sous 24h</div>
 </div>
+
 <script>
 (function() {
-  var isOpen = false;
-  var didInit = false;
-  var panel = document.getElementById('cfp-panel');
-  var msgs  = document.getElementById('cfp-msgs');
-  var inp   = document.getElementById('cfp-in');
-  var quick = document.getElementById('cfp-quick');
-
-  window.cfpToggle = function() {
-    isOpen = !isOpen;
-    if (panel) panel.classList.toggle('open', isOpen);
-    if (isOpen && !didInit) {
-      didInit = true;
-      var m1 = document.getElementById('cfp-m1');
-      var m2 = document.getElementById('cfp-m2');
-      if (m1) setTimeout(function() { m1.classList.add('vis'); }, 300);
-      if (m2) setTimeout(function() { m2.classList.add('vis'); }, 800);
-    }
-  };
-
-  var LOGO = '<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
-
-  function makeAv(cls) {
-    var av = document.createElement('div');
-    av.className = cls;
-    av.innerHTML = LOGO;
-    return av;
-  }
-
-  function botMsg(html) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg';
-    d.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.innerHTML = html;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { d.classList.add('vis'); }, 30);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function userMsg(text) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg vis';
-    d.style.flexDirection = 'row-reverse';
-    var av = document.createElement('div');
-    av.className = 'cfp-uav';
-    av.textContent = 'vous';
-    d.appendChild(av);
-    var bub = document.createElement('div');
-    bub.className = 'cfp-ubub';
-    var p = document.createElement('p');
-    p.textContent = text;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function typing(cb) {
-    var t = document.createElement('div');
-    t.className = 'cfp-msg vis';
-    t.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.style.cssText = 'display:flex;gap:5px;align-items:center;margin:0';
-    for (var i = 0; i < 3; i++) {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s ' + (i*0.2) + 's infinite';
-      p.appendChild(dot);
-    }
-    bub.appendChild(p);
-    t.appendChild(bub);
-    if (msgs) msgs.appendChild(t);
-    setTimeout(function() { t.remove(); cb(); }, 950);
-  }
-
-  window.cfpAct = function(n) {
-    var labels = ['Je voudrais prendre rendez-vous', 'Je souhaite deposer un brief', 'En savoir plus sur PROAD'];
-    userMsg(labels[n - 1]);
-    if (quick) quick.style.display = 'none';
-    typing(function() {
-      if (n === 1) botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');
-      else if (n === 2) botMsg('Parfait. Rendez-vous ici pour déposer votre brief : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');
-      else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');
-    });
-  };
-
-  window.cfpSend = function() {
-    var text = inp ? inp.value.trim() : '';
-    if (!text) return;
-    inp.value = '';
-    userMsg(text);
-    if (quick) quick.style.display = 'none';
-    var tl = text.toLowerCase();
-    typing(function() {
-      if (tl.indexOf('rdv') > -1 || tl.indexOf('rendez') > -1) {
-        botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour un RDV. Mehdi repond sous 24h.');
-      } else if (tl.indexOf('brief') > -1 || tl.indexOf('projet') > -1) {
-        botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');
-      } else if (tl.indexOf('budget') > -1 || tl.indexOf('prix') > -1) {
-        botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');
-      } else {
-        botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');
-      }
-    });
-  };
-
-  if (inp) {
-    inp.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') window.cfpSend();
-    });
-  }
+  var isOpen=false,didInit=false;
+  var panel=document.getElementById('cfp-panel'),msgs=document.getElementById('cfp-msgs'),inp=document.getElementById('cfp-in'),quick=document.getElementById('cfp-quick');
+  var LOGO='<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
+  window.cfpToggle=function(){isOpen=!isOpen;if(panel)panel.classList.toggle('open',isOpen);if(isOpen&&!didInit){didInit=true;var m1=document.getElementById('cfp-m1'),m2=document.getElementById('cfp-m2');if(m1)setTimeout(function(){m1.classList.add('vis');},300);if(m2)setTimeout(function(){m2.classList.add('vis');},800);}};
+  function makeAv(c){var a=document.createElement('div');a.className=c;a.innerHTML=LOGO;return a;}
+  function botMsg(h){var d=document.createElement('div');d.className='cfp-msg';d.appendChild(makeAv('cfp-mav'));var b=document.createElement('div');b.className='cfp-bub';var p=document.createElement('p');p.innerHTML=h;b.appendChild(p);d.appendChild(b);if(msgs)msgs.appendChild(d);setTimeout(function(){d.classList.add('vis');},30);setTimeout(function(){if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);}
+  function userMsg(t){var d=document.createElement('div');d.className='cfp-msg vis';d.style.flexDirection='row-reverse';var a=document.createElement('div');a.className='cfp-uav';a.textContent='vous';d.appendChild(a);var b=document.createElement('div');b.className='cfp-ubub';var p=document.createElement('p');p.textContent=t;b.appendChild(p);d.appendChild(b);if(msgs)msgs.appendChild(d);setTimeout(function(){if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);}
+  function typing(cb){var t=document.createElement('div');t.className='cfp-msg vis';t.appendChild(makeAv('cfp-mav'));var b=document.createElement('div');b.className='cfp-bub';var p=document.createElement('p');p.style.cssText='display:flex;gap:5px;align-items:center;margin:0';for(var i=0;i<3;i++){var dot=document.createElement('span');dot.style.cssText='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s '+(i*0.2)+'s infinite';p.appendChild(dot);}b.appendChild(p);t.appendChild(b);if(msgs)msgs.appendChild(t);setTimeout(function(){t.remove();cb();},950);}
+  window.cfpAct=function(n){var labels=['Je voudrais prendre rendez-vous','Je souhaite deposer un brief','En savoir plus sur PROAD'];userMsg(labels[n-1]);if(quick)quick.style.display='none';typing(function(){if(n===1)botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');else if(n===2)botMsg('Parfait. Rendez-vous ici : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');});};
+  window.cfpSend=function(){var text=inp?inp.value.trim():'';if(!text)return;inp.value='';userMsg(text);if(quick)quick.style.display='none';var tl=text.toLowerCase();typing(function(){if(tl.indexOf('rdv')>-1||tl.indexOf('rendez')>-1)botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a>. Mehdi repond sous 24h.');else if(tl.indexOf('brief')>-1||tl.indexOf('projet')>-1)botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');else if(tl.indexOf('budget')>-1||tl.indexOf('prix')>-1)botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');else botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');});};
+  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')window.cfpSend();});
 })();
 </script>
 
