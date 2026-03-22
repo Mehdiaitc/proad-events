@@ -93,11 +93,12 @@
   width: auto;
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: .55;
-  transition: opacity .35s;
+  filter: brightness(0) invert(1) opacity(.5);
+  transition: filter .35s, opacity .35s;
 }
-.rcard:hover .rcard-logo img { opacity: .1; }
+.rcard:hover .rcard-logo img {
+  filter: brightness(0) invert(1) opacity(.08);
+}
 .rcard-overlay {
   position: absolute;
   inset: 0;
@@ -306,49 +307,27 @@
   transition: opacity .4s;
 }
 .pcard:hover .pcard-overlay { opacity: .85; }
-/* ── PCARD INFO — épuré ── */
-.pcard-info {
+/* ── PCARD SIZES ── */
+.pcard.sz-large  { grid-column: span 6; aspect-ratio: 16/9; }
+.pcard.sz-medium { grid-column: span 4; aspect-ratio: 4/3; }
+.pcard.sz-small  { grid-column: span 3; aspect-ratio: 1; }
+.pcard.sz-wide   { grid-column: span 8; aspect-ratio: 21/9; }
+.pcard.sz-tall   { grid-column: span 4; aspect-ratio: 3/4; }
+.pcard-bg {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 20px 24px 24px;
-  z-index: 2;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .6s ease;
 }
-.pcard-tag {
-  font-size: .58rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: rgba(43,64,252,.8);
-  margin-bottom: 5px;
-}
-.pcard-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
-  letter-spacing: .04em;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 6px;
-}
-.pcard-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: .6rem;
-  color: rgba(255,255,255,.4);
-  letter-spacing: .05em;
-  margin-bottom: 6px;
-}
-.pcard-desc {
-  font-size: .7rem;
-  color: rgba(255,255,255,.55);
-  line-height: 1.55;
-}
+.pcard:hover .pcard-bg { transform: scale(1.04); }
 .pcard-year {
   position: absolute;
   top: 16px; right: 16px;
   font-family: 'Bebas Neue', sans-serif;
   font-size: .72rem;
   letter-spacing: .2em;
-  color: rgba(255,255,255,.25);
+  color: rgba(255,255,255,.3);
   z-index: 3;
 }
 .pcard-pax {
@@ -377,12 +356,73 @@
 }
 .pcard-chab-badge span { color: rgba(43,64,252,.6); }
 
-/* Background variants */
-.bg-gala    { background: linear-gradient(135deg,#0a0612,#0d0918,#060410); }
-.bg-corporate{ background: linear-gradient(135deg,#060c18,#0a1020,#04080e); }
-.bg-launch  { background: linear-gradient(135deg,#08100a,#0c1410,#060a06); }
-.bg-lifestyle{ background: linear-gradient(135deg,#100606,#180a08,#0a0404); }
-.bg-luxury  { background: linear-gradient(135deg,#10080a,#16080c,#0c0608); }
+/* Background variants — plus contrastés */
+.bg-gala    { background: linear-gradient(135deg,#12061a,#180a24,#0a0414); }
+.bg-corporate{ background: linear-gradient(135deg,#061428,#0c1c38,#040c1a); }
+.bg-launch  { background: linear-gradient(135deg,#081808,#0e2010,#060e06); }
+.bg-lifestyle{ background: linear-gradient(135deg,#1a0606,#280c08,#120404); }
+.bg-luxury  { background: linear-gradient(135deg,#180a0c,#220c10,#100608); }
+
+/* Overlay permanent léger — lisibilité même sans hover */
+.pcard-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(3,4,10,.96) 0%,
+    rgba(3,4,10,.6) 40%,
+    rgba(3,4,10,.15) 100%
+  );
+  opacity: .7;
+  transition: opacity .4s;
+}
+.pcard:hover .pcard-overlay { opacity: 1; }
+
+/* Info toujours visible, pas seulement au hover */
+.pcard-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 24px 24px;
+  z-index: 2;
+}
+.pcard-tag {
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(43,64,252,.9);
+  margin-bottom: 5px;
+}
+.pcard-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  letter-spacing: .04em;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.8);
+}
+.pcard-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: .6rem;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+}
+.pcard-desc {
+  font-size: .7rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .35s, transform .35s;
+}
+.pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
+
+/* Bordure hover dorée */
+.pcard { border: 1px solid transparent; transition: border-color .3s; }
+.pcard:hover { border-color: rgba(201,169,110,.3); }
 
 /* ── MOBILE ── */
 @media(max-width:768px) {
@@ -586,7 +626,7 @@
         </div>
 
         <div class="rcard">
-          <div class="rcard-logo"><img src="logos/le-coq-sportif-logo-png-seeklo..." alt="Le Coq Sportif"></div>
+          <div class="rcard-logo"><img src="logos/le-coq-sportif-logo.png" alt="Le Coq Sportif"></div>
           <div class="rcard-overlay">
             <div class="rcard-name">Le Coq Sportif</div>
             <div class="rcard-type">Pop-up & Collection Exclusive</div>
@@ -602,7 +642,7 @@
         <div class="rcard"><div class="rcard-logo"><img src="logos/Nexans_logo.svg.png" alt="Nexans"></div><div class="rcard-overlay"><div class="rcard-name">Nexans</div><div class="rcard-type">Lancement Corporate</div><div class="rcard-stat">Bruxelles</div></div></div>
         <div class="rcard"><div class="rcard-logo"><img src="logos/NOLT_FOND_NOIR.png" alt="NOLT"></div><div class="rcard-overlay"><div class="rcard-name">NOLT</div><div class="rcard-type">Shooting Catalogue</div><div class="rcard-stat">Monaco 2025</div></div></div>
         <div class="rcard"><div class="rcard-logo"><img src="logos/JD Sports.png" alt="JD Sports"></div><div class="rcard-overlay"><div class="rcard-name">JD Sports</div><div class="rcard-type">Fan Zone</div><div class="rcard-stat">6 000+ visiteurs</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/le-coq-sportif-logo-png-seeklo..." alt="Le Coq Sportif"></div><div class="rcard-overlay"><div class="rcard-name">Le Coq Sportif</div><div class="rcard-type">Collection Exclusive</div><div class="rcard-stat">+40M impressions</div></div></div>
+        <div class="rcard"><div class="rcard-logo"><img src="logos/le-coq-sportif-logo.png" alt="Le Coq Sportif"></div><div class="rcard-overlay"><div class="rcard-name">Le Coq Sportif</div><div class="rcard-type">Collection Exclusive</div><div class="rcard-stat">+40M impressions</div></div></div>
 
       </div>
     </div>
@@ -919,18 +959,33 @@
 </div>
 
 <!-- STATS -->
-<div class="portfolio-stats">
-  <div class="pstat reveal"><div class="pstat-num">17+</div><div class="pstat-label">Projets réalisés</div></div>
-  <div class="pstat reveal"><div class="pstat-num">8</div><div class="pstat-label">Pays & Destinations</div></div>
-  <div class="pstat reveal"><div class="pstat-num">10K+</div><div class="pstat-label">Participants</div></div>
-  <div class="pstat reveal"><div class="pstat-num">6</div><div class="pstat-label">Univers d'activité</div></div>
+<div style="border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:80px 48px;display:flex;justify-content:center;gap:clamp(40px,7vw,100px);flex-wrap:wrap;align-items:center;">
+  <div class="reveal" style="text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);letter-spacing:.04em;color:#C9A96E;line-height:1;filter:drop-shadow(0 0 16px rgba(201,169,110,.35));">17+</div>
+    <div style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:10px;font-family:'Inter',sans-serif;">Projets réalisés</div>
+  </div>
+  <div style="width:1px;height:40px;background:rgba(255,255,255,.08);flex-shrink:0;"></div>
+  <div class="reveal" style="text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);letter-spacing:.04em;color:#C9A96E;line-height:1;filter:drop-shadow(0 0 16px rgba(201,169,110,.35));">8</div>
+    <div style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:10px;font-family:'Inter',sans-serif;">Pays & Destinations</div>
+  </div>
+  <div style="width:1px;height:40px;background:rgba(255,255,255,.08);flex-shrink:0;"></div>
+  <div class="reveal" style="text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);letter-spacing:.04em;color:#C9A96E;line-height:1;filter:drop-shadow(0 0 16px rgba(201,169,110,.35));">10K+</div>
+    <div style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:10px;font-family:'Inter',sans-serif;">Participants</div>
+  </div>
+  <div style="width:1px;height:40px;background:rgba(255,255,255,.08);flex-shrink:0;"></div>
+  <div class="reveal" style="text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);letter-spacing:.04em;color:#C9A96E;line-height:1;filter:drop-shadow(0 0 16px rgba(201,169,110,.35));">6</div>
+    <div style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:10px;font-family:'Inter',sans-serif;">Univers d'activité</div>
+  </div>
 </div>
 
 <!-- CTA -->
-<div class="portfolio-cta">
+<div style="padding:120px 48px;text-align:center;">
   <p class="section-label reveal">Votre prochain projet</p>
-  <h2 class="reveal">Traçons ensemble<br>votre route.</h2>
-  <p class="reveal">Chaque événement est une nouvelle destination. Parlez-nous de votre projet.</p>
+  <h2 class="reveal" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:.03em;margin:0 0 16px;line-height:1;">Traçons ensemble<br>votre route.</h2>
+  <p class="reveal" style="color:var(--gray);max-width:480px;margin:0 auto 40px;line-height:1.7;font-size:.88rem;">Chaque événement est une nouvelle destination. Parlez-nous de votre projet.</p>
   <a href="contact.html" class="btn-primary reveal">PRENDRE RENDEZ-VOUS</a>
 </div>
 
