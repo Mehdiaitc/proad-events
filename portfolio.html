@@ -320,6 +320,17 @@
   background-position: center;
   transition: transform .6s ease;
 }
+/* Quand une vraie photo est définie, le SVG accent s'efface */
+.pcard-bg.has-photo { background-color: transparent; }
+.pcard-bg.has-photo + .pcard-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(3,4,10,.97) 0%,
+    rgba(3,4,10,.45) 45%,
+    rgba(3,4,10,.1) 100%
+  );
+  opacity: 1;
+}
 .pcard:hover .pcard-bg { transform: scale(1.04); }
 .pcard-year {
   position: absolute;
