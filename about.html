@@ -85,26 +85,6 @@
 }
 .bio-photo-frame:hover img { filter: grayscale(0%) contrast(1.05); }
 
-/* Placeholder si pas de photo */
-.bio-photo-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(160deg, #0d0f1e 0%, #060810 60%, #0a0c1a 100%);
-  gap: 16px;
-}
-.bio-photo-placeholder svg { opacity: .25; }
-.bio-photo-placeholder span {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .7rem;
-  letter-spacing: .3em;
-  color: rgba(255,255,255,.2);
-  text-transform: uppercase;
-}
-
 /* Blue accent border */
 .bio-photo-frame::before {
   content: '';
@@ -125,7 +105,7 @@
   z-index: 3;
 }
 
-/* Photo hover overlay avec infos */
+/* Photo hover overlay */
 .bio-photo-overlay {
   position: absolute;
   inset: 0;
@@ -147,11 +127,12 @@
   line-height: 1;
   margin-bottom: 6px;
 }
+/* ── CORRECTION : rôle en doré au lieu de bleu ── */
 .bio-overlay-role {
   font-size: .68rem;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: #C9A96E;
   margin-bottom: 6px;
   line-height: 1.4;
 }
@@ -215,82 +196,12 @@
   50% { color: #6680ff; text-shadow: 0 0 18px rgba(43,64,252,.9), 0 0 40px rgba(43,64,252,.4); filter: brightness(1.3); }
 }
 
-/* Copilote float button — PROAD A logo */
-.cop-float-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 1000;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--dark);
-  border: 1.5px solid rgba(43,64,252,.6);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 0 rgba(43,64,252,.3);
-  animation: copPulse 2.5s infinite;
-  transition: transform .2s, box-shadow .2s;
-  padding: 0;
-}
-.cop-float-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 32px rgba(43,64,252,.7);
-}
-.cop-float-btn svg { width: 32px; height: auto; }
-@keyframes copPulse {
-  0%,100% { box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 0 rgba(43,64,252,.3); }
-  50% { box-shadow: 0 4px 24px rgba(43,64,252,.45), 0 0 0 10px rgba(43,64,252,0); }
-}
-.cop-float-badge {
-  position: absolute;
-  top: -2px; right: -2px;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 2px solid var(--dark);
-  box-shadow: 0 0 6px rgba(34,197,94,.6);
-}
-
-/* Tooltip on hover */
-.cop-float-tooltip {
-  position: absolute;
-  right: 68px;
-  bottom: 50%;
-  transform: translateY(50%);
-  background: rgba(7,7,15,.98);
-  border: 1px solid rgba(43,64,252,.3);
-  padding: 8px 14px;
-  white-space: nowrap;
-  font-family: 'Inter', sans-serif;
-  font-size: .72rem;
-  color: rgba(255,255,255,.75);
-  letter-spacing: .04em;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s;
-  border-radius: 2px;
-}
-.cop-float-tooltip::after {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 5px solid transparent;
-  border-left-color: rgba(43,64,252,.3);
-}
-.cop-float-btn:hover .cop-float-tooltip { opacity: 1; }
-
 /* ── ROAD TIMELINE HORIZONTALE ── */
 .bio-road {
   position: relative;
   margin-top: 48px;
   padding-bottom: 8px;
 }
-/* Ligne horizontale */
 .bio-road-line {
   position: absolute;
   top: 14px;
@@ -302,8 +213,6 @@
     rgba(43,64,252,.4) 95%,
     transparent);
 }
-/* Wrapper flex pour les 4 étapes */
-
 .bio-road-section {
   max-width: 1200px;
   margin: 0 auto;
@@ -326,7 +235,6 @@
   transition: opacity .6s, transform .6s;
 }
 .bio-road-item.visible { opacity: 1; transform: translateY(0); }
-/* Point sur la ligne horizontale */
 .bio-road-dot {
   position: absolute;
   top: 5px;
@@ -344,7 +252,6 @@
   background: var(--blue);
   box-shadow: 0 0 18px rgba(43,64,252,.85);
 }
-.bio-road-item:not(:last-child) .bio-road-dot::after { display: none; }
 .bio-road-year {
   font-family: "Bebas Neue", sans-serif;
   font-size: .65rem;
@@ -352,7 +259,6 @@
   color: #C9A96E;
   margin-bottom: 4px;
 }
-.bio-road-year::after { display: none; }
 .bio-road-title {
   font-family: "Bebas Neue", sans-serif;
   font-size: clamp(.8rem, 1.1vw, .95rem);
@@ -374,16 +280,7 @@
 }
 .bio-road-item:last-child .bio-road-title { color: var(--blue); }
 @media(max-width:900px){
-  
-.bio-road-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 48px 60px;
-}
-@media(max-width:900px){
-  .bio-road-section { padding: 0 24px 48px; }
-}
-.bio-road-items { flex-direction: column; }
+  .bio-road-items { flex-direction: column; }
   .bio-road-line { top: 0; bottom: 0; left: 14px; right: auto; width: 2px; height: auto;
     background: linear-gradient(to bottom, transparent, rgba(43,64,252,.5) 5%, rgba(43,64,252,.4) 95%, transparent); }
   .bio-road-item { padding: 0 0 28px 44px; }
@@ -408,45 +305,6 @@
   background: var(--blue);
   margin: 32px 0;
   box-shadow: 0 0 8px rgba(43,64,252,.6);
-}
-
-/* Timeline */
-.bio-timeline { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-.bio-tl-item {
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 20px;
-  align-items: start;
-  position: relative;
-}
-.bio-tl-item::before {
-  content: '';
-  position: absolute;
-  left: 90px;
-  top: 10px;
-  bottom: -20px;
-  width: 1px;
-  background: rgba(255,255,255,.06);
-}
-.bio-tl-item:last-child::before { display: none; }
-.bio-tl-year {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .78rem;
-  letter-spacing: .18em;
-  color: var(--blue);
-  padding-top: 2px;
-  text-align: right;
-}
-.bio-tl-content h4 {
-  font-size: .85rem;
-  font-weight: 600;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 3px;
-}
-.bio-tl-content p {
-  font-size: .75rem;
-  color: var(--gray);
-  line-height: 1.5;
 }
 
 /* Values strip */
@@ -482,263 +340,6 @@
   line-height: 1.6;
 }
 
-/* ═══════════════════════════════
-   COPILOTE — LE GRAND WIDGET
-   ═══════════════════════════════ */
-.copilote-section {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 100px 48px;
-}
-.copilote-label {
-  font-size: .7rem;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 16px;
-}
-.copilote-heading {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  letter-spacing: .03em;
-  line-height: 1;
-  margin-bottom: 40px;
-}
-
-/* Chat UI */
-.copilote-widget {
-  background: #07070f;
-  border: 1px solid rgba(43,64,252,.2);
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 0 60px rgba(43,64,252,.08), 0 40px 80px rgba(0,0,0,.5);
-}
-
-/* Header */
-.cop-header {
-  background: rgba(43,64,252,.07);
-  border-bottom: 1px solid rgba(43,64,252,.15);
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.cop-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a2aff, #0018cc);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .8rem;
-  color: #fff;
-  letter-spacing: .1em;
-  flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(43,64,252,.5);
-  position: relative;
-}
-.cop-avatar::after {
-  content: '';
-  position: absolute;
-  bottom: 1px; right: 1px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 1.5px solid #07070f;
-}
-.cop-title { flex: 1; }
-.cop-title strong {
-  display: block;
-  font-size: .82rem;
-  font-weight: 600;
-  color: rgba(255,255,255,.9);
-  letter-spacing: .04em;
-}
-.cop-title span {
-  font-size: .65rem;
-  color: rgba(255,255,255,.35);
-  letter-spacing: .08em;
-}
-.cop-status {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .6rem;
-  letter-spacing: .2em;
-  color: #22c55e;
-  background: rgba(34,197,94,.1);
-  border: 1px solid rgba(34,197,94,.2);
-  padding: 4px 10px;
-}
-
-/* Messages */
-.cop-messages {
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-height: 280px;
-  max-height: 420px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(43,64,252,.3) transparent;
-}
-
-.cop-msg {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .4s, transform .4s;
-}
-.cop-msg.visible { opacity: 1; transform: translateY(0); }
-
-.cop-msg-avatar {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a2aff, #0018cc);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .6rem;
-  color: #fff;
-  flex-shrink: 0;
-  margin-top: 2px;
-  box-shadow: 0 0 8px rgba(43,64,252,.4);
-}
-.cop-msg-bubble {
-  background: rgba(43,64,252,.1);
-  border: 1px solid rgba(43,64,252,.18);
-  border-radius: 2px 12px 12px 12px;
-  padding: 12px 16px;
-  max-width: 85%;
-}
-.cop-msg-bubble p {
-  font-size: .82rem;
-  line-height: 1.65;
-  color: rgba(255,255,255,.8);
-}
-.cop-msg-bubble strong { color: #fff; }
-.cop-msg-bubble em {
-  font-style: normal;
-  color: var(--blue);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .85rem;
-  letter-spacing: .06em;
-}
-
-/* User message */
-.cop-msg.user { flex-direction: row-reverse; }
-.cop-msg.user .cop-msg-bubble {
-  background: rgba(255,255,255,.04);
-  border-color: rgba(255,255,255,.08);
-  border-radius: 12px 2px 12px 12px;
-  text-align: right;
-}
-.cop-msg.user .cop-msg-bubble p { color: rgba(255,255,255,.6); }
-.cop-user-avatar {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.08);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .6rem;
-  color: rgba(255,255,255,.5);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* Quick actions */
-.cop-quick {
-  padding: 0 20px 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.cop-quick-btn {
-  background: none;
-  border: 1px solid rgba(43,64,252,.25);
-  color: rgba(255,255,255,.5);
-  font-family: 'Inter', sans-serif;
-  font-size: .72rem;
-  padding: 7px 14px;
-  cursor: pointer;
-  transition: all .2s;
-  border-radius: 2px;
-}
-.cop-quick-btn:hover {
-  border-color: var(--blue);
-  color: rgba(255,255,255,.85);
-  background: rgba(43,64,252,.08);
-}
-
-/* Input */
-.cop-input-row {
-  border-top: 1px solid rgba(255,255,255,.05);
-  padding: 14px 16px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-.cop-input {
-  flex: 1;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  color: rgba(255,255,255,.8);
-  font-family: 'Inter', sans-serif;
-  font-size: .8rem;
-  padding: 10px 14px;
-  outline: none;
-  transition: border-color .2s;
-  border-radius: 2px;
-}
-.cop-input::placeholder { color: rgba(255,255,255,.2); }
-.cop-input:focus { border-color: rgba(43,64,252,.45); }
-.cop-send {
-  background: var(--blue);
-  border: none;
-  color: #fff;
-  width: 38px; height: 38px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .2s, box-shadow .2s;
-  flex-shrink: 0;
-  border-radius: 2px;
-}
-.cop-send:hover { background: #4455ff; box-shadow: 0 0 16px rgba(43,64,252,.5); }
-.cop-send svg { width: 16px; height: 16px; }
-
-/* Typing indicator */
-.cop-typing {
-  display: flex; gap: 4px; align-items: center;
-  padding: 8px 0 4px;
-}
-.cop-typing span {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--blue);
-  opacity: .4;
-  animation: typingDot 1.2s infinite;
-}
-.cop-typing span:nth-child(2) { animation-delay: .2s; }
-.cop-typing span:nth-child(3) { animation-delay: .4s; }
-@keyframes typingDot {
-  0%,60%,100% { opacity: .2; transform: translateY(0); }
-  30% { opacity: 1; transform: translateY(-3px); }
-}
-
-/* Disclaimer */
-.cop-disclaimer {
-  padding: 12px 20px;
-  font-size: .62rem;
-  color: rgba(255,255,255,.18);
-  letter-spacing: .06em;
-  border-top: 1px solid rgba(255,255,255,.04);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.cop-disclaimer::before {
-  content: '⚡';
-  font-size: .7rem;
-}
-
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .bio-section {
@@ -748,7 +349,6 @@
   }
   .bio-photo-frame { max-width: 280px; }
   .about-hero { padding: 100px 24px 48px; }
-  .copilote-section { padding: 80px 24px; }
   .values-strip { padding: 48px 24px; }
 }
 </style>
@@ -781,10 +381,9 @@
   <div class="bio-photo-col reveal">
     <div class="bio-photo-frame">
       <img src="Photo portrait.jpg" alt="Mehdi — Fondateur PROAD Events">
-      <!-- Hover overlay -->
       <div class="bio-photo-overlay">
         <div class="bio-overlay-name">Mehdi</div>
-        <div class="bio-overlay-role">Concepteur &amp; Fondateur de PROAD<br>Directeur de Production</div>
+        <div class="bio-overlay-role">Concepteur &amp; Fondateur de PROAD</div>
         <div class="bio-overlay-loc">
           <svg width="9" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
           Marseille · France
@@ -807,7 +406,8 @@
     </p>
     <p class="bio-body reveal">
       Retour en France. Je continue avec <strong>Chab Agency</strong> à Aix-en-Provence. Chef de Projet Senior. C'est là que tout prend forme. Et c'est de <strong>Marseille</strong>, ville que j'aime pour sa diversité et son potentiel événementiel, que je décide de tracer ma propre route avec <strong>PROAD</strong>.
-    </p></div>
+    </p>
+  </div>
 </section>
 
 <!-- ── ROUTE TIMELINE HORIZONTALE ── -->
@@ -830,9 +430,10 @@
         <div class="bio-road-desc">Event Executive. Junior Event Manager. Ubisoft, Cartier, Macallan, Bain, Roger Dubuis, Allianz.</div>
       </div>
 
+      <!-- ── CORRECTION : 2023 · 2025 ── -->
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
-        <div class="bio-road-year">2023 · 2024</div>
+        <div class="bio-road-year">2023 · 2025</div>
         <div class="bio-road-title">Aix-en-Provence · Chab Agency</div>
         <div class="bio-road-desc">Chef de Projet Senior. Corporate, lifestyle, luxe. La vision prend forme.</div>
       </div>
@@ -844,10 +445,9 @@
         <div class="bio-road-desc">Ma propre route. Marseille et toute la France.</div>
       </div>
 
-    </div><!-- /bio-road-items -->
+    </div>
   </div>
 </div>
-
 
 <!-- VALUES -->
 <div class="values-strip">
@@ -885,20 +485,16 @@
   <div class="f-copy">© 2025 PROAD Events. Tous droits réservés.</div>
 </footer>
 
-
 <script>
-/* NAV */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
 }, {passive:true});
 
-/* REVEAL */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
 }, {threshold: .1});
 document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 
-/* ROAD ITEMS — staggered animation */
 const roadIo = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -912,28 +508,6 @@ const roadIo = new IntersectionObserver(entries => {
 }, {threshold: .1});
 const roadEl = document.querySelector('.bio-road');
 if (roadEl) roadIo.observe(roadEl);
-document.querySelectorAll('.reveal').forEach(r => io.observe(r));
-
-/* ── COPILOTE ── */
-const msgs = document.getElementById('cop-messages');
-const input = document.getElementById('cop-input');
-
-// Animate initial messages
-function showInitialMsgs() {
-  const initMsgs = ['msg-1','msg-2','msg-3'];
-  initMsgs.forEach((id, i) => {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('visible');
-    }, 400 + i * 600);
-  });
-}
-setTimeout(showInitialMsgs, 800);
-
-
-
-
-
 </script>
 
 <style>
@@ -942,7 +516,6 @@ setTimeout(showInitialMsgs, 800);
 .cop-float-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(43,64,252,.25);animation:cfpRing 2s ease-out infinite;pointer-events:none;}
 .cop-float-btn::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(43,64,252,.12);animation:cfpRing 2s ease-out .4s infinite;pointer-events:none;}
 @keyframes cfpRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.6);opacity:0;}}
-.cop-float-btn svg{width:100%;height:100%;display:block;}
 .cop-float-badge{position:absolute;top:0px;right:0px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 8px rgba(34,197,94,.8);z-index:2;}
 .cop-float-tip{position:absolute;right:74px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
 .cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
@@ -969,6 +542,7 @@ setTimeout(showInitialMsgs, 800);
 .cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
 .cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);}
 </style>
+
 <button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
   <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>
   <div class="cop-float-badge"></div>
@@ -987,11 +561,11 @@ setTimeout(showInitialMsgs, 800);
   <div class="cfp-msgs" id="cfp-msgs">
     <div class="cfp-msg" id="cfp-m1">
       <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>Bonjour ! Je suis le <strong>Copilote</strong> de Mehdi. Il prend personnellement en charge chaque projet.</p></div>
+      <div class="cfp-bub"><p>Bonjour ! Je suis le <strong>Copilote</strong> de Mehdi. Il prend personnellement en charge chaque projet.</p></div>
     </div>
     <div class="cfp-msg" id="cfp-m2">
       <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>En quoi puis-je vous aider ? Un RDV, un brief, une question — je suis là pour ça.</p></div>
+      <div class="cfp-bub"><p>En quoi puis-je vous aider ? Un RDV, un brief, une question — je suis là pour ça.</p></div>
     </div>
   </div>
   <div class="cfp-quick" id="cfp-quick">
@@ -1007,124 +581,20 @@ setTimeout(showInitialMsgs, 800);
   </div>
   <div class="cfp-footer">Copilote IA - Reponse Mehdi sous 24h</div>
 </div>
+
 <script>
 (function() {
-  var isOpen = false;
-  var didInit = false;
-  var panel = document.getElementById('cfp-panel');
-  var msgs  = document.getElementById('cfp-msgs');
-  var inp   = document.getElementById('cfp-in');
-  var quick = document.getElementById('cfp-quick');
-
-  window.cfpToggle = function() {
-    isOpen = !isOpen;
-    if (panel) panel.classList.toggle('open', isOpen);
-    if (isOpen && !didInit) {
-      didInit = true;
-      var m1 = document.getElementById('cfp-m1');
-      var m2 = document.getElementById('cfp-m2');
-      if (m1) setTimeout(function() { m1.classList.add('vis'); }, 300);
-      if (m2) setTimeout(function() { m2.classList.add('vis'); }, 800);
-    }
-  };
-
-  var LOGO = '<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
-
-  function makeAv(cls) {
-    var av = document.createElement('div');
-    av.className = cls;
-    av.innerHTML = LOGO;
-    return av;
-  }
-
-  function botMsg(html) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg';
-    d.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.innerHTML = html;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { d.classList.add('vis'); }, 30);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function userMsg(text) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg vis';
-    d.style.flexDirection = 'row-reverse';
-    var av = document.createElement('div');
-    av.className = 'cfp-uav';
-    av.textContent = 'vous';
-    d.appendChild(av);
-    var bub = document.createElement('div');
-    bub.className = 'cfp-ubub';
-    var p = document.createElement('p');
-    p.textContent = text;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function typing(cb) {
-    var t = document.createElement('div');
-    t.className = 'cfp-msg vis';
-    t.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.style.cssText = 'display:flex;gap:5px;align-items:center;margin:0';
-    for (var i = 0; i < 3; i++) {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s ' + (i*0.2) + 's infinite';
-      p.appendChild(dot);
-    }
-    bub.appendChild(p);
-    t.appendChild(bub);
-    if (msgs) msgs.appendChild(t);
-    setTimeout(function() { t.remove(); cb(); }, 950);
-  }
-
-  window.cfpAct = function(n) {
-    var labels = ['Je voudrais prendre rendez-vous', 'Je souhaite deposer un brief', 'En savoir plus sur PROAD'];
-    userMsg(labels[n - 1]);
-    if (quick) quick.style.display = 'none';
-    typing(function() {
-      if (n === 1) botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');
-      else if (n === 2) botMsg('Parfait. Rendez-vous ici pour déposer votre brief : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');
-      else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');
-    });
-  };
-
-  window.cfpSend = function() {
-    var text = inp ? inp.value.trim() : '';
-    if (!text) return;
-    inp.value = '';
-    userMsg(text);
-    if (quick) quick.style.display = 'none';
-    var tl = text.toLowerCase();
-    typing(function() {
-      if (tl.indexOf('rdv') > -1 || tl.indexOf('rendez') > -1) {
-        botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour un RDV. Mehdi repond sous 24h.');
-      } else if (tl.indexOf('brief') > -1 || tl.indexOf('projet') > -1) {
-        botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');
-      } else if (tl.indexOf('budget') > -1 || tl.indexOf('prix') > -1) {
-        botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');
-      } else {
-        botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');
-      }
-    });
-  };
-
-  if (inp) {
-    inp.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') window.cfpSend();
-    });
-  }
+  var isOpen=false,didInit=false;
+  var panel=document.getElementById('cfp-panel'),msgs=document.getElementById('cfp-msgs'),inp=document.getElementById('cfp-in'),quick=document.getElementById('cfp-quick');
+  var LOGO='<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
+  window.cfpToggle=function(){isOpen=!isOpen;if(panel)panel.classList.toggle('open',isOpen);if(isOpen&&!didInit){didInit=true;var m1=document.getElementById('cfp-m1'),m2=document.getElementById('cfp-m2');if(m1)setTimeout(function(){m1.classList.add('vis');},300);if(m2)setTimeout(function(){m2.classList.add('vis');},800);}};
+  function makeAv(c){var a=document.createElement('div');a.className=c;a.innerHTML=LOGO;return a;}
+  function botMsg(h){var d=document.createElement('div');d.className='cfp-msg';d.appendChild(makeAv('cfp-mav'));var b=document.createElement('div');b.className='cfp-bub';var p=document.createElement('p');p.innerHTML=h;b.appendChild(p);d.appendChild(b);if(msgs)msgs.appendChild(d);setTimeout(function(){d.classList.add('vis');},30);setTimeout(function(){if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);}
+  function userMsg(t){var d=document.createElement('div');d.className='cfp-msg vis';d.style.flexDirection='row-reverse';var a=document.createElement('div');a.className='cfp-uav';a.textContent='vous';d.appendChild(a);var b=document.createElement('div');b.className='cfp-ubub';var p=document.createElement('p');p.textContent=t;b.appendChild(p);d.appendChild(b);if(msgs)msgs.appendChild(d);setTimeout(function(){if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);}
+  function typing(cb){var t=document.createElement('div');t.className='cfp-msg vis';t.appendChild(makeAv('cfp-mav'));var b=document.createElement('div');b.className='cfp-bub';var p=document.createElement('p');p.style.cssText='display:flex;gap:5px;align-items:center;margin:0';for(var i=0;i<3;i++){var dot=document.createElement('span');dot.style.cssText='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s '+(i*0.2)+'s infinite';p.appendChild(dot);}b.appendChild(p);t.appendChild(b);if(msgs)msgs.appendChild(t);setTimeout(function(){t.remove();cb();},950);}
+  window.cfpAct=function(n){var labels=['Je voudrais prendre rendez-vous','Je souhaite deposer un brief','En savoir plus sur PROAD'];userMsg(labels[n-1]);if(quick)quick.style.display='none';typing(function(){if(n===1)botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');else if(n===2)botMsg('Parfait. Rendez-vous ici : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');});};
+  window.cfpSend=function(){var text=inp?inp.value.trim():'';if(!text)return;inp.value='';userMsg(text);if(quick)quick.style.display='none';var tl=text.toLowerCase();typing(function(){if(tl.indexOf('rdv')>-1||tl.indexOf('rendez')>-1)botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a>. Mehdi repond sous 24h.');else if(tl.indexOf('brief')>-1||tl.indexOf('projet')>-1)botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');else if(tl.indexOf('budget')>-1||tl.indexOf('prix')>-1)botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');else botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');});};
+  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')window.cfpSend();});
 })();
 </script>
 
