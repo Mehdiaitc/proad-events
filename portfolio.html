@@ -464,6 +464,30 @@
   .rcard { width: 180px; height: 110px; }
   .road-clients-header { padding: 0 20px; }
 }
+
+/* ── FILIGRANE PROAD sur cartes portfolio ── */
+.pcard {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.pcard::after {
+  content: 'PROAD';
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  color: rgba(255,255,255,.3);
+  text-shadow: 0 1px 4px rgba(0,0,0,.9);
+  pointer-events: none;
+  z-index: 10;
+  user-select: none;
+}
+.pcard img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -715,8 +739,8 @@
         <div class="rcard" data-target="proj-alan"><div class="rcard-logo"><img src="logos/Alan Logo.png" alt="Alan"></div><div class="rcard-overlay"><div class="rcard-name">Alan</div><div class="rcard-type">Séminaires Corporate</div><div class="rcard-stat">400 pax</div></div></div>
         <div class="rcard" data-target="proj-rsm"><div class="rcard-logo"><img src="logos/RSM Logo.png" alt="RSM France"></div><div class="rcard-overlay"><div class="rcard-name">RSM France</div><div class="rcard-type">Séminaire</div><div class="rcard-stat">110 pax</div></div></div>
         <div class="rcard" data-target="proj-hrpath"><div class="rcard-logo"><img src="logos/HR PATH Logo.png" alt="HR Path"></div><div class="rcard-overlay"><div class="rcard-name">HR Path</div><div class="rcard-type">Séminaire International</div><div class="rcard-stat">50 pax</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/Nexans_logo.svg.png" alt="Nexans"></div><div class="rcard-overlay"><div class="rcard-name">Nexans</div><div class="rcard-type">Lancement Corporate</div><div class="rcard-stat">Bruxelles</div></div></div>
-        <div class="rcard"><div class="rcard-logo"><img src="logos/Nolt logo.png" alt="NOLT"></div><div class="rcard-overlay"><div class="rcard-name">NOLT</div><div class="rcard-type">Shooting Catalogue</div><div class="rcard-stat">Monaco 2025</div></div></div>
+        <div class="rcard" data-target="proj-nexans"><div class="rcard-logo"><img src="logos/Nexans_logo.svg.png" alt="Nexans"></div><div class="rcard-overlay"><div class="rcard-name">Nexans</div><div class="rcard-type">Lancement Corporate</div><div class="rcard-stat">Bruxelles</div></div></div>
+        <div class="rcard" data-target="proj-nolt"><div class="rcard-logo"><img src="logos/Nolt logo.png" alt="NOLT"></div><div class="rcard-overlay"><div class="rcard-name">NOLT</div><div class="rcard-type">Shooting Catalogue</div><div class="rcard-stat">Monaco 2025</div></div></div>
         <div class="rcard" data-target="proj-vdn"><div class="rcard-logo"><img src="logos/JD Sports.png" alt="JD Sports"></div><div class="rcard-overlay"><div class="rcard-name">JD Sports</div><div class="rcard-type">Fan Zone</div><div class="rcard-stat">6 000+ visiteurs</div></div></div>
         <div class="rcard" data-target="proj-vdn"><div class="rcard-logo"><img src="logos/le-coq-sportif-logo.png" alt="Le Coq Sportif"></div><div class="rcard-overlay"><div class="rcard-name">Le Coq Sportif</div><div class="rcard-type">Collection Exclusive</div><div class="rcard-stat">+40M impressions</div></div></div>
 
@@ -965,7 +989,7 @@
   </div>
 
   <!-- Morrocanoil — MEDIUM -->
-  <div class="pcard sz-medium" data-cat="launch" id="proj-moroccanoil" style="cursor:pointer">
+  <div class="pcard sz-medium" data-cat="launch" id="proj-moroccanoil" onclick="window.location='projet-moroccanoil.html'" style="cursor:pointer">
     <div class="pcard-bg bg-launch">
       <svg class="pcard-accent" width="100%" height="100%" viewBox="0 0 530 400"><rect x="80" y="60" width="370" height="280" fill="none" stroke="#2b40fc" stroke-width="1"/><line x1="80" y1="200" x2="450" y2="200" stroke="#2b40fc" stroke-width=".4"/><line x1="265" y1="60" x2="265" y2="340" stroke="#2b40fc" stroke-width=".4"/></svg>
     </div>
@@ -1175,9 +1199,12 @@ const projPages = {
   'proj-damen': 'projet-damen.html',
   'proj-edrington': 'projet-edrington.html',
   'proj-hrpath': 'projet-hrpath.html',
+  'proj-nexans': 'projet-nexans.html',
   'proj-bain': null,
   'proj-alan': null,
-  'proj-moroccanoil': null,
+  'proj-nolt': 'projet-nolt.html',
+  'proj-nexans': 'projet-nexans.html',
+  'proj-moroccanoil': 'projet-moroccanoil.html',
   'proj-alibaba': 'projet-alibaba.html',
   'proj-caudalie': 'projet-caudalie.html',
 };
@@ -1322,5 +1349,6 @@ document.querySelectorAll('.reveal').forEach(r => io.observe(r));
 })();
 </script>
 
+<script>document.addEventListener("contextmenu",e=>{if(e.target.tagName==="IMG")e.preventDefault();});</script>
 </body>
 </html>
