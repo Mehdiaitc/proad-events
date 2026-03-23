@@ -97,7 +97,7 @@
 </section>
 
 <div class="proj-body">
-  <p class="proj-desc">Transformation complète du yacht Lady Trudy en expérience premium pour le Tax Free de Cannes. Trois ponts distincts dédiés à trois univers : Macallan, Highland Park et Brugal. Chaque espace conçu sur mesure pour immerger les clients dans l'identité de chaque marque. Réalisé via Chab Agency.</p>
+  <p class="proj-desc">Transformation complète du yacht Lady Trudy en expérience premium pour le Tax Free de Cannes. Trois ponts distincts dédiés à trois univers : Macallan, Highland Park et Brugal. Chaque espace conçu sur mesure pour immerger les clients dans l'identité de chaque marque.</p>
   
   <div style="margin-top:-24px;margin-bottom:48px;padding:14px 20px;background:rgba(43,64,252,.05);border:1px solid rgba(43,64,252,.12);border-radius:2px;">
     <p style="font-size:.72rem;color:rgba(255,255,255,.35);letter-spacing:.08em;line-height:1.7;margin:0;">
@@ -116,6 +116,9 @@
     <div class="proj-gallery-item" onclick="openLightbox(5)"><img src="logos/photos/Edrington - intérieur Highland Park.jpeg" alt=""></div>
     <div class="proj-gallery-item" onclick="openLightbox(6)"><img src="logos/photos/Edrington - Pont supérieur Brugal.jpeg" alt=""></div>
     <div class="proj-gallery-item" onclick="openLightbox(7)"><img src="logos/photos/Edrington - Pont supérieurJaccuzi.jpeg" alt=""></div>
+    <div class="proj-gallery-item" onclick="openLightbox(8)"><img src="logos/photos/EDRINGTON 2 .jpeg" alt="Edrington"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(9)"><img src="logos/photos/EDRINGTON 3.jpeg" alt="Edrington"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(10)"><img src="logos/photos/EDRINGTON 4.jpeg" alt="Edrington"></div>
 
   </div>
 </div>
@@ -146,7 +149,7 @@
 </div>
 <script>
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50),{passive:true});
-const photos=['logos/photos/Edrington - Lady Trudy Yacht.jpeg','logos/photos/Edrington - Port de Cannes.jpeg','logos/photos/Edrington - Deck Macallan extérieur.jpeg','logos/photos/Edrington - Deck Higland Park intérieur.jpeg','logos/photos/Edrington - Intérieur 2 Highland.jpeg','logos/photos/Edrington - intérieur Highland Park.jpeg','logos/photos/Edrington - Pont supérieur Brugal.jpeg','logos/photos/Edrington - Pont supérieurJaccuzi.jpeg'];
+const photos=['logos/photos/Edrington - Lady Trudy Yacht.jpeg','logos/photos/Edrington - Port de Cannes.jpeg','logos/photos/Edrington - Deck Macallan extérieur.jpeg','logos/photos/Edrington - Deck Higland Park intérieur.jpeg','logos/photos/Edrington - Intérieur 2 Highland.jpeg','logos/photos/Edrington - intérieur Highland Park.jpeg','logos/photos/Edrington - Pont supérieur Brugal.jpeg','logos/photos/Edrington - Pont supérieurJaccuzi.jpeg','logos/photos/EDRINGTON 2 .jpeg','logos/photos/EDRINGTON 3.jpeg','logos/photos/EDRINGTON 4.jpeg'];
 let current=0;
 function openLightbox(i){current=i;document.getElementById('lightbox-img').src=photos[i];document.getElementById('lightbox-counter').textContent=(i+1)+' / '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
