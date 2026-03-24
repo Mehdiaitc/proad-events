@@ -8,224 +8,50 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 <style>
-
-/* ── FAQ PAGE ── */
-.faq-hero {
-  min-height: 48vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 120px 48px 56px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-.faq-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 65% 50% at 50% 0%, rgba(43,64,252,.13) 0%, transparent 70%);
-}
-.faq-hero::after {
-  content: 'FAQ';
-  position: absolute;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(12rem, 30vw, 28rem);
-  letter-spacing: .06em;
-  color: rgba(255,255,255,.02);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -40%);
-  white-space: nowrap;
-  pointer-events: none;
-}
-.faq-hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 7vw, 6rem);
-  letter-spacing: .04em;
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.faq-hero p { color: var(--gray); font-size: .9rem; max-width: 480px; line-height: 1.7; }
-
-/* ── LAYOUT ── */
-.faq-layout {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 80px 48px 120px;
-}
-
-/* ── CATEGORY TABS ── */
-.faq-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 56px;
-  flex-wrap: wrap;
-}
-.faq-tab {
-  background: none;
-  border: 1px solid rgba(255,255,255,.08);
-  color: rgba(255,255,255,.4);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .72rem;
-  letter-spacing: .2em;
-  padding: 8px 20px;
-  cursor: pointer;
-  transition: all .2s;
-}
-.faq-tab:hover { border-color: rgba(43,64,252,.4); color: rgba(255,255,255,.75); }
-.faq-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
-
-/* ── CATEGORY BLOCK ── */
-.faq-category { margin-bottom: 64px; }
-.faq-category.hidden { display: none; }
-.faq-cat-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  letter-spacing: .06em;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.faq-cat-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,.06);
-}
-.faq-cat-sub {
-  font-size: .72rem;
-  color: var(--blue);
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  margin-bottom: 28px;
-}
-
-/* ── ACCORDION ── */
-.faq-list { display: flex; flex-direction: column; }
-
-.faq-item {
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  overflow: hidden;
-}
-.faq-item:first-child { border-top: 1px solid rgba(255,255,255,.06); }
-
-.faq-q {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px 0;
-  cursor: pointer;
-  transition: color .2s;
-  user-select: none;
-}
-.faq-q:hover { color: rgba(255,255,255,.95); }
-.faq-q-text {
-  font-size: .92rem;
-  font-weight: 500;
-  color: rgba(255,255,255,.75);
-  line-height: 1.4;
-  transition: color .2s;
-}
-.faq-q:hover .faq-q-text { color: #fff; }
-.faq-item.open .faq-q-text { color: #fff; }
-
-.faq-icon {
-  width: 28px; height: 28px;
-  border: 1px solid rgba(255,255,255,.12);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: all .3s;
-  font-size: .75rem;
-  color: rgba(255,255,255,.4);
-}
-.faq-item.open .faq-icon {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-  transform: rotate(45deg);
-}
-
-.faq-a {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s cubic-bezier(.25,.46,.45,.94), padding .3s;
-}
-.faq-item.open .faq-a { max-height: 400px; padding-bottom: 20px; }
-
-.faq-a-inner {
-  font-size: .84rem;
-  color: rgba(255,255,255,.5);
-  line-height: 1.85;
-  padding-right: 48px;
-}
-.faq-a-inner strong { color: rgba(255,255,255,.8); font-weight: 500; }
-.faq-a-inner a { color: var(--blue); text-decoration: none; }
-.faq-a-inner a:hover { text-decoration: underline; }
-.faq-a-inner ul {
-  margin: 10px 0 0 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.faq-a-inner ul li::marker { color: var(--blue); }
-
-/* ── STILL HAVE Q ── */
-.faq-cta {
-  margin-top: 80px;
-  text-align: center;
-  padding: 64px 48px;
-  background: rgba(43,64,252,.04);
-  border: 1px solid rgba(43,64,252,.15);
-  position: relative;
-  overflow: hidden;
-}
-.faq-cta::before {
-  content: '?';
-  position: absolute;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20rem;
-  color: rgba(43,64,252,.04);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  line-height: 1;
-  pointer-events: none;
-}
-.faq-cta h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: .04em;
-  margin-bottom: 12px;
-}
-.faq-cta p { color: var(--gray); font-size: .88rem; margin-bottom: 32px; line-height: 1.7; }
-.faq-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.btn-outline {
-  display: inline-block;
-  padding: 14px 36px;
-  border: 1px solid rgba(255,255,255,.2);
-  color: rgba(255,255,255,.7);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: .8rem;
-  letter-spacing: .2em;
-  text-decoration: none;
-  transition: all .3s;
-}
-.btn-outline:hover { border-color: rgba(255,255,255,.5); color: #fff; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .faq-layout { padding: 48px 24px 80px; }
-  .faq-hero { padding: 100px 24px 48px; }
-  .faq-a-inner { padding-right: 0; }
-}
+.faq-hero{min-height:48vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:120px 48px 56px;position:relative;overflow:hidden;text-align:center;}
+.faq-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 0%,rgba(43,64,252,.13) 0%,transparent 70%);}
+.faq-hero::after{content:'FAQ';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,30vw,28rem);letter-spacing:.06em;color:rgba(255,255,255,.02);top:50%;left:50%;transform:translate(-50%,-40%);white-space:nowrap;pointer-events:none;}
+.faq-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);letter-spacing:.04em;line-height:1;margin-bottom:16px;}
+.faq-hero p{color:var(--gray);font-size:.9rem;max-width:480px;line-height:1.7;}
+.faq-layout{max-width:1000px;margin:0 auto;padding:80px 48px 120px;}
+.faq-tabs{display:flex;gap:4px;margin-bottom:56px;flex-wrap:wrap;}
+.faq-tab{background:none;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.2em;padding:8px 20px;cursor:pointer;transition:all .2s;}
+.faq-tab:hover{border-color:rgba(43,64,252,.4);color:rgba(255,255,255,.75);}
+.faq-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.faq-category{margin-bottom:64px;}
+.faq-category.hidden{display:none;}
+.faq-cat-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.06em;color:rgba(255,255,255,.85);margin-bottom:4px;display:flex;align-items:center;gap:16px;}
+.faq-cat-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06);}
+.faq-cat-sub{font-size:.72rem;color:var(--blue);letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px;}
+.faq-list{display:flex;flex-direction:column;}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden;}
+.faq-item:first-child{border-top:1px solid rgba(255,255,255,.06);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;cursor:pointer;transition:color .2s;user-select:none;}
+.faq-q:hover{color:rgba(255,255,255,.95);}
+.faq-q-text{font-size:.92rem;font-weight:500;color:rgba(255,255,255,.75);line-height:1.4;transition:color .2s;}
+.faq-q:hover .faq-q-text,.faq-item.open .faq-q-text{color:#fff;}
+.faq-icon{width:28px;height:28px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:.75rem;color:rgba(255,255,255,.4);}
+.faq-item.open .faq-icon{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.46,.45,.94),padding .3s;}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:20px;}
+.faq-a-inner{font-size:.84rem;color:rgba(255,255,255,.5);line-height:1.85;padding-right:48px;}
+.faq-a-inner strong{color:rgba(255,255,255,.8);font-weight:500;}
+.faq-a-inner a{color:var(--blue);text-decoration:none;}
+.faq-a-inner a:hover{text-decoration:underline;}
+.faq-a-inner ul{margin:10px 0 0 16px;display:flex;flex-direction:column;gap:6px;}
+.faq-a-inner ul li::marker{color:var(--blue);}
+.faq-cta{margin-top:80px;text-align:center;padding:64px 48px;background:rgba(43,64,252,.04);border:1px solid rgba(43,64,252,.15);position:relative;overflow:hidden;}
+.faq-cta::before{content:'?';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:20rem;color:rgba(43,64,252,.04);top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;pointer-events:none;}
+.faq-cta h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.04em;margin-bottom:12px;}
+.faq-cta p{color:var(--gray);font-size:.88rem;margin-bottom:32px;line-height:1.7;}
+.faq-cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-outline{display:inline-block;padding:14px 36px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.2em;text-decoration:none;transition:all .3s;}
+.btn-outline:hover{border-color:rgba(255,255,255,.5);color:#fff;}
+@media(max-width:768px){.faq-layout{padding:48px 24px 80px;}.faq-hero{padding:100px 24px 48px;}.faq-a-inner{padding-right:0;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="nav-logo-wrap"><img src="A_2.png" alt="PROAD Events" style="width:42px;height:auto;display:block;"></a>
   <ul class="nav-links">
@@ -237,18 +63,15 @@
   <a href="contact.html" class="nav-cta" style="border-color:#C9A96E;color:#C9A96E;">Prendre RDV</a>
 </nav>
 
-<!-- HERO -->
 <section class="faq-hero">
-  <p class="section-label reveal">Questions fréquentes</p>
-  <h1 class="reveal">Tout ce que vous<br>voulez savoir.</h1>
-  <p class="reveal">Avant de prendre la route, autant s'assurer qu'on roule dans la même direction.</p>
+  <p class="section-label">Questions fréquentes</p>
+  <h1>Tout ce que vous<br>voulez savoir.</h1>
+  <p>Avant de prendre la route, autant s'assurer qu'on roule dans la même direction.</p>
 </section>
 
-<!-- FAQ LAYOUT -->
 <div class="faq-layout">
 
-  <!-- TABS -->
-  <div class="faq-tabs reveal">
+  <div class="faq-tabs">
     <button class="faq-tab active" onclick="filterFaq('all')">Toutes</button>
     <button class="faq-tab" onclick="filterFaq('general')">Général</button>
     <button class="faq-tab" onclick="filterFaq('process')">Process</button>
@@ -257,31 +80,31 @@
     <button class="faq-tab" onclick="filterFaq('pratique')">Pratique</button>
   </div>
 
-  <!-- ── GÉNÉRAL ── -->
-  <div class="faq-category reveal" data-cat="general">
+  <!-- GÉNÉRAL -->
+  <div class="faq-category" data-cat="general">
     <div class="faq-cat-sub">Général</div>
     <div class="faq-cat-title">PROAD, c'est quoi ?</div>
     <div class="faq-list">
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Qu'est-ce que PROAD Events exactement ?</span>
+          <span class="faq-q-text">Qu'est-ce que PROAD exactement ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          <strong>PROAD Events</strong> est une structure de production événementielle indépendante fondée par Mehdi, basée à Marseille. PROAD signifie <strong>Production Road</strong> — la conviction qu'un événement réussi, c'est une route bien tracée, sans improvisation.<br><br>
-          Nous intervenons sur tous les formats : soirées, galas, lancements de produits, événements corporate, lifestyle et luxe. En France et à l'international.
+          <strong>PROAD</strong>, ce n'est pas une agence. C'est un concept — une méthode que j'applique lors de missions de conseil événementiel. PROAD signifie <strong>Production Road</strong> : la conviction qu'un événement réussi, c'est une route bien tracée, chaque étape anticipée.<br><br>
+          C'est moi, Mehdi, qui porte et applique ce concept — en renfort d'agences événementielles ou en direct avec des marques et annonceurs.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Qui travaille chez PROAD Events ?</span>
+          <span class="faq-q-text">Qui est derrière PROAD ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          PROAD, c'est avant tout <strong>Mehdi</strong>, directeur de production et interlocuteur unique. Il a forgé son expérience à Singapour (Chab Events) puis à Aix-en-Provence (Chab Agency), sur des projets pour Ubisoft, Cartier, Macallan, Bain & Company, Lacoste, Allianz...<br><br>
-          Selon les projets, Mehdi s'appuie sur un réseau de prestataires de confiance — techniciens, traiteurs, scénographes, logisticiens — sélectionnés pour leur excellence.
+          <strong>Mehdi</strong>, seul et unique. J'ai forgé mon expérience à Singapour puis à Aix-en-Provence sur des projets corporate, luxe, lifestyle et travel retail — dans des environnements exigeants, pour des clients qui n'ont pas le droit à l'erreur.<br><br>
+          PROAD, c'est cette expérience mise au service de vos projets. Un seul interlocuteur, du début à la fin.
         </div></div>
       </div>
 
@@ -291,26 +114,26 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Les deux ! PROAD travaille aussi bien avec des <strong>agences événementielles ou de communication</strong> qui cherchent un producteur terrain fiable, qu'avec des <strong>annonceurs et entreprises en direct</strong> qui veulent un interlocuteur sans couche intermédiaire.<br><br>
-          Dans les deux cas, Mehdi est votre contact direct du brief à la livraison.
+          Les deux. J'interviens principalement en <strong>renfort d'agences événementielles</strong> qui cherchent un consultant terrain pour structurer, challenger les budgets et sécuriser la production. J'apporte une vision d'acheteur et de producteur que peu de profils combinent.<br><br>
+          J'interviens aussi en <strong>direct avec les marques et annonceurs</strong>, notamment sur la partie sourcing prestataires, négociation et création de concept. Dans tous les cas, vous avez accès direct à moi.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Vous intervenez où géographiquement ?</span>
+          <span class="faq-q-text">Tu interviens où géographiquement ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Basé à <strong>Marseille</strong>, PROAD opère sur l'ensemble du territoire français. Nous avons également une solide expérience internationale — Singapour, Thaïlande, Belgique, Espagne, Monaco — et nous pouvons accompagner des projets hors de France sur demande.
+          Basé à <strong>Marseille</strong>, j'opère sur l'ensemble du territoire français. J'ai également une solide expérience internationale — Singapour, Thaïlande, Belgique, Espagne, Monaco — et je me déplace hors de France sur demande.
         </div></div>
       </div>
 
     </div>
   </div>
 
-  <!-- ── PROCESS ── -->
-  <div class="faq-category reveal" data-cat="process">
+  <!-- PROCESS -->
+  <div class="faq-category" data-cat="process">
     <div class="faq-cat-sub">Process</div>
     <div class="faq-cat-title">Comment ça marche ?</div>
     <div class="faq-list">
@@ -323,23 +146,23 @@
         <div class="faq-a"><div class="faq-a-inner">
           La route PROAD se déroule en 5 étapes :<br><br>
           <ul>
-            <li><strong>Brief</strong> — Vous nous parlez de votre projet : ambitions, dates, jauge, budget.</li>
-            <li><strong>Conception</strong> — Mehdi propose une vision, un rétro-planning et une enveloppe budgétaire.</li>
-            <li><strong>Validation</strong> — On aligne les visions, on ajuste, on signe.</li>
-            <li><strong>Production</strong> — PROAD prend le volant. Coordination, prestataires, logistique, tout est géré.</li>
-            <li><strong>Livraison</strong> — Le jour J, Mehdi est sur le terrain. Vous profitez de votre événement.</li>
+            <li><strong>Plan</strong> — Vous me parlez de votre projet : ambitions, dates, jauge, budget.</li>
+            <li><strong>Run</strong> — Je propose une vision, un rétro-planning et une enveloppe budgétaire.</li>
+            <li><strong>Organize</strong> — On aligne les visions, on ajuste, on signe.</li>
+            <li><strong>Activate</strong> — Je prends le volant. Coordination, prestataires, logistique — tout est géré.</li>
+            <li><strong>Deliver</strong> — Le jour J, je suis sur le terrain. Vous profitez de votre événement.</li>
           </ul>
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Combien de temps en avance faut-il vous contacter ?</span>
+          <span class="faq-q-text">Combien de temps en avance faut-il contacter PROAD ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Idéalement, <strong>3 à 6 mois</strong> pour un projet de taille normale. Pour des événements complexes ou de grande envergure (+300 personnes, lieu sur-mesure), comptez <strong>6 à 12 mois</strong>.<br><br>
-          Cela dit, PROAD est habitué aux délais courts. Si votre projet est urgent, contactez-nous — on évaluera ensemble ce qui est faisable sans compromis sur la qualité.
+          Idéalement, <strong>3 à 6 mois</strong> pour un projet de taille normale. Pour des événements complexes ou de grande envergure, comptez <strong>6 à 12 mois</strong>.<br><br>
+          Cela dit, je suis habitué aux délais courts. Si votre projet est urgent, contactez-moi — on évalue ensemble ce qui est faisable sans compromis sur la qualité.
         </div></div>
       </div>
 
@@ -349,7 +172,7 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          <strong>Mehdi, et personne d'autre.</strong> C'est le principe fondateur de PROAD : un seul interlocuteur, du brief au bilan. Pas de turn-over, pas de perte d'information, pas de "je transmets à mon collègue".<br><br>
+          <strong>Moi, et personne d'autre.</strong> C'est le principe fondateur de PROAD : un seul interlocuteur, du brief au bilan. Pas de turn-over, pas de perte d'information, pas de "je transmets à mon collègue".<br><br>
           Vous avez accès direct au producteur à toutes les étapes du projet.
         </div></div>
       </div>
@@ -357,8 +180,8 @@
     </div>
   </div>
 
-  <!-- ── BUDGET ── -->
-  <div class="faq-category reveal" data-cat="budget">
+  <!-- BUDGET -->
+  <div class="faq-category" data-cat="budget">
     <div class="faq-cat-sub">Budget</div>
     <div class="faq-cat-title">Les questions d'argent.</div>
     <div class="faq-list">
@@ -369,96 +192,97 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Il n'y a pas de seuil minimum imposé, mais PROAD opère sur des projets à partir de <strong>quelques milliers d'euros</strong>. L'important, c'est l'adéquation entre vos ambitions et votre enveloppe budgétaire.<br><br>
-          Lors du premier échange, Mehdi vous dira franchement si le projet est réalisable dans votre budget ou s'il faut recalibrer les attentes.
+          Il n'y a pas de seuil minimum imposé. L'important, c'est l'adéquation entre vos ambitions et votre enveloppe budgétaire.<br><br>
+          Lors du premier échange, je vous dirai franchement si le projet est réalisable dans votre budget ou s'il faut recalibrer les attentes.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Comment est calculé votre honoraire ?</span>
+          <span class="faq-q-text">Comment sont calculés les honoraires ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Les honoraires PROAD sont calculés selon la <strong>complexité du projet</strong>, le nombre de jours de production, et le niveau de coordination nécessaire. Nous fonctionnons en honoraires fixes (définis en amont) ou en pourcentage du budget global selon les projets.<br><br>
+          Mes honoraires sont calculés selon la <strong>complexité du projet</strong>, le nombre de jours de production, et le niveau de coordination nécessaire. Je fonctionne en honoraires fixes définis en amont, ou en pourcentage du budget global selon les missions.<br><br>
           Tout est transparent et discuté dès le devis. Aucune mauvaise surprise en cours de route.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Pouvez-vous travailler avec un budget serré ?</span>
+          <span class="faq-q-text">Tu peux travailler avec un budget serré ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Oui, à condition d'être honnête sur les contraintes dès le départ. PROAD est capable de <strong>prioriser, redimensionner et optimiser</strong> un projet pour qu'il reste percutant dans une enveloppe restreinte.<br><br>
-          Ce qu'on ne fait pas : promettre la lune avec un budget étoile. La transparence fait partie de notre ADN.
+          Oui, à condition d'être honnête sur les contraintes dès le départ. Je suis capable de <strong>prioriser, redimensionner et optimiser</strong> un projet pour qu'il reste percutant dans une enveloppe restreinte. C'est d'ailleurs là que ma vision d'acheteur fait toute la différence.<br><br>
+          Ce que je ne fais pas : promettre la lune avec un budget étoile.
         </div></div>
       </div>
 
     </div>
   </div>
 
-  <!-- ── SERVICES ── -->
-  <div class="faq-category reveal" data-cat="services">
+  <!-- SERVICES -->
+  <div class="faq-category" data-cat="services">
     <div class="faq-cat-sub">Services</div>
-    <div class="faq-cat-title">Ce qu'on fait (et ce qu'on ne fait pas).</div>
+    <div class="faq-cat-title">Ce que je fais (et ce que je ne fais pas).</div>
     <div class="faq-list">
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Quels types d'événements produisez-vous ?</span>
+          <span class="faq-q-text">Sur quels types d'événements interviens-tu ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          PROAD couvre tous les formats :
+          J'interviens sur tous les formats :
           <ul>
             <li>Soirées de gala et événements d'entreprise</li>
             <li>Lancements de produits et activations de marque</li>
             <li>Événements lifestyle, sport et culture</li>
             <li>Expériences luxe et VIP</li>
             <li>Événements travel retail</li>
+            <li>Séminaires et conventions</li>
           </ul>
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Gérez-vous aussi la recherche de lieu ?</span>
+          <span class="faq-q-text">Tu gères aussi la recherche de lieu ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Oui. La recherche et la négociation de lieux font partie intégrante de notre prestation. Que vous ayez un lieu en tête ou que vous partiez de zéro, PROAD peut vous proposer des options adaptées à votre format, votre jauge et votre ADN de marque.
+          Oui. La recherche et la négociation de lieux font partie intégrante de ma prestation. Que vous ayez un lieu en tête ou que vous partiez de zéro, je peux vous proposer des options adaptées à votre format, votre jauge et votre ADN de marque.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Proposez-vous uniquement la coordination ou aussi la production technique ?</span>
+          <span class="faq-q-text">Tu proposes uniquement la coordination ou aussi la production technique ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Les deux. PROAD peut intervenir en <strong>direction de production complète</strong> (de la conception à la livraison, prestataires inclus) ou en <strong>coordination pure</strong> si vous avez déjà vos prestataires et cherchez un chef d'orchestre pour tenir la route le jour J.<br><br>
-          Nous adaptons notre périmètre d'intervention à vos besoins réels.
+          Les deux. Je peux intervenir en <strong>direction de production complète</strong> — de la conception à la livraison, prestataires inclus — ou en <strong>coordination pure</strong> si vous avez déjà vos prestataires et cherchez un chef d'orchestre pour tenir la route le jour J.<br><br>
+          J'adapte mon périmètre d'intervention à vos besoins réels.
         </div></div>
       </div>
 
     </div>
   </div>
 
-  <!-- ── PRATIQUE ── -->
-  <div class="faq-category reveal" data-cat="pratique">
+  <!-- PRATIQUE -->
+  <div class="faq-category" data-cat="pratique">
     <div class="faq-cat-sub">Pratique</div>
     <div class="faq-cat-title">Les détails qui comptent.</div>
     <div class="faq-list">
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Sous quel délai vous répondez après une prise de contact ?</span>
+          <span class="faq-q-text">Sous quel délai réponds-tu après une prise de contact ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          <strong>Sous 24 heures</strong>, du lundi au vendredi. Si Mehdi est sur un événement le jour de votre message, le Copilote PROAD peut prendre note de votre demande et vous confirmer un créneau d'appel.
+          <strong>Sous 24 heures</strong>, du lundi au vendredi. Si je suis sur un événement le jour de votre message, le Copilote PROAD peut prendre note de votre demande et vous confirmer un créneau d'appel.
         </div></div>
       </div>
 
@@ -468,17 +292,17 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          <strong>Non.</strong> Le premier échange — qu'il soit par téléphone, visio ou en présentiel — est gratuit et sans engagement. C'est simplement l'occasion de se jauger, d'aligner les visions et de voir si la route est la même.
+          <strong>Non.</strong> Le premier échange — téléphone, visio ou présentiel — est gratuit et sans engagement. C'est simplement l'occasion de se jauger, d'aligner les visions et de voir si la route est la même.
         </div></div>
       </div>
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Vous déplacez-vous pour des événements à Paris ou à l'étranger ?</span>
+          <span class="faq-q-text">Tu te déplaces pour des événements à Paris ou à l'étranger ?</span>
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          Absolument. Mehdi est basé à Marseille mais se déplace sur tout le territoire et à l'international. Les frais de déplacement sont intégrés au devis de manière transparente. Singapour, Thaïlande, Monaco, Paris, Ibiza — la route s'arrête rarement à la frontière.
+          Absolument. Je suis basé à Marseille mais je me déplace sur tout le territoire et à l'international. Les frais de déplacement sont intégrés au devis de manière transparente. La route s'arrête rarement à la frontière.
         </div></div>
       </div>
 
@@ -488,21 +312,20 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-a"><div class="faq-a-inner">
-          C'est exactement pour ça qu'on prépare une route, pas une improvisation. PROAD travaille avec des plans B sur les points critiques : prestataires de secours identifiés, timeline tamponnée, solutions alternatives prêtes.<br><br>
-          Et si malgré tout quelque chose déraille, <strong>Mehdi est là, sur place, pour gérer</strong>. Vous ne gérez pas le problème — c'est son boulot.
+          C'est exactement pour ça qu'on prépare une route, pas une improvisation. Je travaille avec des plans B sur les points critiques : prestataires de secours identifiés, timeline tamponnée, solutions alternatives prêtes.<br><br>
+          Et si malgré tout quelque chose déraille, <strong>je suis là, sur place, pour gérer</strong>. Vous ne gérez pas le problème — c'est mon boulot.
         </div></div>
       </div>
 
     </div>
   </div>
 
-  <!-- CTA -->
-  <div class="faq-cta reveal">
+  <div class="faq-cta">
     <h3>Votre question<br>n'est pas là ?</h3>
-    <p>Le Copilote PROAD ou Mehdi directement — dans tous les cas,<br>vous aurez une réponse sous 24h.</p>
+    <p>Contactez-moi directement — je réponds sous 24h.</p>
     <div class="faq-cta-btns">
       <a href="contact.html" class="btn-primary">PRENDRE RENDEZ-VOUS</a>
-      <a href="about.html" class="btn-outline">PARLER AU COPILOTE</a>
+      <a href="about.html" class="btn-outline">EN SAVOIR PLUS</a>
     </div>
   </div>
 
@@ -521,233 +344,9 @@
 </footer>
 
 <script>
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
-}, {passive:true});
-
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
-}, {threshold: .1});
-document.querySelectorAll('.reveal').forEach(r => io.observe(r));
-
-function toggleFaq(el) {
-  const item = el.parentElement;
-  const isOpen = item.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-  // Open clicked if was closed
-  if (!isOpen) item.classList.add('open');
-}
-
-function filterFaq(cat) {
-  document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('.faq-category').forEach(c => {
-    if (cat === 'all' || c.dataset.cat === cat) {
-      c.classList.remove('hidden');
-    } else {
-      c.classList.add('hidden');
-    }
-  });
-}
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50),{passive:true});
+function toggleFaq(el){const item=el.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');}
+function filterFaq(cat){document.querySelectorAll('.faq-tab').forEach(t=>t.classList.remove('active'));event.target.classList.add('active');document.querySelectorAll('.faq-category').forEach(c=>{if(cat==='all'||c.dataset.cat===cat){c.classList.remove('hidden');}else{c.classList.add('hidden');}});}
 </script>
-
-
-
-
-
-
-<style>
-.cop-float-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:62px;height:62px;border-radius:50%;background:#2b40fc;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s;padding:10px;overflow:visible;box-shadow:0 0 0 0 rgba(43,64,252,.5);}
-.cop-float-btn:hover{transform:scale(1.08);}
-.cop-float-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(43,64,252,.25);animation:cfpRing 2s ease-out infinite;pointer-events:none;}
-.cop-float-btn::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(43,64,252,.12);animation:cfpRing 2s ease-out .4s infinite;pointer-events:none;}
-@keyframes cfpRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.6);opacity:0;}}
-.cop-float-btn svg{width:100%;height:100%;display:block;}
-.cop-float-badge{position:absolute;top:0px;right:0px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 8px rgba(34,197,94,.8);z-index:2;}
-.cop-float-tip{position:absolute;right:74px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
-.cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
-.cop-float-btn:hover .cop-float-tip{opacity:1;}
-.cop-float-panel{position:fixed;bottom:106px;right:28px;z-index:999;width:min(370px,calc(100vw - 40px));background:#07070f;border:1px solid rgba(43,64,252,.25);border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.7);transform:translateY(12px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.25,.46,.45,.94);}
-.cop-float-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
-.cfp-hdr{background:rgba(43,64,252,.07);border-bottom:1px solid rgba(43,64,252,.15);padding:14px 20px;display:flex;align-items:center;gap:12px;}
-.cfp-av{width:36px;height:36px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:6px;overflow:hidden;}
-.cfp-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:12px;min-height:160px;max-height:240px;overflow-y:auto;}
-.cfp-msg{display:flex;gap:10px;opacity:0;transition:opacity .4s,transform .4s;transform:translateY(8px);}
-.cfp-msg.vis{opacity:1;transform:translateY(0);}
-.cfp-mav{width:28px;height:28px;border-radius:50%;background:#2b40fc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;padding:4px;overflow:hidden;}
-.cfp-bub{background:rgba(43,64,252,.1);border:1px solid rgba(43,64,252,.18);border-radius:2px 12px 12px 12px;padding:10px 14px;max-width:85%;}
-.cfp-bub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0;}
-.cfp-uav{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.58rem;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
-.cfp-ubub{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px 2px 12px 12px;padding:10px 14px;max-width:85%;}
-.cfp-ubub p{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.7);margin:0;text-align:right;}
-.cfp-quick{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
-.cfp-qbtn{background:none;border:1px solid rgba(43,64,252,.25);color:rgba(255,255,255,.55);font-family:Inter,sans-serif;font-size:.7rem;padding:6px 12px;cursor:pointer;border-radius:2px;transition:all .2s;}
-.cfp-qbtn:hover{border-color:#2b40fc;color:rgba(255,255,255,.9);background:rgba(43,64,252,.08);}
-.cfp-inrow{border-top:1px solid rgba(255,255,255,.05);padding:10px 12px;display:flex;gap:8px;}
-.cfp-in{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-family:Inter,sans-serif;font-size:.78rem;padding:8px 12px;outline:none;border-radius:2px;}
-.cfp-in:focus{border-color:rgba(43,64,252,.5);}
-.cfp-sendbtn{background:#2b40fc;border:none;color:#fff;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
-.cfp-footer{padding:8px 16px;font-size:.6rem;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04);}
-</style>
-<button class="cop-float-btn" id="cfp-btn" onclick="cfpToggle()">
-  <svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>
-  <div class="cop-float-badge"></div>
-  <div class="cop-float-tip">Je suis le Copilote de Mehdi, je vous ecoute</div>
-</button>
-
-<div class="cop-float-panel" id="cfp-panel">
-  <div class="cfp-hdr">
-    <div class="cfp-av"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-    <div style="flex:1">
-      <strong style="display:block;font-size:.82rem;font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;color:#fff">COPILOTE PROAD</strong>
-      <span style="font-size:.65rem;color:rgba(255,255,255,.35);font-family:Inter,sans-serif">Mehdi est sur la route - Je vous ecoute</span>
-    </div>
-    <button onclick="cfpToggle()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:1.1rem;padding:4px 8px;line-height:1">&#x2715;</button>
-  </div>
-  <div class="cfp-msgs" id="cfp-msgs">
-    <div class="cfp-msg" id="cfp-m1">
-      <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>Bonjour ! Je suis le <strong>Copilote</strong> de Mehdi. Il prend personnellement en charge chaque projet.</p></div>
-    </div>
-    <div class="cfp-msg" id="cfp-m2">
-      <div class="cfp-mav"><svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#ffffff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg></div>
-      <div class="cfp-bub"><p>En quoi puis-je vous aider ? Un RDV, un brief, une question — je suis là pour ça.</p></div>
-    </div>
-  </div>
-  <div class="cfp-quick" id="cfp-quick">
-    <button class="cfp-qbtn" onclick="cfpAct(1)">Prendre RDV</button>
-    <button class="cfp-qbtn" onclick="cfpAct(2)">Deposer un brief</button>
-    <button class="cfp-qbtn" onclick="cfpAct(3)">En savoir plus</button>
-  </div>
-  <div class="cfp-inrow">
-    <input class="cfp-in" id="cfp-in" type="text" placeholder="Votre message..." autocomplete="off">
-    <button class="cfp-sendbtn" onclick="cfpSend()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-  </div>
-  <div class="cfp-footer">Copilote IA - Reponse Mehdi sous 24h</div>
-</div>
-<script>
-(function() {
-  var isOpen = false;
-  var didInit = false;
-  var panel = document.getElementById('cfp-panel');
-  var msgs  = document.getElementById('cfp-msgs');
-  var inp   = document.getElementById('cfp-in');
-  var quick = document.getElementById('cfp-quick');
-
-  window.cfpToggle = function() {
-    isOpen = !isOpen;
-    if (panel) panel.classList.toggle('open', isOpen);
-    if (isOpen && !didInit) {
-      didInit = true;
-      var m1 = document.getElementById('cfp-m1');
-      var m2 = document.getElementById('cfp-m2');
-      if (m1) setTimeout(function() { m1.classList.add('vis'); }, 300);
-      if (m2) setTimeout(function() { m2.classList.add('vis'); }, 800);
-    }
-  };
-
-  var LOGO = '<svg viewBox="0 0 463.28 417.56" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><path fill="#fff" d="M2.19,356.57L170.13,1.37l120.68-1.37,39.41,82.95c-37.43,15.22-75.35,29.42-112.7,44.87-17.85,7.38-49.43,17.87-64.49,27.57-18.92,12.18-14.83,36.28,6.81,41.66l149.75,25.33c15.39,5.04,18.81,20.4,8.61,32.63l-198.63,101.56H2.19Z"/><path fill="#90aaff" d="M379.59,185.46l-17.66-12.8c-48.2-14.74-102.61-8.56-152.85-14.45-4.79-.83-6.03-6.13-3.37-9.8l131.53-52.29,42.34,89.34Z"/><path fill="#90aaff" d="M461.31,356.57h-90.79c9.98-22.01,17.45-45.06,22.71-68.69,2.61-11.73,6.42-27.85,7.1-39.56.45-7.82-1.71-15.04-.63-22.68l61.6,130.94Z"/></svg>';
-
-  function makeAv(cls) {
-    var av = document.createElement('div');
-    av.className = cls;
-    av.innerHTML = LOGO;
-    return av;
-  }
-
-  function botMsg(html) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg';
-    d.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.innerHTML = html;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { d.classList.add('vis'); }, 30);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function userMsg(text) {
-    var d = document.createElement('div');
-    d.className = 'cfp-msg vis';
-    d.style.flexDirection = 'row-reverse';
-    var av = document.createElement('div');
-    av.className = 'cfp-uav';
-    av.textContent = 'vous';
-    d.appendChild(av);
-    var bub = document.createElement('div');
-    bub.className = 'cfp-ubub';
-    var p = document.createElement('p');
-    p.textContent = text;
-    bub.appendChild(p);
-    d.appendChild(bub);
-    if (msgs) msgs.appendChild(d);
-    setTimeout(function() { if (msgs) msgs.scrollTop = msgs.scrollHeight; }, 100);
-  }
-
-  function typing(cb) {
-    var t = document.createElement('div');
-    t.className = 'cfp-msg vis';
-    t.appendChild(makeAv('cfp-mav'));
-    var bub = document.createElement('div');
-    bub.className = 'cfp-bub';
-    var p = document.createElement('p');
-    p.style.cssText = 'display:flex;gap:5px;align-items:center;margin:0';
-    for (var i = 0; i < 3; i++) {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s ' + (i*0.2) + 's infinite';
-      p.appendChild(dot);
-    }
-    bub.appendChild(p);
-    t.appendChild(bub);
-    if (msgs) msgs.appendChild(t);
-    setTimeout(function() { t.remove(); cb(); }, 950);
-  }
-
-  window.cfpAct = function(n) {
-    var labels = ['Je voudrais prendre rendez-vous', 'Je souhaite deposer un brief', 'En savoir plus sur PROAD'];
-    userMsg(labels[n - 1]);
-    if (quick) quick.style.display = 'none';
-    typing(function() {
-      if (n === 1) botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');
-      else if (n === 2) botMsg('Parfait. Rendez-vous ici pour déposer votre brief : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');
-      else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');
-    });
-  };
-
-  window.cfpSend = function() {
-    var text = inp ? inp.value.trim() : '';
-    if (!text) return;
-    inp.value = '';
-    userMsg(text);
-    if (quick) quick.style.display = 'none';
-    var tl = text.toLowerCase();
-    typing(function() {
-      if (tl.indexOf('rdv') > -1 || tl.indexOf('rendez') > -1) {
-        botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour un RDV. Mehdi repond sous 24h.');
-      } else if (tl.indexOf('brief') > -1 || tl.indexOf('projet') > -1) {
-        botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');
-      } else if (tl.indexOf('budget') > -1 || tl.indexOf('prix') > -1) {
-        botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');
-      } else {
-        botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');
-      }
-    });
-  };
-
-  if (inp) {
-    inp.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') window.cfpSend();
-    });
-  }
-})();
-</script>
-
 </body>
 </html>
