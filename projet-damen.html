@@ -101,38 +101,34 @@
 </nav>
 
 <section class="proj-hero">
-  <div class="proj-hero-bg" style="background-image:url('logos/photos/Damen%20Soir%C3%A9e%205Ocean.JPG')"></div>
+  <div class="proj-hero-bg" style="background-image:url('logos/photos/Damen%20Soiree%205Ocean.JPG')"></div>
   <div class="proj-hero-overlay"></div>
   <div class="proj-hero-content">
     <a href="portfolio.html" class="proj-back">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
       Retour au portfolio
     </a>
-    <div class="proj-cat">Luxury · Yachting · Monaco</div>
-    <h1 class="proj-title">Damen Yachting<br>Soirée 5Ocean</h1>
+    <div class="proj-cat">Soirée Privée · Monaco Yacht Show 2024</div>
+    <h1 class="proj-title">Damen — Five Ocean<br>Party</h1>
     <div class="proj-meta"><span>📍 Monaco Yacht Show</span><span>📅 2024</span></div>
     <div class="proj-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
   </div>
 </section>
 
 <div class="proj-body">
-    <div style="font-size:.68rem;letter-spacing:.12em;color:rgba(255,255,255,.28);margin-bottom:48px;padding:12px 16px;border:1px solid rgba(43,64,252,.12);background:rgba(43,64,252,.04);font-family:'Inter',sans-serif;">Projet réalisé via <span style="color:rgba(43,64,252,.7);">Chab Agency</span> · Mehdi Aït-chalal, Chef de Projet · 2023–2025</div>
-  <p class="proj-desc">Soirée de lancement à bord du tout nouveau superyacht 5Ocean lors du Monaco Yacht Show. DJ, traiteur haut de gamme, décoration sur mesure sur trois ponts. Une première mondiale orchestrée dans les moindres détails.</p>
+    
   
-  <div style="margin-top:-24px;margin-bottom:48px;padding:14px 20px;background:rgba(43,64,252,.05);border:1px solid rgba(43,64,252,.12);border-radius:2px;">
-    <p style="font-size:.72rem;color:rgba(255,255,255,.35);letter-spacing:.08em;line-height:1.7;margin:0;">
-      Projet réalisé via <span style="color:rgba(43,64,252,.7);">Chab Agency</span> · Mehdi Aït, Chef de Projet Senior · 2023–2025<br>
-      <span style="color:rgba(255,255,255,.2);font-size:.65rem;">Photos © PROAD Events — reproduction interdite sans autorisation</span>
-    </p>
-  </div>
-  
+  <a href="https://www.instagram.com/reel/DBJUFvaN96_/" target="_blank" rel="noopener" class="proj-press-link">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    Voir la vidéo de la soirée — Instagram Damen Yachting →
+  </a>
+
   <div class="proj-gallery-title">Photos du projet</div>
   <div class="proj-gallery" id="gallery">
-    <div class="proj-gallery-item" onclick="openLightbox(0)"><img src="logos/photos/Damen%20Soir%C3%A9e%205Ocean.JPG" alt=""></div>
-    <div class="proj-gallery-item" onclick="openLightbox(1)"><img src="logos/photos/Damen%20Photo%20montage%20termin%C3%A9.JPG" alt=""></div>
-    <div class="proj-gallery-item" onclick="openLightbox(2)"><img src="logos/photos/Damen%20photo%20montage%20soir.JPG" alt=""></div>
-    <div class="proj-gallery-item" onclick="openLightbox(3)"><img src="logos/photos/Damen%20saxophoniste.JPG" alt=""></div>
-
+    <div class="proj-gallery-item" onclick="openLightbox(0)"><img src="logos/photos/Damen%20Soiree%205Ocean.JPG" alt="Damen Five Ocean Party"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(1)"><img src="logos/photos/Damen%20Photo%20montage.JPG" alt="Damen Five Ocean Party"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(2)"><img src="logos/photos/Damen%20photo%20montage%20soir.JPG" alt="Damen Five Ocean Party"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(3)"><img src="logos/photos/Damen%20saxophoniste.JPG" alt="Damen Five Ocean Party"></div>
   </div>
 </div>
 
@@ -162,7 +158,7 @@
 </div>
 <script>
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50),{passive:true});
-const photos=['logos/photos/Damen%20Soir%C3%A9e%205Ocean.JPG','logos/photos/Damen%20Photo%20montage%20termin%C3%A9.JPG','logos/photos/Damen%20photo%20montage%20soir.JPG','logos/photos/Damen%20saxophoniste.JPG'];
+const photos=['logos/photos/Damen%20Soiree%205Ocean.JPG','logos/photos/Damen%20Photo%20montage.JPG','logos/photos/Damen%20photo%20montage%20soir.JPG','logos/photos/Damen%20saxophoniste.JPG'];
 let current=0;
 function openLightbox(i){current=i;document.getElementById('lightbox-img').src=photos[i];document.getElementById('lightbox-counter').textContent=(i+1)+' / '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
