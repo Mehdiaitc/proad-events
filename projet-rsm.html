@@ -68,24 +68,100 @@
   pointer-events: none;
 }
 
-/* ── LIGHTBOX FILIGRANE ── */
-#lightbox { position: relative; }
-#lightbox::after {
-  content: '';
+
+/* ── LIGHTBOX ── */
+.lightbox {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 80px;
-  height: 30px;
+  inset: 0;
+  background: rgba(3,4,10,.97);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open {
+  display: flex;
+}
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  display: block;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 28px;
+  background: none; border: none;
+  color: rgba(255,255,255,.6);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+}
+.lightbox-close:hover { color: #fff; }
+.lightbox-prev, .lightbox-next {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.7);
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 1.4rem;
+  z-index: 10000;
+}
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover, .lightbox-next:hover {
+  background: rgba(43,64,252,.4);
+  border-color: rgba(43,64,252,.6);
+  color: #fff;
+}
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: .65rem;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.35);
+  font-family: 'Bebas Neue', sans-serif;
+}
+.lightbox-watermark {
+  position: absolute;
+  bottom: 24px; right: 28px;
+  width: 52px; height: 52px;
+  opacity: .25;
+  pointer-events: none;
+  filter: brightness(0) invert(1);
+}
+
+/* ── FILIGRANE sur galerie ── */
+.proj-gallery-item {
+  position: relative;
+}
+.proj-gallery-item::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 44px; height: 44px;
   background-image: url('A_2.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   opacity: .3;
   pointer-events: none;
-  z-index: 1001;
+  z-index: 5;
   filter: brightness(0) invert(1);
 }
+.proj-gallery-item img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
 </style>
 </head>
 <body>
@@ -163,17 +239,48 @@
   <img class="lightbox-img" id="lightbox-img" src="" alt="">
   <button class="lightbox-next" onclick="changeLightbox(1)">›</button>
   <div class="lightbox-counter" id="lightbox-counter"></div>
+  <img class="lightbox-watermark" src="A_2.png" alt="">
 </div>
+
+<script>
+// placeholder
+</script>
+
 <script>
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50),{passive:true});
-const photos=['logos/photos/RSM%20GROUP%20PICTURE.jpeg','logos/photos/RSM%20AU%20VIGS.jpeg','logos/photos/RSM%20PARTY%20VIGS.jpeg','logos/photos/RSM%20SOIR%C3%89E%20VIGS.jpeg','logos/photos/RSM%20MEETING%20RADISSON.jpeg','logos/photos/RSM%20MEETING%20ROOM%20BACK.jpeg','logos/photos/RSM%20RADISSON%20TB.jpeg','logos/photos/RSM%20DISTRIBUTION%20TB.jpeg','logos/photos/RSM%20TEAMBUILDING%20ISY.jpeg'];
-let current=0;
-function openLightbox(i){current=i;document.getElementById('lightbox-img').src=photos[i];document.getElementById('lightbox-counter').textContent=(i+1)+' / '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
-function changeLightbox(dir){current=(current+dir+photos.length)%photos.length;document.getElementById('lightbox-img').src=photos[current];document.getElementById('lightbox-counter').textContent=(current+1)+' / '+photos.length;}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')changeLightbox(1);if(e.key==='ArrowLeft')changeLightbox(-1);});
-document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
+document.addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
+
+var _lb_current = 0;
+
+function openLightbox(i) {
+  _lb_current = i;
+  var img = document.getElementById('lightbox-img');
+  var counter = document.getElementById('lightbox-counter');
+  var lb = document.getElementById('lightbox');
+  img.src = photos[i];
+  counter.textContent = (i+1) + ' / ' + photos.length;
+  lb.classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.documentElement.style.overflow = '';
+}
+function changeLightbox(dir) {
+  _lb_current = (_lb_current + dir + photos.length) % photos.length;
+  document.getElementById('lightbox-img').src = photos[_lb_current];
+  document.getElementById('lightbox-counter').textContent = (_lb_current+1) + ' / ' + photos.length;
+}
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') changeLightbox(1);
+  if (e.key === 'ArrowLeft') changeLightbox(-1);
+});
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
 </script>
-<script>document.addEventListener("contextmenu",e=>{if(e.target.tagName==="IMG")e.preventDefault();});</script>
 </body>
 </html>
