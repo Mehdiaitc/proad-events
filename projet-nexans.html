@@ -112,9 +112,9 @@
     <div class="proj-gallery-item" onclick="openLightbox(1)"><img src="logos/photos/NEXANS%20TUNNEL%20ATOMIUM.jpeg" alt="Nexans"></div>
     <div class="proj-gallery-item" onclick="openLightbox(2)"><img src="logos/photos/NEXANS%20MONTAGE%20BOOTH.jpeg" alt="Nexans"></div>
     <div class="proj-gallery-item" onclick="openLightbox(3)"><img src="logos/photos/NEXANS%20INTERVIEW%20ROOM.jpeg" alt="Nexans"></div>
-    <div class="proj-gallery-item" onclick="openLightbox(4)"><img src="logos/photos/NEXANS%20OVERVIEW%20SOIREE.jpeg" alt="Nexans"></div>
-    <div class="proj-gallery-item" onclick="openLightbox(5)"><img src="logos/photos/NEXANS%20SOIREE%20VUE%20SCENE.jpeg" alt="Nexans"></div>
-    <div class="proj-gallery-item" onclick="openLightbox(6)"><img src="logos/photos/NEXANS%20SOIREE.jpeg" alt="Nexans"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(4)"><img src="logos/photos/NEXANS%20INTERVENANTS%20SCENE.jpeg" alt="Nexans"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(5)"><img src="logos/photos/NEXANS%20OVERVIEW%20SOIREE.jpeg" alt="Nexans"></div>
+    <div class="proj-gallery-item" onclick="openLightbox(6)"><img src="logos/photos/NEXANS%20SOIREE%20VUE%20SCENE.jpeg" alt="Nexans"></div>
   </div>
 </div>
 
@@ -144,7 +144,7 @@
 </div>
 <script>
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50),{passive:true});
-const photos=['logos/photos/NEXANS%20ENTRANCE%20ATOMIUM.jpeg','logos/photos/NEXANS%20TUNNEL%20ATOMIUM.jpeg','logos/photos/NEXANS%20MONTAGE%20BOOTH.jpeg','logos/photos/NEXANS%20INTERVIEW%20ROOM.jpeg','logos/photos/NEXANS%20OVERVIEW%20SOIREE.jpeg','logos/photos/NEXANS%20SOIREE%20VUE%20SCENE.jpeg','logos/photos/NEXANS%20SOIREE.jpeg'];
+const photos=['logos/photos/NEXANS%20ENTRANCE%20ATOMIUM.jpeg','logos/photos/NEXANS%20TUNNEL%20ATOMIUM.jpeg','logos/photos/NEXANS%20MONTAGE%20BOOTH.jpeg','logos/photos/NEXANS%20INTERVIEW%20ROOM.jpeg','logos/photos/NEXANS%20INTERVENANTS%20SCENE.jpeg','logos/photos/NEXANS%20OVERVIEW%20SOIREE.jpeg','logos/photos/NEXANS%20SOIREE%20VUE%20SCENE.jpeg'];
 let current=0;
 function openLightbox(i){current=i;document.getElementById('lightbox-img').src=photos[i];document.getElementById('lightbox-counter').textContent=(i+1)+' / '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
