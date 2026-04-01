@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À propos | PROAD Events</title>
-<meta name="description" content="Mehdi, producteur événementiel freelance basé à Marseille. Expérience terrain entre Singapour et le Sud de la France. Fondateur de PROAD Events.">
-<meta name="keywords" content="producteur événementiel freelance Marseille, chef de projet événementiel Sud France, Mehdi PROAD, événementiel Marseille">
-<meta property="og:title" content="À propos — Mehdi | PROAD Events Marseille">
+<title>À propos — Mehdi | Producteur Événementiel Marseille | PROAD Events</title>
+<meta name="description" content="Mehdi, producteur événementiel freelance basé à Marseille. Expérience terrain entre Singapour et le Sud de la France. Fondateur de PROAD Events — conseil, production et chef de projet événementiel.">
+<meta name="keywords" content="producteur événementiel freelance Marseille, chef de projet événementiel Sud France, conseil événementiel agences, Mehdi PROAD, événementiel Marseille">
+<meta property="og:title" content="À propos — Mehdi | Producteur Événementiel Marseille | PROAD Events">
 <meta property="og:description" content="Producteur événementiel freelance. De Singapour à Marseille, une méthode construite sur le terrain pour livrer des événements d'excellence.">
 <meta property="og:url" content="https://www.proadevents.com/about.html">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://www.proadevents.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.proadevents.com/about.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,7 +138,6 @@
   line-height: 1;
   margin-bottom: 6px;
 }
-/* ── CORRECTION : rôle en doré au lieu de bleu ── */
 .bio-overlay-role {
   font-size: .68rem;
   letter-spacing: .18em;
@@ -438,7 +440,6 @@
         <div class="bio-road-desc">Event Executive. Junior Event Manager. Des productions à grande échelle, une école du terrain hors du commun.</div>
       </div>
 
-      <!-- ── CORRECTION : 2023 · 2025 ── -->
       <div class="bio-road-item">
         <div class="bio-road-dot"></div>
         <div class="bio-road-year">2023 · 2025</div>
@@ -524,6 +525,7 @@ if (roadEl) roadIo.observe(roadEl);
 .cop-float-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(43,64,252,.25);animation:cfpRing 2s ease-out infinite;pointer-events:none;}
 .cop-float-btn::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(43,64,252,.12);animation:cfpRing 2s ease-out .4s infinite;pointer-events:none;}
 @keyframes cfpRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.6);opacity:0;}}
+.cop-float-btn svg{width:100%;height:100%;display:block;}
 .cop-float-badge{position:absolute;top:0px;right:0px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #2b40fc;box-shadow:0 0 8px rgba(34,197,94,.8);z-index:2;}
 .cop-float-tip{position:absolute;right:74px;bottom:50%;transform:translateY(50%);background:rgba(7,7,15,.97);border:1px solid rgba(43,64,252,.3);padding:8px 14px;white-space:nowrap;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.8);opacity:0;pointer-events:none;transition:opacity .2s;border-radius:2px;}
 .cop-float-tip::after{content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:rgba(43,64,252,.3);}
@@ -601,7 +603,7 @@ if (roadEl) roadIo.observe(roadEl);
   function userMsg(t){var d=document.createElement('div');d.className='cfp-msg vis';d.style.flexDirection='row-reverse';var a=document.createElement('div');a.className='cfp-uav';a.textContent='vous';d.appendChild(a);var b=document.createElement('div');b.className='cfp-ubub';var p=document.createElement('p');p.textContent=t;b.appendChild(p);d.appendChild(b);if(msgs)msgs.appendChild(d);setTimeout(function(){if(msgs)msgs.scrollTop=msgs.scrollHeight;},100);}
   function typing(cb){var t=document.createElement('div');t.className='cfp-msg vis';t.appendChild(makeAv('cfp-mav'));var b=document.createElement('div');b.className='cfp-bub';var p=document.createElement('p');p.style.cssText='display:flex;gap:5px;align-items:center;margin:0';for(var i=0;i<3;i++){var dot=document.createElement('span');dot.style.cssText='width:5px;height:5px;border-radius:50%;background:#2b40fc;display:inline-block;animation:cfpRing .9s '+(i*0.2)+'s infinite';p.appendChild(dot);}b.appendChild(p);t.appendChild(b);if(msgs)msgs.appendChild(t);setTimeout(function(){t.remove();cb();},950);}
   window.cfpAct=function(n){var labels=['Je voudrais prendre rendez-vous','Je souhaite deposer un brief','En savoir plus sur PROAD'];userMsg(labels[n-1]);if(quick)quick.style.display='none';typing(function(){if(n===1)botMsg('Parfait. Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a> pour reserver un creneau dans l agenda de Mehdi.');else if(n===2)botMsg('Parfait. Rendez-vous ici : <a href="contact.html#brief-form" style="color:#2b40fc;text-decoration:underline">Ligne de départ →</a>. Mehdi reprend le volant sous 24h.');else botMsg('PROAD c est Production Road. Des evenements traces comme des routes. Zero improvisation, 100% livraison.');});};
-  window.cfpSend=function(){var text=inp?inp.value.trim():'';if(!text)return;inp.value='';userMsg(text);if(quick)quick.style.display='none';var tl=text.toLowerCase();typing(function(){if(tl.indexOf('rdv')>-1||tl.indexOf('rendez')>-1)botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a>. Mehdi repond sous 24h.');else if(tl.indexOf('brief')>-1||tl.indexOf('projet')>-1)botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');else if(tl.indexOf('budget')>-1||tl.indexOf('prix')>-1)botMsg('Pas de minimum impose. Parlez-nous de vos ambitions, on trace la route ensemble.');else botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');});};
+  window.cfpSend=function(){var text=inp?inp.value.trim():'';if(!text)return;inp.value='';userMsg(text);if(quick)quick.style.display='none';var tl=text.toLowerCase();typing(function(){if(tl.indexOf('rdv')>-1||tl.indexOf('rendez')>-1)botMsg('Direction la page <a href="contact.html" style="color:#2b40fc">Contact</a>. Mehdi repond sous 24h.');else if(tl.indexOf('brief')>-1||tl.indexOf('projet')>-1)botMsg('Dites-m en plus. Type, date, jauge ? Je note pour Mehdi.');else if(tl.indexOf('budget')>-1||tl.indexOf('prix')>-1)botMsg('Pas de minimum impose. Parlez-moi de vos ambitions, on trace la route ensemble.');else botMsg('Note ! Mehdi reprend le volant sous 24h. Page <a href="contact.html" style="color:#2b40fc">Contact</a>');});};
   if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')window.cfpSend();});
 })();
 </script>
