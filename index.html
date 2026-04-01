@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PROAD Events | Production Road</title>
+<meta name="google-site-verification" content="6WM2UCDDWfhSVH-4vXdRvYS8-726jec492sO6gj81HA" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
@@ -284,11 +285,6 @@
 
     <div id="stage-content">
 
-      <div id="led-screen">
-        <div id="screen-logo-wrap"><img src="A_2.png" alt="PROAD Events" style="width:100%;height:auto;display:block;"></div>
-        <div id="screen-universe">L'UNIVERS PROAD</div>
-      </div>
-
       <!-- P -->
       <div class="prop" id="prop-p" data-l="P" data-w="PLAN" data-d="La prise de brief. Le projet prend forme avant de prendre vie sur scène.">
         <div class="prop-spotlight"></div>
@@ -439,7 +435,7 @@
         <div class="prop-labels"><span class="prop-letter">A</span><span class="prop-word">ACTIVATE</span></div>
       </div>
 
-      <!-- D — DRAPEAU DAMIER NOIR/BLANC ANIMÉ EN VAGUE -->
+      <!-- D -->
       <div class="prop" id="prop-d" data-l="D" data-w="DELIVER" data-d="La ligne est franchie. Le rideau s'ouvre, le public entre. Le projet prend vie.">
         <div class="prop-spotlight"></div>
         <div class="obj-wrap">
@@ -456,7 +452,6 @@
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-
             <style>
               @keyframes flagWave {
                 0%   { transform: skewY(0deg)    scaleX(1);    }
@@ -471,59 +466,37 @@
                 animation: flagWave 2.6s ease-in-out infinite;
               }
             </style>
-
-            <!-- Mât -->
-            <rect x="4" y="0" width="7" height="148" rx="3"
-                  fill="#0d1020" stroke="rgba(43,64,252,.5)" stroke-width="1"
-                  filter="url(#fd-shadow-d)"/>
-            <!-- Bout du mât doré -->
-            <circle cx="7" cy="4" r="5" fill="#C9A96E"
-                    filter="url(#fd-glow-d)"/>
-
-            <!-- Groupe animé en vague -->
+            <rect x="4" y="0" width="7" height="148" rx="3" fill="#0d1020" stroke="rgba(43,64,252,.5)" stroke-width="1" filter="url(#fd-shadow-d)"/>
+            <circle cx="7" cy="4" r="5" fill="#C9A96E" filter="url(#fd-glow-d)"/>
             <g id="flag-wave-group" filter="url(#fd-shadow-d)">
-
-              <!-- Fond du drapeau — ivoire sombre dans l'esprit du thème -->
-              <rect x="10" y="4" width="184" height="132" rx="3"
-                    fill="#d8d5ce"/>
-
-              <!-- Damier : cases noires #0d1020 (même couleur que le thème) -->
+              <rect x="10" y="4" width="184" height="132" rx="3" fill="#d8d5ce"/>
               <g clip-path="url(#fc-clip-d)">
-                <!-- 6 colonnes × 4 rangées, cases ~30×33 -->
-                <!-- Rangée 1 -->
                 <rect x="10"  y="4"   width="30" height="33" fill="#0d1020"/>
                 <rect x="70"  y="4"   width="30" height="33" fill="#0d1020"/>
                 <rect x="130" y="4"   width="30" height="33" fill="#0d1020"/>
-                <!-- Rangée 2 -->
                 <rect x="40"  y="37"  width="30" height="33" fill="#0d1020"/>
                 <rect x="100" y="37"  width="30" height="33" fill="#0d1020"/>
                 <rect x="160" y="37"  width="30" height="33" fill="#0d1020"/>
-                <!-- Rangée 3 -->
                 <rect x="10"  y="70"  width="30" height="33" fill="#0d1020"/>
                 <rect x="70"  y="70"  width="30" height="33" fill="#0d1020"/>
                 <rect x="130" y="70"  width="30" height="33" fill="#0d1020"/>
-                <!-- Rangée 4 -->
                 <rect x="40"  y="103" width="30" height="33" fill="#0d1020"/>
                 <rect x="100" y="103" width="30" height="33" fill="#0d1020"/>
                 <rect x="160" y="103" width="30" height="33" fill="#0d1020"/>
               </g>
-
-              <!-- Contour subtil -->
-              <rect x="10" y="4" width="184" height="132" rx="3"
-                    fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
-
-              <!-- Liseré gauche lumineux -->
-              <line x1="11" y1="5" x2="11" y2="135"
-                    stroke="rgba(255,255,255,.45)" stroke-width="2"/>
-
-              <!-- Lueur bleu foncé sous le drapeau (cohérence avec les autres props) -->
-              <ellipse cx="102" cy="140" rx="80" ry="7"
-                       fill="rgba(0,20,80,.3)" filter="url(#fd-glow-d)"/>
+              <rect x="10" y="4" width="184" height="132" rx="3" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+              <line x1="11" y1="5" x2="11" y2="135" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+              <ellipse cx="102" cy="140" rx="80" ry="7" fill="rgba(0,20,80,.3)" filter="url(#fd-glow-d)"/>
             </g>
           </svg>
         </div>
         <div class="prop-shadow"></div>
         <div class="prop-labels"><span class="prop-letter">D</span><span class="prop-word">DELIVER</span></div>
+      </div>
+
+      <div id="led-screen">
+        <div id="screen-logo-wrap"><img src="A_2.png" alt="PROAD Events" style="width:100%;height:auto;display:block;"></div>
+        <div id="screen-universe">L'UNIVERS PROAD</div>
       </div>
 
     </div><!-- /stage-content -->
