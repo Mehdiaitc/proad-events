@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio | PROAD Events</title>
+<title>Portfolio — Projets Événementiels | PROAD Events Marseille</title>
+<meta name="description" content="Portfolio PROAD Events — Projets événementiels produits par Mehdi : Ubisoft, Lacoste, Alibaba, Nexans, RSM. Soirées, galas, corporate, lancements. Marseille et Sud de la France.">
+<meta name="keywords" content="portfolio événementiel Marseille, production événements corporate, soirées galas Sud France, chef de projet événementiel, conseil événementiel agences">
+<meta property="og:title" content="Portfolio — Projets Événementiels | PROAD Events Marseille">
+<meta property="og:description" content="Découvrez les projets événementiels produits par PROAD : corporate, galas, lancements, lifestyle. Sud de la France et international.">
+<meta property="og:url" content="https://www.proadevents.com/portfolio.html">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.proadevents.com/portfolio.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
@@ -62,7 +70,6 @@
   padding: 10px;
 }
 
-/* ── CARTE 240×140 ── */
 .rcard {
   width: 240px;
   height: 140px;
@@ -144,7 +151,6 @@
   color: #C9A96E;
 }
 
-/* ── PORTFOLIO PAGE ── */
 .portfolio-hero {
   min-height: 52vh;
   display: flex;
@@ -192,7 +198,6 @@
   line-height: 1.8;
 }
 
-/* ── FILTERS ── */
 .portfolio-filters {
   display: flex;
   gap: 10px;
@@ -216,7 +221,6 @@
   border-color: #C9A96E;
 }
 
-/* ── GRID ── */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -231,14 +235,6 @@
 }
 .pcard.hidden { display: none; }
 
-/* ── VILLAGE DES NATIONS — carte featured ── */
-.pcard-featured {
-  border: 1px solid rgba(43,64,252,.35) !important;
-  box-shadow: 0 0 32px rgba(43,64,252,.1), inset 0 0 40px rgba(43,64,252,.03);
-}
-.bg-vdn {
-  background: linear-gradient(135deg, #06080f 0%, #0a0e1e 40%, #08101a 100%);
-}
 .pcard-press-badge {
   position: absolute;
   top: 16px;
@@ -256,36 +252,7 @@
   border-radius: 2px;
   z-index: 10;
 }
-.pcard-tag-featured {
-  color: rgba(43,64,252,.85) !important;
-  font-size: .62rem !important;
-  letter-spacing: .16em;
-}
-.pcard-title-featured {
-  font-size: clamp(1.6rem, 3vw, 2.6rem) !important;
-  margin-bottom: 10px !important;
-}
-.pcard-title-featured span {
-  font-size: .55em;
-  color: rgba(255,255,255,.45);
-  display: block;
-  letter-spacing: .1em;
-}
-.pcard-press-link {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(43,64,252,.85);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(43,64,252,.35);
-  padding-bottom: 2px;
-  transition: color .2s, border-color .2s;
-}
-.pcard-press-link:hover { color: #fff; border-color: rgba(255,255,255,.5); }
 
-/* ── PCARD SIZES ── */
 .pcard.sz-large  { grid-column: span 6; aspect-ratio: 16/9; }
 .pcard.sz-medium { grid-column: span 4; aspect-ratio: 4/3; }
 .pcard.sz-small  { grid-column: span 3; aspect-ratio: 1; }
@@ -298,37 +265,9 @@
   background-position: center;
   transition: transform .6s ease;
 }
-.pcard:hover .pcard-bg { transform: scale(1.05); }
-.pcard-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(3,4,10,.92) 0%, rgba(3,4,10,.5) 50%, transparent 100%);
-  opacity: 0;
-  transition: opacity .4s;
-}
-.pcard:hover .pcard-overlay { opacity: .85; }
-/* ── PCARD SIZES ── */
-.pcard.sz-large  { grid-column: span 6; aspect-ratio: 16/9; }
-.pcard.sz-medium { grid-column: span 4; aspect-ratio: 4/3; }
-.pcard.sz-small  { grid-column: span 3; aspect-ratio: 1; }
-.pcard.sz-wide   { grid-column: span 8; aspect-ratio: 21/9; }
-.pcard.sz-tall   { grid-column: span 4; aspect-ratio: 3/4; }
-.pcard-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: transform .6s ease;
-}
-/* Quand une vraie photo est définie, le SVG accent s'efface */
 .pcard-bg.has-photo { background-color: transparent; }
 .pcard-bg.has-photo + .pcard-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(3,4,10,.97) 0%,
-    rgba(3,4,10,.45) 45%,
-    rgba(3,4,10,.1) 100%
-  );
+  background: linear-gradient(to top, rgba(3,4,10,.97) 0%, rgba(3,4,10,.45) 45%, rgba(3,4,10,.1) 100%);
   opacity: 1;
 }
 .pcard:hover .pcard-bg { transform: scale(1.04); }
@@ -367,29 +306,21 @@
 }
 .pcard-chab-badge span { color: rgba(43,64,252,.6); }
 
-/* Background variants — plus contrastés */
 .bg-gala    { background: linear-gradient(135deg,#12061a,#180a24,#0a0414); }
 .bg-corporate{ background: linear-gradient(135deg,#061428,#0c1c38,#040c1a); }
 .bg-launch  { background: linear-gradient(135deg,#081808,#0e2010,#060e06); }
 .bg-lifestyle{ background: linear-gradient(135deg,#1a0606,#280c08,#120404); }
 .bg-luxury  { background: linear-gradient(135deg,#180a0c,#220c10,#100608); }
 
-/* Overlay permanent léger — lisibilité même sans hover */
 .pcard-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(3,4,10,.96) 0%,
-    rgba(3,4,10,.6) 40%,
-    rgba(3,4,10,.15) 100%
-  );
+  background: linear-gradient(to top, rgba(3,4,10,.96) 0%, rgba(3,4,10,.6) 40%, rgba(3,4,10,.15) 100%);
   opacity: .7;
   transition: opacity .4s;
 }
 .pcard:hover .pcard-overlay { opacity: 1; }
 
-/* Info toujours visible, pas seulement au hover */
 .pcard-info {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -431,7 +362,6 @@
 }
 .pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
 
-/* ── BADGE AGENCE EN BAS DE CARTE ── */
 .pcard-agency {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -449,23 +379,10 @@
   text-overflow: ellipsis;
 }
 .pcard-agency span { color: rgba(43,64,252,.55); }
-.pcard:hover .pcard-desc { opacity: 1; transform: translateY(0); }
 
-/* Bordure hover dorée */
 .pcard { border: 1px solid transparent; transition: border-color .3s; }
 .pcard:hover { border-color: rgba(201,169,110,.3); }
 
-/* ── MOBILE ── */
-@media(max-width:768px) {
-  .portfolio-filters { padding: 24px 20px; }
-  .pcard.sz-large, .pcard.sz-wide { grid-column: span 12; }
-  .pcard.sz-medium, .pcard.sz-tall { grid-column: span 6; }
-  .pcard.sz-small { grid-column: span 6; }
-  .rcard { width: 180px; height: 110px; }
-  .road-clients-header { padding: 0 20px; }
-}
-
-/* ── FILIGRANE PROAD sur cartes portfolio ── */
 .pcard {
   -webkit-user-select: none;
   user-select: none;
@@ -487,6 +404,14 @@
 .pcard img {
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+@media(max-width:768px) {
+  .portfolio-filters { padding: 24px 20px; }
+  .pcard.sz-large, .pcard.sz-wide { grid-column: span 12; }
+  .pcard.sz-medium, .pcard.sz-tall { grid-column: span 6; }
+  .pcard.sz-small { grid-column: span 6; }
+  .rcard { width: 180px; height: 110px; }
 }
 </style>
 </head>
@@ -520,7 +445,7 @@
     <div class="road-line-right"></div>
   </div>
 
-  <!-- RANGÉE 1 — gauche vers droite -->
+  <!-- RANGÉE 1 -->
   <div class="road-track">
     <div class="road-strip road-strip--right" id="strip-1">
       <div class="road-cards-inner">
@@ -541,7 +466,7 @@
     </div>
   </div>
 
-  <!-- RANGÉE 2 — droite vers gauche -->
+  <!-- RANGÉE 2 -->
   <div class="road-track">
     <div class="road-strip road-strip--left" id="strip-2">
       <div class="road-cards-inner">
@@ -759,8 +684,6 @@
     <div class="pcard-agency">Réalisé via <span>Chab Agency</span> · Aix-en-Provence</div>
   </div>
 
-
-
 </div>
 
 <footer>
@@ -777,7 +700,6 @@
 
 <script src="script.js"></script>
 <script>
-/* ── FILTRES ── */
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -793,7 +715,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-/* Mapping rcard → page projet */
 const projPages = {
   'proj-vdn': 'projet-vdn.html',
   'proj-ubisoft': 'projet-ubisoft.html',
@@ -801,8 +722,6 @@ const projPages = {
   'proj-lacoste': 'projet-lacoste.html',
   'proj-damen': 'projet-damen.html',
   'proj-edrington': 'projet-edrington.html',
-  'proj-hrpath': null,
-  'proj-alan': 'projet-alan-bts.html',
   'proj-alan-bts': 'projet-alan-bts.html',
   'proj-moroccanoil': 'projet-moroccanoil.html',
   'proj-nolt': 'projet-nolt.html',
@@ -815,14 +734,10 @@ document.querySelectorAll('.rcard[data-target]').forEach(card => {
   card.addEventListener('click', () => {
     const targetId = card.dataset.target;
     const page = projPages[targetId];
-    if (page) {
-      window.location.href = page;
-      return;
-    }
+    if (page) { window.location.href = page; return; }
     const target = document.getElementById(targetId);
     if (!target) return;
-    const offset = 80;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top, behavior: 'smooth' });
     target.style.transition = 'box-shadow .2s';
     target.style.boxShadow = '0 0 0 2px #C9A96E, 0 0 40px rgba(201,169,110,.4)';
